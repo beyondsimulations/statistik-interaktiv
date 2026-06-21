@@ -1,0 +1,26 @@
+{
+  "planPath": "docs/superpowers/plans/2026-06-21-ds2-lernwebsite.md",
+  "tasks": [
+    { "id": 1, "subject": "Task 0: Project setup & toolchain", "status": "pending", "description": "Scaffold SvelteKit + Svelte 5 + adapter-static (prerender), Tailwind v4, mdsvex, KaTeX, Vitest. Verify: `npm run build && npm run test`." },
+    { "id": 2, "subject": "Task 1: lib/stats.ts core", "status": "pending", "blockedBy": [1], "description": "Pure unit-tested stats: mean/variance(n-1)/sd/SE, normalPdf/Cdf/Quantile, seeded RNG, drawSample(normal/exponential/bimodal/uniform). Verify: `npm run test src/lib/stats.test.ts`." },
+    { "id": 3, "subject": "Task 2: Design system", "status": "pending", "blockedBy": [1], "description": "Warm light tokens (coral/amber on off-white), friendly sans, Button/Card primitives via frontend-design. Verify in chrome." },
+    { "id": 4, "subject": "Task 3: Teaching kit structure", "status": "pending", "blockedBy": [1, 3], "description": "lessons.ts manifest (14 lessons/3 tracks), localStorage progress store (tested), LessonLayout/TrackNav/ProgressDots. Verify: progress test + chrome." },
+    { "id": 5, "subject": "Task 4: Teaching kit content components", "status": "pending", "blockedBy": [1, 3], "description": "Callouts, FormelZeigen (KaTeX+legend), Begriff tooltip, RCode, Widget frame, Selbsttest (scoring tested), /kit demo. Verify: Selbsttest test + chrome." },
+    { "id": 6, "subject": "Task 5: Keystone widget StichprobenverteilungWidget", "status": "pending", "blockedBy": [2, 5], "description": "Population selector + n slider + draw one/×100; sampling distribution builds live, normal overlay, SE=σ/√n, ZGW under skew. Histogram + binCounts (tested). Verify: tests + chrome end-to-end." },
+    { "id": 7, "subject": "Task 6: Keystone lesson page + nav (FIRST USABLE MILESTONE)", "status": "pending", "blockedBy": [4, 6], "description": "Lektion 1 mdsvex page: intro→widget→FormelZeigen→Intuition→Selbsttest; wired to nav+progress. Verify: build + chrome end-to-end." },
+    { "id": 8, "subject": "Task 7: Lektion 2 — Was ist Statistik?", "status": "pending", "blockedBy": [7], "description": "Sortier-Spiel widget. Per-lesson DoD (German, FormelZeigen, 3Q Selbsttest, frontend-design, chrome end-to-end, nav+progress)." },
+    { "id": 9, "subject": "Task 8: Lektion 3 — Wahrscheinlichkeit & Bayes", "status": "pending", "blockedBy": [7], "description": "Bayes-Box 10.000-person grid. Add+test Bayes helper. Per-lesson DoD." },
+    { "id": 10, "subject": "Task 9: Lektion 4 — Verteilungen & Glockenkurve", "status": "pending", "blockedBy": [7], "description": "Flächen-Schieber (pnorm live, z↔x). Per-lesson DoD." },
+    { "id": 11, "subject": "Task 10: Lektion 5 — Konfidenzintervalle", "status": "pending", "blockedBy": [7], "description": "Sampling-Maschine (100 CIs, fixed μ). Add+test t-quantile. Per-lesson DoD." },
+    { "id": 12, "subject": "Task 11: Lektion 6 — Hypothesentest & p-Wert", "status": "pending", "blockedBy": [7], "description": "α/β/Power visualizer + p-Wert-Würfelspiel. Per-lesson DoD." },
+    { "id": 13, "subject": "Task 12: Lektion 7 — t-Tests", "status": "pending", "blockedBy": [7], "description": "Signal-vs-Rausch-Regler. Build shared AnnahmenBaum. Add+test t-statistic. Per-lesson DoD." },
+    { "id": 14, "subject": "Task 13: Lektion 8 — Chi-Quadrat", "status": "pending", "blockedBy": [7], "description": "Kontingenztafel-Editor (expected from margins, χ²/df/p tested, E<5 warning). Per-lesson DoD." },
+    { "id": 15, "subject": "Task 14: Lektion 9 — ANOVA", "status": "pending", "blockedBy": [7], "description": "F-Ratio-Regler + FWER-Roulette. Build shared SSZerlegung. Add+test SS/F. Per-lesson DoD." },
+    { "id": 16, "subject": "Task 15: Lektion 10 — Korrelation", "status": "pending", "blockedBy": [7], "description": "Scatter-Builder (Pearson vs Spearman). Add+test correlation helpers. Per-lesson DoD." },
+    { "id": 17, "subject": "Task 16: Lektion 11 — Regression", "status": "pending", "blockedBy": [7], "description": "Regression-Builder (line/residuals/R², reuse SSZerlegung, leverage). Add+test OLS. Per-lesson DoD." },
+    { "id": 18, "subject": "Task 17: Lektion 12 — Design & Power", "status": "pending", "blockedBy": [7], "description": "Power-Spielplatz (4 coupled sliders + curve). Add+test power helper. Per-lesson DoD." },
+    { "id": 19, "subject": "Task 18: Lektion 13 — Pseudoreplikation", "status": "pending", "blockedBy": [7], "description": "Pseudoreplikations-Falle (p/df inflate). Per-lesson DoD." },
+    { "id": 20, "subject": "Task 19: Lektion 14 — Welcher Test?", "status": "pending", "blockedBy": [7], "description": "Entscheidungsbaum-Spiel, reuse AnnahmenBaum. Per-lesson DoD." }
+  ],
+  "lastUpdated": "2026-06-21"
+}
