@@ -52,6 +52,48 @@ export function standardError(xs: number[]): number {
 }
 
 // ---------------------------------------------------------------------------
+// Histogram binning
+// ---------------------------------------------------------------------------
+
+/**
+ * Count how many `values` fall into each of `nBins` equal-width bins spanning
+ * the half-open intervals that tile [min, max].
+ *
+ * Contract:
+ *   - Bin `i` covers [min + i·w, min + (i+1)·w) with w = (max − min) / nBins.
+ *   - A value exactly equal to `max` is counted in the LAST bin (so the upper
+ *     edge is inclusive only for the final bin).
+ *   - Values OUTSIDE [min, max] are IGNORED (not clamped), so a histogram only
+ *     ever reflects the requested domain. NaN is likewise ignored.
+ *   - Requires nBins ≥ 1 and max > min; otherwise an empty/zero array is
+ *     returned (nBins ≤ 0 → []) to fail safe rather than throw in a widget.
+ *
+ * Returns an array of length `nBins` of non-negative integer counts.
+ */
+export function binCounts(
+	values: number[],
+	min: number,
+	max: number,
+	nBins: number
+): number[] {
+	if (nBins <= 0) return [];
+	const counts = new Array<number>(nBins).fill(0);
+	if (!(max > min)) return counts;
+
+	const width = (max - min) / nBins;
+	for (const v of values) {
+		if (!Number.isFinite(v)) continue;
+		if (v < min || v > max) continue; // outside domain → ignore
+		let idx = Math.floor((v - min) / width);
+		// value === max (and tiny float overshoots) land in the last bin.
+		if (idx >= nBins) idx = nBins - 1;
+		if (idx < 0) idx = 0;
+		counts[idx]++;
+	}
+	return counts;
+}
+
+// ---------------------------------------------------------------------------
 // Normal distribution
 // ---------------------------------------------------------------------------
 

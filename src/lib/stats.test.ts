@@ -9,9 +9,54 @@ import {
 	normalQuantile,
 	makeRng,
 	drawSample,
+	binCounts,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
+
+describe('binCounts', () => {
+	it('counts a known array into known bins', () => {
+		// Domain [0,10], 5 bins of width 2: [0,2) [2,4) [4,6) [6,8) [8,10].
+		// values:         0   1   2   3   4   5   9
+		// bins:           b0  b0  b1  b1  b2  b2  b4
+		const v = [0, 1, 2, 3, 4, 5, 9];
+		expect(binCounts(v, 0, 10, 5)).toEqual([2, 2, 2, 0, 1]);
+	});
+
+	it('value equal to max goes in the LAST bin', () => {
+		expect(binCounts([10], 0, 10, 5)).toEqual([0, 0, 0, 0, 1]);
+	});
+
+	it('value equal to min goes in the FIRST bin', () => {
+		expect(binCounts([0], 0, 10, 5)).toEqual([1, 0, 0, 0, 0]);
+	});
+
+	it('values outside [min,max] are ignored', () => {
+		expect(binCounts([-1, 11, 5], 0, 10, 5)).toEqual([0, 0, 1, 0, 0]);
+	});
+
+	it('NaN values are ignored', () => {
+		expect(binCounts([NaN, 3], 0, 10, 5)).toEqual([0, 1, 0, 0, 0]);
+	});
+
+	it('total count equals number of in-domain values', () => {
+		const v = drawSample('normal', 1000, makeRng(11));
+		const lo = 100 - 4 * 15;
+		const hi = 100 + 4 * 15;
+		const counts = binCounts(v, lo, hi, 30);
+		const inDomain = v.filter((x) => x >= lo && x <= hi).length;
+		expect(counts.reduce((a, b) => a + b, 0)).toBe(inDomain);
+		expect(counts).toHaveLength(30);
+	});
+
+	it('returns a zero array when nBins>0 but max<=min', () => {
+		expect(binCounts([1, 2, 3], 5, 5, 3)).toEqual([0, 0, 0]);
+	});
+
+	it('returns [] for nBins <= 0', () => {
+		expect(binCounts([1, 2, 3], 0, 10, 0)).toEqual([]);
+	});
+});
 
 describe('descriptive', () => {
 	const x = [2, 4, 4, 4, 5, 5, 7, 9];
