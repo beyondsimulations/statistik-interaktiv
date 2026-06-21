@@ -162,6 +162,51 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Positiver prädiktiver Wert',
 		definition:
 			'Die eigentlich interessante Größe: P(krank | positiv) — wie wahrscheinlich man wirklich krank ist, wenn der Test positiv anschlägt.'
+	},
+	Häufigkeitsverteilung: {
+		term: 'Häufigkeitsverteilung',
+		definition:
+			'Zeigt, wie oft jeder Wert in deinen tatsächlich gemessenen Daten vorkommt — beobachtet, aus echten Daten gezählt.'
+	},
+	Wahrscheinlichkeitsverteilung: {
+		term: 'Wahrscheinlichkeitsverteilung',
+		definition:
+			'Das theoretische Gegenstück: Sie gibt an, mit welcher Wahrscheinlichkeit eine Zufallsvariable welche Werte annimmt — erwartet, nicht gezählt.'
+	},
+	Normalverteilung: {
+		term: 'Normalverteilung',
+		definition:
+			'Die symmetrische Glockenkurve N(μ, σ). μ legt die Lage des Gipfels fest, σ die Breite. Viele natürliche Größen folgen ihr näherungsweise.'
+	},
+	Dichtefunktion: {
+		term: 'Dichtefunktion',
+		definition:
+			'Die Kurve einer stetigen Verteilung. Ihre Höhe ist keine Wahrscheinlichkeit — erst die Fläche unter ihr über einem Intervall ergibt eine.'
+	},
+	Verteilungsfunktion: {
+		term: 'Verteilungsfunktion',
+		definition:
+			'Die aufsummierte Fläche von links: F(x) = P(X ≤ x). In R heißt sie pnorm. Aus ihr liest du P(a < X ≤ b) = F(b) − F(a) ab.'
+	},
+	'Stetige Zufallsvariable': {
+		term: 'Stetige Zufallsvariable',
+		definition:
+			'Eine Größe, die jeden Wert in einem Bereich annehmen kann (z. B. Körpergröße). Für einen exakten Einzelwert ist P(X = x) = 0; nur Intervalle haben Wahrscheinlichkeit.'
+	},
+	'Diskrete Zufallsvariable': {
+		term: 'Diskrete Zufallsvariable',
+		definition:
+			'Eine Größe mit abzählbar vielen Werten (z. B. Augenzahl, Anzahl Treffer). Hier hat jeder einzelne Wert eine eigene Wahrscheinlichkeit.'
+	},
+	'Z-Transformation': {
+		term: 'Z-Transformation',
+		definition:
+			'Standardisierung Z = (X − μ)/σ. Sie überführt jede Normalverteilung in die Standardnormalverteilung N(0, 1); Z misst den Abstand in Standardabweichungen.'
+	},
+	Standardnormalverteilung: {
+		term: 'Standardnormalverteilung',
+		definition:
+			'Die Normalverteilung mit μ = 0 und σ = 1. Jede Normalverteilung lässt sich per Z-Transformation auf sie zurückführen.'
 	}
 };
 
