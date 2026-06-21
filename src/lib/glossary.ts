@@ -77,6 +77,31 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Verteilung',
 		definition:
 			'Beschreibt, welche Werte wie häufig (oder wie wahrscheinlich) auftreten. Das "Profil" deiner Daten oder einer Zufallsvariable.'
+	},
+	'Deskriptive Statistik': {
+		term: 'Deskriptive Statistik',
+		definition:
+			'Beschreibt und fasst vorhandene Daten zusammen — etwa mit Mittelwert, Anteilen oder einem Histogramm. Sie geht nicht über die gemessenen Daten hinaus.'
+	},
+	'Inferentielle Statistik': {
+		term: 'Inferentielle Statistik',
+		definition:
+			'Die schließende (induktive) Statistik: Sie schließt von der Stichprobe auf die Grundgesamtheit — durch Schätzen und Testen.'
+	},
+	'Explorative Statistik': {
+		term: 'Explorative Statistik',
+		definition:
+			'Durchsucht Daten nach Mustern und erzeugt daraus neue, noch zu prüfende Hypothesen. Sie entdeckt, sie bestätigt nicht.'
+	},
+	Störfaktor: {
+		term: 'Störfaktor',
+		definition:
+			'Eine dritte Größe (Confounder), die sowohl Ursache als auch Wirkung beeinflusst und so einen Scheinzusammenhang vortäuschen kann.'
+	},
+	Kausalschluss: {
+		term: 'Kausalschluss',
+		definition:
+			'Die Aussage, dass A wirklich B verursacht — nicht nur mit B zusammenhängt. Sauber begründbar nur durch kontrollierte Experimente.'
 	}
 };
 
