@@ -1,0 +1,8 @@
+# Willkommen
+
+Dies ist ein **mdsvex**-Schnipsel: Markdown, das als Svelte-Komponente
+gerendert wird. Es beweist, dass die Inhalts-Pipeline funktioniert.
+
+- Intuition zuerst
+- Interaktive Widgets
+- Statik fuer GitHub Pages
