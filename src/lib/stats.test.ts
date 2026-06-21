@@ -20,6 +20,10 @@ import {
 	chiSquareIndependence,
 	fCdf,
 	oneWayAnova,
+	pearson,
+	spearman,
+	ranks,
+	corTestP,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
@@ -591,6 +595,138 @@ describe('oneWayAnova (einfaktorielle Varianzanalyse)', () => {
 
 	it('fails safe: every group has one observation (df_within = 0) → NaNs', () => {
 		expect(Number.isNaN(oneWayAnova([[1], [2], [3]]).F)).toBe(true);
+	});
+});
+
+describe('ranks (mid-ranks for ties)', () => {
+	it('ranks distinct values 1..n in ascending order', () => {
+		expect(ranks([30, 10, 20, 40])).toEqual([3, 1, 2, 4]);
+	});
+	it('assigns the average rank to ties (matches R rank())', () => {
+		// values 10, 20, 20, 40 → ranks 1, 2.5, 2.5, 4
+		expect(ranks([10, 20, 20, 40])).toEqual([1, 2.5, 2.5, 4]);
+	});
+	it('all equal → all get the mean rank (n+1)/2', () => {
+		expect(ranks([7, 7, 7, 7])).toEqual([2.5, 2.5, 2.5, 2.5]);
+	});
+});
+
+describe('pearson', () => {
+	it('a perfect increasing line gives r = 1', () => {
+		const x = [1, 2, 3, 4, 5];
+		const y = [2, 4, 6, 8, 10]; // y = 2x
+		expect(pearson(x, y)).toBeCloseTo(1, 12);
+	});
+
+	it('a perfect decreasing line gives r = -1', () => {
+		const x = [1, 2, 3, 4, 5];
+		const y = [10, 8, 6, 4, 2];
+		expect(pearson(x, y)).toBeCloseTo(-1, 12);
+	});
+
+	it('matches a hand-computed value (matches R cor())', () => {
+		// x <- c(1,2,3,4,5); y <- c(2,1,4,3,6); cor(x, y) = 0.8219949
+		const x = [1, 2, 3, 4, 5];
+		const y = [2, 1, 4, 3, 6];
+		expect(pearson(x, y)).toBeCloseTo(0.8219949, 6);
+	});
+
+	it('a symmetric U-shape (parabola) gives r ≈ 0 despite a clear pattern', () => {
+		// y = x² on a symmetric grid: strong pattern, but NO linear trend.
+		const x = [-3, -2, -1, 0, 1, 2, 3];
+		const y = x.map((v) => v * v);
+		expect(pearson(x, y)).toBeCloseTo(0, 12);
+	});
+
+	it('is the Cov/(sx·sy) standardisation of covariance', () => {
+		const x = [2, 4, 4, 4, 5, 5, 7, 9];
+		const y = [1, 3, 2, 5, 4, 6, 7, 8];
+		// Manual Cov/(sx·sy) using the sample (n−1) helpers must equal pearson().
+		const mx = mean(x);
+		const my = mean(y);
+		let cov = 0;
+		for (let i = 0; i < x.length; i++) cov += (x[i] - mx) * (y[i] - my);
+		cov /= x.length - 1;
+		expect(pearson(x, y)).toBeCloseTo(cov / (sd(x) * sd(y)), 12);
+	});
+
+	it('fails safe: unequal lengths / n < 2 / constant variable → NaN', () => {
+		expect(Number.isNaN(pearson([1, 2, 3], [1, 2]))).toBe(true);
+		expect(Number.isNaN(pearson([1], [2]))).toBe(true);
+		expect(Number.isNaN(pearson([5, 5, 5], [1, 2, 3]))).toBe(true);
+	});
+});
+
+describe('spearman', () => {
+	it('a monotone-but-curved relation gives ρ = 1 while Pearson r < 1', () => {
+		// y = x³ is strictly increasing (perfectly monotone) but not linear.
+		const x = [1, 2, 3, 4, 5];
+		const y = x.map((v) => v * v * v);
+		expect(spearman(x, y)).toBeCloseTo(1, 12);
+		expect(pearson(x, y)).toBeLessThan(1);
+	});
+
+	it('a monotone decreasing relation gives ρ = -1', () => {
+		const x = [1, 2, 3, 4, 5];
+		const y = [100, 50, 20, 5, 1]; // strictly decreasing
+		expect(spearman(x, y)).toBeCloseTo(-1, 12);
+	});
+
+	it('matches a known small example (matches R cor(method="spearman"))', () => {
+		// x <- c(1,2,3,4,5); y <- c(2,1,4,3,6)
+		// ranks of y are 2,1,4,3,5 → cor(x, y, method = "spearman") = 0.8
+		const x = [1, 2, 3, 4, 5];
+		const y = [2, 1, 4, 3, 6];
+		expect(spearman(x, y)).toBeCloseTo(0.8, 10);
+	});
+
+	it('handles ties via average ranks (mid-rank Pearson)', () => {
+		// x <- c(1,2,2,3,4); y <- c(1,3,2,4,5)
+		// ranks(x) = 1,2.5,2.5,4,5 ; ranks(y) = 1,3,2,4,5
+		// Pearson of those mid-ranks = 0.97467943
+		const x = [1, 2, 2, 3, 4];
+		const y = [1, 3, 2, 4, 5];
+		expect(spearman(x, y)).toBeCloseTo(0.9746794, 6);
+	});
+
+	it('is robust where Pearson is not: a far outlier inflates r but barely moves ρ', () => {
+		// An essentially UNcorrelated blob near the origin...
+		const x = [1, 2, 1, 2, 3, 3, 2];
+		const y = [2, 1, 3, 2, 1, 3, 2];
+		// ...plus a single far outlier at (20, 20).
+		const xOut = [...x, 20];
+		const yOut = [...y, 20];
+		const rBlob = pearson(x, y); // ≈ -0.25, no real trend
+		const rOut = pearson(xOut, yOut); // one point fakes a strong line
+		const rhoOut = spearman(xOut, yOut); // ranks barely notice
+		expect(rBlob).toBeCloseTo(-0.25, 6);
+		expect(rOut).toBeGreaterThan(0.9); // Pearson swings dramatically up
+		expect(rhoOut).toBeLessThan(0.4); // Spearman stays low/stable
+	});
+});
+
+describe('corTestP (Signifikanztest ρ = 0)', () => {
+	it('matches R cor.test() for a known Pearson case', () => {
+		// x <- c(1,2,3,4,5); y <- c(2,1,4,3,6); r = 0.7, n = 5
+		// cor.test(x, y) → t = 1.6977, df = 3, p-value = 0.188
+		expect(corTestP(0.7, 5)).toBeCloseTo(0.188, 3);
+	});
+
+	it('a perfect correlation gives p = 0', () => {
+		expect(corTestP(1, 10)).toBe(0);
+		expect(corTestP(-1, 10)).toBe(0);
+	});
+
+	it('zero correlation gives p = 1', () => {
+		expect(corTestP(0, 10)).toBe(1);
+	});
+
+	it('the same r is more significant with a larger n', () => {
+		expect(corTestP(0.5, 50)).toBeLessThan(corTestP(0.5, 8));
+	});
+
+	it('fails safe: n < 3 → NaN', () => {
+		expect(Number.isNaN(corTestP(0.5, 2))).toBe(true);
 	});
 });
 

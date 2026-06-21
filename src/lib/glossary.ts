@@ -457,6 +457,56 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Eta-Quadrat',
 		definition:
 			'η² = SS_zwischen / SS_total: der Anteil der Gesamtstreuung, den die Gruppenzugehörigkeit erklärt. Das ANOVA-Pendant zum R² der Regression; reicht von 0 (kein Effekt) bis 1.'
+	},
+	Korrelation: {
+		term: 'Korrelation',
+		definition:
+			'Ein Maß für den Zusammenhang zweier Variablen — wie stark sie gemeinsam schwanken. Sie macht KEINE Aussage über Ursache und Wirkung und kennt keine Richtung; beide Variablen sind zufällig.'
+	},
+	Kovarianz: {
+		term: 'Kovarianz',
+		definition:
+			'Misst, ob zwei Variablen gemeinsam schwanken: Liegen beide oft gleichzeitig über oder unter ihrem Mittel, ist sie positiv. Sie ist aber skalenabhängig (hängt von den Einheiten ab) und daher nicht zwischen Variablenpaaren vergleichbar.'
+	},
+	'Pearson-Korrelation': {
+		term: 'Pearson-Korrelation',
+		definition:
+			'Der Korrelationskoeffizient r = Cov(x, y) / (s_x · s_y) — die standardisierte Kovarianz. Einheitenlos, immer in [−1, +1], misst aber NUR die LINEARE Stärke des Zusammenhangs.'
+	},
+	'Spearman-Korrelation': {
+		term: 'Spearman-Korrelation',
+		definition:
+			'Die Rangkorrelation ρ: der Pearson-Koeffizient der Ränge. Sie erfasst MONOTONE (nicht zwingend lineare) Zusammenhänge, ist für ordinale Daten zulässig und robust gegen Ausreißer.'
+	},
+	'Kendall-Korrelation': {
+		term: 'Kendall-Korrelation',
+		definition:
+			'Kendalls τ: ein weiteres rangbasiertes Maß. Es zählt konkordante gegen diskordante Paare und erfasst wie Spearman monotone Zusammenhänge — robust und auch für ordinale Daten geeignet.'
+	},
+	Ausreißer: {
+		term: 'Ausreißer',
+		definition:
+			'Ein einzelner Wert, der weit von den übrigen Daten entfernt liegt. Er kann die Pearson-Korrelation stark verzerren, während rangbasierte Maße (Spearman, Kendall) kaum darauf reagieren.'
+	},
+	'monotoner Zusammenhang': {
+		term: 'monotoner Zusammenhang',
+		definition:
+			'Ein Zusammenhang, bei dem y durchgehend steigt (oder durchgehend fällt), wenn x wächst — egal ob gerade oder gekrümmt. Spearman ρ und Kendall τ messen genau diese Monotonie.'
+	},
+	Transformation: {
+		term: 'Transformation',
+		definition:
+			'Eine Umrechnung der Daten (z. B. log, Wurzel, Box-Cox), um einen gekrümmten Zusammenhang zu begradigen oder die Verteilung normaler zu machen — damit lineare Methoden wieder passen.'
+	},
+	'Box-Cox-Transformation': {
+		term: 'Box-Cox-Transformation',
+		definition:
+			'Eine Familie von Potenz-Transformationen mit Parameter λ: y^λ für λ ≠ 0 und log(y) für λ = 0. Man wählt λ so, dass die Daten möglichst normalverteilt und der Zusammenhang möglichst linear werden.'
+	},
+	Scheinkorrelation: {
+		term: 'Scheinkorrelation',
+		definition:
+			'Eine Korrelation zwischen zwei Größen, die nicht auf einem direkten Zusammenhang beruht, sondern durch einen dritten Faktor (Confounder) entsteht. Klassische Mahnung: Korrelation ist nicht Kausalität.'
 	}
 };
 

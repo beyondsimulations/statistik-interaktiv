@@ -820,6 +820,123 @@ export function oneWayAnova(groups: number[][]): OneWayAnovaResult {
 }
 
 // ---------------------------------------------------------------------------
+// Korrelation (Pearson, Spearman) & Signifikanztest
+// ---------------------------------------------------------------------------
+
+/**
+ * Pearson-Korrelationskoeffizient r — die STANDARDISIERTE Kovarianz.
+ *
+ *   r = Cov(x, y) / (s_x · s_y)
+ *     = Σ (x_i − x̄)(y_i − ȳ) / √( Σ (x_i − x̄)² · Σ (y_i − ȳ)² )
+ *
+ * r ist einheitenlos und liegt immer in [−1, +1]. Er misst NUR die LINEARE
+ * Stärke des Zusammenhangs: r = +1 bei perfekt steigender Gerade, r = −1 bei
+ * perfekt fallender Gerade, r ≈ 0 bei keinem LINEAREN Zusammenhang (eine
+ * symmetrische U-Form/Parabel kann r ≈ 0 liefern, obwohl klar ein Muster
+ * existiert).
+ *
+ * Da sich der Faktor (n − 1) in Zähler und Nenner kürzt, ist es gleichgültig,
+ * ob man Cov und s mit n oder n − 1 bildet — das Ergebnis ist dasselbe.
+ *
+ * Entspricht R `cor(x, y)` (Standard: method = "pearson").
+ *
+ * Edge cases: ungleiche Längen oder n < 2 → NaN. Ist eine der beiden Variablen
+ * konstant (s = 0), ist r nicht definiert → NaN (fail-safe statt 0/0).
+ */
+export function pearson(x: number[], y: number[]): number {
+	const n = x.length;
+	if (n !== y.length || n < 2) return NaN;
+
+	const mx = mean(x);
+	const my = mean(y);
+
+	let sxy = 0;
+	let sxx = 0;
+	let syy = 0;
+	for (let i = 0; i < n; i++) {
+		const dx = x[i] - mx;
+		const dy = y[i] - my;
+		sxy += dx * dy;
+		sxx += dx * dx;
+		syy += dy * dy;
+	}
+
+	const denom = Math.sqrt(sxx * syy);
+	if (denom === 0) return NaN; // mindestens eine Variable konstant
+	return sxy / denom;
+}
+
+/**
+ * Wandelt eine Zahlenreihe in ihre RÄNGE um (1-basiert). Bindungen (gleiche
+ * Werte) bekommen den DURCHSCHNITTSRANG (mid-rank), wie es R `rank()` und der
+ * Spearman-/Kendall-Standard verlangen.
+ *
+ * Beispiel: [10, 20, 20, 40] → [1, 2.5, 2.5, 4].
+ */
+export function ranks(xs: number[]): number[] {
+	const n = xs.length;
+	// Indizes nach Wert sortieren (stabil genug; Bindungen behandeln wir danach).
+	const order = Array.from({ length: n }, (_, i) => i).sort((a, b) => xs[a] - xs[b]);
+	const r = new Array<number>(n);
+
+	let i = 0;
+	while (i < n) {
+		// Gruppe gleicher Werte [i, j) finden.
+		let j = i + 1;
+		while (j < n && xs[order[j]] === xs[order[i]]) j++;
+		// Durchschnittsrang der Positionen i..j-1 (1-basiert): (i+1 + j) / 2.
+		const avg = (i + 1 + j) / 2;
+		for (let k = i; k < j; k++) r[order[k]] = avg;
+		i = j;
+	}
+	return r;
+}
+
+/**
+ * Spearman-Rangkorrelationskoeffizient ρ — der PEARSON-Koeffizient der RÄNGE.
+ *
+ * Statt die Originalwerte zu korrelieren, korreliert Spearman ihre Ränge. Damit
+ * erfasst ρ MONOTONE (nicht zwingend lineare) Zusammenhänge: Bei jeder streng
+ * monoton steigenden Beziehung — auch einer gekrümmten wie y = x³ oder
+ * y = log(x) — ist ρ = 1, während Pearson r < 1 bliebe. ρ ist außerdem robust
+ * gegen Ausreißer und für ordinale Daten zulässig.
+ *
+ * Bindungen werden über Durchschnittsränge behandelt (siehe `ranks`), sodass
+ * das Ergebnis R `cor(x, y, method = "spearman")` entspricht.
+ *
+ * Edge cases: wie bei `pearson` (ungleiche Längen / n < 2 / konstante Reihe →
+ * NaN).
+ */
+export function spearman(x: number[], y: number[]): number {
+	const n = x.length;
+	if (n !== y.length || n < 2) return NaN;
+	return pearson(ranks(x), ranks(y));
+}
+
+/**
+ * Zweiseitiger p-Wert für die Nullhypothese ρ = 0 (kein Zusammenhang), gegeben
+ * der beobachtete Korrelationskoeffizient `r` und der Stichprobenumfang `n`.
+ *
+ * Über die t-Teststatistik mit df = n − 2:
+ *   t = r · √( (n − 2) / (1 − r²) )
+ *   p = 2 · P(T ≥ |t|),  T ~ t_{n−2}
+ *
+ * Funktioniert für Pearson r (exakt unter Normalität) ebenso wie als gängige
+ * Approximation für Spearman ρ. Entspricht R `cor.test(...)$p.value`.
+ *
+ * Edge cases: n < 3 → NaN (df = n − 2 < 1). |r| = 1 → t = ±∞, p = 0
+ * (perfekter Zusammenhang). |r| = 0 → p = 1.
+ */
+export function corTestP(r: number, n: number): number {
+	if (!Number.isFinite(r) || n < 3) return NaN;
+	const df = n - 2;
+	if (Math.abs(r) >= 1) return 0;
+	if (r === 0) return 1;
+	const t = r * Math.sqrt(df / (1 - r * r));
+	return 2 * (1 - tCdf(Math.abs(t), df));
+}
+
+// ---------------------------------------------------------------------------
 // Seeded RNG
 // ---------------------------------------------------------------------------
 
