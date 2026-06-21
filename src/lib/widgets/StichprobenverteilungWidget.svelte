@@ -38,8 +38,27 @@
 	// The most recently drawn sample (for the "one sample → one mean" strip).
 	let currentSample = $state<number[]>([]);
 	let currentMean = $state<number | null>(null);
-	// Drives the drop animation of the newest mean.
+	// Drives the drop animation of the newest mean. Each draw bumps `dropKey`; an
+	// $effect below retriggers the CSS animation on a STABLE wrapper (no remount).
 	let dropKey = $state(0);
+	// TRUE while the drop animation plays; toggled on by the $effect, off on
+	// animationend. Drives the `.dropped` class without remounting the Histogram.
+	let dropping = $state(false);
+	let lastDropKey = 0;
+
+	$effect(() => {
+		// React to dropKey changes only. Restart the animation by toggling the
+		// class off and back on (a microtask gap lets the browser see the reset).
+		if (dropKey !== lastDropKey) {
+			lastDropKey = dropKey;
+			if (dropKey > 0) {
+				dropping = false;
+				queueMicrotask(() => {
+					dropping = true;
+				});
+			}
+		}
+	});
 
 	// --- True population parameters (always from stats.ts) --------------------
 	const pop = $derived(POPULATIONS[kind]);
@@ -251,26 +270,27 @@
 					<h4 class="text-ink font-semibold">3. Stichprobenverteilung der Mittelwerte</h4>
 					<p class="text-ink-faint text-sm">{means.length} Stichproben gesammelt</p>
 				</div>
-				{#key dropKey}
-					<div class="dropped">
-						<Histogram
-							bins={meanCounts}
-							min={meansDomain[0]}
-							max={meansDomain[1]}
-							{overlayCurve}
-							{overlayPeak}
-							title="Histogramm der Stichprobenmittelwerte mit theoretischer Normalkurve N(μ, SE)"
-							xLabel="Stichprobenmittelwert x̄"
-							barColor="var(--color-sage-300)"
-							markers={[
-								{ x: mu, label: 'μ', color: 'var(--color-ink-soft)' },
-								...(meanOfMeans !== null
-									? [{ x: meanOfMeans, label: 'x̄̄', color: 'var(--color-coral-500)' }]
-									: [])
-							]}
-						/>
-					</div>
-				{/key}
+				<!-- Stabiler Wrapper: das Histogramm bleibt montiert (keine ~40 SVG-Knoten
+				     werden bei jeder Ziehung neu erzeugt); die „Drop“-Animation wird per
+				     Klassen-Toggle ausgelöst und am animationend zurückgesetzt. -->
+				<div class:dropped={dropping} onanimationend={() => (dropping = false)}>
+					<Histogram
+						bins={meanCounts}
+						min={meansDomain[0]}
+						max={meansDomain[1]}
+						{overlayCurve}
+						{overlayPeak}
+						title="Histogramm der Stichprobenmittelwerte mit theoretischer Normalkurve N(μ, SE)"
+						xLabel="Stichprobenmittelwert x̄"
+						barColor="var(--color-sage-300)"
+						markers={[
+							{ x: mu, label: 'μ', color: 'var(--color-ink-soft)' },
+							...(meanOfMeans !== null
+								? [{ x: meanOfMeans, label: 'x̄̄', color: 'var(--color-coral-500)' }]
+								: [])
+						]}
+					/>
+				</div>
 				<div class="text-ink-soft mt-2 grid grid-cols-1 gap-2 text-sm sm:grid-cols-3">
 					<div class="bg-paper-sunk/60 rounded-xl px-3 py-2">
 						<div class="text-ink-faint text-xs">Anzahl Stichproben</div>

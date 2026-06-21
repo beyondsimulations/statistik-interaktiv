@@ -49,7 +49,9 @@
 
 	function reset() {
 		answers = {};
-		completedFired = false;
+		// completedFired bleibt absichtlich bestehen: onComplete (und damit
+		// progress.markComplete) darf pro Komponenten-Lebensdauer nur ein
+		// einziges Mal feuern — auch nach einem erneuten Durchlauf.
 	}
 
 	function optionState(q: Question, value: Answer): 'correct' | 'wrong' | 'idle' {

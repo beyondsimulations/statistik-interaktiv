@@ -173,6 +173,9 @@ export function normalCdf(x: number, mu = 0, sigma = 1): number {
 export function normalQuantile(p: number, mu = 0, sigma = 1): number {
 	if (p <= 0) return -Infinity;
 	if (p >= 1) return Infinity;
+	// Median-Shortcut: für p = 0.5 ist das Quantil exakt μ. Ohne diesen Sonderfall
+	// würde der Halley-Verfeinerungsschritt ~-1.25e-9 statt 0 zurückgeben.
+	if (p === 0.5) return mu;
 
 	// Coefficients for Acklam's algorithm.
 	const a = [
@@ -763,7 +766,7 @@ export function chiSquareIndependence(
  *   P(X ≤ x) = I_{y}(df1/2, df2/2)  with  y = (df1·x) / (df1·x + df2).
  *
  * Contract / tested against R's pf():
- *   pf(1, 3, 20)      ≈ 0.5847
+ *   pf(1, 3, 20)      ≈ 0.5867
  *   pf(3.10, 3, 20)   ≈ 0.95     (≈ the 5 %-critical value qf(0.95, 3, 20))
  *   pf(4.26, 2, 9)    ≈ 0.95
  *
@@ -1027,6 +1030,10 @@ export interface LinearRegressionResult {
 	intercept: number;
 	/** Bestimmtheitsmaß R² = SS_Regression / SS_Total ∈ [0, 1]. */
 	r2: number;
+	/** Vom Modell erklärte Quadratsumme SS_Reg = Σ (ŷᵢ − ȳ)². */
+	ssExplained: number;
+	/** Residuale (unerklärte) Quadratsumme SS_Res = Σ (yᵢ − ŷᵢ)². */
+	ssResidual: number;
 	/** Standardfehler der Steigung SE_b. */
 	slopeSE: number;
 	/** Teststatistik der Steigung t = b / SE_b (H0: β = 0). */
@@ -1067,6 +1074,8 @@ export function linearRegression(x: number[], y: number[]): LinearRegressionResu
 		slope: NaN,
 		intercept: NaN,
 		r2: NaN,
+		ssExplained: NaN,
+		ssResidual: NaN,
 		slopeSE: NaN,
 		tSlope: NaN,
 		pSlope: NaN,
@@ -1124,7 +1133,17 @@ export function linearRegression(x: number[], y: number[]): LinearRegressionResu
 		pSlope = 2 * (1 - tCdf(Math.abs(tSlope), df));
 	}
 
-	return { slope, intercept, r2, slopeSE, tSlope, pSlope, df };
+	return {
+		slope,
+		intercept,
+		r2,
+		ssExplained: ssReg,
+		ssResidual: ssRes,
+		slopeSE,
+		tSlope,
+		pSlope,
+		df
+	};
 }
 
 // ---------------------------------------------------------------------------
@@ -1217,7 +1236,7 @@ export const POPULATIONS: Record<PopulationKind, PopulationDescriptor> = {
  * intentionally discarded to keep the RNG-consumption pattern simple and
  * predictable per call.)
  */
-function standardNormal(rng: () => number): number {
+export function standardNormal(rng: () => number): number {
 	// Guard against u1 = 0 so log() stays finite.
 	let u1 = rng();
 	if (u1 <= 0) u1 = Number.MIN_VALUE;

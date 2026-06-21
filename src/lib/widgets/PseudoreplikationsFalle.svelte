@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
-	import { mean, welchTTest, makeRng } from '$lib/stats';
+	import { mean, welchTTest, makeRng, standardNormal } from '$lib/stats';
 
 	// --- Idee ------------------------------------------------------------------
 	// Die Pseudoreplikations-Falle zum Anfassen. Ein strukturierter biologischer
@@ -36,18 +36,13 @@
 
 	const BASE = 30; // Bezugswert: mittlere Blattlänge der Kontrolle (cm)
 
-	// Ein Standardnormalwert aus dem seeded RNG (Box–Muller).
-	function normal(rng: () => number): number {
-		let u1 = rng();
-		if (u1 <= 0) u1 = Number.MIN_VALUE;
-		const u2 = rng();
-		return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-	}
-
-	type Plant = { groupMean: number; leafValues: number[] };
+	type Plant = { groupMean: number; leafValues: number[]; jitter: number[] };
 	type Group = { name: string; mean: number; plants: Plant[] };
 
 	// Deterministischer Datensatz (fester Seed → reproduzierbar, ruhige Anzeige).
+	// Die horizontalen Jitter-Offsets der Blatt-Punkte werden HIER einmal mitberechnet
+	// (abhängig nur von plants/leaves/effect/betweenSd/withinSd) — so wird der Jitter
+	// nicht bei jedem Umschalten der Analysemethode neu ausgewürfelt.
 	const data = $derived.by<Group[]>(() => {
 		const rng = makeRng(20240621);
 		const groupMeans = [BASE, BASE + effect]; // Kontrolle, Dünger
@@ -56,13 +51,17 @@
 			const ps: Plant[] = [];
 			for (let p = 0; p < plants; p++) {
 				// Pflanzeneffekt: konstanter Offset für ALLE Blätter dieser Pflanze.
-				const plantOffset = betweenSd * normal(rng);
+				const plantOffset = betweenSd * standardNormal(rng);
 				const center = gm + plantOffset;
 				const leafValues: number[] = [];
 				for (let l = 0; l < leaves; l++) {
-					leafValues.push(center + withinSd * normal(rng));
+					leafValues.push(center + withinSd * standardNormal(rng));
 				}
-				ps.push({ groupMean: mean(leafValues), leafValues });
+				// Horizontaler Jitter je Blatt, einmal fest pro Pflanze gewürfelt
+				// (Anteil der Spaltenbreite, ±0,25; Pixel-Skalierung im Template).
+				const jitterRng = makeRng(1000 * (gi + 1) + p);
+				const jitter = leafValues.map(() => (jitterRng() - 0.5) * 0.5);
+				ps.push({ groupMean: mean(leafValues), leafValues, jitter });
 			}
 			return { name: names[gi], mean: gm, plants: ps };
 		});
@@ -246,7 +245,6 @@
 						{#each group.plants as plant, pi (pi)}
 							{@const colW = 320 / plants}
 							{@const cx = colW * pi + colW / 2}
-							{@const plantRng = makeRng(1000 * (gi + 1) + pi)}
 							<!-- Trennlinie zwischen Pflanzen -->
 							{#if pi > 0}
 								<line
@@ -270,7 +268,7 @@
 							/>
 							<!-- Blatt-Punkte dieser Pflanze (leicht horizontal gejittert) -->
 							{#each plant.leafValues as leaf, li (li)}
-								{@const jx = (plantRng() - 0.5) * colW * 0.5}
+								{@const jx = plant.jitter[li] * colW}
 								<circle
 									cx={cx + jx}
 									cy={dotY(leaf, 132) + 6}

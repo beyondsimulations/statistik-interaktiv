@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
 	import Button from '$lib/components/Button.svelte';
-	import { pearson, spearman, mean } from '$lib/stats';
+	import { pearson, spearman, linearRegression } from '$lib/stats';
+	import { makeLinearScale } from '$lib/widgets/curve';
 
 	// --- Idee ------------------------------------------------------------------
 	// Ein Streudiagramm zum Anfassen: Körpermasse (x) vs. Hirnmasse (y) bei
@@ -77,21 +78,12 @@
 	const r = $derived(pearson(xs, ys));
 	const rho = $derived(spearman(xs, ys));
 
-	// Lineare Trendgerade (Kleinste-Quadrate, nur zur Anschauung).
+	// Lineare Trendgerade über den getesteten OLS-Helfer (Kleinste-Quadrate, nur
+	// zur Anschauung). Bei konstantem x oder < 3 Punkten liefert er NaN → keine
+	// Gerade.
 	const trend = $derived.by(() => {
-		const n = points.length;
-		if (n < 2) return null;
-		const mx = mean(xs);
-		const my = mean(ys);
-		let sxy = 0;
-		let sxx = 0;
-		for (let i = 0; i < n; i++) {
-			sxy += (xs[i] - mx) * (ys[i] - my);
-			sxx += (xs[i] - mx) * (xs[i] - mx);
-		}
-		if (sxx === 0) return null; // alle x gleich → keine Gerade
-		const slope = sxy / sxx;
-		const intercept = my - slope * mx;
+		const { slope, intercept } = linearRegression(xs, ys);
+		if (!Number.isFinite(slope) || !Number.isFinite(intercept)) return null;
 		return { slope, intercept };
 	});
 
@@ -105,18 +97,15 @@
 	const plotW = W - PAD_L - PAD_R;
 	const plotH = H - PAD_T - PAD_B;
 
-	function toPxX(x: number): number {
-		return PAD_L + ((x - DOMAIN.xMin) / (DOMAIN.xMax - DOMAIN.xMin)) * plotW;
-	}
-	function toPxY(y: number): number {
-		return PAD_T + plotH - ((y - DOMAIN.yMin) / (DOMAIN.yMax - DOMAIN.yMin)) * plotH;
-	}
-	function fromPxX(px: number): number {
-		return DOMAIN.xMin + ((px - PAD_L) / plotW) * (DOMAIN.xMax - DOMAIN.xMin);
-	}
-	function fromPxY(py: number): number {
-		return DOMAIN.yMin + ((PAD_T + plotH - py) / plotH) * (DOMAIN.yMax - DOMAIN.yMin);
-	}
+	// Eine lineare Skala je Achse (Datenraum → Pixel und zurück). y ist im
+	// SVG gespiegelt: yMin liegt unten (PAD_T + plotH), yMax oben (PAD_T).
+	const scaleX = makeLinearScale(DOMAIN.xMin, DOMAIN.xMax, PAD_L, PAD_L + plotW);
+	const scaleY = makeLinearScale(DOMAIN.yMin, DOMAIN.yMax, PAD_T + plotH, PAD_T);
+	const toPxX = (x: number) => scaleX.map(x);
+	const toPxY = (y: number) => scaleY.map(y);
+	const fromPxX = (px: number) => scaleX.invert(px);
+	const fromPxY = (py: number) => scaleY.invert(py);
+
 	function clamp(v: number, lo: number, hi: number): number {
 		return Math.max(lo, Math.min(hi, v));
 	}

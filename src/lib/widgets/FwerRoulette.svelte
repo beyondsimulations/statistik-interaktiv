@@ -31,7 +31,11 @@
 
 	// Empirische Fehlalarmrate aus der Simulation (deterministisch über seedCounter).
 	const empirical = $derived.by(() => {
-		const rng = makeRng(1000 + seedCounter * 7919 + nGroups * 101 + (bonferroni ? 1 : 0));
+		// Der Seed hängt BEWUSST NICHT von `bonferroni` ab: So werden beim Umschalten
+		// der Korrektur DIESELBEN Zufallsdatensätze wiederverwendet und nur die
+		// Signifikanzschwelle (α vs. α/c) ändert sich („gleiche Daten, korrigiert vs.
+		// nicht“).
+		const rng = makeRng(1000 + seedCounter * 7919 + nGroups * 101);
 		const threshold = bonferroni ? ALPHA / nComparisons : ALPHA;
 		let falseAlarms = 0;
 		for (let r = 0; r < ROUNDS; r++) {

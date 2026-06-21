@@ -2,7 +2,8 @@
 	import Widget from '$lib/components/Widget.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import SSZerlegung from '$lib/widgets/SSZerlegung.svelte';
-	import { linearRegression, mean } from '$lib/stats';
+	import { linearRegression } from '$lib/stats';
+	import { makeLinearScale } from '$lib/widgets/curve';
 
 	// --- Idee ------------------------------------------------------------------
 	// Eine Regressionsgerade zum Anfassen: Körperlänge (x, mm) einer Daphnie
@@ -50,23 +51,14 @@
 	const ys = $derived(points.map((p) => p.y));
 	const fit = $derived(linearRegression(xs, ys));
 
-	const my = $derived(mean(ys));
-
-	// Quadratsummen für die SS-Zerlegung (erklärt vs. unerklärt).
-	const sums = $derived.by(() => {
-		const n = points.length;
-		if (n < 2 || !Number.isFinite(fit.slope)) {
-			return { ssReg: 0, ssRes: 0 };
-		}
-		let ssReg = 0;
-		let ssRes = 0;
-		for (const p of points) {
-			const yhat = fit.intercept + fit.slope * p.x;
-			ssReg += (yhat - my) * (yhat - my);
-			ssRes += (p.y - yhat) * (p.y - yhat);
-		}
-		return { ssReg, ssRes };
-	});
+	// Quadratsummen für die SS-Zerlegung direkt aus dem getesteten OLS-Helfer,
+	// damit der Balken nicht vom angezeigten R² abdriften kann. Bei degeneriertem
+	// Fit (NaN) zeigen wir einen leeren Balken.
+	const sums = $derived(
+		Number.isFinite(fit.slope)
+			? { ssReg: fit.ssExplained, ssRes: fit.ssResidual }
+			: { ssReg: 0, ssRes: 0 }
+	);
 
 	// --- SVG-Geometrie ---------------------------------------------------------
 	const W = 520;
@@ -78,18 +70,15 @@
 	const plotW = W - PAD_L - PAD_R;
 	const plotH = H - PAD_T - PAD_B;
 
-	function toPxX(x: number): number {
-		return PAD_L + ((x - DOMAIN.xMin) / (DOMAIN.xMax - DOMAIN.xMin)) * plotW;
-	}
-	function toPxY(y: number): number {
-		return PAD_T + plotH - ((y - DOMAIN.yMin) / (DOMAIN.yMax - DOMAIN.yMin)) * plotH;
-	}
-	function fromPxX(px: number): number {
-		return DOMAIN.xMin + ((px - PAD_L) / plotW) * (DOMAIN.xMax - DOMAIN.xMin);
-	}
-	function fromPxY(py: number): number {
-		return DOMAIN.yMin + ((PAD_T + plotH - py) / plotH) * (DOMAIN.yMax - DOMAIN.yMin);
-	}
+	// Eine lineare Skala je Achse (Datenraum → Pixel und zurück). y ist im
+	// SVG gespiegelt: yMin liegt unten (PAD_T + plotH), yMax oben (PAD_T).
+	const scaleX = makeLinearScale(DOMAIN.xMin, DOMAIN.xMax, PAD_L, PAD_L + plotW);
+	const scaleY = makeLinearScale(DOMAIN.yMin, DOMAIN.yMax, PAD_T + plotH, PAD_T);
+	const toPxX = (x: number) => scaleX.map(x);
+	const toPxY = (y: number) => scaleY.map(y);
+	const fromPxX = (px: number) => scaleX.invert(px);
+	const fromPxY = (py: number) => scaleY.invert(py);
+
 	function clamp(v: number, lo: number, hi: number): number {
 		return Math.max(lo, Math.min(hi, v));
 	}

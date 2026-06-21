@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { lookup } from '$lib/glossary';
+	import { useId } from '$lib/use-id';
 
 	type Props = {
 		/** Schlüssel ins Glossar (Groß-/Kleinschreibung egal). */
@@ -13,7 +14,7 @@
 
 	const entry = $derived(lookup(term));
 	let open = $state(false);
-	const popId = 'begriff-' + Math.random().toString(36).slice(2, 9);
+	const popId = useId('begriff');
 
 	function show() {
 		open = true;

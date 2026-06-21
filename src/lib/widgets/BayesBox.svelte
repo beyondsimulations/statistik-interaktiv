@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
+	import { browser } from '$app/environment';
 	import { positivePredictiveValue } from '$lib/stats';
 
 	// --- Rendering-Ansatz ------------------------------------------------------
@@ -118,15 +119,22 @@
 				role="img"
 				aria-label="Raster aus 10.000 Personen, eingefärbt nach Testergebnis und tatsächlichem Krankheitsstatus"
 			>
-				{#each cells as cell, i (i)}
-					<rect
-						x={cell.x + GAP / 2}
-						y={cell.y + GAP / 2}
-						width={CELL - GAP}
-						height={CELL - GAP}
-						fill={palette[GROUP_BY_CODE[cellGroups[i]]]}
-					/>
-				{/each}
+				{#if browser}
+					{#each cells as cell, i (i)}
+						<rect
+							x={cell.x + GAP / 2}
+							y={cell.y + GAP / 2}
+							width={CELL - GAP}
+							height={CELL - GAP}
+							fill={palette[GROUP_BY_CODE[cellGroups[i]]]}
+						/>
+					{/each}
+				{:else}
+					<!-- Platzhalter im SSR/Prerender: das vollständige 10.000-Zellen-Raster
+					     wird erst clientseitig aufgebaut, damit das vorgerenderte HTML klein
+					     bleibt. Nach der Hydration ist das Gitter identisch. -->
+					<rect x="0" y="0" width={VIEW} height={VIEW} fill="var(--color-paper-sunk)" />
+				{/if}
 			</svg>
 			<p class="text-ink-faint mt-2 text-xs">
 				Jedes Kästchen ist eine Person (10.000 insgesamt). Oben liegen die positiv

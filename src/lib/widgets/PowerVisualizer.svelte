@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
-	import { normalPdf, normalCdf, normalQuantile } from '$lib/stats';
+	import { normalCdf, normalQuantile } from '$lib/stats';
+	import { bellCurvePath, bellAreaPath } from '$lib/widgets/curve';
 
 	// --- Idee ------------------------------------------------------------------
 	// Zwei Glockenkurven auf der Skala der Teststatistik (z-Skala, SD = 1):
@@ -52,38 +53,30 @@
 	const hi = $derived(Math.max(3.5, delta + 3.5));
 
 	const sx = $derived.by(() => (x: number) => PAD_L + ((x - lo) / (hi - lo)) * plotW);
-	const peak = normalPdf(0, 0, 1);
-	const sy = $derived.by(() => (yd: number) => baseY - (yd / peak) * plotH * 0.9);
+	// sy bildet einen Höhen-Anteil (0..1, Gipfel = 1) auf SVG-y ab; peakFrac 0.9
+	// hält die Gipfelhöhe wie zuvor. Wird für die H0/HA-Beschriftung gebraucht.
+	const PEAK_FRAC = 0.9;
+	const sy = $derived.by(() => (frac: number) => baseY - frac * plotH * PEAK_FRAC);
 
 	const N_POINTS = 200;
-	function curve(mu: number): string {
-		const pts: string[] = [];
-		for (let i = 0; i <= N_POINTS; i++) {
-			const x = lo + ((hi - lo) * i) / N_POINTS;
-			pts.push(`${sx(x).toFixed(2)},${sy(normalPdf(x, mu, 1)).toFixed(2)}`);
-		}
-		return pts.join(' ');
-	}
-	const h0Curve = $derived(curve(0));
-	const haCurve = $derived(curve(delta));
-
-	// Gefülltes Flächenstück einer N(mu,1)-Kurve von x0 bis x1.
-	function area(mu: number, x0: number, x1: number): string {
-		if (!(x1 > x0)) return '';
-		const steps = 120;
-		let p = `M ${sx(x0).toFixed(2)} ${baseY.toFixed(2)}`;
-		for (let i = 0; i <= steps; i++) {
-			const x = x0 + ((x1 - x0) * i) / steps;
-			p += ` L ${sx(x).toFixed(2)} ${sy(normalPdf(x, mu, 1)).toFixed(2)}`;
-		}
-		p += ` L ${sx(x1).toFixed(2)} ${baseY.toFixed(2)} Z`;
-		return p;
-	}
+	const h0Curve = $derived(
+		bellCurvePath({ mu: 0, sigma: 1, xMin: lo, xMax: hi, baseY, plotH, peakFrac: PEAK_FRAC, nPoints: N_POINTS }, sx)
+	);
+	const haCurve = $derived(
+		bellCurvePath({ mu: delta, sigma: 1, xMin: lo, xMax: hi, baseY, plotH, peakFrac: PEAK_FRAC, nPoints: N_POINTS }, sx)
+	);
 
 	// α-Fläche: H0 rechts von c. β-Fläche: HA links von c. Power: HA rechts von c.
-	const alphaPath = $derived(area(0, crit, hi));
-	const betaPath = $derived(area(delta, lo, crit));
-	const powerPath = $derived(area(delta, crit, hi));
+	const AREA_POINTS = 120;
+	const alphaPath = $derived(
+		bellAreaPath({ mu: 0, sigma: 1, xMin: lo, xMax: hi, baseY, plotH, peakFrac: PEAK_FRAC, nPoints: AREA_POINTS, x0: crit, x1: hi }, sx)
+	);
+	const betaPath = $derived(
+		bellAreaPath({ mu: delta, sigma: 1, xMin: lo, xMax: hi, baseY, plotH, peakFrac: PEAK_FRAC, nPoints: AREA_POINTS, x0: lo, x1: crit }, sx)
+	);
+	const powerPath = $derived(
+		bellAreaPath({ mu: delta, sigma: 1, xMin: lo, xMax: hi, baseY, plotH, peakFrac: PEAK_FRAC, nPoints: AREA_POINTS, x0: crit, x1: hi }, sx)
+	);
 
 	function pct(v: number): string {
 		return (v * 100).toFixed(1).replace('.', ',');
@@ -179,12 +172,12 @@
 			</text>
 
 			<!-- Kurvenbeschriftung -->
-			<text x={sx(0)} y={sy(peak) - 6} text-anchor="middle" font-size="11" fill="var(--color-ink-soft)">
+			<text x={sx(0)} y={sy(1) - 6} text-anchor="middle" font-size="11" fill="var(--color-ink-soft)">
 				H0
 			</text>
 			<text
 				x={sx(delta)}
-				y={sy(peak) - 6}
+				y={sy(1) - 6}
 				text-anchor="middle"
 				font-size="11"
 				font-weight="700"

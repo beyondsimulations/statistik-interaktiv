@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
-	import { normalPdf, summaryTTest, makeRng } from '$lib/stats';
+	import { summaryTTest, makeRng, standardNormal } from '$lib/stats';
+	import { bellCurvePath } from '$lib/widgets/curve';
 
 	// --- Idee ------------------------------------------------------------------
 	// Zwei Vogelarten, deren Zugdistanz (km) wir vergleichen: Buchfink (grün) und
@@ -47,42 +48,45 @@
 	const hi = $derived(BASE + halfSpan);
 
 	const sx = $derived.by(() => (x: number) => PAD_L + ((x - lo) / (hi - lo)) * plotW);
-	// Höhe relativ zur höchsten Glocke (kleinstes s → spitzeste Kurve).
-	const peak = $derived(normalPdf(0, 0, s));
-	const sy = $derived.by(() => (yd: number) => baseY - (yd / peak) * plotH * 0.82);
+	// Höhe relativ zur höchsten Glocke (kleinstes s → spitzeste Kurve). peakFrac
+	// 0.82 hält die Gipfelhöhe wie zuvor; sy wird noch für die Mittelwert- und
+	// Δ-Linien gebraucht (Gipfelhöhe ist σ-invariant).
+	const PEAK_FRAC = 0.82;
+	const sy = $derived.by(() => (frac: number) => baseY - frac * plotH * PEAK_FRAC);
 
-	const N_POINTS = 160;
-	function curve(mu: number): string {
-		const pts: string[] = [];
-		for (let i = 0; i <= N_POINTS; i++) {
-			const x = lo + ((hi - lo) * i) / N_POINTS;
-			pts.push(`${sx(x).toFixed(2)},${sy(normalPdf(x, mu, s)).toFixed(2)}`);
-		}
-		return pts.join(' ');
-	}
-	const finkCurve = $derived(curve(muFink));
-	const moenchCurve = $derived(curve(muMoench));
+	const finkCurve = $derived(
+		bellCurvePath({ mu: muFink, sigma: s, xMin: lo, xMax: hi, baseY, plotH, peakFrac: PEAK_FRAC, nPoints: 160 }, sx)
+	);
+	const moenchCurve = $derived(
+		bellCurvePath({ mu: muMoench, sigma: s, xMin: lo, xMax: hi, baseY, plotH, peakFrac: PEAK_FRAC, nPoints: 160 }, sx)
+	);
 
 	// Illustrative Stichprobenpunkte (deterministisch, fester Seed). Sie dienen
 	// nur der Veranschaulichung der Streuung; die Statistik kommt aus summaryTTest.
-	function jitterDots(mu: number, seed: number): { x: number; y: number }[] {
+	// Die Standardnormal-z-Werte und der feste vertikale Versatz werden EINMAL
+	// (seed-stabil, nur abhängig von n) gezogen; nur die x-Projektion (mu + s·z)
+	// reagiert auf Δ und s, damit das Ziehen des Rausch-Reglers die Wolke nicht
+	// neu auswürfelt.
+	function sampleZ(seed: number): { z: number; jitter: number }[] {
 		const rng = makeRng(seed);
 		const count = Math.min(n, 40); // höchstens 40 Punkte je Gruppe zeichnen
-		const dots: { x: number; y: number }[] = [];
+		const out: { z: number; jitter: number }[] = [];
 		for (let i = 0; i < count; i++) {
-			// Box–Muller für einen Normalwert um mu mit SD s.
-			let u1 = rng();
-			if (u1 <= 0) u1 = Number.MIN_VALUE;
-			const u2 = rng();
-			const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-			const x = mu + s * z;
+			const z = standardNormal(rng);
 			const jitter = 6 + rng() * 22; // vertikaler Versatz über der Achse
-			dots.push({ x: sx(x), y: baseY - jitter });
+			out.push({ z, jitter });
 		}
-		return dots;
+		return out;
 	}
-	const finkDots = $derived(jitterDots(muFink, 101));
-	const moenchDots = $derived(jitterDots(muMoench, 202));
+	const finkZ = $derived(sampleZ(101));
+	const moenchZ = $derived(sampleZ(202));
+
+	const finkDots = $derived(
+		finkZ.map(({ z, jitter }) => ({ x: sx(muFink + s * z), y: baseY - jitter }))
+	);
+	const moenchDots = $derived(
+		moenchZ.map(({ z, jitter }) => ({ x: sx(muMoench + s * z), y: baseY - jitter }))
+	);
 
 	function fmt0(v: number): string {
 		return Math.round(v).toLocaleString('de-DE');
@@ -177,7 +181,7 @@
 			<!-- Mittelwertlinien -->
 			<line
 				x1={sx(muFink)}
-				y1={sy(peak)}
+				y1={sy(1)}
 				x2={sx(muFink)}
 				y2={baseY}
 				stroke="var(--color-sage-500)"
@@ -186,7 +190,7 @@
 			/>
 			<line
 				x1={sx(muMoench)}
-				y1={sy(peak)}
+				y1={sy(1)}
 				x2={sx(muMoench)}
 				y2={baseY}
 				stroke="var(--color-coral-500)"
@@ -197,15 +201,15 @@
 			<!-- Δ-Klammer zwischen den Gipfeln -->
 			<line
 				x1={sx(muFink)}
-				y1={sy(peak) - 10}
+				y1={sy(1) - 10}
 				x2={sx(muMoench)}
-				y2={sy(peak) - 10}
+				y2={sy(1) - 10}
 				stroke="var(--color-ink-soft)"
 				stroke-width="1.5"
 			/>
 			<text
 				x={sx(BASE)}
-				y={sy(peak) - 14}
+				y={sy(1) - 14}
 				text-anchor="middle"
 				font-size="11"
 				font-weight="700"

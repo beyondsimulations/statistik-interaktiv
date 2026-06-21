@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
-	import { normalPdf, normalCdf } from '$lib/stats';
+	import { normalCdf } from '$lib/stats';
+	import { makeLinearScale, bellCurvePath, bellAreaPath } from '$lib/widgets/curve';
 
 	// --- Idee ------------------------------------------------------------------
 	// Eine Normalverteilungs-Dichtekurve N(μ, σ) über einer x-Achse. Zwei Grenzen
@@ -19,18 +20,6 @@
 	let zView = $state(false); // Achse in Standardabweichungen (z) beschriften
 	let showRegel = $state(false); // 68/95/99,7-Markierungen einblenden
 
-	// Achse stets μ ± 4σ — die Kurve ist außerhalb praktisch null.
-	const lo = $derived(mu - 4 * sigma);
-	const hi = $derived(mu + 4 * sigma);
-
-	// a darf b nicht überholen (und umgekehrt). Wir klemmen beim Lesen, statt die
-	// Slider gegenseitig zu zwingen — so bleibt das Ziehen flüssig.
-	const aClamped = $derived(Math.min(a, b));
-	const bClamped = $derived(Math.max(a, b));
-
-	// --- Die zentrale Zahl: P(a < X ≤ b) = F(b) − F(a) ------------------------
-	const prob = $derived(normalCdf(bClamped, mu, sigma) - normalCdf(aClamped, mu, sigma));
-
 	// --- SVG-Geometrie ---------------------------------------------------------
 	const W = 560;
 	const H = 240;
@@ -41,38 +30,66 @@
 	const plotW = W - PAD_L - PAD_R;
 	const plotH = H - PAD_T - PAD_B;
 	const baseY = PAD_T + plotH; // y der Nulllinie (x-Achse)
+	const PEAK_FRAC = 0.92; // Gipfelhöhe als Anteil von plotH (wie zuvor ~92 %)
 
-	// x-Wert (Datenraum) → SVG-x
-	const sx = $derived.by(() => (x: number) => PAD_L + ((x - lo) / (hi - lo)) * plotW);
-	// Dichte → SVG-y. Gipfelhöhe = normalPdf(μ) bei N(μ,σ); wir skalieren auf ~92 %.
-	const peak = $derived(normalPdf(mu, mu, sigma));
-	const sy = $derived.by(() => (d: number) => baseY - (d / peak) * plotH * 0.92);
+	// Achse stets μ ± 4σ — die Kurve ist außerhalb praktisch null.
+	const lo = $derived(mu - 4 * sigma);
+	const hi = $derived(mu + 4 * sigma);
 
-	// Kurvenpunkte (Polyline der gesamten Dichte).
-	const N_POINTS = 180;
-	const curvePoints = $derived.by(() => {
-		const pts: string[] = [];
-		for (let i = 0; i <= N_POINTS; i++) {
-			const x = lo + ((hi - lo) * i) / N_POINTS;
-			pts.push(`${sx(x).toFixed(2)},${sy(normalPdf(x, mu, sigma)).toFixed(2)}`);
-		}
-		return pts.join(' ');
+	// Slider-Bereich für a/b folgt der Achse. Wir runden großzügig, damit die
+	// Slider beim Verschieben von μ/σ nicht „springen“.
+	const boundMin = $derived(Math.round((lo - 0.5) * 10) / 10);
+	const boundMax = $derived(Math.round((hi + 0.5) * 10) / 10);
+	const boundStep = $derived(Math.max(0.01, Math.round((sigma / 20) * 100) / 100));
+
+	// μ/σ verschieben den Slider-Bereich [boundMin, boundMax]. Ohne Nachführung
+	// klebt der Thumb am alten Wert, während min/max wandern — Anzeige und Thumb
+	// driften auseinander. Dieser Effekt klemmt a und b in den aktuellen Bereich.
+	$effect(() => {
+		const clampedA = Math.min(Math.max(a, boundMin), boundMax);
+		const clampedB = Math.min(Math.max(b, boundMin), boundMax);
+		if (clampedA !== a) a = clampedA;
+		if (clampedB !== b) b = clampedB;
 	});
+
+	// a darf b nicht überholen (und umgekehrt). Wir klemmen beim Lesen, statt die
+	// Slider gegenseitig zu zwingen — so bleibt das Ziehen flüssig.
+	const aClamped = $derived(Math.min(a, b));
+	const bClamped = $derived(Math.max(a, b));
+
+	// --- Die zentrale Zahl: P(a < X ≤ b) = F(b) − F(a) ------------------------
+	const prob = $derived(normalCdf(bClamped, mu, sigma) - normalCdf(aClamped, mu, sigma));
+
+	// x-Wert (Datenraum) → SVG-x über die geteilte lineare Skala.
+	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
+	const sx = $derived.by(() => (x: number) => scaleX.map(x));
+
+	// Kurvenpunkte (Polyline der gesamten Dichte) über die geteilte Helferin.
+	const curvePoints = $derived(
+		bellCurvePath(
+			{ mu, sigma, xMin: lo, xMax: hi, baseY, plotH, peakFrac: PEAK_FRAC, nPoints: 180 },
+			sx
+		)
+	);
 
 	// Gefülltes Flächenstück zwischen a und b (geschlossenes Polygon auf der Basis).
-	const areaPath = $derived.by(() => {
-		const x0 = aClamped;
-		const x1 = bClamped;
-		if (!(x1 > x0)) return '';
-		const steps = 120;
-		let d = `M ${sx(x0).toFixed(2)} ${baseY.toFixed(2)}`;
-		for (let i = 0; i <= steps; i++) {
-			const x = x0 + ((x1 - x0) * i) / steps;
-			d += ` L ${sx(x).toFixed(2)} ${sy(normalPdf(x, mu, sigma)).toFixed(2)}`;
-		}
-		d += ` L ${sx(x1).toFixed(2)} ${baseY.toFixed(2)} Z`;
-		return d;
-	});
+	const areaPath = $derived(
+		bellAreaPath(
+			{
+				mu,
+				sigma,
+				xMin: lo,
+				xMax: hi,
+				baseY,
+				plotH,
+				peakFrac: PEAK_FRAC,
+				nPoints: 120,
+				x0: aClamped,
+				x1: bClamped
+			},
+			sx
+		)
+	);
 
 	// Achsen-Ticks: im Datenmodus μ−3σ … μ+3σ, im z-Modus −3 … +3.
 	const ticks = $derived.by(() => {
@@ -119,13 +136,6 @@
 		zView = false;
 		showRegel = false;
 	}
-
-	// Slider-Bereich für a/b folgt der Achse, hat aber feste Grenzen, damit die
-	// Slider beim Verschieben von μ/σ nicht „springen“. Wir nutzen die aktuelle
-	// Achse als Bereich und runden großzügig.
-	const boundMin = $derived(Math.round((lo - 0.5) * 10) / 10);
-	const boundMax = $derived(Math.round((hi + 0.5) * 10) / 10);
-	const boundStep = $derived(Math.max(0.01, Math.round((sigma / 20) * 100) / 100));
 </script>
 
 <Widget

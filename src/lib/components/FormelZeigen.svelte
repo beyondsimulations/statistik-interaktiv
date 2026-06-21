@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Katex from '$lib/Katex.svelte';
+	import { useId } from '$lib/use-id';
 
 	export type Symbol = {
 		/** Das Symbol als TeX-Ausschnitt (inline gerendert), z. B. `\sigma`. */
@@ -18,7 +19,7 @@
 	let { formula, symbols = [] }: Props = $props();
 
 	let open = $state(false);
-	const panelId = 'formel-' + Math.random().toString(36).slice(2, 9);
+	const panelId = useId('formel');
 </script>
 
 <div class="border-ink/10 bg-paper-raised shadow-soft my-5 overflow-hidden rounded-2xl border">

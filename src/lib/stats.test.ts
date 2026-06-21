@@ -144,6 +144,10 @@ describe('normal quantile', () => {
 	});
 	it('quantile with mu/sigma', () =>
 		expect(normalQuantile(0.975, 100, 15)).toBeCloseTo(100 + 1.959964 * 15, 2));
+	it('median is exactly mu (no Halley drift)', () => {
+		expect(normalQuantile(0.5)).toBe(0);
+		expect(normalQuantile(0.5, 10, 2)).toBe(10);
+	});
 });
 
 describe('student-t cdf', () => {
@@ -795,6 +799,14 @@ describe('linearRegression (OLS / Kleinste Quadrate)', () => {
 		expect(Number.isNaN(linearRegression([1, 2, 3], [1, 2]).slope)).toBe(true);
 		expect(Number.isNaN(linearRegression([1, 2], [1, 2]).slope)).toBe(true);
 		expect(Number.isNaN(linearRegression([5, 5, 5], [1, 2, 3]).slope)).toBe(true);
+	});
+
+	it('exposes ssExplained / ssResidual: they sum to ssTotal and define R²', () => {
+		const fit = linearRegression(x, y);
+		const my = mean(y);
+		const ssTotal = y.reduce((acc, v) => acc + (v - my) * (v - my), 0);
+		expect(fit.ssExplained + fit.ssResidual).toBeCloseTo(ssTotal, 10);
+		expect(fit.r2).toBeCloseTo(fit.ssExplained / (fit.ssExplained + fit.ssResidual), 12);
 	});
 });
 
