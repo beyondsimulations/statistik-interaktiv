@@ -270,7 +270,7 @@ function betacf(x: number, a: number, b: number): number {
 }
 
 /** Natural log of the gamma function (Lanczos approximation). */
-function logGamma(z: number): number {
+export function logGamma(z: number): number {
 	const g = [
 		676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059,
 		12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7
@@ -464,6 +464,211 @@ export function summaryTTest(delta: number, s: number, n: number): SummaryTTestR
 	const t = delta / se;
 	const pTwoSided = 2 * (1 - tCdf(Math.abs(t), df));
 	return { t, df, se, pTwoSided };
+}
+
+// ---------------------------------------------------------------------------
+// Chi-square distribution & tests
+// ---------------------------------------------------------------------------
+
+/**
+ * Regularized lower incomplete gamma function P(a, x) = γ(a, x) / Γ(a).
+ *
+ * Combines the series expansion (fast for x < a + 1) and the Lentz continued
+ * fraction (fast for x ≥ a + 1), the standard Numerical-Recipes split. Reuses
+ * the Lanczos `logGamma` above so the normalization Γ(a) is exact to machine
+ * precision.
+ *
+ * Domain: a > 0, x ≥ 0. Returns 0 at x = 0 and approaches 1 as x → ∞.
+ */
+function regularizedGammaP(a: number, x: number): number {
+	if (x <= 0) return 0;
+	if (a <= 0) return NaN;
+
+	const gln = logGamma(a);
+
+	if (x < a + 1) {
+		// Series representation γ*(a, x) = Σ x^n / (a(a+1)...(a+n)).
+		let ap = a;
+		let sum = 1 / a;
+		let del = sum;
+		for (let n = 0; n < 500; n++) {
+			ap += 1;
+			del *= x / ap;
+			sum += del;
+			if (Math.abs(del) < Math.abs(sum) * 1e-15) break;
+		}
+		return sum * Math.exp(-x + a * Math.log(x) - gln);
+	}
+
+	// Continued fraction for the upper incomplete gamma Q(a, x); P = 1 − Q.
+	const FPMIN = 1e-300;
+	let b = x + 1 - a;
+	let c = 1 / FPMIN;
+	let d = 1 / b;
+	let h = d;
+	for (let i = 1; i <= 500; i++) {
+		const an = -i * (i - a);
+		b += 2;
+		d = an * d + b;
+		if (Math.abs(d) < FPMIN) d = FPMIN;
+		c = b + an / c;
+		if (Math.abs(c) < FPMIN) c = FPMIN;
+		d = 1 / d;
+		const del = d * c;
+		h *= del;
+		if (Math.abs(del - 1) < 1e-15) break;
+	}
+	const q = Math.exp(-x + a * Math.log(x) - gln) * h;
+	return 1 - q;
+}
+
+/**
+ * Cumulative distribution function of the chi-square distribution with `df`
+ * degrees of freedom: F(x) = P(df/2, x/2), the regularized lower incomplete
+ * gamma function.
+ *
+ * Contract / tested against R's pchisq():
+ *   pchisq(3.84, 1)  ≈ 0.9500   (the 5 %-critical value for df = 1)
+ *   pchisq(5.99, 2)  ≈ 0.9500
+ *   pchisq(7.81, 3)  ≈ 0.9500
+ *
+ * Edge cases: x ≤ 0 → 0; df ≤ 0 → NaN.
+ */
+export function chiSquareCdf(x: number, df: number): number {
+	if (df <= 0) return NaN;
+	if (x <= 0) return 0;
+	return regularizedGammaP(df / 2, x / 2);
+}
+
+/** Upper-tail p-value of the chi-square distribution: P(X ≥ x). */
+function chiSquareP(x: number, df: number): number {
+	if (df <= 0) return NaN;
+	if (x <= 0) return 1;
+	return 1 - chiSquareCdf(x, df);
+}
+
+export interface ChiSquareResult {
+	/** Teststatistik χ² = Σ (B − E)² / E. */
+	chi2: number;
+	/** Freiheitsgrade. */
+	df: number;
+	/** Oberer (rechtsseitiger) p-Wert P(X ≥ χ² | H0). */
+	p: number;
+}
+
+/**
+ * Chi-Quadrat-Anpassungstest (goodness of fit): Folgen die BEOBACHTETEN
+ * Häufigkeiten `observed` der erwarteten Verteilung `expectedProbs`?
+ *
+ *   E_i  = N · p_i             (N = Σ beobachtet, p_i die erwarteten Anteile)
+ *   χ²   = Σ (B_i − E_i)² / E_i
+ *   df   = k − 1               (k = Anzahl Kategorien)
+ *   p    = P(X ≥ χ² | H0),  X ~ χ²_{df}
+ *
+ * Klassisches Beispiel: Mendels Erbsen mit dem 9:3:3:1-Spaltungsverhältnis,
+ * also expectedProbs = [9/16, 3/16, 3/16, 1/16].
+ *
+ * `expectedProbs` muss dieselbe Länge wie `observed` haben und wird intern auf
+ * Summe 1 normiert (du darfst also auch Verhältnisse wie [9,3,3,1] übergeben).
+ *
+ * Edge cases: weniger als 2 Kategorien oder Längen-Mismatch → NaNs.
+ */
+export function chiSquareGof(observed: number[], expectedProbs: number[]): ChiSquareResult {
+	const k = observed.length;
+	if (k < 2 || expectedProbs.length !== k) {
+		return { chi2: NaN, df: NaN, p: NaN };
+	}
+
+	let probSum = 0;
+	for (const p of expectedProbs) probSum += p;
+	if (!(probSum > 0)) return { chi2: NaN, df: NaN, p: NaN };
+
+	let total = 0;
+	for (const o of observed) total += o;
+
+	let chi2 = 0;
+	for (let i = 0; i < k; i++) {
+		const e = total * (expectedProbs[i] / probSum);
+		if (e > 0) {
+			const diff = observed[i] - e;
+			chi2 += (diff * diff) / e;
+		}
+	}
+
+	const df = k - 1;
+	return { chi2, df, p: chiSquareP(chi2, df) };
+}
+
+export interface ChiSquareIndependenceResult extends ChiSquareResult {
+	/** Erwartete Häufigkeiten E = (Zeilensumme · Spaltensumme) / N je Zelle. */
+	expected: number[][];
+}
+
+/**
+ * Chi-Quadrat-Unabhängigkeitstest für eine Kontingenztafel `table` (Zeilen ×
+ * Spalten beobachteter Häufigkeiten). Prüft, ob die beiden Merkmale (Zeile,
+ * Spalte) unabhängig sind.
+ *
+ *   E_{ij} = (Zeilensumme_i · Spaltensumme_j) / N      (N = Gesamtsumme)
+ *   χ²     = Σ_{i,j} (B_{ij} − E_{ij})² / E_{ij}
+ *   df     = (Zeilen − 1) · (Spalten − 1)
+ *   p      = P(X ≥ χ² | H0),  X ~ χ²_{df}
+ *
+ * Entspricht R `chisq.test(table, correct = FALSE)`. Bei einer 2×2-Tafel
+ * (df = 1) verwendet R standardmäßig die Yates-Stetigkeitskorrektur
+ * (`correct = TRUE`); setze `yates = true`, um sie nachzubilden — dann wird in
+ * jeder Zelle |B − E| um 0,5 verkleinert (aber nie unter 0).
+ *
+ * Die erwarteten Häufigkeiten werden mitgeliefert (für die Anzeige der „E aus
+ * den Rändern“-Idee und die E ≥ 5-Faustregel).
+ *
+ * Edge cases: weniger als 2 Zeilen/Spalten, leere/ungleich lange Zeilen oder
+ * Gesamtsumme 0 → NaNs mit leerer `expected`-Matrix.
+ */
+export function chiSquareIndependence(
+	table: number[][],
+	yates = false
+): ChiSquareIndependenceResult {
+	const rows = table.length;
+	const cols = rows > 0 ? table[0].length : 0;
+	const bad: ChiSquareIndependenceResult = { chi2: NaN, df: NaN, p: NaN, expected: [] };
+
+	if (rows < 2 || cols < 2) return bad;
+	if (!table.every((r) => r.length === cols)) return bad;
+
+	const rowSums = new Array<number>(rows).fill(0);
+	const colSums = new Array<number>(cols).fill(0);
+	let total = 0;
+	for (let i = 0; i < rows; i++) {
+		for (let j = 0; j < cols; j++) {
+			const v = table[i][j];
+			rowSums[i] += v;
+			colSums[j] += v;
+			total += v;
+		}
+	}
+	if (!(total > 0)) return bad;
+
+	const useYates = yates && rows === 2 && cols === 2;
+
+	const expected: number[][] = [];
+	let chi2 = 0;
+	for (let i = 0; i < rows; i++) {
+		const eRow: number[] = [];
+		for (let j = 0; j < cols; j++) {
+			const e = (rowSums[i] * colSums[j]) / total;
+			eRow.push(e);
+			if (e > 0) {
+				let diff = Math.abs(table[i][j] - e);
+				if (useYates) diff = Math.max(0, diff - 0.5);
+				chi2 += (diff * diff) / e;
+			}
+		}
+		expected.push(eRow);
+	}
+
+	const df = (rows - 1) * (cols - 1);
+	return { chi2, df, p: chiSquareP(chi2, df), expected };
 }
 
 // ---------------------------------------------------------------------------

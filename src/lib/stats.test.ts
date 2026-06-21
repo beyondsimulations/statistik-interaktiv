@@ -15,6 +15,9 @@ import {
 	positivePredictiveValue,
 	welchTTest,
 	summaryTTest,
+	chiSquareCdf,
+	chiSquareGof,
+	chiSquareIndependence,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
@@ -364,6 +367,141 @@ describe('summaryTTest (Signal-zu-Rausch)', () => {
 		const exact = summaryTTest(0, 0, 10);
 		expect(exact.t).toBe(0);
 		expect(exact.pTwoSided).toBe(1);
+	});
+});
+
+describe('chiSquareCdf', () => {
+	// Reference values from R's pchisq() at the classic 5 %-critical values.
+	it('pchisq(3.841, 1) ≈ 0.95', () => {
+		expect(chiSquareCdf(3.841459, 1)).toBeCloseTo(0.95, 4);
+	});
+	it('pchisq(5.991, 2) ≈ 0.95', () => {
+		expect(chiSquareCdf(5.991465, 2)).toBeCloseTo(0.95, 4);
+	});
+	it('pchisq(7.815, 3) ≈ 0.95', () => {
+		expect(chiSquareCdf(7.814728, 3)).toBeCloseTo(0.95, 4);
+	});
+	it('pchisq(11.07, 5) ≈ 0.95', () => {
+		expect(chiSquareCdf(11.0705, 5)).toBeCloseTo(0.95, 4);
+	});
+	it('cdf(0, df) = 0 and is 0 for negative x', () => {
+		expect(chiSquareCdf(0, 3)).toBe(0);
+		expect(chiSquareCdf(-1, 3)).toBe(0);
+	});
+	it('df ≤ 0 → NaN', () => {
+		expect(Number.isNaN(chiSquareCdf(1, 0))).toBe(true);
+	});
+	it('grows toward 1 in the upper tail', () => {
+		expect(chiSquareCdf(20, 3)).toBeGreaterThan(0.999);
+	});
+});
+
+describe('chiSquareGof (Anpassungstest)', () => {
+	// Mendel's classic dihybrid pea data, expected 9:3:3:1 ratio.
+	//   R: chisq.test(c(315,101,108,32), p = c(9,3,3,1)/16)
+	//      X-squared = 0.47002, df = 3, p-value = 0.9254
+	it('matches R for Mendel 9:3:3:1 (315,101,108,32)', () => {
+		const r = chiSquareGof([315, 101, 108, 32], [9, 3, 3, 1]);
+		expect(r.chi2).toBeCloseTo(0.47002, 3);
+		expect(r.df).toBe(3);
+		expect(r.p).toBeCloseTo(0.9254, 3);
+	});
+
+	it('accepts probabilities that already sum to 1 (same result)', () => {
+		const ratios = chiSquareGof([315, 101, 108, 32], [9, 3, 3, 1]);
+		const probs = chiSquareGof([315, 101, 108, 32], [9 / 16, 3 / 16, 3 / 16, 1 / 16]);
+		expect(probs.chi2).toBeCloseTo(ratios.chi2, 10);
+	});
+
+	// Mendel monohybrid 3:1 (round vs. wrinkled): 5474 round, 1850 wrinkled.
+	//   R: chisq.test(c(5474,1850), p = c(3,1)/4)
+	//      X-squared = 0.26288, df = 1, p-value = 0.6081
+	it('matches R for a 3:1 monohybrid cross (5474, 1850)', () => {
+		const r = chiSquareGof([5474, 1850], [3, 1]);
+		expect(r.chi2).toBeCloseTo(0.26288, 3);
+		expect(r.df).toBe(1);
+		expect(r.p).toBeCloseTo(0.6081, 3);
+	});
+
+	it('a perfect fit gives χ² = 0 and p = 1', () => {
+		const r = chiSquareGof([90, 30, 30, 10], [9, 3, 3, 1]);
+		expect(r.chi2).toBeCloseTo(0, 10);
+		expect(r.p).toBeCloseTo(1, 10);
+	});
+
+	it('fails safe with fewer than two categories or a length mismatch', () => {
+		expect(Number.isNaN(chiSquareGof([10], [1]).chi2)).toBe(true);
+		expect(Number.isNaN(chiSquareGof([10, 20], [1, 1, 1]).chi2)).toBe(true);
+	});
+});
+
+describe('chiSquareIndependence (Unabhängigkeitstest)', () => {
+	// 2×2 contingency table, Art (A/B) × Habitat (1/2):
+	//   A: 30 in Habitat 1, 10 in Habitat 2
+	//   B: 12 in Habitat 1, 28 in Habitat 2
+	// R: chisq.test(matrix(c(30,12,10,28), nrow = 2), correct = FALSE)
+	//    X-squared = 16.241, df = 1, p-value = 5.57e-05
+	const table = [
+		[30, 10],
+		[12, 28]
+	];
+
+	it('matches R chisq.test(correct = FALSE) on a 2×2 table', () => {
+		const r = chiSquareIndependence(table);
+		expect(r.chi2).toBeCloseTo(16.2406, 2);
+		expect(r.df).toBe(1);
+		expect(r.p).toBeCloseTo(5.566e-5, 6);
+	});
+
+	it('computes expected values from the margins E = (rowSum·colSum)/N', () => {
+		const r = chiSquareIndependence(table);
+		// rowSums = 40,40; colSums = 42,38; N = 80 → E11 = 40·42/80 = 21.
+		expect(r.expected[0][0]).toBeCloseTo(21, 6);
+		expect(r.expected[0][1]).toBeCloseTo(19, 6);
+		expect(r.expected[1][0]).toBeCloseTo(21, 6);
+		expect(r.expected[1][1]).toBeCloseTo(19, 6);
+	});
+
+	it('matches R chisq.test(correct = TRUE) with the Yates correction on 2×2', () => {
+		// R default: X-squared = 14.486, df = 1, p-value = 0.0001416
+		const r = chiSquareIndependence(table, true);
+		expect(r.chi2).toBeCloseTo(14.4862, 2);
+		expect(r.p).toBeCloseTo(0.0001416, 6);
+	});
+
+	// A 2×3 table (df = 2), Yates does NOT apply.
+	//   R: chisq.test(matrix(c(10,20,30, 6,9,17), nrow = 2, byrow = TRUE),
+	//                  correct = FALSE) → X-squared = 0.27157, df = 2, p = 0.8730
+	it('matches R on a 2×3 table (df = 2)', () => {
+		const r = chiSquareIndependence([
+			[10, 20, 30],
+			[6, 9, 17]
+		]);
+		expect(r.chi2).toBeCloseTo(0.27157, 3);
+		expect(r.df).toBe(2);
+		expect(r.p).toBeCloseTo(0.873, 3);
+	});
+
+	it('perfect independence gives χ² ≈ 0', () => {
+		// Rows proportional → no association.
+		const r = chiSquareIndependence([
+			[10, 20],
+			[20, 40]
+		]);
+		expect(r.chi2).toBeCloseTo(0, 8);
+	});
+
+	it('fails safe for degenerate tables', () => {
+		expect(Number.isNaN(chiSquareIndependence([[1, 2]]).chi2)).toBe(true);
+		expect(chiSquareIndependence([[1, 2]]).expected).toEqual([]);
+		expect(
+			Number.isNaN(
+				chiSquareIndependence([
+					[0, 0],
+					[0, 0]
+				]).chi2
+			)
+		).toBe(true);
 	});
 });
 

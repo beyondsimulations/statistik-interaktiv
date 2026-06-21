@@ -352,6 +352,41 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'nicht-parametrischer Test',
 		definition:
 			'Ein verteilungsfreier Test, der keine bestimmte Verteilung (etwa Normalverteilung) der Daten voraussetzt. Meist rang- oder medianbasiert und robust gegen Ausreißer.'
+	},
+	'Chi-Quadrat-Test': {
+		term: 'Chi-Quadrat-Test',
+		definition:
+			'Eine Gruppe von Tests für kategoriale Häufigkeitsdaten (Anzahlen). Sie vergleichen beobachtete Zählungen B mit den unter H₀ erwarteten Zählungen E über χ² = Σ (B − E)² / E.'
+	},
+	Anpassungstest: {
+		term: 'Anpassungstest',
+		definition:
+			'Der Chi-Quadrat-Goodness-of-Fit-Test: Folgen die beobachteten Häufigkeiten einer erwarteten Verteilung (z. B. dem Mendel-Verhältnis 9:3:3:1)? Freiheitsgrade df = k − 1.'
+	},
+	Unabhängigkeitstest: {
+		term: 'Unabhängigkeitstest',
+		definition:
+			'Der Chi-Quadrat-Test auf einer Kontingenztafel: Sind zwei kategoriale Merkmale unabhängig? Die Erwartungswerte folgen aus den Rändern, df = (Zeilen − 1)·(Spalten − 1).'
+	},
+	Kontingenztafel: {
+		term: 'Kontingenztafel',
+		definition:
+			'Eine Kreuztabelle, die zählt, wie oft jede Kombination zweier kategorialer Merkmale auftritt (z. B. Art × Habitat). Aus ihren Zeilen- und Spaltensummen werden die Erwartungswerte berechnet.'
+	},
+	Erwartungswert: {
+		term: 'Erwartungswert',
+		definition:
+			'Beim Chi-Quadrat-Test die unter der Nullhypothese erwartete Häufigkeit E einer Zelle. Sie sind keine Daten, sondern verkörpern das Modell (Unabhängigkeit bzw. das genetische Verhältnis).'
+	},
+	'Yates-Korrektur': {
+		term: 'Yates-Korrektur',
+		definition:
+			'Eine Stetigkeitskorrektur für 2×2-Tafeln (df = 1): In jeder Zelle wird |B − E| um 0,5 verkleinert. Sie macht den Test konservativer. In R ist sie bei chisq.test() der Standard (correct = TRUE).'
+	},
+	'Fisher-Test': {
+		term: 'Fisher-Test',
+		definition:
+			'Fishers exakter Test: die genaue Alternative zum Chi-Quadrat-Test bei kleinen erwarteten Häufigkeiten (Faustregel E < 5). Er rechnet exakt mit der hypergeometrischen Verteilung statt mit der Näherung.'
 	}
 };
 
