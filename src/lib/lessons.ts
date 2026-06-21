@@ -51,7 +51,7 @@ export const lessons: Lesson[] = [
 	// --- Vertiefung --------------------------------------------------------
 	{ slug: 'power', title: 'Experimentelles Design & Power', track: 'rest', order: 12, status: 'live' },
 	{ slug: 'designtypen', title: 'Designtypen & Pseudoreplikation', track: 'rest', order: 13, status: 'live' },
-	{ slug: 'welcher-test', title: 'Welcher Test?', track: 'rest', order: 14, status: 'coming-soon' }
+	{ slug: 'welcher-test', title: 'Welcher Test?', track: 'rest', order: 14, status: 'live' }
 ];
 
 /** Lessons in canonical order (defensive copy, sorted by `order`). */

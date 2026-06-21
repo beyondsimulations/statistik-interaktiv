@@ -176,12 +176,12 @@
     {
       "id": 20,
       "subject": "Task 19: Lektion 14 — Welcher Test?",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         7
       ],
       "description": "Entscheidungsbaum-Spiel, reuse AnnahmenBaum. Per-lesson DoD."
     }
   ],
-  "lastUpdated": "2026-06-21T13:00:00Z"
+  "lastUpdated": "2026-06-21T14:00:00Z"
 }
