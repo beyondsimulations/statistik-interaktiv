@@ -21,7 +21,13 @@ const config = {
 			fallback: undefined,
 			precompress: false,
 			strict: true
-		})
+		}),
+		// GitHub Pages serves a project site under /<repo>/, so asset + link URLs
+		// need that prefix. CI builds with BASE_PATH=/Data-Science; local dev and
+		// the test build use '' (root). All internal links go through `base`.
+		paths: {
+			base: process.env.BASE_PATH ?? ''
+		}
 	}
 };
 
