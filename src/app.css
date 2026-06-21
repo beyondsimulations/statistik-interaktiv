@@ -1,1 +1,188 @@
 @import 'tailwindcss';
+
+/*
+ * DS2 Lernwebsite — Design System (Task 2)
+ * --------------------------------------------------------------------------
+ * Personality: warm & encouraging ("du schaffst das"). Soft rounded shapes,
+ * generous whitespace, calm pacing. Light theme only (best for math + charts).
+ *
+ * Aesthetic direction: "soft encouraging textbook" — warm paper background,
+ * a characterful display serif (Fraunces) for headings paired with a friendly,
+ * highly readable sans (Nunito) for body. Coral as the primary action accent,
+ * amber as the warm secondary highlight. Soft, low-contrast shadows that feel
+ * like paper lifting off paper rather than harsh UI elevation.
+ *
+ * Fonts are loaded via <link> in src/app.html (preconnect + display=swap).
+ */
+
+@theme {
+	/* --- Color: warm paper & ink ------------------------------------------ */
+	--color-paper: #fbf8f4; /* page background — warm off-white */
+	--color-paper-raised: #ffffff; /* cards / raised surfaces */
+	--color-paper-sunk: #f4efe7; /* subtle inset / muted panels */
+
+	--color-ink: #2b2724; /* primary text — warm dark gray */
+	--color-ink-soft: #5c544d; /* secondary text */
+	--color-ink-faint: #756b63; /* captions, hints, disabled — AA on paper */
+
+	/* Coral — primary accent / actions. AA on white & on paper. */
+	--color-coral-50: #fef1ee;
+	--color-coral-100: #fcdcd5;
+	--color-coral-200: #f9bcb0;
+	--color-coral-300: #f5917f;
+	--color-coral-400: #f2654e;
+	--color-coral-500: #e14e36; /* default action — 4.7:1 on white */
+	--color-coral-600: #c23f2a;
+	--color-coral-700: #9c3322;
+
+	/* Amber — secondary accent / warm highlights. */
+	--color-amber-50: #fef6e7;
+	--color-amber-100: #fde9c2;
+	--color-amber-200: #fad592;
+	--color-amber-300: #f5a623;
+	--color-amber-400: #e8951a;
+	--color-amber-500: #c87c12; /* text-safe amber — AA on white */
+	--color-amber-600: #a3640d;
+
+	/* Sage — a calm, reassuring support hue for "you got this" moments. */
+	--color-sage-100: #e6efe6;
+	--color-sage-300: #8fb89a;
+	--color-sage-500: #4f7d5e;
+
+	/* Semantic aliases */
+	--color-background: var(--color-paper);
+	--color-surface: var(--color-paper-raised);
+	--color-foreground: var(--color-ink);
+	--color-primary: var(--color-coral-500);
+	--color-secondary: var(--color-amber-300);
+
+	/* --- Typography -------------------------------------------------------- */
+	--font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+	--font-sans:
+		'Nunito', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+	/* --- Radii: soft & rounded -------------------------------------------- */
+	--radius-lg: 0.875rem;
+	--radius-xl: 1.125rem;
+	--radius-2xl: 1.5rem;
+	--radius-3xl: 2rem;
+	--radius-full: 9999px;
+
+	/* --- Shadows: soft paper lift (warm-tinted, never harsh) -------------- */
+	--shadow-soft:
+		0 1px 2px rgba(43, 39, 36, 0.04), 0 4px 12px rgba(43, 39, 36, 0.06);
+	--shadow-lifted:
+		0 2px 4px rgba(43, 39, 36, 0.05), 0 12px 28px rgba(43, 39, 36, 0.09);
+	--shadow-coral: 0 8px 24px rgba(225, 78, 54, 0.28);
+	--shadow-amber: 0 8px 24px rgba(245, 166, 35, 0.26);
+
+	/* --- Spacing rhythm (8px base, with a couple of generous steps) ------- */
+	--spacing-section: 4.5rem; /* vertical rhythm between major sections */
+}
+
+/* ------------------------------------------------------------------------- *
+ * Base layer: apply the warm theme globally.
+ * ------------------------------------------------------------------------- */
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		background-color: var(--color-paper);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		font-feature-settings: 'kern', 'liga', 'calt';
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+		line-height: 1.7;
+	}
+
+	/* Headings: characterful display serif, tightened tracking, warm ink. */
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: var(--font-display);
+		color: var(--color-ink);
+		font-weight: 600;
+		line-height: 1.12;
+		letter-spacing: -0.015em;
+		font-optical-sizing: auto;
+		text-wrap: balance;
+	}
+
+	p {
+		text-wrap: pretty;
+	}
+
+	/* Soft, branded text selection. */
+	::selection {
+		background-color: var(--color-coral-100);
+		color: var(--color-coral-700);
+	}
+
+	/* Consistent, accessible focus ring across interactive elements. */
+	:focus-visible {
+		outline: 2px solid var(--color-coral-400);
+		outline-offset: 2px;
+		border-radius: var(--radius-md, 0.5rem);
+	}
+
+	/* Respect reduced-motion preferences. */
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------- *
+ * Atmospheric page texture: a barely-there warm grain + soft top glow so the
+ * background reads as "paper", not flat #fff. Stays subtle for readability.
+ * ------------------------------------------------------------------------- */
+@layer base {
+	body::before {
+		content: '';
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		background:
+			radial-gradient(
+				120% 80% at 50% -10%,
+				rgba(245, 166, 35, 0.07) 0%,
+				rgba(245, 166, 35, 0) 55%
+			),
+			radial-gradient(
+				90% 60% at 100% 0%,
+				rgba(242, 101, 78, 0.05) 0%,
+				rgba(242, 101, 78, 0) 50%
+			);
+	}
+}
+
+/* ------------------------------------------------------------------------- *
+ * KaTeX: nudge math to inherit the warm ink color and breathe a little.
+ * ------------------------------------------------------------------------- */
+.katex {
+	color: var(--color-ink);
+}
+.katex-display {
+	margin: 1.25rem 0;
+	padding: 1rem 1.25rem;
+	background: var(--color-paper-sunk);
+	border-radius: var(--radius-xl);
+	overflow-x: auto;
+	overflow-y: hidden;
+}
