@@ -10,9 +10,36 @@ import {
 	makeRng,
 	drawSample,
 	binCounts,
+	positivePredictiveValue,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
+
+describe('positivePredictiveValue', () => {
+	it('rare disease: high sensitivity still yields a low predictive value', () => {
+		// Prävalenz 0,5 %, Sensitivität 99 %, Spezifität 95 % → ≈ 0,0905.
+		const ppv = positivePredictiveValue(0.005, 0.99, 0.95);
+		expect(ppv).toBeCloseTo(0.0905, 4);
+	});
+
+	it('a perfect test (no false positives) gives PPV = 1 for any positive', () => {
+		expect(positivePredictiveValue(0.01, 1, 1)).toBe(1);
+	});
+
+	it('matches P(krank∩positiv) / P(positiv) directly', () => {
+		const prev = 0.1;
+		const sens = 0.9;
+		const spec = 0.8;
+		const tp = prev * sens;
+		const fp = (1 - prev) * (1 - spec);
+		expect(positivePredictiveValue(prev, sens, spec)).toBeCloseTo(tp / (tp + fp), 12);
+	});
+
+	it('fails safe to 0 when there are no positive tests at all', () => {
+		// Prävalenz 0 und perfekte Spezifität → niemand testet positiv.
+		expect(positivePredictiveValue(0, 0.99, 1)).toBe(0);
+	});
+});
 
 describe('binCounts', () => {
 	it('counts a known array into known bins', () => {

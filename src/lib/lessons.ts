@@ -35,7 +35,7 @@ export const TRACKS: { id: TrackId; label: string }[] = [
 export const lessons: Lesson[] = [
 	// --- Grundlagen --------------------------------------------------------
 	{ slug: 'was-ist-statistik', title: 'Was ist Statistik?', track: 'grundlagen', order: 1, status: 'live' },
-	{ slug: 'wahrscheinlichkeit-bayes', title: 'Wahrscheinlichkeit & Bayes', track: 'grundlagen', order: 2, status: 'coming-soon' },
+	{ slug: 'wahrscheinlichkeit-bayes', title: 'Wahrscheinlichkeit & Bayes', track: 'grundlagen', order: 2, status: 'live' },
 	{ slug: 'verteilungen', title: 'Verteilungen & die Glockenkurve', track: 'grundlagen', order: 3, status: 'coming-soon' },
 	{ slug: 'stichprobenverteilung', title: 'Von der Stichprobe zur Stichprobenverteilung', track: 'grundlagen', order: 4, status: 'live' },
 	{ slug: 'konfidenzintervalle', title: 'Schätzen & Konfidenzintervalle', track: 'grundlagen', order: 5, status: 'coming-soon' },

@@ -52,6 +52,40 @@ export function standardError(xs: number[]): number {
 }
 
 // ---------------------------------------------------------------------------
+// Bayes / medizinischer Test
+// ---------------------------------------------------------------------------
+
+/**
+ * Positiver prädiktiver Wert P(krank | positiv) — die Wahrscheinlichkeit,
+ * tatsächlich krank zu sein, gegeben ein positives Testergebnis.
+ *
+ * Über den Satz von Bayes mit den Bausteinen eines medizinischen Tests:
+ *   - prevalence  = P(krank)            — Prävalenz in der Bevölkerung
+ *   - sensitivity = P(positiv | krank)  — Sensitivität (richtig-positiv-Rate)
+ *   - specificity = P(negativ | gesund) — Spezifität (richtig-negativ-Rate)
+ *
+ * Es gilt:
+ *   richtig-positiv = prevalence · sensitivity
+ *   falsch-positiv  = (1 − prevalence) · (1 − specificity)
+ *   P(krank|positiv) = richtig-positiv / (richtig-positiv + falsch-positiv)
+ *
+ * Alle drei Argumente sind Wahrscheinlichkeiten in [0, 1]. Gibt es überhaupt
+ * keine positiven Tests (Nenner = 0, etwa Prävalenz 0 und perfekte Spezifität),
+ * ist der Wert undefiniert; wir geben dann 0 zurück (fail-safe statt NaN).
+ */
+export function positivePredictiveValue(
+	prevalence: number,
+	sensitivity: number,
+	specificity: number
+): number {
+	const truePositive = prevalence * sensitivity;
+	const falsePositive = (1 - prevalence) * (1 - specificity);
+	const positives = truePositive + falsePositive;
+	if (positives <= 0) return 0;
+	return truePositive / positives;
+}
+
+// ---------------------------------------------------------------------------
 // Histogram binning
 // ---------------------------------------------------------------------------
 

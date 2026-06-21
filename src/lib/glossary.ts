@@ -102,6 +102,66 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Kausalschluss',
 		definition:
 			'Die Aussage, dass A wirklich B verursacht — nicht nur mit B zusammenhängt. Sauber begründbar nur durch kontrollierte Experimente.'
+	},
+	Zufallsexperiment: {
+		term: 'Zufallsexperiment',
+		definition:
+			'Ein Vorgang mit ungewissem Ausgang, den man (gedanklich) beliebig oft wiederholen kann — etwa ein Würfelwurf oder ein medizinischer Test.'
+	},
+	Ergebnisraum: {
+		term: 'Ergebnisraum',
+		definition:
+			'Die Menge aller möglichen Ergebnisse eines Zufallsexperiments. Beim Würfel zum Beispiel {1, 2, 3, 4, 5, 6}.'
+	},
+	Ereignis: {
+		term: 'Ereignis',
+		definition:
+			'Eine Teilmenge des Ergebnisraums — also eine Aussage, die eintreten kann oder nicht, z. B. "eine gerade Zahl würfeln".'
+	},
+	Wahrscheinlichkeit: {
+		term: 'Wahrscheinlichkeit',
+		definition:
+			'Eine Zahl zwischen 0 und 1, die angibt, wie sicher ein Ereignis eintritt. 0 = unmöglich, 1 = sicher.'
+	},
+	'Laplace-Wahrscheinlichkeit': {
+		term: 'Laplace-Wahrscheinlichkeit',
+		definition:
+			'Bei gleich wahrscheinlichen Ergebnissen: günstige durch mögliche Fälle. Etwa 3/6 für eine gerade Augenzahl beim fairen Würfel.'
+	},
+	'relative Häufigkeit': {
+		term: 'relative Häufigkeit',
+		definition:
+			'Der Anteil, mit dem ein Ereignis tatsächlich eingetreten ist (Treffer geteilt durch Versuche). Sie nähert sich auf Dauer der Wahrscheinlichkeit an.'
+	},
+	'Bedingte Wahrscheinlichkeit': {
+		term: 'Bedingte Wahrscheinlichkeit',
+		definition:
+			'Die Wahrscheinlichkeit von A, wenn man bereits weiß, dass B eingetreten ist. Geschrieben P(A|B) = P(A∩B)/P(B).'
+	},
+	'Satz von Bayes': {
+		term: 'Satz von Bayes',
+		definition:
+			'Dreht eine bedingte Wahrscheinlichkeit um: Aus P(B|A) wird P(A|B). So kommt man vom Testergebnis zurück zur eigentlich gesuchten Wahrscheinlichkeit.'
+	},
+	Prävalenz: {
+		term: 'Prävalenz',
+		definition:
+			'Der Anteil der Menschen, die eine Krankheit tatsächlich haben — also P(krank) in der betrachteten Bevölkerung.'
+	},
+	Sensitivität: {
+		term: 'Sensitivität',
+		definition:
+			'Wie zuverlässig ein Test Kranke erkennt: P(positiv | krank). Eine hohe Sensitivität heißt, fast alle Kranken werden positiv getestet.'
+	},
+	Spezifität: {
+		term: 'Spezifität',
+		definition:
+			'Wie zuverlässig ein Test Gesunde als gesund erkennt: P(negativ | gesund). Eine hohe Spezifität heißt wenige falsch-positive Ergebnisse.'
+	},
+	'Positiver prädiktiver Wert': {
+		term: 'Positiver prädiktiver Wert',
+		definition:
+			'Die eigentlich interessante Größe: P(krank | positiv) — wie wahrscheinlich man wirklich krank ist, wenn der Test positiv anschlägt.'
 	}
 };
 
