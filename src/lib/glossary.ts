@@ -602,6 +602,51 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Repräsentativität',
 		definition:
 			'Die Stichprobe spiegelt die Grundgesamtheit in den relevanten Merkmalen wider. Nur dann darfst du von der Stichprobe auf die ganze Population schließen.'
+	},
+	Versuchsplanung: {
+		term: 'Versuchsplanung',
+		definition:
+			'Das Festlegen des Versuchsaufbaus VOR der Datenerhebung (engl. design of experiments). Die Statistik kann später nur trennen, was das Design vorab getrennt hat.'
+	},
+	Subsample: {
+		term: 'Subsample',
+		definition:
+			'Eine Mehrfachmessung INNERHALB einer Versuchseinheit (z. B. mehrere Blätter pro Pflanze, mehrere Fische pro Becken). Subsamples sind voneinander abhängig — sie sind keine echten Replikate.'
+	},
+	Versuchseinheit: {
+		term: 'Versuchseinheit',
+		definition:
+			'Die kleinste Einheit, die unabhängig einer Behandlung zugeordnet wird (z. B. die Pflanze, das Becken). Sie — nicht die Einzelmessung — ist die wahre Replikationseinheit.'
+	},
+	'Vollständig randomisiertes Design': {
+		term: 'Vollständig randomisiertes Design',
+		definition:
+			'CRD (completely randomized design): Die einfachste Form — jede Versuchseinheit wird rein zufällig einer Behandlung zugeordnet, ohne weitere Struktur. Passt, wenn die Einheiten ähnlich sind.'
+	},
+	'Randomisiertes Blockdesign': {
+		term: 'Randomisiertes Blockdesign',
+		definition:
+			'RBD: Ähnliche Einheiten werden zu Blöcken zusammengefasst (z. B. nach Beet oder Standort) und INNERHALB jedes Blocks randomisiert. So rechnet man die Blockvariation aus dem Fehler heraus und gewinnt Power.'
+	},
+	'Repeated Measures': {
+		term: 'Repeated Measures',
+		definition:
+			'Längsschnitt-/Messwiederholungsdesign: Dieselbe Einheit wird mehrmals gemessen (z. B. dasselbe Tier zu mehreren Zeitpunkten). Die Messungen sind abhängig und brauchen einen passenden Fehlerterm oder ein Mixed Model.'
+	},
+	'Split-Plot-Design': {
+		term: 'Split-Plot-Design',
+		definition:
+			'Ein Design mit zwei Randomisierungsebenen: ein Faktor wird auf großen Einheiten (Hauptparzellen) variiert, ein zweiter auf darin geschachtelten kleinen Einheiten (Teilparzellen). Beide Ebenen haben eigene Fehlerterme.'
+	},
+	'Verschachteltes Design': {
+		term: 'Verschachteltes Design',
+		definition:
+			'Nested: Eine Faktorstufe kommt nur innerhalb genau einer Stufe eines anderen Faktors vor (z. B. Pflanzen sind in Gruppen verschachtelt — jede Pflanze gehört zu genau einer Behandlung).'
+	},
+	'Gekreuztes Design': {
+		term: 'Gekreuztes Design',
+		definition:
+			'Crossed: Jede Stufe des einen Faktors tritt mit jeder Stufe des anderen kombiniert auf (z. B. Behandlung × Geschlecht in allen Kombinationen). Erlaubt es, Wechselwirkungen zu schätzen.'
 	}
 };
 
