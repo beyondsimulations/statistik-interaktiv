@@ -38,7 +38,7 @@ export const lessons: Lesson[] = [
 	{ slug: 'wahrscheinlichkeit-bayes', title: 'Wahrscheinlichkeit & Bayes', track: 'grundlagen', order: 2, status: 'live' },
 	{ slug: 'verteilungen', title: 'Verteilungen & die Glockenkurve', track: 'grundlagen', order: 3, status: 'live' },
 	{ slug: 'stichprobenverteilung', title: 'Von der Stichprobe zur Stichprobenverteilung', track: 'grundlagen', order: 4, status: 'live' },
-	{ slug: 'konfidenzintervalle', title: 'Schätzen & Konfidenzintervalle', track: 'grundlagen', order: 5, status: 'coming-soon' },
+	{ slug: 'konfidenzintervalle', title: 'Schätzen & Konfidenzintervalle', track: 'grundlagen', order: 5, status: 'live' },
 	{ slug: 'hypothesentest', title: 'Hypothesentest & der p-Wert', track: 'grundlagen', order: 6, status: 'coming-soon' },
 
 	// --- Klausur-relevant --------------------------------------------------

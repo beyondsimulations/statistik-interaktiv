@@ -207,6 +207,46 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Standardnormalverteilung',
 		definition:
 			'Die Normalverteilung mit μ = 0 und σ = 1. Jede Normalverteilung lässt sich per Z-Transformation auf sie zurückführen.'
+	},
+	Kennwert: {
+		term: 'Kennwert',
+		definition:
+			'Eine aus der Stichprobe berechnete Größe — etwa der Mittelwert x̄ oder die Standardabweichung s. Wird mit lateinischen Buchstaben geschrieben und schwankt von Stichprobe zu Stichprobe.'
+	},
+	Parameter: {
+		term: 'Parameter',
+		definition:
+			'Eine feste, meist unbekannte Größe der Grundgesamtheit — etwa μ oder σ. Wird mit griechischen Buchstaben geschrieben und ändert sich nicht.'
+	},
+	Punktschätzer: {
+		term: 'Punktschätzer',
+		definition:
+			'Ein einzelner Zahlenwert aus der Stichprobe, der einen unbekannten Parameter schätzt — z. B. x̄ als Schätzer für μ.'
+	},
+	Erwartungstreue: {
+		term: 'Erwartungstreue',
+		definition:
+			'Ein Schätzer ist erwartungstreu (unverzerrt), wenn er im Mittel über alle Stichproben den wahren Parameter trifft: E(x̄) = μ.'
+	},
+	Stichprobenkennwertverteilung: {
+		term: 'Stichprobenkennwertverteilung',
+		definition:
+			'Die Verteilung eines Kennwerts (z. B. von x̄) über alle denkbaren Stichproben. Ein einzelner Mittelwert ist eine zufällige Ziehung aus ihr.'
+	},
+	Freiheitsgrade: {
+		term: 'Freiheitsgrade',
+		definition:
+			'Die Anzahl der frei variierbaren Werte. Bei der Stichprobenvarianz sind es n − 1, weil ein Freiheitsgrad schon für die Schätzung von x̄ verbraucht ist.'
+	},
+	Konfidenzniveau: {
+		term: 'Konfidenzniveau',
+		definition:
+			'Der Anteil (z. B. 95 %) der nach demselben Verfahren gebauten Intervalle, die den wahren Parameter enthalten. Es ist 1 − α.'
+	},
+	'Student-t-Verteilung': {
+		term: 'Student-t-Verteilung',
+		definition:
+			'Eine glockenförmige Verteilung mit schwereren Rändern als die Normalverteilung. Für kleine Stichproben (unbekanntes σ) liefert sie breitere, korrekte Intervalle; mit wachsendem df nähert sie sich N(0, 1).'
 	}
 };
 

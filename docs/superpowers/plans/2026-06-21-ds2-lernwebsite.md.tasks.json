@@ -10,7 +10,7 @@
     { "id": 7, "subject": "Task 6: Keystone lesson page + nav (FIRST USABLE MILESTONE)", "status": "completed", "blockedBy": [4, 6], "description": "Lektion 1 mdsvex page: intro→widget→FormelZeigen→Intuition→Selbsttest; wired to nav+progress. Verify: build + chrome end-to-end." },
     { "id": 8, "subject": "Task 7: Lektion 2 — Was ist Statistik?", "status": "completed", "blockedBy": [7], "description": "Sortier-Spiel widget. Per-lesson DoD (German, FormelZeigen, 3Q Selbsttest, frontend-design, chrome end-to-end, nav+progress)." },
     { "id": 9, "subject": "Task 8: Lektion 3 — Wahrscheinlichkeit & Bayes", "status": "completed", "blockedBy": [7], "description": "Bayes-Box 10.000-person grid. Add+test Bayes helper. Per-lesson DoD." },
-    { "id": 10, "subject": "Task 9: Lektion 4 — Verteilungen & Glockenkurve", "status": "pending", "blockedBy": [7], "description": "Flächen-Schieber (pnorm live, z↔x). Per-lesson DoD." },
+    { "id": 10, "subject": "Task 9: Lektion 4 — Verteilungen & Glockenkurve", "status": "completed", "blockedBy": [7], "description": "Flächen-Schieber (pnorm live, z↔x). Per-lesson DoD." },
     { "id": 11, "subject": "Task 10: Lektion 5 — Konfidenzintervalle", "status": "pending", "blockedBy": [7], "description": "Sampling-Maschine (100 CIs, fixed μ). Add+test t-quantile. Per-lesson DoD." },
     { "id": 12, "subject": "Task 11: Lektion 6 — Hypothesentest & p-Wert", "status": "pending", "blockedBy": [7], "description": "α/β/Power visualizer + p-Wert-Würfelspiel. Per-lesson DoD." },
     { "id": 13, "subject": "Task 12: Lektion 7 — t-Tests", "status": "pending", "blockedBy": [7], "description": "Signal-vs-Rausch-Regler. Build shared AnnahmenBaum. Add+test t-statistic. Per-lesson DoD." },

@@ -7,6 +7,8 @@ import {
 	normalPdf,
 	normalCdf,
 	normalQuantile,
+	tCdf,
+	tQuantile,
 	makeRng,
 	drawSample,
 	binCounts,
@@ -128,6 +130,52 @@ describe('normal quantile', () => {
 	});
 	it('quantile with mu/sigma', () =>
 		expect(normalQuantile(0.975, 100, 15)).toBeCloseTo(100 + 1.959964 * 15, 2));
+});
+
+describe('student-t cdf', () => {
+	it('cdf(0, df)=0.5 (symmetric)', () => {
+		expect(tCdf(0, 5)).toBeCloseTo(0.5, 8);
+		expect(tCdf(0, 30)).toBeCloseTo(0.5, 8);
+	});
+	it('cdf is symmetric around 0', () => {
+		expect(tCdf(-1.7, 9)).toBeCloseTo(1 - tCdf(1.7, 9), 8);
+	});
+	it('cdf(2.262, 9) ≈ 0.975 (matches R pt)', () => {
+		expect(tCdf(2.262, 9)).toBeCloseTo(0.975, 3);
+	});
+	it('approaches the normal cdf for large df', () => {
+		expect(tCdf(1.96, 1e7)).toBeCloseTo(normalCdf(1.96), 4);
+	});
+});
+
+describe('student-t quantile', () => {
+	// Reference values from R's qt().
+	it('qt(0.975, 9) ≈ 2.262', () => {
+		expect(tQuantile(0.975, 9)).toBeCloseTo(2.262, 2);
+	});
+	it('qt(0.975, 30) ≈ 2.042', () => {
+		expect(tQuantile(0.975, 30)).toBeCloseTo(2.042, 2);
+	});
+	it('qt(0.975, 1e7) ≈ 1.96 (converges to z)', () => {
+		expect(tQuantile(0.975, 1e7)).toBeCloseTo(1.96, 2);
+	});
+	it('qt(0.95, 1) ≈ 6.314 (heavy tails at df=1)', () => {
+		expect(tQuantile(0.95, 1)).toBeCloseTo(6.314, 2);
+	});
+	it('is symmetric: qt(0.025, df) = -qt(0.975, df)', () => {
+		expect(tQuantile(0.025, 9)).toBeCloseTo(-tQuantile(0.975, 9), 6);
+	});
+	it('qt(0.5, df) = 0', () => {
+		expect(tQuantile(0.5, 12)).toBe(0);
+	});
+	it('is the inverse of tCdf', () => {
+		for (const p of [0.05, 0.25, 0.6, 0.9, 0.99]) {
+			expect(tCdf(tQuantile(p, 7), 7)).toBeCloseTo(p, 4);
+		}
+	});
+	it('t quantile is wider than z for small df (same p)', () => {
+		expect(tQuantile(0.975, 5)).toBeGreaterThan(normalQuantile(0.975));
+	});
 });
 
 describe('rng', () => {
