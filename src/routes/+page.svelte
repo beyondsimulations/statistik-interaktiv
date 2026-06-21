@@ -1,7 +1,12 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import Katex from '$lib/Katex.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Card from '$lib/components/Card.svelte';
+	import TrackNav from '$lib/components/TrackNav.svelte';
+
+	// Erste freigeschaltete Lektion — Ziel des Haupt-CTA.
+	const startHref = `${base}/lektion/stichprobenverteilung`;
 </script>
 
 <svelte:head>
@@ -33,41 +38,27 @@
 		</p>
 
 		<div class="mt-2 flex flex-wrap items-center gap-3">
-			<Button href="#kapitel" size="lg">Los geht&rsquo;s</Button>
-			<Button href="#designsystem" variant="subtle" size="lg">
-				So sieht&rsquo;s aus
+			<Button href={startHref} size="lg">Los geht&rsquo;s</Button>
+			<Button href="#kapitel" variant="subtle" size="lg">
+				Alle Lektionen
 			</Button>
 		</div>
 	</header>
 
-	<!-- Encouraging callout-style cards ------------------------------------- -->
+	<!-- Lektions-Index ------------------------------------------------------ -->
 	<section id="kapitel" class="mt-[var(--spacing-section)] scroll-mt-12">
 		<h2 class="text-3xl">Womit fangen wir an?</h2>
 		<p class="text-ink-soft mt-2 max-w-xl">
-			Drei kleine Bausteine — jeder für sich verständlich. Kein Vorwissen
-			nötig.
+			Die Lektionen bauen aufeinander auf, jede für sich verständlich. Am besten
+			startest du mit der ersten freigeschalteten — der Rest ergibt sich.
 		</p>
 
-		<div class="mt-8 grid gap-5 sm:grid-cols-2">
-			<Card title="Mittelwert & Streuung" tone="coral" interactive>
-				Wo liegt die Mitte deiner Daten, und wie weit streuen sie darum herum?
-				Wir bauen das Gefühl dafür von Grund auf.
-			</Card>
+		<div class="bg-paper-raised shadow-soft mt-8 rounded-2xl p-6">
+			<TrackNav />
+		</div>
 
-			<Card title="Stichproben verstehen" tone="amber" interactive>
-				Warum sagt eine kleine Stichprobe oft schon viel? Du siehst es selbst —
-				mit einem Regler statt einer Formel.
-			</Card>
-
-			<Card title="Wahrscheinlichkeit" tone="sage" interactive>
-				Zufall ist kein Gegner. Wir machen ihn anschaulich, Schritt für
-				Schritt, bis es sich vertraut anfühlt.
-			</Card>
-
-			<Card title="In deinem Tempo" interactive>
-				Kein Stress, keine Prüfungsangst. Du kannst jederzeit zurückblättern
-				und Dinge so oft wiederholen, wie du magst.
-			</Card>
+		<div class="mt-6">
+			<Button href={startHref} size="lg">Erste Lektion öffnen</Button>
 		</div>
 	</section>
 
@@ -163,7 +154,7 @@
 				erste Kapitel — der Rest ergibt sich.
 			</p>
 			<div class="mt-6 flex justify-center">
-				<Button href="#kapitel" size="lg">Erstes Kapitel öffnen</Button>
+				<Button href={startHref} size="lg">Erste Lektion öffnen</Button>
 			</div>
 		</div>
 	</section>

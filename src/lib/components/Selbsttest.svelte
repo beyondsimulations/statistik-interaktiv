@@ -13,12 +13,20 @@
 		questions: Question[];
 		/** Optionaler Titel über dem Test. */
 		title?: string;
+		/**
+		 * Wird einmal aufgerufen, sobald alle Fragen beantwortet wurden.
+		 * Nützlich, um eine Lektion als abgeschlossen zu markieren.
+		 */
+		onComplete?: () => void;
 	};
 
-	let { questions, title = 'Selbsttest' }: Props = $props();
+	let { questions, title = 'Selbsttest', onComplete }: Props = $props();
 
 	// Abgegebene Antworten je Fragen-id.
 	let answers = $state<Record<string, Answer | undefined>>({});
+
+	// Stellt sicher, dass onComplete nur ein einziges Mal feuert.
+	let completedFired = $state(false);
 
 	function answered(q: Question): boolean {
 		return answers[q.id] !== undefined;
@@ -32,8 +40,16 @@
 	const allAnswered = $derived(questions.every(answered));
 	const score = $derived(computeScore(questions, answers));
 
+	$effect(() => {
+		if (allAnswered && questions.length > 0 && !completedFired) {
+			completedFired = true;
+			onComplete?.();
+		}
+	});
+
 	function reset() {
 		answers = {};
+		completedFired = false;
 	}
 
 	function optionState(q: Question, value: Answer): 'correct' | 'wrong' | 'idle' {
