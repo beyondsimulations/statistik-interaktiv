@@ -507,6 +507,46 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Scheinkorrelation',
 		definition:
 			'Eine Korrelation zwischen zwei Größen, die nicht auf einem direkten Zusammenhang beruht, sondern durch einen dritten Faktor (Confounder) entsteht. Klassische Mahnung: Korrelation ist nicht Kausalität.'
+	},
+	'Lineare Regression': {
+		term: 'Lineare Regression',
+		definition:
+			'Ein Modell, das eine Gerade ŷ = a + b·x durch die Daten legt, um Y aus X vorherzusagen. Anders als die Korrelation hat sie eine Richtung: X erklärt Y.'
+	},
+	'Methode der kleinsten Quadrate': {
+		term: 'Methode der kleinsten Quadrate',
+		definition:
+			'Das Verfahren, das die Regressionsgerade bestimmt: Es wählt a und b so, dass die Summe der quadrierten Residuen (senkrechte Abstände der Punkte zur Geraden) möglichst klein wird.'
+	},
+	Steigung: {
+		term: 'Steigung',
+		definition:
+			'Der Koeffizient b der Regressionsgerade: Um wie viel sich die Vorhersage von Y ändert, wenn X um eine Einheit steigt.'
+	},
+	Achsenabschnitt: {
+		term: 'Achsenabschnitt',
+		definition:
+			'Der Koeffizient a der Regressionsgerade: der vorhergesagte Y-Wert bei X = 0 (oft nur rechnerisch, wenn X = 0 außerhalb der Daten liegt).'
+	},
+	Residuum: {
+		term: 'Residuum',
+		definition:
+			'Die Abweichung einer Beobachtung von der Vorhersage: e = y − ŷ. Die Residuen sind die Grundlage aller Regressionsdiagnostik.'
+	},
+	Bestimmtheitsmaß: {
+		term: 'Bestimmtheitsmaß',
+		definition:
+			'R² — der Anteil der Y-Variabilität, den das Modell erklärt: R² = SS_Regression / SS_Total ∈ [0, 1]. Bei einfacher Regression ist R² = r². Ein kleines R² heißt schlechte Vorhersage, sagt aber nichts über die Signifikanz.'
+	},
+	Hebelwirkung: {
+		term: 'Hebelwirkung',
+		definition:
+			'Leverage — wie weit ein Punkt in X-Richtung von den übrigen Daten entfernt liegt. Ein Punkt mit hoher Hebelwirkung kann die Regressionsgerade allein stark verändern (kippen).'
+	},
+	'Cook-Distanz': {
+		term: 'Cook-Distanz',
+		definition:
+			"Cook's Distance — ein Maß dafür, wie stark sich die geschätzte Gerade ändert, wenn man einen einzelnen Punkt weglässt. Große Werte markieren besonders einflussreiche Beobachtungen."
 	}
 };
 

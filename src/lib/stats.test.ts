@@ -24,6 +24,7 @@ import {
 	spearman,
 	ranks,
 	corTestP,
+	linearRegression,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
@@ -727,6 +728,71 @@ describe('corTestP (Signifikanztest ρ = 0)', () => {
 
 	it('fails safe: n < 3 → NaN', () => {
 		expect(Number.isNaN(corTestP(0.5, 2))).toBe(true);
+	});
+});
+
+describe('linearRegression (OLS / Kleinste Quadrate)', () => {
+	// Daphnia-style example: Körperlänge (mm) → Anzahl Nachkommen.
+	// Reference values computed exactly as R's summary(lm(y ~ x)) would:
+	//   lm(c(4,7,9,14,16,21,24) ~ c(2,2.5,3,3.5,4,4.5,5))
+	//   Estimate (Intercept) = -10.17857, slope = 6.78571
+	//   Std. Error of slope  =   0.31135,  t value = 21.794
+	//   Pr(>|t|)             =   3.77e-06, Multiple R-squared = 0.98958
+	const x = [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0];
+	const y = [4, 7, 9, 14, 16, 21, 24];
+
+	it('matches R lm(): slope, intercept, R² and slope SE', () => {
+		const fit = linearRegression(x, y);
+		expect(fit.slope).toBeCloseTo(6.785714, 4);
+		expect(fit.intercept).toBeCloseTo(-10.178571, 4);
+		expect(fit.r2).toBeCloseTo(0.989583, 4);
+		expect(fit.slopeSE).toBeCloseTo(0.311350, 4);
+		expect(fit.df).toBe(5);
+	});
+
+	it('matches R lm(): t value and Pr(>|t|) of the slope', () => {
+		const fit = linearRegression(x, y);
+		expect(fit.tSlope).toBeCloseTo(21.7945, 2);
+		// p ≈ 3.77e−6 — assert to ~1e−2 on a log scale (the value itself is tiny).
+		expect(fit.pSlope).toBeGreaterThan(0);
+		expect(fit.pSlope).toBeLessThan(1e-4);
+		expect(fit.pSlope).toBeCloseTo(3.77e-6, 5);
+	});
+
+	it('R² equals pearson(x, y)² for simple linear regression', () => {
+		const fit = linearRegression(x, y);
+		const r = pearson(x, y);
+		expect(fit.r2).toBeCloseTo(r * r, 12);
+	});
+
+	it('a perfect line: R² = 1, slope SE = 0, p = 0', () => {
+		const xs = [1, 2, 3, 4, 5];
+		const ys = xs.map((v) => 3 * v + 2); // y = 3x + 2 exactly
+		const fit = linearRegression(xs, ys);
+		expect(fit.slope).toBeCloseTo(3, 12);
+		expect(fit.intercept).toBeCloseTo(2, 12);
+		expect(fit.r2).toBeCloseTo(1, 12);
+		expect(fit.slopeSE).toBe(0);
+		expect(fit.pSlope).toBe(0);
+	});
+
+	it('a single far leverage point dramatically changes the line', () => {
+		// A flat, near-horizontal cloud...
+		const xs = [1, 2, 3, 4, 5];
+		const ys = [10, 11, 9, 10, 11];
+		const base = linearRegression(xs, ys);
+		expect(Math.abs(base.slope)).toBeLessThan(0.5); // essentially flat
+		// ...plus one influential point far out in x tilts the whole line up.
+		const xl = [...xs, 20];
+		const yl = [...ys, 60];
+		const lev = linearRegression(xl, yl);
+		expect(lev.slope).toBeGreaterThan(2); // the line is dragged steeply upward
+	});
+
+	it('fails safe: unequal lengths / n < 3 / constant x → NaN', () => {
+		expect(Number.isNaN(linearRegression([1, 2, 3], [1, 2]).slope)).toBe(true);
+		expect(Number.isNaN(linearRegression([1, 2], [1, 2]).slope)).toBe(true);
+		expect(Number.isNaN(linearRegression([5, 5, 5], [1, 2, 3]).slope)).toBe(true);
 	});
 });
 

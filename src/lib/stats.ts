@@ -937,6 +937,117 @@ export function corTestP(r: number, n: number): number {
 }
 
 // ---------------------------------------------------------------------------
+// Einfache lineare Regression (Kleinste Quadrate / OLS)
+// ---------------------------------------------------------------------------
+
+export interface LinearRegressionResult {
+	/** Steigung b: Änderung von Y pro Einheit X. */
+	slope: number;
+	/** Achsenabschnitt a: vorhergesagtes Y bei X = 0. */
+	intercept: number;
+	/** Bestimmtheitsmaß R² = SS_Regression / SS_Total ∈ [0, 1]. */
+	r2: number;
+	/** Standardfehler der Steigung SE_b. */
+	slopeSE: number;
+	/** Teststatistik der Steigung t = b / SE_b (H0: β = 0). */
+	tSlope: number;
+	/** Zweiseitiger p-Wert der Steigung, T ~ t_{n−2}. */
+	pSlope: number;
+	/** Freiheitsgrade df = n − 2. */
+	df: number;
+}
+
+/**
+ * Einfache lineare Regression nach der Methode der KLEINSTEN QUADRATE (OLS):
+ * Sie sucht die Gerade ŷ = a + b·x, die die Summe der quadrierten Residuen
+ * Σ (yᵢ − ŷᵢ)² minimiert. Anders als die Korrelation hat die Regression eine
+ * RICHTUNG: X erklärt Y und sagt Y vorher.
+ *
+ *   b  = Σ (xᵢ − x̄)(yᵢ − ȳ) / Σ (xᵢ − x̄)²        (Steigung)
+ *   a  = ȳ − b·x̄                                   (Achsenabschnitt)
+ *   SS_Total = Σ (yᵢ − ȳ)²                          (Gesamtstreuung von Y)
+ *   SS_Reg   = Σ (ŷᵢ − ȳ)²                          (vom Modell erklärt)
+ *   SS_Res   = Σ (yᵢ − ŷᵢ)²                          (Residuen, unerklärt)
+ *   R²  = SS_Reg / SS_Total                          (= pearson(x,y)² bei einfacher Regression)
+ *   SE_b = √( (SS_Res / (n−2)) / Σ (xᵢ − x̄)² )       (Standardfehler der Steigung)
+ *   t   = b / SE_b ,   df = n − 2 ,   p = 2·P(T ≥ |t|)
+ *
+ * Der Test auf die Steigung prüft H0: β = 0 — „die Gerade bringt nichts
+ * gegenüber dem reinen Mittelwert von Y“. Entspricht R `summary(lm(y ~ x))`
+ * in Estimate, Std. Error, t value, Pr(>|t|) und Multiple R².
+ *
+ * Edge cases: ungleiche Längen oder n < 3 → NaNs (df = n − 2 < 1). Sind alle x
+ * gleich (Σ (xᵢ − x̄)² = 0), gibt es keine Gerade → NaNs (fail-safe). Liegen
+ * alle Punkte exakt auf einer Geraden (SS_Res = 0), ist R² = 1, SE_b = 0,
+ * |t| = ∞ und p = 0.
+ */
+export function linearRegression(x: number[], y: number[]): LinearRegressionResult {
+	const n = x.length;
+	const bad: LinearRegressionResult = {
+		slope: NaN,
+		intercept: NaN,
+		r2: NaN,
+		slopeSE: NaN,
+		tSlope: NaN,
+		pSlope: NaN,
+		df: NaN
+	};
+	if (n !== y.length || n < 3) return bad;
+
+	const mx = mean(x);
+	const my = mean(y);
+
+	let sxx = 0;
+	let sxy = 0;
+	let syy = 0;
+	for (let i = 0; i < n; i++) {
+		const dx = x[i] - mx;
+		const dy = y[i] - my;
+		sxx += dx * dx;
+		sxy += dx * dy;
+		syy += dy * dy;
+	}
+	if (sxx === 0) return bad; // alle x gleich → keine Gerade
+
+	const slope = sxy / sxx;
+	const intercept = my - slope * mx;
+	const df = n - 2;
+
+	// Quadratsummen.
+	let ssRes = 0;
+	for (let i = 0; i < n; i++) {
+		const fit = intercept + slope * x[i];
+		const e = y[i] - fit;
+		ssRes += e * e;
+	}
+	const ssTotal = syy;
+	const ssReg = Math.max(0, ssTotal - ssRes);
+	const r2 = ssTotal > 0 ? ssReg / ssTotal : 0;
+
+	// Standardfehler der Steigung und Test auf β = 0.
+	const mse = ssRes / df; // residuales mittleres Quadrat
+	const slopeSE = Math.sqrt(mse / sxx);
+
+	let tSlope: number;
+	let pSlope: number;
+	if (slopeSE === 0) {
+		// Perfekte Gerade: kein Residuum → t = ±∞, p = 0 (bzw. p = 1 bei b = 0).
+		if (slope === 0) {
+			tSlope = 0;
+			pSlope = 1;
+		} else {
+			tSlope = slope > 0 ? Infinity : -Infinity;
+			pSlope = 0;
+		}
+	} else {
+		tSlope = slope / slopeSE;
+		pSlope = 2 * (1 - tCdf(Math.abs(tSlope), df));
+	}
+
+	return { slope, intercept, r2, slopeSE, tSlope, pSlope, df };
+}
+
+// ---------------------------------------------------------------------------
 // Seeded RNG
 // ---------------------------------------------------------------------------
 

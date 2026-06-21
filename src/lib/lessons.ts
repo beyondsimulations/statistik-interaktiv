@@ -46,7 +46,7 @@ export const lessons: Lesson[] = [
 	{ slug: 'chi-quadrat', title: 'Chi-Quadrat-Tests', track: 'klausur', order: 8, status: 'live' },
 	{ slug: 'anova', title: 'ANOVA & Mehrstichprobentests', track: 'klausur', order: 9, status: 'live' },
 	{ slug: 'korrelation', title: 'Korrelation & Transformation', track: 'klausur', order: 10, status: 'live' },
-	{ slug: 'regression', title: 'Lineare Regression', track: 'klausur', order: 11, status: 'coming-soon' },
+	{ slug: 'regression', title: 'Lineare Regression', track: 'klausur', order: 11, status: 'live' },
 
 	// --- Vertiefung --------------------------------------------------------
 	{ slug: 'power', title: 'Experimentelles Design & Power', track: 'rest', order: 12, status: 'coming-soon' },
