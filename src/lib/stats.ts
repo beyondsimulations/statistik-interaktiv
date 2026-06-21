@@ -672,6 +672,154 @@ export function chiSquareIndependence(
 }
 
 // ---------------------------------------------------------------------------
+// F-distribution & one-way ANOVA
+// ---------------------------------------------------------------------------
+
+/**
+ * Cumulative distribution function of the F-distribution with `df1` numerator
+ * and `df2` denominator degrees of freedom: F(x) = P(X ≤ x).
+ *
+ * Built from the regularized incomplete beta function via the standard identity
+ *   P(X ≤ x) = I_{y}(df1/2, df2/2)  with  y = (df1·x) / (df1·x + df2).
+ *
+ * Contract / tested against R's pf():
+ *   pf(1, 3, 20)      ≈ 0.5847
+ *   pf(3.10, 3, 20)   ≈ 0.95     (≈ the 5 %-critical value qf(0.95, 3, 20))
+ *   pf(4.26, 2, 9)    ≈ 0.95
+ *
+ * The upper-tail p-value of an ANOVA is therefore 1 − fCdf(F, df1, df2).
+ *
+ * Edge cases: x ≤ 0 → 0; df1 ≤ 0 or df2 ≤ 0 → NaN.
+ */
+export function fCdf(x: number, df1: number, df2: number): number {
+	if (df1 <= 0 || df2 <= 0) return NaN;
+	if (x <= 0) return 0;
+	const y = (df1 * x) / (df1 * x + df2);
+	return incompleteBeta(y, df1 / 2, df2 / 2);
+}
+
+export interface OneWayAnovaResult {
+	/** Quadratsumme ZWISCHEN den Gruppen (erklärte Streuung). */
+	ssBetween: number;
+	/** Quadratsumme INNERHALB der Gruppen (unerklärte Streuung / Residuum). */
+	ssWithin: number;
+	/** Freiheitsgrade zwischen den Gruppen: k − 1. */
+	dfBetween: number;
+	/** Freiheitsgrade innerhalb der Gruppen: N − k. */
+	dfWithin: number;
+	/** Mittleres Quadrat zwischen den Gruppen: ssBetween / dfBetween. */
+	msBetween: number;
+	/** Mittleres Quadrat innerhalb der Gruppen: ssWithin / dfWithin. */
+	msWithin: number;
+	/** F-Verhältnis = msBetween / msWithin (Signal zu Rausch). */
+	F: number;
+	/** Rechtsseitiger p-Wert P(X ≥ F | H0), X ~ F(dfBetween, dfWithin). */
+	p: number;
+	/** Effektstärke η² = ssBetween / ssTotal (Anteil erklärter Streuung). */
+	etaSquared: number;
+}
+
+/**
+ * Einfaktorielle Varianzanalyse (one-way ANOVA) über mehrere Gruppen.
+ *
+ * Zerlegt die Gesamtstreuung in einen Anteil ZWISCHEN den Gruppen (wie weit die
+ * Gruppenmittel vom Gesamtmittel abweichen) und einen Anteil INNERHALB der
+ * Gruppen (wie sehr die Werte um ihr eigenes Gruppenmittel streuen):
+ *
+ *   SS_between = Σ_g n_g · (x̄_g − x̄)²            df_between = k − 1
+ *   SS_within  = Σ_g Σ_i (x_{g,i} − x̄_g)²        df_within  = N − k
+ *   MS_between = SS_between / df_between
+ *   MS_within  = SS_within  / df_within
+ *   F          = MS_between / MS_within
+ *   p          = P(X ≥ F | H0),  X ~ F(df_between, df_within)
+ *   η²         = SS_between / (SS_between + SS_within)
+ *
+ * Das F-Verhältnis ist ein Signal-zu-Rausch-Maß: Ist die Streuung ZWISCHEN den
+ * Gruppenmitteln groß im Vergleich zur Streuung INNERHALB der Gruppen, wird F
+ * groß und der (immer rechtsseitige) p-Wert klein.
+ *
+ * Entspricht R `summary(aov(y ~ gruppe))` in F-value und Pr(>F) auf ~1e−2.
+ *
+ * Edge cases: weniger als 2 Gruppen, eine leere Gruppe oder df_within ≤ 0
+ * (jede Gruppe nur eine Beobachtung) → NaNs (fail-safe statt Throw im Widget).
+ * Bei MS_within = 0 (keinerlei Streuung innerhalb) ist F nicht definiert: wir
+ * geben F = +∞, p = 0 bei vorhandener Streuung zwischen den Gruppen zurück,
+ * sonst F = 0, p = 1.
+ */
+export function oneWayAnova(groups: number[][]): OneWayAnovaResult {
+	const k = groups.length;
+	const bad: OneWayAnovaResult = {
+		ssBetween: NaN,
+		ssWithin: NaN,
+		dfBetween: NaN,
+		dfWithin: NaN,
+		msBetween: NaN,
+		msWithin: NaN,
+		F: NaN,
+		p: NaN,
+		etaSquared: NaN
+	};
+	if (k < 2) return bad;
+	if (groups.some((g) => g.length === 0)) return bad;
+
+	let total = 0;
+	let n = 0;
+	for (const g of groups) {
+		for (const x of g) total += x;
+		n += g.length;
+	}
+	const grandMean = total / n;
+
+	let ssBetween = 0;
+	let ssWithin = 0;
+	for (const g of groups) {
+		const gm = mean(g);
+		const d = gm - grandMean;
+		ssBetween += g.length * d * d;
+		for (const x of g) {
+			const e = x - gm;
+			ssWithin += e * e;
+		}
+	}
+
+	const dfBetween = k - 1;
+	const dfWithin = n - k;
+	if (dfWithin <= 0) return bad;
+
+	const msBetween = ssBetween / dfBetween;
+	const msWithin = ssWithin / dfWithin;
+	const ssTotal = ssBetween + ssWithin;
+	const etaSquared = ssTotal > 0 ? ssBetween / ssTotal : 0;
+
+	let F: number;
+	let p: number;
+	if (msWithin === 0) {
+		if (ssBetween > 0) {
+			F = Infinity;
+			p = 0;
+		} else {
+			F = 0;
+			p = 1;
+		}
+	} else {
+		F = msBetween / msWithin;
+		p = 1 - fCdf(F, dfBetween, dfWithin);
+	}
+
+	return {
+		ssBetween,
+		ssWithin,
+		dfBetween,
+		dfWithin,
+		msBetween,
+		msWithin,
+		F,
+		p,
+		etaSquared
+	};
+}
+
+// ---------------------------------------------------------------------------
 // Seeded RNG
 // ---------------------------------------------------------------------------
 

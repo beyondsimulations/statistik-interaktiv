@@ -18,6 +18,8 @@ import {
 	chiSquareCdf,
 	chiSquareGof,
 	chiSquareIndependence,
+	fCdf,
+	oneWayAnova,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
@@ -502,6 +504,93 @@ describe('chiSquareIndependence (Unabhängigkeitstest)', () => {
 				]).chi2
 			)
 		).toBe(true);
+	});
+});
+
+describe('fCdf (F-distribution)', () => {
+	// Reference values from R's pf().
+	it('pf(1, 3, 20) ≈ 0.5867', () => {
+		expect(fCdf(1, 3, 20)).toBeCloseTo(0.5867, 3);
+	});
+	it('pf(3.0984, 3, 20) ≈ 0.95 (the 5 %-critical value qf(0.95, 3, 20))', () => {
+		expect(fCdf(3.0984, 3, 20)).toBeCloseTo(0.95, 3);
+	});
+	it('pf(4.2565, 2, 9) ≈ 0.95', () => {
+		expect(fCdf(4.2565, 2, 9)).toBeCloseTo(0.95, 3);
+	});
+	it('pf(2, 5, 10) ≈ 0.8358', () => {
+		expect(fCdf(2, 5, 10)).toBeCloseTo(0.8358, 3);
+	});
+	it('cdf(0, df1, df2) = 0 and is 0 for negative x', () => {
+		expect(fCdf(0, 3, 9)).toBe(0);
+		expect(fCdf(-1, 3, 9)).toBe(0);
+	});
+	it('df ≤ 0 → NaN', () => {
+		expect(Number.isNaN(fCdf(1, 0, 9))).toBe(true);
+		expect(Number.isNaN(fCdf(1, 3, 0))).toBe(true);
+	});
+	it('grows toward 1 in the upper tail', () => {
+		expect(fCdf(100, 3, 9)).toBeGreaterThan(0.999);
+	});
+});
+
+describe('oneWayAnova (einfaktorielle Varianzanalyse)', () => {
+	// Three groups of four salmon lengths (cm) in three cage types.
+	//   g1 <- c(12,14,11,13); g2 <- c(20,18,22,19); g3 <- c(15,17,16,14)
+	//   summary(aov(y ~ gruppe)) in R:
+	//     Df Sum Sq Mean Sq F value   Pr(>F)
+	//     gruppe       2 106.17   53.08   25.48 0.000197 ***
+	//     Residuals    9  18.75    2.083
+	const g1 = [12, 14, 11, 13];
+	const g2 = [20, 18, 22, 19];
+	const g3 = [15, 17, 16, 14];
+
+	it('matches R summary(aov(...)) for SS, df, MS, F and Pr(>F)', () => {
+		const r = oneWayAnova([g1, g2, g3]);
+		expect(r.ssBetween).toBeCloseTo(106.1667, 2);
+		expect(r.ssWithin).toBeCloseTo(18.75, 4);
+		expect(r.dfBetween).toBe(2);
+		expect(r.dfWithin).toBe(9);
+		expect(r.msBetween).toBeCloseTo(53.0833, 2);
+		expect(r.msWithin).toBeCloseTo(2.0833, 3);
+		expect(r.F).toBeCloseTo(25.48, 1);
+		expect(r.p).toBeCloseTo(0.000197, 4);
+	});
+
+	it('computes η² = SS_between / SS_total', () => {
+		const r = oneWayAnova([g1, g2, g3]);
+		expect(r.etaSquared).toBeCloseTo(106.1667 / (106.1667 + 18.75), 4);
+		expect(r.etaSquared).toBeCloseTo(0.8499, 3);
+	});
+
+	it('identical group means give F ≈ 0 and η² ≈ 0', () => {
+		const r = oneWayAnova([
+			[1, 2, 3],
+			[2, 3, 1],
+			[3, 1, 2]
+		]);
+		expect(r.ssBetween).toBeCloseTo(0, 8);
+		expect(r.F).toBeCloseTo(0, 8);
+		expect(r.etaSquared).toBeCloseTo(0, 8);
+	});
+
+	it('zero within-group spread but separated means → F = ∞, p = 0', () => {
+		const r = oneWayAnova([
+			[10, 10],
+			[20, 20],
+			[30, 30]
+		]);
+		expect(r.F).toBe(Infinity);
+		expect(r.p).toBe(0);
+	});
+
+	it('fails safe: fewer than two groups or an empty group → NaNs', () => {
+		expect(Number.isNaN(oneWayAnova([[1, 2, 3]]).F)).toBe(true);
+		expect(Number.isNaN(oneWayAnova([[1, 2], []]).F)).toBe(true);
+	});
+
+	it('fails safe: every group has one observation (df_within = 0) → NaNs', () => {
+		expect(Number.isNaN(oneWayAnova([[1], [2], [3]]).F)).toBe(true);
 	});
 });
 

@@ -387,6 +387,76 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Fisher-Test',
 		definition:
 			'Fishers exakter Test: die genaue Alternative zum Chi-Quadrat-Test bei kleinen erwarteten Häufigkeiten (Faustregel E < 5). Er rechnet exakt mit der hypergeometrischen Verteilung statt mit der Näherung.'
+	},
+	ANOVA: {
+		term: 'ANOVA',
+		definition:
+			'Varianzanalyse (analysis of variance): ein EINZELNER Test, der die Mittelwerte mehrerer Gruppen gleichzeitig vergleicht. Sie heißt „Varianz“-analyse, weil sie Unterschiede in Mittelwerten über das Verhältnis zweier Varianzen prüft.'
+	},
+	Varianzanalyse: {
+		term: 'Varianzanalyse',
+		definition:
+			'Deutscher Name der ANOVA. Sie zerlegt die Gesamtstreuung in einen Anteil zwischen den Gruppen und einen innerhalb und testet über das F-Verhältnis, ob sich mindestens ein Gruppenmittel von den anderen unterscheidet.'
+	},
+	'F-Verhältnis': {
+		term: 'F-Verhältnis',
+		definition:
+			'Die Teststatistik der ANOVA: F = Varianz ZWISCHEN den Gruppen / Varianz INNERHALB der Gruppen (MS_zwischen / MS_innerhalb). Ein Signal-zu-Rausch-Maß; großes F → kleiner (rechtsseitiger) p-Wert.'
+	},
+	'F-Verteilung': {
+		term: 'F-Verteilung',
+		definition:
+			'Die rechtsschiefe Verteilung des F-Verhältnisses unter H₀, charakterisiert durch zwei Freiheitsgrade (df_zwischen, df_innerhalb). Die ANOVA wird immer rechtsseitig getestet.'
+	},
+	'multiples Testen': {
+		term: 'multiples Testen',
+		definition:
+			'Das Problem vieler gleichzeitiger Tests: Bei c Vergleichen mit je α steigt die Wahrscheinlichkeit für mindestens einen Fehlalarm auf 1 − (1 − α)^c. Schon 5 Vergleiche bei α = 5 % ergeben ~23 %.'
+	},
+	FWER: {
+		term: 'FWER',
+		definition:
+			'Familienweise Fehlerrate (family-wise error rate): die Wahrscheinlichkeit, in einer ganzen Familie von c Tests MINDESTENS einen Fehler 1. Art zu machen. Ohne Korrektur 1 − (1 − α)^c.'
+	},
+	'Varianzzerlegung': {
+		term: 'Varianzzerlegung',
+		definition:
+			'Die Aufteilung der Gesamtstreuung: SS_total = SS_zwischen + SS_innerhalb. Die ANOVA fragt, wie groß der erklärte Anteil (zwischen den Gruppen) gegenüber dem unerklärten (innerhalb) ist.'
+	},
+	'Post-hoc-Test': {
+		term: 'Post-hoc-Test',
+		definition:
+			'Folgetest NACH einer signifikanten ANOVA: Er sagt, WELCHE Gruppen sich konkret unterscheiden. Kontrolliert die familienweise Fehlerrate, z. B. der Tukey-HSD-Test.'
+	},
+	'Tukey HSD': {
+		term: 'Tukey HSD',
+		definition:
+			'Tukeys „honestly significant difference“-Test: vergleicht nach einer signifikanten ANOVA alle Gruppenpaare und hält dabei die familienweise Fehlerrate auf α. In R: TukeyHSD(aov(...)).'
+	},
+	'Bonferroni-Korrektur': {
+		term: 'Bonferroni-Korrektur',
+		definition:
+			'Die einfachste FWER-Korrektur: Bei c Vergleichen testet man jeden zum strengeren Niveau α/c. Das hält die familienweise Fehlerrate unter α, ist aber konservativ.'
+	},
+	'Kruskal-Wallis-Test': {
+		term: 'Kruskal-Wallis-Test',
+		definition:
+			'Die rangbasierte, verteilungsfreie Alternative zur einfaktoriellen ANOVA. Er vergleicht die Lage mehrerer Gruppen über ihre Ränge und braucht keine Normalverteilung.'
+	},
+	'Levene-Test': {
+		term: 'Levene-Test',
+		definition:
+			'Ein Test auf Varianzhomogenität über mehrere Gruppen (eine ANOVA-Voraussetzung). H₀ ist „gleiche Varianzen“ — ein p > 0,05 bedeutet hier also „Annahme ok“.'
+	},
+	Effektstärke: {
+		term: 'Effektstärke',
+		definition:
+			'Wie groß ein Effekt tatsächlich ist, unabhängig von der Stichprobengröße. Bei der ANOVA ist η² (Eta-Quadrat) = SS_zwischen / SS_total der Anteil der durch die Gruppen erklärten Streuung.'
+	},
+	'Eta-Quadrat': {
+		term: 'Eta-Quadrat',
+		definition:
+			'η² = SS_zwischen / SS_total: der Anteil der Gesamtstreuung, den die Gruppenzugehörigkeit erklärt. Das ANOVA-Pendant zum R² der Regression; reicht von 0 (kein Effekt) bis 1.'
 	}
 };
 
