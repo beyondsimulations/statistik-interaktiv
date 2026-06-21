@@ -14,6 +14,7 @@ import {
 	binCounts,
 	positivePredictiveValue,
 	welchTTest,
+	summaryTTest,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
@@ -307,6 +308,62 @@ describe('welchTTest', () => {
 		expect(Number.isNaN(r.t)).toBe(true);
 		expect(Number.isNaN(r.df)).toBe(true);
 		expect(Number.isNaN(r.pTwoSided)).toBe(true);
+	});
+});
+
+describe('summaryTTest (Signal-zu-Rausch)', () => {
+	it('computes t, df, se and p for a known case', () => {
+		// Δ = 2, s = 3, n = 10 → SE = 3·√(2/10) = 1.34164, t = 1.49071, df = 18.
+		const r = summaryTTest(2, 3, 10);
+		expect(r.se).toBeCloseTo(1.341641, 5);
+		expect(r.t).toBeCloseTo(1.490712, 5);
+		expect(r.df).toBe(18);
+		expect(r.pTwoSided).toBeCloseTo(0.153353, 5);
+	});
+
+	it('a large signal-to-noise ratio is highly significant', () => {
+		// Δ = 5, s = 1, n = 4 → t = 7.0711, df = 6, p ≈ 0.0004.
+		const r = summaryTTest(5, 1, 4);
+		expect(r.t).toBeCloseTo(7.071068, 5);
+		expect(r.df).toBe(6);
+		expect(r.pTwoSided).toBeCloseTo(0.000401, 5);
+	});
+
+	it('same Δ: more noise s → smaller t and larger p', () => {
+		const quiet = summaryTTest(2, 1, 20);
+		const loud = summaryTTest(2, 4, 20);
+		expect(quiet.t).toBeGreaterThan(loud.t);
+		expect(quiet.pTwoSided).toBeLessThan(loud.pTwoSided);
+	});
+
+	it('same Δ and s: more data n → larger t and smaller p (√n im Nenner des SE)', () => {
+		const few = summaryTTest(1, 3, 8);
+		const many = summaryTTest(1, 3, 80);
+		expect(many.t).toBeGreaterThan(few.t);
+		expect(many.pTwoSided).toBeLessThan(few.pTwoSided);
+	});
+
+	it('agrees with welchTTest on equal-n, equal-variance samples', () => {
+		// Two samples with identical n and identical sample SD, shifted by Δ.
+		const base = [-2, -1, 0, 1, 2]; // mean 0, sample sd √2.5
+		const a = base.map((x) => x + 10);
+		const b = base.map((x) => x); // same spread, Δ = 10
+		const sSample = sd(a); // = sd(b)
+		const summary = summaryTTest(10, sSample, base.length);
+		const welch = welchTTest(a, b);
+		expect(summary.t).toBeCloseTo(welch.t, 6);
+		expect(summary.df).toBeCloseTo(welch.df, 6);
+		expect(summary.pTwoSided).toBeCloseTo(welch.pTwoSided, 6);
+	});
+
+	it('fails safe: n < 2 → NaNs; zero noise with Δ = 0 → t = 0, p = 1', () => {
+		const tiny = summaryTTest(1, 1, 1);
+		expect(Number.isNaN(tiny.t)).toBe(true);
+		expect(Number.isNaN(tiny.pTwoSided)).toBe(true);
+
+		const exact = summaryTTest(0, 0, 10);
+		expect(exact.t).toBe(0);
+		expect(exact.pTwoSided).toBe(1);
 	});
 });
 

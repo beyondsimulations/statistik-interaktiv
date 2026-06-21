@@ -297,6 +297,61 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Hypothesentest',
 		definition:
 			'Ein Verfahren, das anhand der Daten entscheidet, ob ein beobachteter Effekt mit reinem Zufall (H₀) noch erklärbar ist oder so überraschend, dass man H₀ verwirft.'
+	},
+	't-Test': {
+		term: 't-Test',
+		definition:
+			'Ein Test für Mittelwerte: Er teilt den beobachteten Unterschied durch den Standardfehler und vergleicht das Ergebnis (den t-Wert) mit der Student-t-Verteilung.'
+	},
+	'Ein-Stichproben-t-Test': {
+		term: 'Ein-Stichproben-t-Test',
+		definition:
+			'Vergleicht den Mittelwert einer einzelnen Stichprobe mit einem festen Erwartungswert μ₀ (z. B. „die mittlere Zugdistanz beträgt 1500 km“).'
+	},
+	'Student-t-Test': {
+		term: 'Student-t-Test',
+		definition:
+			'Der Zwei-Stichproben-t-Test, der GLEICHE Varianzen in beiden Gruppen annimmt und die Streuung „poolt“. Genauer, aber empfindlich, wenn die Varianzen ungleich sind.'
+	},
+	'Welch-Test': {
+		term: 'Welch-Test',
+		definition:
+			'Der Zwei-Stichproben-t-Test, der KEINE gleichen Varianzen voraussetzt. Robuster und in R der Standard von t.test(); er korrigiert die Freiheitsgrade (Welch-Satterthwaite).'
+	},
+	'gepaarter t-Test': {
+		term: 'gepaarter t-Test',
+		definition:
+			'Für abhängige Messpaare (z. B. dieselbe Pflanze vor und nach einer Behandlung): Er bildet die Differenzen und testet, ob deren Mittelwert null ist. Die Normalität betrifft die Differenzen.'
+	},
+	Varianzhomogenität: {
+		term: 'Varianzhomogenität',
+		definition:
+			'Die Annahme, dass beide Gruppen dieselbe Streuung (Varianz) haben. Prüfbar z. B. mit dem F-Test (var.test). Ist sie verletzt, nimmt man den Welch-Test.'
+	},
+	'Shapiro-Wilk-Test': {
+		term: 'Shapiro-Wilk-Test',
+		definition:
+			'Ein Test auf Normalverteilung. H₀ ist „die Daten sind normalverteilt“ — ein p > 0,05 bedeutet hier also „Annahme ok“ (umgekehrte Logik gegenüber dem üblichen Test).'
+	},
+	'Mann-Whitney-U-Test': {
+		term: 'Mann-Whitney-U-Test',
+		definition:
+			'Die rangbasierte, verteilungsfreie Alternative zum unabhängigen t-Test. Er vergleicht die Lage (Mediane/Ränge) zweier Gruppen, ist robuster gegen Ausreißer und braucht keine Normalverteilung.'
+	},
+	'Wilcoxon-Vorzeichen-Rang-Test': {
+		term: 'Wilcoxon-Vorzeichen-Rang-Test',
+		definition:
+			'Die rangbasierte, verteilungsfreie Alternative zum gepaarten t-Test. Er arbeitet mit den Rängen der Differenzen und kommt ohne Normalverteilungsannahme aus.'
+	},
+	'Signal-zu-Rausch-Verhältnis': {
+		term: 'Signal-zu-Rausch-Verhältnis',
+		definition:
+			'Die Kernidee des t-Werts: beobachtetes Signal (Mittelwertdifferenz) geteilt durch das Rauschen (Standardfehler). Viel Signal bei wenig Rauschen → großes t → kleiner p-Wert.'
+	},
+	'nicht-parametrischer Test': {
+		term: 'nicht-parametrischer Test',
+		definition:
+			'Ein verteilungsfreier Test, der keine bestimmte Verteilung (etwa Normalverteilung) der Daten voraussetzt. Meist rang- oder medianbasiert und robust gegen Ausreißer.'
 	}
 };
 

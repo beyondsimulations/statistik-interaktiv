@@ -42,7 +42,7 @@ export const lessons: Lesson[] = [
 	{ slug: 'hypothesentest', title: 'Hypothesentest & der p-Wert', track: 'grundlagen', order: 6, status: 'live' },
 
 	// --- Klausur-relevant --------------------------------------------------
-	{ slug: 't-tests', title: 't-Tests & nicht-parametrische Alternativen', track: 'klausur', order: 7, status: 'coming-soon' },
+	{ slug: 't-tests', title: 't-Tests & nicht-parametrische Alternativen', track: 'klausur', order: 7, status: 'live' },
 	{ slug: 'chi-quadrat', title: 'Chi-Quadrat-Tests', track: 'klausur', order: 8, status: 'coming-soon' },
 	{ slug: 'anova', title: 'ANOVA & Mehrstichprobentests', track: 'klausur', order: 9, status: 'coming-soon' },
 	{ slug: 'korrelation', title: 'Korrelation & Transformation', track: 'klausur', order: 10, status: 'coming-soon' },

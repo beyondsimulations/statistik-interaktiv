@@ -418,6 +418,55 @@ export function welchTTest(a: number[], b: number[]): TwoSampleResult {
 }
 
 // ---------------------------------------------------------------------------
+// Summary-based two-sample t-test (Signal-zu-Rausch)
+// ---------------------------------------------------------------------------
+
+export interface SummaryTTestResult {
+	/** Teststatistik t = Δ / SE der Differenz. */
+	t: number;
+	/** Freiheitsgrade df = 2·n − 2 (gleiche n, gleiche Streuung). */
+	df: number;
+	/** Standardfehler der Differenz SE = s·√(2/n). */
+	se: number;
+	/** Zweiseitiger p-Wert P(|T| ≥ |t| | H0). */
+	pTwoSided: number;
+}
+
+/**
+ * Zwei-Stichproben-t-Test aus Kennzahlen (Signal-zu-Rausch-Intuition), für den
+ * vereinfachten Fall GLEICHER Gruppengrößen `n` und GLEICHER Streuung `s` je
+ * Gruppe. Das macht die zentrale Intuition sichtbar:
+ *
+ *   Signal  = Δ (die Mittelwertdifferenz)
+ *   Rausch  = SE = s · √(2/n)  (der Standardfehler der Differenz)
+ *   t       = Δ / SE = Δ / (s · √(2/n))
+ *   df      = 2n − 2
+ *   p       = 2 · P(T ≥ |t|),  T ~ t_df
+ *
+ * Dieselbe Differenz Δ wird bei großer Streuung `s` unbedeutend (kleines t,
+ * großes p) und bei kleiner Streuung hochsignifikant. Mehr Daten (√n im Nenner
+ * von SE) verkleinern den Standardfehler → größeres t, kleineres p.
+ *
+ * Entspricht dem gepoolten Student-t-Test (bei gleichem n und gleichem s sind
+ * Student und Welch identisch). Edge cases: n < 2 → NaNs; s = 0 → t = 0/p = 1
+ * bei Δ = 0, sonst ±∞/p = 0 (fail-safe statt Throw im Widget).
+ */
+export function summaryTTest(delta: number, s: number, n: number): SummaryTTestResult {
+	if (n < 2) return { t: NaN, df: NaN, se: NaN, pTwoSided: NaN };
+	const df = 2 * n - 2;
+	const se = s * Math.sqrt(2 / n);
+
+	if (se === 0) {
+		if (delta === 0) return { t: 0, df, se: 0, pTwoSided: 1 };
+		return { t: delta > 0 ? Infinity : -Infinity, df, se: 0, pTwoSided: 0 };
+	}
+
+	const t = delta / se;
+	const pTwoSided = 2 * (1 - tCdf(Math.abs(t), df));
+	return { t, df, se, pTwoSided };
+}
+
+// ---------------------------------------------------------------------------
 // Seeded RNG
 // ---------------------------------------------------------------------------
 
