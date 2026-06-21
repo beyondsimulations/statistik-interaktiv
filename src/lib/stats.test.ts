@@ -13,6 +13,7 @@ import {
 	drawSample,
 	binCounts,
 	positivePredictiveValue,
+	welchTTest,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
@@ -253,6 +254,60 @@ describe('generators match declared population mu/sigma', () => {
 			expect(Math.abs(sd(s) - sigma)).toBeLessThan(REL_TOL * sigma);
 		});
 	}
+});
+
+describe('welchTTest', () => {
+	// Reference values from R:
+	//   x <- c(5.1, 4.9, 6.2, 5.5, 5.8); y <- c(4.4, 5.0, 4.1, 4.8, 4.6)
+	//   t.test(x, y)  →  t = 3.265, df = 6.9655, p-value = 0.01387 (Welch default)
+	const x = [5.1, 4.9, 6.2, 5.5, 5.8];
+	const y = [4.4, 5.0, 4.1, 4.8, 4.6];
+
+	it('matches R t.test() for t, df and the two-sided p-value', () => {
+		const r = welchTTest(x, y);
+		expect(r.t).toBeCloseTo(3.265, 2);
+		expect(r.df).toBeCloseTo(6.9655, 2);
+		expect(r.pTwoSided).toBeCloseTo(0.01387, 2);
+	});
+
+	it('is antisymmetric in its arguments: swapping flips the sign of t, keeps p', () => {
+		const r1 = welchTTest(x, y);
+		const r2 = welchTTest(y, x);
+		expect(r2.t).toBeCloseTo(-r1.t, 10);
+		expect(r2.pTwoSided).toBeCloseTo(r1.pTwoSided, 10);
+		expect(r2.df).toBeCloseTo(r1.df, 10);
+	});
+
+	it('identical samples give t = 0 and p = 1', () => {
+		const r = welchTTest([1, 2, 3, 4], [1, 2, 3, 4]);
+		expect(r.t).toBe(0);
+		expect(r.pTwoSided).toBe(1);
+	});
+
+	it('under a true H0 (no real effect), ~5 % of experiments are significant', () => {
+		// Draw two independent normal samples (same population → H0 true) many
+		// times; the false-positive rate at α = 0.05 should be ≈ 5 %.
+		const rng = makeRng(4242);
+		const RUNS = 3000;
+		const n = 30;
+		let significant = 0;
+		for (let i = 0; i < RUNS; i++) {
+			const sa = drawSample('normal', n, rng);
+			const sb = drawSample('normal', n, rng);
+			if (welchTTest(sa, sb).pTwoSided < 0.05) significant += 1;
+		}
+		const rate = significant / RUNS;
+		// Allow a generous band around the nominal 5 % (Monte-Carlo noise).
+		expect(rate).toBeGreaterThan(0.03);
+		expect(rate).toBeLessThan(0.07);
+	});
+
+	it('returns NaNs when a group has fewer than two observations', () => {
+		const r = welchTTest([1], [1, 2, 3]);
+		expect(Number.isNaN(r.t)).toBe(true);
+		expect(Number.isNaN(r.df)).toBe(true);
+		expect(Number.isNaN(r.pTwoSided)).toBe(true);
+	});
 });
 
 describe('POPULATIONS descriptor', () => {

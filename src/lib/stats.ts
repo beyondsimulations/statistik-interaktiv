@@ -356,6 +356,68 @@ export function tQuantile(p: number, df: number): number {
 }
 
 // ---------------------------------------------------------------------------
+// Two-sample test (Welch's t-test)
+// ---------------------------------------------------------------------------
+
+export interface TwoSampleResult {
+	/** Test statistic t = (x̄₁ − x̄₂) / SE der Differenz. */
+	t: number;
+	/** Welch-Freiheitsgrade (i. A. nicht ganzzahlig). */
+	df: number;
+	/** Zweiseitiger p-Wert P(|T| ≥ |t| | H0). */
+	pTwoSided: number;
+}
+
+/**
+ * Welch's two-sample t-test (does NOT assume equal variances), comparing the
+ * means of two independent samples. Returns the test statistic, the
+ * Welch–Satterthwaite degrees of freedom and the TWO-sided p-value.
+ *
+ * Built purely from the descriptive helpers and the Student-t CDF above:
+ *   SE = √(s₁²/n₁ + s₂²/n₂)
+ *   t  = (x̄₁ − x̄₂) / SE
+ *   df = (s₁²/n₁ + s₂²/n₂)² / [ (s₁²/n₁)²/(n₁−1) + (s₂²/n₂)²/(n₂−1) ]
+ *   p  = 2 · P(T ≥ |t|)  with T ~ t_df
+ *
+ * Matches R's `t.test(x, y)` (Welch default) to ~1e−2 in t, df and p.
+ *
+ * Edge cases: needs n ≥ 2 in each group (otherwise the variance / df are not
+ * defined) → returns NaNs to fail safe rather than throw inside a widget. If
+ * the pooled standard error is 0 (both samples constant), t is ±∞/NaN; we map a
+ * zero difference to t = 0, p = 1, and a non-zero difference to p = 0.
+ */
+export function welchTTest(a: number[], b: number[]): TwoSampleResult {
+	const n1 = a.length;
+	const n2 = b.length;
+	if (n1 < 2 || n2 < 2) return { t: NaN, df: NaN, pTwoSided: NaN };
+
+	const m1 = mean(a);
+	const m2 = mean(b);
+	const v1 = variance(a);
+	const v2 = variance(b);
+
+	const s1 = v1 / n1;
+	const s2 = v2 / n2;
+	const seSq = s1 + s2;
+	const se = Math.sqrt(seSq);
+	const diff = m1 - m2;
+
+	if (se === 0) {
+		// Both samples are constant: either identical (no difference) or a sharp,
+		// zero-variance separation.
+		if (diff === 0) return { t: 0, df: n1 + n2 - 2, pTwoSided: 1 };
+		return { t: diff > 0 ? Infinity : -Infinity, df: n1 + n2 - 2, pTwoSided: 0 };
+	}
+
+	const t = diff / se;
+	// Welch–Satterthwaite degrees of freedom.
+	const df = (seSq * seSq) / ((s1 * s1) / (n1 - 1) + (s2 * s2) / (n2 - 1));
+	const pTwoSided = 2 * (1 - tCdf(Math.abs(t), df));
+
+	return { t, df, pTwoSided };
+}
+
+// ---------------------------------------------------------------------------
 // Seeded RNG
 // ---------------------------------------------------------------------------
 

@@ -247,6 +247,56 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Student-t-Verteilung',
 		definition:
 			'Eine glockenförmige Verteilung mit schwereren Rändern als die Normalverteilung. Für kleine Stichproben (unbekanntes σ) liefert sie breitere, korrekte Intervalle; mit wachsendem df nähert sie sich N(0, 1).'
+	},
+	Alternativhypothese: {
+		term: 'Alternativhypothese',
+		definition:
+			'Die Forschungshypothese H₁ (oder Hₐ): die Annahme, dass es einen Effekt gibt. Sie enthält immer eine Effektgröße und wird nie direkt bewiesen — man widerlegt nur die Nullhypothese.'
+	},
+	Forschungshypothese: {
+		term: 'Forschungshypothese',
+		definition:
+			'Das, was du eigentlich zeigen möchtest (H₁): ein Effekt, ein Unterschied, ein Zusammenhang. Im Test wird sie indirekt gestützt, indem man die Nullhypothese verwirft.'
+	},
+	Falsifikation: {
+		term: 'Falsifikation',
+		definition:
+			'Poppers Idee: Eine Hypothese lässt sich nie endgültig beweisen, nur widerlegen. Deshalb prüft man die Nullhypothese auf Widerlegung, statt H₁ direkt zu beweisen.'
+	},
+	Teststatistik: {
+		term: 'Teststatistik',
+		definition:
+			'Eine aus den Daten berechnete Kennzahl (z. B. ein z- oder t-Wert), die misst, wie weit dein Befund von dem entfernt ist, was H₀ erwartet. Aus ihr folgt der p-Wert.'
+	},
+	'Fehler 1. Art': {
+		term: 'Fehler 1. Art',
+		definition:
+			'Falsch-positiv: Du verwirfst eine wahre Nullhypothese und „findest“ einen Effekt, den es gar nicht gibt. Seine Wahrscheinlichkeit ist genau das Signifikanzniveau α.'
+	},
+	'Fehler 2. Art': {
+		term: 'Fehler 2. Art',
+		definition:
+			'Falsch-negativ: Es gibt einen echten Effekt, aber dein Test übersieht ihn — du behältst H₀ fälschlich bei. Seine Wahrscheinlichkeit heißt β.'
+	},
+	Teststärke: {
+		term: 'Teststärke',
+		definition:
+			'Die Power = 1 − β: die Wahrscheinlichkeit, einen wirklich vorhandenen Effekt auch als signifikant zu erkennen. Steigt mit größerem n, größerem Effekt oder größerem α.'
+	},
+	Effektgröße: {
+		term: 'Effektgröße',
+		definition:
+			'Wie groß der Unterschied bzw. Effekt tatsächlich ist — etwa der Abstand zweier Mittelwerte in Standardfehlern. Große Effekte sind leichter signifikant nachzuweisen.'
+	},
+	'Kritischer Wert': {
+		term: 'Kritischer Wert',
+		definition:
+			'Die Grenze auf der Skala der Teststatistik, ab der du H₀ verwirfst. Sie trennt den Ablehnungsbereich vom Rest und wird durch α festgelegt.'
+	},
+	Hypothesentest: {
+		term: 'Hypothesentest',
+		definition:
+			'Ein Verfahren, das anhand der Daten entscheidet, ob ein beobachteter Effekt mit reinem Zufall (H₀) noch erklärbar ist oder so überraschend, dass man H₀ verwirft.'
 	}
 };
 

@@ -39,7 +39,7 @@ export const lessons: Lesson[] = [
 	{ slug: 'verteilungen', title: 'Verteilungen & die Glockenkurve', track: 'grundlagen', order: 3, status: 'live' },
 	{ slug: 'stichprobenverteilung', title: 'Von der Stichprobe zur Stichprobenverteilung', track: 'grundlagen', order: 4, status: 'live' },
 	{ slug: 'konfidenzintervalle', title: 'Schätzen & Konfidenzintervalle', track: 'grundlagen', order: 5, status: 'live' },
-	{ slug: 'hypothesentest', title: 'Hypothesentest & der p-Wert', track: 'grundlagen', order: 6, status: 'coming-soon' },
+	{ slug: 'hypothesentest', title: 'Hypothesentest & der p-Wert', track: 'grundlagen', order: 6, status: 'live' },
 
 	// --- Klausur-relevant --------------------------------------------------
 	{ slug: 't-tests', title: 't-Tests & nicht-parametrische Alternativen', track: 'klausur', order: 7, status: 'coming-soon' },
