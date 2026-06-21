@@ -49,7 +49,7 @@ export const lessons: Lesson[] = [
 	{ slug: 'regression', title: 'Lineare Regression', track: 'klausur', order: 11, status: 'live' },
 
 	// --- Vertiefung --------------------------------------------------------
-	{ slug: 'power', title: 'Experimentelles Design & Power', track: 'rest', order: 12, status: 'coming-soon' },
+	{ slug: 'power', title: 'Experimentelles Design & Power', track: 'rest', order: 12, status: 'live' },
 	{ slug: 'designtypen', title: 'Designtypen & Pseudoreplikation', track: 'rest', order: 13, status: 'coming-soon' },
 	{ slug: 'welcher-test', title: 'Welcher Test?', track: 'rest', order: 14, status: 'coming-soon' }
 ];

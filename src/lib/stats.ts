@@ -467,6 +467,86 @@ export function summaryTTest(delta: number, s: number, n: number): SummaryTTestR
 }
 
 // ---------------------------------------------------------------------------
+// Power / Stichprobenumfang für den Zweistichproben-t-Test
+// ---------------------------------------------------------------------------
+
+/** Eingabe für `twoSampleTPower` (alle Werte je GRUPPE, gleicher Umfang). */
+export type TwoSampleTPowerInput = {
+	/** Wahre Mittelwertdifferenz (Effektgröße), z. B. Unterschied der Zugdistanz in km. */
+	delta: number;
+	/** Streuung σ (Standardabweichung innerhalb der Gruppen). */
+	sd: number;
+	/** Stichprobenumfang PRO Gruppe. */
+	n: number;
+	/** Signifikanzniveau α (zweiseitig). Standard: 0,05. */
+	sigLevel?: number;
+};
+
+/**
+ * Teststärke (Power = 1 − β) eines ZWEISTICHPROBEN-t-Tests mit gleichem Umfang
+ * n je Gruppe, zweiseitig.
+ *
+ * Exakt wäre die Power über die NICHTZENTRALE t-Verteilung definiert. Wir nutzen
+ * eine solide NORMALAPPROXIMATION der nichtzentralen t-Verteilung: die
+ * Teststatistik hat unter HA näherungsweise eine N(ncp, 1)-Verteilung, und der
+ * kritische Wert kommt aus der (zentralen) t-Verteilung mit df = 2n − 2:
+ *
+ *   ncp  = δ / (σ · √(2/n))                    (Nichtzentralitätsparameter)
+ *   crit = tQuantile(1 − α/2, df = 2n − 2)     (zweiseitige Schranke)
+ *   power ≈ Φ(ncp − crit) + Φ(−ncp − crit)
+ *
+ * Das zweite Glied fängt den (winzigen) Beitrag des gegenüberliegenden
+ * Ablehnungsbereichs ein. Die Näherung trifft R `power.t.test` auf etwa ±0,03;
+ * qualitativ ist sie exakt: Power steigt mit n und |δ|, fällt mit σ und fällt,
+ * wenn α kleiner wird.
+ *
+ * Rückgabe in [0, 1]. Bei n < 2 oder σ ≤ 0 → NaN (kein definierter Test).
+ */
+export function twoSampleTPower({ delta, sd, n, sigLevel = 0.05 }: TwoSampleTPowerInput): number {
+	if (!(n >= 2) || !(sd > 0) || !(sigLevel > 0) || !(sigLevel < 1)) return NaN;
+	const df = 2 * n - 2;
+	const ncp = Math.abs(delta) / (sd * Math.sqrt(2 / n));
+	const crit = tQuantile(1 - sigLevel / 2, df);
+	const power = normalCdf(ncp - crit) + normalCdf(-ncp - crit);
+	// Numerisch in [0, 1] halten.
+	return Math.min(1, Math.max(0, power));
+}
+
+/** Eingabe für `sampleSizeForPower`. */
+export type SampleSizeForPowerInput = {
+	/** Wahre Mittelwertdifferenz (Effektgröße). */
+	delta: number;
+	/** Streuung σ. */
+	sd: number;
+	/** Signifikanzniveau α (zweiseitig). Standard: 0,05. */
+	sigLevel?: number;
+	/** Geforderte Power (z. B. 0,8). Standard: 0,8. */
+	power?: number;
+};
+
+/**
+ * Kleinster Stichprobenumfang n PRO Gruppe, der für einen zweiseitigen
+ * Zweistichproben-t-Test mindestens die geforderte `power` erreicht.
+ *
+ * Sucht aufsteigend (n = 2, 3, …) das erste n mit twoSampleTPower(…) ≥ power.
+ * Liefert eine Obergrenze (Standard 100 000) zurück, falls der Effekt 0 ist
+ * oder die Zielpower unrealistisch hoch.
+ */
+export function sampleSizeForPower({
+	delta,
+	sd,
+	sigLevel = 0.05,
+	power = 0.8
+}: SampleSizeForPowerInput): number {
+	if (!(sd > 0) || delta === 0) return Number.POSITIVE_INFINITY;
+	const MAX_N = 100000;
+	for (let n = 2; n <= MAX_N; n++) {
+		if (twoSampleTPower({ delta, sd, n, sigLevel }) >= power) return n;
+	}
+	return MAX_N;
+}
+
+// ---------------------------------------------------------------------------
 // Chi-square distribution & tests
 // ---------------------------------------------------------------------------
 

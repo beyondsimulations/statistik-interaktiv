@@ -15,6 +15,8 @@ import {
 	positivePredictiveValue,
 	welchTTest,
 	summaryTTest,
+	twoSampleTPower,
+	sampleSizeForPower,
 	chiSquareCdf,
 	chiSquareGof,
 	chiSquareIndependence,
@@ -807,5 +809,92 @@ describe('POPULATIONS descriptor', () => {
 			expect(Number.isFinite(p.sigma)).toBe(true);
 			expect(p.sigma).toBeGreaterThan(0);
 		}
+	});
+});
+
+describe('twoSampleTPower', () => {
+	// Die Normalapproximation der nichtzentralen t-Verteilung trifft R
+	// `power.t.test` auf etwa ±0,03 — diese Toleranz dokumentieren wir hier.
+	const TOL = 0.03;
+
+	it('matches R power.t.test ballpark: delta=1, sd=1, n=17 → power ≈ 0,807', () => {
+		const p = twoSampleTPower({ delta: 1, sd: 1, n: 17, sigLevel: 0.05 });
+		expect(p).toBeCloseTo(0.807, 1);
+		expect(Math.abs(p - 0.807)).toBeLessThan(TOL);
+	});
+
+	it('matches R for a medium effect: delta=0,5, sd=1, n=64 → power ≈ 0,801', () => {
+		const p = twoSampleTPower({ delta: 0.5, sd: 1, n: 64, sigLevel: 0.05 });
+		expect(Math.abs(p - 0.801)).toBeLessThan(TOL);
+	});
+
+	it('matches R for a large effect: delta=2, sd=1, n=10 → power ≈ 0,988', () => {
+		const p = twoSampleTPower({ delta: 2, sd: 1, n: 10, sigLevel: 0.05 });
+		expect(Math.abs(p - 0.988)).toBeLessThan(TOL);
+	});
+
+	it('only the ratio delta/sd matters: doubling both delta and sd keeps power equal', () => {
+		const a = twoSampleTPower({ delta: 1, sd: 1, n: 30 });
+		const b = twoSampleTPower({ delta: 2, sd: 2, n: 30 });
+		expect(b).toBeCloseTo(a, 10);
+	});
+
+	it('power rises with n (monotone)', () => {
+		const p10 = twoSampleTPower({ delta: 1, sd: 1, n: 10 });
+		const p20 = twoSampleTPower({ delta: 1, sd: 1, n: 20 });
+		const p40 = twoSampleTPower({ delta: 1, sd: 1, n: 40 });
+		expect(p20).toBeGreaterThan(p10);
+		expect(p40).toBeGreaterThan(p20);
+	});
+
+	it('power rises with the effect size delta', () => {
+		const small = twoSampleTPower({ delta: 0.5, sd: 1, n: 30 });
+		const big = twoSampleTPower({ delta: 1.5, sd: 1, n: 30 });
+		expect(big).toBeGreaterThan(small);
+	});
+
+	it('power falls as the spread sd grows', () => {
+		const tight = twoSampleTPower({ delta: 1, sd: 1, n: 30 });
+		const wide = twoSampleTPower({ delta: 1, sd: 3, n: 30 });
+		expect(wide).toBeLessThan(tight);
+	});
+
+	it('power falls as alpha shrinks (stricter test, same n)', () => {
+		const loose = twoSampleTPower({ delta: 1, sd: 1, n: 17, sigLevel: 0.05 });
+		const strict = twoSampleTPower({ delta: 1, sd: 1, n: 17, sigLevel: 0.01 });
+		expect(strict).toBeLessThan(loose);
+	});
+
+	it('stays in [0, 1] and fails safe (n < 2 or sd ≤ 0 → NaN)', () => {
+		const p = twoSampleTPower({ delta: 0.3, sd: 1, n: 8 });
+		expect(p).toBeGreaterThanOrEqual(0);
+		expect(p).toBeLessThanOrEqual(1);
+		expect(Number.isNaN(twoSampleTPower({ delta: 1, sd: 1, n: 1 }))).toBe(true);
+		expect(Number.isNaN(twoSampleTPower({ delta: 1, sd: 0, n: 20 }))).toBe(true);
+	});
+});
+
+describe('sampleSizeForPower', () => {
+	it('matches R: delta=1, sd=1, power=0,8 → n ≈ 17 per group', () => {
+		const n = sampleSizeForPower({ delta: 1, sd: 1, sigLevel: 0.05, power: 0.8 });
+		expect(n).toBeGreaterThanOrEqual(16);
+		expect(n).toBeLessThanOrEqual(18);
+	});
+
+	it('smaller effects need drastically larger n (the n-explosion)', () => {
+		const big = sampleSizeForPower({ delta: 1, sd: 1 });
+		const small = sampleSizeForPower({ delta: 0.5, sd: 1 });
+		// Halving the effect roughly quadruples the required n (n ∝ 1/d²).
+		expect(small).toBeGreaterThan(3 * big);
+	});
+
+	it('returned n actually reaches the target power', () => {
+		const n = sampleSizeForPower({ delta: 0.7, sd: 1, power: 0.8 });
+		expect(twoSampleTPower({ delta: 0.7, sd: 1, n })).toBeGreaterThanOrEqual(0.8);
+		expect(twoSampleTPower({ delta: 0.7, sd: 1, n: n - 1 })).toBeLessThan(0.8);
+	});
+
+	it('a zero effect can never be detected → Infinity', () => {
+		expect(sampleSizeForPower({ delta: 0, sd: 1 })).toBe(Number.POSITIVE_INFINITY);
 	});
 });

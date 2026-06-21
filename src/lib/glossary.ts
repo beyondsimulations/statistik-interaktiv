@@ -547,6 +547,61 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Cook-Distanz',
 		definition:
 			"Cook's Distance — ein Maß dafür, wie stark sich die geschätzte Gerade ändert, wenn man einen einzelnen Punkt weglässt. Große Werte markieren besonders einflussreiche Beobachtungen."
+	},
+	Randomisierung: {
+		term: 'Randomisierung',
+		definition:
+			'Der Goldstandard im Experiment: Versuchseinheiten werden per Zufall auf die Gruppen verteilt. Das verteilt bekannte UND unbekannte Störvariablen gleichmäßig und schützt vor systematischem Bias.'
+	},
+	Blocking: {
+		term: 'Blocking',
+		definition:
+			'Ähnliche Versuchseinheiten werden vorab zu Blöcken zusammengefasst (z. B. nach Standort oder Alter) und innerhalb jedes Blocks randomisiert. So rechnet man störende Variation aus dem Fehler heraus und gewinnt Power.'
+	},
+	Verblindung: {
+		term: 'Verblindung',
+		definition:
+			'Beteiligte wissen nicht, wer in welcher Gruppe ist. Single-blind: die Versuchseinheit/der Beobachter; double-blind: beide. Verhindert (unbewusste) Verzerrung der Messung.'
+	},
+	Negativkontrolle: {
+		term: 'Negativkontrolle',
+		definition:
+			'Eine Gruppe ohne die eigentliche Behandlung (z. B. nur Lösungsmittel). Sie zeigt, was OHNE Effekt passiert — die Vergleichsbasis.'
+	},
+	Positivkontrolle: {
+		term: 'Positivkontrolle',
+		definition:
+			'Eine Gruppe mit einer Behandlung, die sicher wirkt. Sie zeigt, dass der Versuchsaufbau einen vorhandenen Effekt überhaupt nachweisen kann.'
+	},
+	Confounding: {
+		term: 'Confounding',
+		definition:
+			'Ein Störeffekt: eine dritte Variable hängt mit Behandlung und Ergebnis zusammen und verfälscht den Vergleich. Gutes Design (Randomisierung, Kontrollen) isoliert den eigentlichen Effekt.'
+	},
+	Replikation: {
+		term: 'Replikation',
+		definition:
+			'Mehrere echte, voneinander UNABHÄNGIGE Wiederholungen einer Behandlung. Nur sie erlauben es, den Behandlungseffekt von der zufälligen Streuung zu trennen.'
+	},
+	Pseudoreplikation: {
+		term: 'Pseudoreplikation',
+		definition:
+			'Scheinbare Replikate, die in Wahrheit nicht unabhängig sind (z. B. mehrere Messungen am selben Tier). Sie blähen die Stichprobe künstlich auf und führen zu falsch kleinen p-Werten.'
+	},
+	Treffgenauigkeit: {
+		term: 'Treffgenauigkeit',
+		definition:
+			'Accuracy — wie nah die Messungen IM MITTEL am wahren Wert liegen. Geringe Treffgenauigkeit heißt: systematischer Fehler (Bias).'
+	},
+	Exaktheit: {
+		term: 'Exaktheit',
+		definition:
+			'Precision — wie eng die Messungen UNTEREINANDER streuen (Reproduzierbarkeit). Hohe Exaktheit heißt: kleine Streuung, sagt aber nichts über Bias.'
+	},
+	Repräsentativität: {
+		term: 'Repräsentativität',
+		definition:
+			'Die Stichprobe spiegelt die Grundgesamtheit in den relevanten Merkmalen wider. Nur dann darfst du von der Stichprobe auf die ganze Population schließen.'
 	}
 };
 
