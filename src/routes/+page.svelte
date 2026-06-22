@@ -158,24 +158,4 @@
 			</div>
 		</div>
 	</section>
-
-	<footer class="text-ink-faint mt-16 space-y-2 text-center text-sm">
-		<p>Universität Hamburg · Data Science 2 — eine Lernumgebung zum Verstehen.</p>
-		<p class="mx-auto max-w-xl">
-			Inhaltlich angelehnt an den
-			<a
-				class="hover:text-coral-600 underline underline-offset-2"
-				href="https://saskiaotto.github.io/uham-bio-data-science-2/"
-				target="_blank"
-				rel="noopener noreferrer">Kurs „Data Science 2" von Dr. Saskia Otto</a
-			>
-			(CC&nbsp;BY-SA&nbsp;4.0). Diese inoffizielle Lernhilfe steht ebenfalls unter
-			<a
-				class="hover:text-coral-600 underline underline-offset-2"
-				href="https://creativecommons.org/licenses/by-sa/4.0/"
-				target="_blank"
-				rel="noopener noreferrer">CC&nbsp;BY-SA&nbsp;4.0</a
-			>.
-		</p>
-	</footer>
 </main>
