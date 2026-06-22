@@ -36,6 +36,4 @@ unterstützt.
 
 ## Rechtliches
 
-Die rechtlichen Angaben findest du im <a href="{base}/impressum">Impressum</a>,
-Hinweise zum Umgang mit deinen Daten in der
-<a href="{base}/datenschutz">Datenschutzerklärung</a>.
+Die rechtlichen Angaben findest du im <a href="{base}/impressum">Impressum</a>, Hinweise zum Umgang mit deinen Daten in der <a href="{base}/datenschutz">Datenschutzerklärung</a>.

@@ -30,6 +30,7 @@
 		>
 	</p>
 	<nav class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1" aria-label="Weitere Seiten">
+		<a class="hover:text-coral-600 underline underline-offset-2" href="{base}/">Startseite</a>
 		<a class="hover:text-coral-600 underline underline-offset-2" href="{base}/ueber">Über</a>
 		<a class="hover:text-coral-600 underline underline-offset-2" href="{base}/impressum">Impressum</a>
 		<a class="hover:text-coral-600 underline underline-offset-2" href="{base}/datenschutz"
