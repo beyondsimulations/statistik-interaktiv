@@ -23,20 +23,20 @@
 		{
 			id: 'sv-1',
 			kind: 'mc',
-			prompt: 'Was wird glockenförmig — die einzelnen Datenpunkte oder die Mittelwerte vieler Stichproben?',
+			prompt: 'Du misst die Flügellänge gefangener Amseln. Was wird glockenförmig — die Flügellängen der einzelnen Vögel oder die mittleren Flügellängen vieler Fänge?',
 			options: [
-				'Die einzelnen Datenpunkte der Grundgesamtheit',
-				'Die Mittelwerte vieler Stichproben',
+				'Die Flügellängen der einzelnen Vögel in der Grundgesamtheit',
+				'Die mittleren Flügellängen vieler Fänge (Stichproben)',
 				'Beides immer gleichzeitig'
 			],
 			correct: 1,
 			explanation:
-				'Genau das ist der Kern: Nicht die Rohdaten müssen glockenförmig sein, sondern die Verteilung der Mittelwerte wird es — auch wenn die Grundgesamtheit ganz anders aussieht.'
+				'Genau das ist der Kern: Nicht die einzelnen Flügellängen müssen glockenförmig sein, sondern die Verteilung der Stichprobenmittelwerte wird es — auch wenn die Flügellängen im Wald ganz anders verteilt sind.'
 		},
 		{
 			id: 'sv-2',
 			kind: 'mc',
-			prompt: 'Was passiert mit dem Standardfehler, wenn du den Stichprobenumfang n größer machst?',
+			prompt: 'Was passiert mit dem Standardfehler, wenn du pro Fang mehr Amseln misst (Stichprobenumfang n größer)?',
 			options: [
 				'Er wird größer.',
 				'Er wird kleiner.',
@@ -44,15 +44,15 @@
 			],
 			correct: 1,
 			explanation:
-				'Richtig — der Standardfehler ist σ/√n. Größeres n im Nenner heißt: kleinerer Standardfehler, also schwanken die Mittelwerte weniger. Mehr Daten, verlässlichere Schätzung.'
+				'Richtig — der Standardfehler ist σ/√n. Größeres n im Nenner heißt: kleinerer Standardfehler, also schwankt die mittlere Flügellänge weniger von Fang zu Fang. Mehr gemessene Vögel, verlässlichere Schätzung.'
 		},
 		{
 			id: 'sv-3',
 			kind: 'tf',
-			prompt: 'Der Zentrale Grenzwertsatz gilt auch, wenn die Grundgesamtheit schief (nicht glockenförmig) ist.',
+			prompt: 'Der Zentrale Grenzwertsatz gilt auch, wenn die Flügellängen im Wald schief (nicht glockenförmig) verteilt sind.',
 			correct: true,
 			explanation:
-				'Wahr. Das ist das Verblüffende daran: Selbst aus einer schiefen Grundgesamtheit werden die Mittelwerte mit wachsendem n glockenförmig. Probier es im Widget mit der rechtsschiefen Verteilung aus.'
+				'Wahr. Das ist das Verblüffende daran: Selbst aus einer schiefen Grundgesamtheit werden die Stichprobenmittelwerte mit wachsendem n glockenförmig. Probier es im Widget mit der rechtsschiefen Verteilung aus.'
 		}
 	];
 </script>
@@ -88,25 +88,29 @@
 		<p class="text-ink-soft leading-relaxed">
 			Die Frage dahinter klingt fast wie ein Zaubertrick: Warum sagt uns eine
 			kleine <Begriff term="Stichprobe" /> überhaupt etwas über eine riesige
-			<Begriff term="Grundgesamtheit" />? Du befragst ein paar Hundert Menschen und
-			willst auf Millionen schließen. Wie kann das funktionieren — und vor allem:
-			Wie sicher darfst du dir dabei sein?
+			<Begriff term="Grundgesamtheit" />? Stell dir vor, du willst die
+			Flügellänge <em>aller</em> Amseln in einem großen Wald kennen. Die kannst du
+			niemals alle fangen — du fängst und misst ein paar Dutzend Vögel und willst
+			daraus auf den ganzen Bestand schließen. Wie kann das funktionieren — und vor
+			allem: Wie sicher darfst du dir dabei sein?
 		</p>
 
 		<p class="text-ink-soft leading-relaxed">
-			Stell dir kurz das Setup vor. Die Grundgesamtheit sind alle Fälle, die dich
-			eigentlich interessieren. Du kannst sie nie ganz messen, also ziehst du eine
-			Stichprobe und rechnest daraus einen <Begriff term="Mittelwert" />. Dieser
-			eine Mittelwert ist dein Schätzwert. Die spannende Frage ist: Wie sehr würde
-			er schwanken, wenn du die Stichprobe noch einmal ziehen würdest? Genau diese
-			Schwankung ist der <Begriff term="Standardfehler" /> — und sie ist der
-			Schlüssel zu allem, was danach kommt.
+			Stell dir kurz das Setup vor. Die Grundgesamtheit sind alle Amseln des
+			Waldes, die dich eigentlich interessieren. Du kannst sie nie ganz messen,
+			also ziehst du eine Stichprobe — du fängst ein paar Vögel — und rechnest
+			daraus einen <Begriff term="Mittelwert" />, hier die mittlere Flügellänge der
+			gefangenen Tiere. Dieser eine Mittelwert ist dein Schätzwert. Die spannende
+			Frage ist: Wie sehr würde er schwanken, wenn du noch einmal losziehst und
+			andere Amseln fängst? Genau diese Schwankung ist der
+			<Begriff term="Standardfehler" /> — und sie ist der Schlüssel zu allem, was
+			danach kommt.
 		</p>
 
 		<Merke title="Worauf es jetzt ankommt">
-			Halte zwei Dinge auseinander: die <em>Streuung der Daten</em> in einer
-			einzelnen Stichprobe und die <em>Schwankung des Mittelwerts</em> von
-			Stichprobe zu Stichprobe. Es geht hier um das Zweite.
+			Halte zwei Dinge auseinander: die <em>Streuung der Flügellängen</em> in einem
+			einzelnen Fang und die <em>Schwankung der mittleren Flügellänge</em> von Fang
+			zu Fang. Es geht hier um das Zweite.
 		</Merke>
 
 		<!-- Das Widget ----------------------------------------------------------- -->
@@ -116,9 +120,9 @@
 			dieser Reihenfolge vor:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Zieh ein paar einzelne Stichproben und beobachte, wie jede einen Mittelwert liefert.</li>
+			<li>Zieh ein paar einzelne Stichproben — stell dir vor, du fängst jedes Mal eine Handvoll Amseln — und beobachte, wie jeder Fang eine mittlere Flügellänge liefert.</li>
 			<li>Klick dann auf <strong>×100</strong> und sieh zu, wie sich aus den vielen Mittelwerten eine neue Verteilung aufbaut.</li>
-			<li>Mach den Stichprobenumfang <strong>n</strong> größer und achte darauf, wie schmal die Verteilung der Mittelwerte wird.</li>
+			<li>Mach den Stichprobenumfang <strong>n</strong> größer — also miss mehr Vögel pro Fang — und achte darauf, wie schmal die Verteilung der Mittelwerte wird.</li>
 			<li>Stell zum Schluss die Grundgesamtheit auf <strong>rechtsschief</strong> um — und schau, was mit den Mittelwerten passiert.</li>
 		</ol>
 
@@ -126,11 +130,12 @@
 
 		<!-- Aha-Beat (a): viele Mittelwerte bilden eine neue Verteilung ---------- -->
 		<Intuition title="Beat 1 — eine neue Verteilung entsteht">
-			Jede Stichprobe gibt dir genau <em>einen</em> Mittelwert. Für sich genommen
-			ist das nur ein Punkt. Aber wenn du das hundertfach wiederholst und alle
-			Mittelwerte sammelst, entsteht eine ganz eigene Verteilung: die
-			<strong>Stichprobenverteilung des Mittelwerts</strong>. Sie zeigt nicht mehr
-			die Rohdaten, sondern wie der Mittelwert selbst schwankt.
+			Jeder Fang gibt dir genau <em>einen</em> Mittelwert — eine mittlere
+			Flügellänge. Für sich genommen ist das nur ein Punkt. Aber wenn du das
+			hundertfach wiederholst und alle Mittelwerte sammelst, entsteht eine ganz
+			eigene Verteilung: die <strong>Stichprobenverteilung des Mittelwerts</strong>.
+			Sie zeigt nicht mehr die einzelnen Flügellängen, sondern wie der Mittelwert
+			selbst von Fang zu Fang schwankt.
 		</Intuition>
 
 		<!-- Aha-Beat (b): schmaler als die Population, schmaler mit n ------------ -->

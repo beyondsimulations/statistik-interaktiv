@@ -25,38 +25,38 @@
 			id: 'wb-1',
 			kind: 'mc',
 			prompt:
-				'Ein Test hat eine Sensitivität von 99 %. Was bedeutet diese Zahl genau?',
+				'Ottos Feldtest auf einen Erreger bei gefangenen Wildtieren hat eine Sensitivität von 99 %. Was bedeutet diese Zahl genau?',
 			options: [
-				'P(positiv | krank) — von den Kranken werden 99 % positiv getestet.',
-				'P(krank | positiv) — von den positiv Getesteten sind 99 % krank.',
-				'P(krank) — 99 % der Bevölkerung sind krank.'
+				'P(positiv | infiziert) — von den infizierten Tieren werden 99 % positiv getestet.',
+				'P(infiziert | positiv) — von den positiv getesteten Tieren sind 99 % infiziert.',
+				'P(infiziert) — 99 % der Population sind infiziert.'
 			],
 			correct: 0,
 			explanation:
-				'Genau. Die Sensitivität ist P(positiv | krank): die Richtung "von der Krankheit zum Testergebnis". Die für Betroffene viel wichtigere Frage P(krank | positiv) ist die umgekehrte Richtung — und kann ganz anders ausfallen.'
+				'Genau. Die Sensitivität ist P(positiv | infiziert): die Richtung "von der Infektion zum Testergebnis". Die viel wichtigere Frage P(infiziert | positiv) ist die umgekehrte Richtung — und kann ganz anders ausfallen.'
 		},
 		{
 			id: 'wb-2',
 			kind: 'mc',
 			prompt:
-				'Eine Krankheit ist sehr selten (Prävalenz 0,5 %), der Test ist gut (Sensitivität 99 %, Spezifität 95 %). Warum ist ein positives Ergebnis trotzdem meist ein Fehlalarm?',
+				'Der Erreger ist in der Wildpopulation sehr selten (Prävalenz 0,5 %), der Feldtest ist gut (Sensitivität 99 %, Spezifität 95 %). Warum ist ein positiv getestetes Tier trotzdem meist ein Fehlalarm?',
 			options: [
 				'Weil der Test eine zu niedrige Sensitivität hat.',
-				'Weil es so viele Gesunde gibt, dass selbst 5 % falsch-positive unter ihnen die wenigen richtig-positiven Kranken zahlenmäßig erschlagen.',
+				'Weil es so viele gesunde Tiere gibt, dass selbst 5 % falsch-positive unter ihnen die wenigen richtig-positiven Infizierten zahlenmäßig erschlagen.',
 				'Weil die Spezifität niemals eine Rolle spielt.'
 			],
 			correct: 1,
 			explanation:
-				'Richtig — das ist der Basisraten-Effekt. Bei 10.000 Personen sind nur etwa 50 krank (davon ~50 positiv), aber 9.950 gesund, von denen 5 % (~498) fälschlich positiv anschlagen. Die falsch-positiven übertreffen die richtig-positiven deutlich, also ist P(krank|positiv) klein (~9 %).'
+				'Richtig — das ist der Basisraten-Effekt. Bei 10.000 gefangenen Tieren sind nur etwa 50 infiziert (davon ~50 positiv), aber 9.950 gesund, von denen 5 % (~498) fälschlich positiv anschlagen. Die falsch-positiven übertreffen die richtig-positiven deutlich, also ist P(infiziert|positiv) klein (~9 %).'
 		},
 		{
 			id: 'wb-3',
 			kind: 'tf',
 			prompt:
-				'Eine hohe Sensitivität allein garantiert, dass ein positives Testergebnis mit hoher Wahrscheinlichkeit auch wirklich krank bedeutet.',
+				'Eine hohe Sensitivität allein garantiert, dass ein positiv getestetes Wildtier mit hoher Wahrscheinlichkeit auch wirklich infiziert ist.',
 			correct: false,
 			explanation:
-				'Falsch. Der positive prädiktive Wert P(krank|positiv) hängt zusätzlich von der Prävalenz und der Spezifität ab. Bei einer seltenen Krankheit kann er trotz hoher Sensitivität sehr niedrig sein.'
+				'Falsch. Der positive prädiktive Wert P(infiziert|positiv) hängt zusätzlich von der Prävalenz und der Spezifität ab. Bei einem seltenen Erreger kann er trotz hoher Sensitivität sehr niedrig sein.'
 		}
 	];
 </script>
@@ -86,8 +86,9 @@
 			spricht. In dieser Lektion legen wir die Bausteine: Was ein Zufallsexperiment
 			ist, wie man Wahrscheinlichkeiten überhaupt bestimmt, mit welchen Regeln man
 			rechnet — und am Ende der vielleicht überraschendste Satz der ganzen
-			Statistik. Er erklärt, warum ein positiver medizinischer Test oft viel
-			weniger bedeutet, als man denkt.
+			Statistik. Er erklärt, warum ein positiver Krankheitstest oft viel weniger
+			bedeutet, als man denkt — etwa wenn Otto im Feld ein gefangenes Wildtier auf
+			einen seltenen Erreger testet.
 		</p>
 
 		<!-- Grundbegriffe -------------------------------------------------------- -->
@@ -95,7 +96,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Alles beginnt mit einem <Begriff term="Zufallsexperiment" />: einem Vorgang,
 			dessen Ausgang ungewiss ist und den man sich beliebig oft wiederholt denken
-			kann — ein Würfelwurf, ein Münzwurf, ein Bluttest. Alle möglichen Ergebnisse
+			kann — ein Würfelwurf, ein Münzwurf, ein Erreger-Feldtest. Alle möglichen Ergebnisse
 			zusammen bilden den <Begriff term="Ergebnisraum" />. Beim Würfel ist das
 			&#123;1, 2, 3, 4, 5, 6&#125;. Ein <Begriff term="Ereignis" /> ist dann
 			einfach eine Teilmenge davon, also eine Aussage, die eintreten kann oder nicht
@@ -243,63 +244,65 @@
 		<h2 class="mt-4 text-2xl">Der Satz von Bayes</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Häufig kennst du eine bedingte Wahrscheinlichkeit in der einen Richtung,
-			brauchst aber die andere. Ein Test sagt dir P(positiv | krank) — wie gut er
-			Kranke erkennt. Dich interessiert aber P(krank | positiv) — bist <em>du</em>
-			krank, jetzt wo dein Test positiv ist? Der <Begriff term="Satz von Bayes" />
-			dreht genau diese Richtung um.
+			brauchst aber die andere. Ottos Feldtest sagt ihm P(positiv | infiziert) —
+			wie gut er infizierte Tiere erkennt. Ihn interessiert aber P(infiziert |
+			positiv) — ist das gefangene Tier <em>wirklich</em> infiziert, jetzt wo sein
+			Test positiv anschlägt? Der <Begriff term="Satz von Bayes" /> dreht genau
+			diese Richtung um.
 		</p>
 
 		<FormelZeigen
 			formula={String.raw`P(A \mid B) = \dfrac{P(B \mid A) \cdot P(A)}{P(B)}`}
 			symbols={[
-				{ sym: String.raw`P(A \mid B)`, bedeutung: 'Die gesuchte Richtung, z. B. P(krank | positiv).' },
-				{ sym: String.raw`P(B \mid A)`, bedeutung: 'Die bekannte Richtung, z. B. P(positiv | krank) = Sensitivität.' },
+				{ sym: String.raw`P(A \mid B)`, bedeutung: 'Die gesuchte Richtung, z. B. P(infiziert | positiv).' },
+				{ sym: String.raw`P(B \mid A)`, bedeutung: 'Die bekannte Richtung, z. B. P(positiv | infiziert) = Sensitivität.' },
 				{ sym: String.raw`P(A)`, bedeutung: 'Die Grundwahrscheinlichkeit von A vor dem Test (z. B. die Prävalenz).' },
 				{ sym: String.raw`P(B)`, bedeutung: 'Wie wahrscheinlich B insgesamt ist (z. B. überhaupt positiv getestet zu werden).' }
 			]}
 		/>
 
 		<p class="text-ink-soft leading-relaxed">
-			Wenden wir das auf einen medizinischen Test an. Drei Größen reichen aus:
+			Wenden wir das auf Ottos Feldtest an einer Wildpopulation an. Drei Größen
+			reichen aus:
 		</p>
 		<ul class="text-ink-soft ml-5 list-disc space-y-1 leading-relaxed">
 			<li>
-				die <Begriff term="Prävalenz" /> P(krank) — wie verbreitet die Krankheit
-				überhaupt ist,
+				die <Begriff term="Prävalenz" /> P(infiziert) — wie verbreitet der Erreger
+				in der Population überhaupt ist,
 			</li>
 			<li>
-				die <Begriff term="Sensitivität" /> P(positiv | krank) — wie zuverlässig
-				der Test Kranke erkennt,
+				die <Begriff term="Sensitivität" /> P(positiv | infiziert) — wie
+				zuverlässig der Test infizierte Tiere erkennt,
 			</li>
 			<li>
 				die <Begriff term="Spezifität" /> P(negativ | gesund) — wie zuverlässig er
-				Gesunde als gesund erkennt.
+				gesunde Tiere als gesund erkennt.
 			</li>
 		</ul>
 		<p class="text-ink-soft leading-relaxed">
 			Daraus berechnet Bayes den <Begriff term="Positiver prädiktiver Wert">positiven
-			prädiktiven Wert</Begriff> P(krank | positiv) — die Zahl, die dich als
-			Betroffenen wirklich interessiert.
+			prädiktiven Wert</Begriff> P(infiziert | positiv) — die Zahl, die Otto bei
+			einem positiv getesteten Tier wirklich interessiert.
 		</p>
 
 		<!-- DER zentrale Aha-Moment ---------------------------------------------- -->
 		<Intuition title="P(A|B) ist nicht P(B|A)">
 			Das ist der Kern dieser Lektion — und einer der häufigsten Denkfehler
-			überhaupt. <strong>P(positiv | krank)</strong> und <strong>P(krank |
-			positiv)</strong> sind zwei völlig verschiedene Zahlen. Ein Test kann Kranke
-			fast perfekt erkennen (Sensitivität 99 %) und trotzdem kann es sein, dass die
-			<em>meisten</em> positiven Ergebnisse Fehlalarme sind. Der Grund ist die
-			<strong>Basisrate</strong>: Ist eine Krankheit selten, gibt es so viele
-			Gesunde, dass selbst ein kleiner Prozentsatz falsch-positiver unter ihnen die
-			wenigen echten Kranken zahlenmäßig überholt. Genau das machst du gleich
-			sichtbar.
+			überhaupt. <strong>P(positiv | infiziert)</strong> und <strong>P(infiziert |
+			positiv)</strong> sind zwei völlig verschiedene Zahlen. Ein Test kann
+			infizierte Tiere fast perfekt erkennen (Sensitivität 99 %) und trotzdem kann
+			es sein, dass die <em>meisten</em> positiven Ergebnisse Fehlalarme sind. Der
+			Grund ist die <strong>Basisrate</strong>: Ist ein Erreger in der Population
+			selten, gibt es so viele gesunde Tiere, dass selbst ein kleiner Prozentsatz
+			falsch-positiver unter ihnen die wenigen echt Infizierten zahlenmäßig
+			überholt. Genau das machst du gleich sichtbar.
 		</Intuition>
 
 		<!-- Die Bayes-Box -------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Probier es selbst aus: die Bayes-Box</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Stell dir 10.000 Personen als Raster vor. Mit den drei Reglern teilst du sie
-			in vier Gruppen auf. Geh am besten so vor:
+			Stell dir 10.000 gefangene Tiere als Raster vor. Mit den drei Reglern teilst
+			du sie in vier Gruppen auf. Geh am besten so vor:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
 			<li>
@@ -320,18 +323,19 @@
 		<BayesBox />
 
 		<Intuition title="Der Basisraten-Effekt, in Zahlen">
-			Bei 10.000 Personen und 0,5 % Prävalenz sind nur etwa 50 wirklich krank.
-			Davon erkennt der Test bei 99 % Sensitivität rund 50. Unter den 9.950 Gesunden
-			schlägt er aber bei 5 % fälschlich an — das sind fast 500 falsch-positive. Von
-			allen rund 550 positiven Tests sind also nur etwa 50 echt: knapp 9 %. Eine
-			hohe Sensitivität rettet dich nicht vor einer niedrigen Basisrate.
+			Bei 10.000 gefangenen Tieren und 0,5 % Prävalenz sind nur etwa 50 wirklich
+			infiziert. Davon erkennt der Test bei 99 % Sensitivität rund 50. Unter den
+			9.950 gesunden Tieren schlägt er aber bei 5 % fälschlich an — das sind fast
+			500 falsch-positive. Von allen rund 550 positiven Tests sind also nur etwa 50
+			echt: knapp 9 %. Eine hohe Sensitivität rettet dich nicht vor einer niedrigen
+			Basisrate.
 		</Intuition>
 
 		<Merke title="So liest du ein positives Testergebnis">
-			Frag immer nach drei Dingen: Wie selten ist die Krankheit (Prävalenz)? Wie gut
-			erkennt der Test Kranke (Sensitivität)? Und wie oft schlägt er bei Gesunden
-			fälschlich an (1 − Spezifität)? Erst alle drei zusammen ergeben P(krank |
-			positiv).
+			Frag immer nach drei Dingen: Wie selten ist der Erreger in der Population
+			(Prävalenz)? Wie gut erkennt der Test infizierte Tiere (Sensitivität)? Und
+			wie oft schlägt er bei gesunden Tieren fälschlich an (1 − Spezifität)? Erst
+			alle drei zusammen ergeben P(infiziert | positiv).
 		</Merke>
 
 		<!-- Selbsttest ----------------------------------------------------------- -->

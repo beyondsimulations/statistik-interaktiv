@@ -36,15 +36,15 @@
 			id: 'ki-1',
 			kind: 'mc',
 			prompt:
-				'Du hast ein 95-%-Konfidenzintervall berechnet. Welche Aussage ist die korrekte frequentistische Deutung?',
+				'Otto hat aus 20 besenderten Vögeln ein 95-%-Konfidenzintervall für die mittlere Zugdistanz der Art berechnet. Welche Aussage ist die korrekte frequentistische Deutung?',
 			options: [
-				'Der wahre Wert μ liegt mit 95 % Wahrscheinlichkeit in genau diesem Intervall.',
-				'Würde man das Verfahren sehr oft wiederholen, enthielten 95 % der so gebauten Intervalle den wahren Wert.',
-				'95 % aller Messwerte der Stichprobe liegen innerhalb dieses Intervalls.'
+				'Die wahre mittlere Zugdistanz μ liegt mit 95 % Wahrscheinlichkeit in genau diesem Intervall.',
+				'Würde man das Verfahren sehr oft wiederholen, enthielten 95 % der so gebauten Intervalle die wahre mittlere Zugdistanz.',
+				'95 % der gemessenen Vögel haben eine Zugdistanz innerhalb dieses Intervalls.'
 			],
 			correct: 1,
 			explanation:
-				'Genau. Der Parameter μ ist fest (keine Zufallsgröße) — er liegt entweder in deinem Intervall oder nicht. Zufällig ist das Intervall, weil es aus einer zufälligen Stichprobe entsteht. Die 95 % beziehen sich auf das Verfahren über viele Wiederholungen, nicht auf dieses eine Intervall.'
+				'Genau. Der Parameter μ (die wahre mittlere Zugdistanz der Art) ist fest — er liegt entweder in Ottos Intervall oder nicht. Zufällig ist das Intervall, weil es aus einer zufälligen Auswahl von Vögeln entsteht. Die 95 % beziehen sich auf das Verfahren über viele Wiederholungen, nicht auf dieses eine Intervall.'
 		},
 		{
 			id: 'ki-2',
@@ -93,10 +93,11 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Im letzten Kapitel hast du gesehen: Ein Stichprobenmittelwert ist nicht „die Wahrheit“,
-			sondern eine zufällige Ziehung. In dieser Lektion machen wir das nutzbar. Wir schätzen aus
-			einer einzigen Stichprobe einen unbekannten Wert der Grundgesamtheit — und sagen
-			<strong>ehrlich dazu, wie unsicher</strong> diese Schätzung ist. Am Ende steht ein Satz, den
-			fast alle falsch deuten, und du wirst ihn richtig verstehen.
+			sondern eine zufällige Ziehung. In dieser Lektion machen wir das nutzbar. Otto hat 20 Vögel
+			einer Art besendert und ihre Zugdistanz gemessen; daraus will er auf die <em>wahre mittlere
+			Zugdistanz der ganzen Art</em> schließen — und <strong>ehrlich dazu sagen, wie präzise</strong>
+			er sie damit eingegrenzt hat. Am Ende steht ein Satz, den fast alle falsch deuten, und du
+			wirst ihn richtig verstehen.
 		</p>
 
 		<!-- Kennwert vs. Parameter ---------------------------------------------- -->
@@ -125,8 +126,8 @@
 		<Intuition title="Ein Mittelwert ist eine zufällige Ziehung — nicht die Wahrheit">
 			Das ist die Brücke aus dem letzten Kapitel: Dein x̄ ist <strong>ein</strong> Wert aus der
 			<Begriff term="Stichprobenkennwertverteilung" /> — der Verteilung aller Mittelwerte, die du
-			bei lauter verschiedenen Stichproben bekommen würdest. Hättest du andere Personen erwischt,
-			läge dein x̄ woanders. Deshalb darfst du x̄ nie mit μ verwechseln: x̄ ist ein zufälliger
+			bei lauter verschiedenen Stichproben bekommen würdest. Hätte Otto andere Vögel besendert,
+			läge sein x̄ woanders. Deshalb darfst du x̄ nie mit μ verwechseln: x̄ ist ein zufälliger
 			Schätzer, μ ist der feste, gesuchte Wert dahinter.
 		</Intuition>
 
@@ -267,12 +268,13 @@
 		<!-- Das Flaggschiff-Widget ---------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Probier es selbst aus: die Sampling-Maschine</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Hier wird die richtige Deutung anfassbar. Das wahre μ steht als rote Linie fest und bewegt
-			sich <em>nie</em>. Jede Stichprobe erzeugt ein Konfidenzintervall, das darunter gestapelt
-			wird. Geh am besten so vor:
+			Hier wird die richtige Deutung anfassbar. Das wahre μ — die wahre mittlere Zugdistanz der Art
+			— steht als rote Linie fest und bewegt sich <em>nie</em>. Jede Stichprobe (eine neue Gruppe
+			besenderter Vögel) erzeugt ein Konfidenzintervall, das darunter gestapelt wird. Geh am besten
+			so vor:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Klick ein paarmal auf <strong>„Stichprobe ziehen“</strong> und beobachte, wie die Intervalle um die feste μ-Linie tanzen — manche treffen, manche verfehlen.</li>
+			<li>Klick ein paarmal auf <strong>„Stichprobe ziehen“</strong> — als würdest du jedes Mal eine neue Gruppe Vögel besendern — und beobachte, wie die Intervalle um die feste μ-Linie tanzen; manche treffen, manche verfehlen.</li>
 			<li>Drück <strong>„100 ziehen“</strong> und sieh zu, wie der Trefferanteil sich beim <strong>Konfidenzniveau</strong> einpendelt (~95 %).</li>
 			<li>Stell das Niveau auf <strong>99 %</strong> — die Intervalle werden breiter und es gibt weniger Fehlschüsse. Auf <strong>90 %</strong> werden sie schmaler, dafür verfehlen mehr.</li>
 			<li>Erhöh <strong>n</strong>: Die Intervalle werden schmaler (der Standardfehler sinkt), der Trefferanteil bleibt aber beim Niveau.</li>
@@ -324,9 +326,10 @@
 		<!-- Mindeststichprobenumfang -------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Wie viele Daten brauche ich? Der Mindeststichprobenumfang</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Die KI-Formel lässt sich umdrehen. Willst du, dass dein 95-%-Intervall höchstens eine
-			gewünschte Genauigkeit E (die halbe Intervallbreite, der „Fehler“) hat, kannst du den nötigen
-			Stichprobenumfang vorab ausrechnen:
+			Die KI-Formel lässt sich umdrehen. Will Otto, dass sein 95-%-Intervall für die mittlere
+			Zugdistanz höchstens eine gewünschte Genauigkeit E (die halbe Intervallbreite, der „Fehler“)
+			hat, kann er den nötigen Stichprobenumfang — also wie viele Vögel er besendern muss — vorab
+			ausrechnen:
 		</p>
 
 		<FormelZeigen

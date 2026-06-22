@@ -24,21 +24,21 @@
 		{
 			id: 'vt-1',
 			kind: 'mc',
-			prompt: 'Was beschreibt die Fläche unter der Dichtekurve über einem Intervall?',
+			prompt: 'Die Flügellänge einer Vogelart ist näherungsweise normalverteilt. Was beschreibt die Fläche unter der Dichtekurve über dem Intervall [a, b]?',
 			options: [
 				'Die Höhe der Verteilung an dieser Stelle.',
-				'Die Wahrscheinlichkeit, dass X in dieses Intervall fällt.',
-				'Den Mittelwert μ der Verteilung.'
+				'Die Wahrscheinlichkeit, dass ein zufällig gefangener Vogel eine Flügellänge zwischen a und b hat.',
+				'Den Mittelwert μ der Flügellänge.'
 			],
 			correct: 1,
 			explanation:
-				'Genau. Bei stetigen Verteilungen ist nicht die Höhe der Kurve die Wahrscheinlichkeit, sondern die Fläche darunter. Die Fläche über [a, b] ist P(a < X ≤ b) = F(b) − F(a).'
+				'Genau. Bei stetigen Verteilungen ist nicht die Höhe der Kurve die Wahrscheinlichkeit, sondern die Fläche darunter. Die Fläche über [a, b] ist P(a < X ≤ b) = F(b) − F(a) — der Anteil der Vögel, deren Flügellänge dazwischen liegt.'
 		},
 		{
 			id: 'vt-2',
 			kind: 'mc',
 			prompt:
-				'Eine Körpergröße ist eine stetige Zufallsvariable. Wie groß ist die Wahrscheinlichkeit, dass jemand exakt 180,000… cm groß ist — auf unendlich viele Nachkommastellen genau?',
+				'Die Blütenblattlänge einer Iris ist eine stetige Zufallsvariable. Wie groß ist die Wahrscheinlichkeit, dass ein Blütenblatt exakt 50,000… mm lang ist — auf unendlich viele Nachkommastellen genau?',
 			options: ['Genau 0.', 'Ungefähr 50 %.', 'Hängt nur von σ ab.'],
 			correct: 0,
 			explanation:
@@ -48,7 +48,7 @@
 			id: 'vt-3',
 			kind: 'tf',
 			prompt:
-				'Bei einer Normalverteilung liegen rund 95 % aller Werte im Bereich μ ± 2σ.',
+				'Ist die Flügellänge einer Vogelart normalverteilt, liegen rund 95 % aller Vögel im Bereich μ ± 2σ.',
 			correct: true,
 			explanation:
 				'Wahr. Das ist die 68–95–99,7-Regel: etwa 68 % liegen in μ ± 1σ, etwa 95 % in μ ± 2σ und etwa 99,7 % in μ ± 3σ. Probier es im Flächen-Schieber mit a = μ − 2σ und b = μ + 2σ aus.'
@@ -78,9 +78,12 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			In dieser Lektion lernst du, wie man beschreibt, welche Werte wie häufig oder wie
-			wahrscheinlich auftreten. Am Ende steht eine einzige, große Idee, die du in fast jedem
-			weiteren Kapitel wiedersehen wirst: <strong>Die Fläche unter einer Kurve ist eine
-			Wahrscheinlichkeit.</strong> Bauen wir uns langsam dorthin.
+			wahrscheinlich auftreten. Viele biologische Messgrößen — die Flügellänge einer Vogelart,
+			die Blütenblattlänge einer Iris, die Größe von Blättern — sind näherungsweise
+			normalverteilt, und genau daran machen wir die Idee fest. Am Ende steht ein einziger,
+			großer Gedanke, den du in fast jedem weiteren Kapitel wiedersehen wirst: <strong>Die
+			Fläche unter einer Kurve ist eine Wahrscheinlichkeit.</strong> Bauen wir uns langsam
+			dorthin.
 		</p>
 
 		<!-- Beobachtet vs. theoretisch ------------------------------------------ -->
@@ -114,17 +117,18 @@
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Bei einer <Begriff term="Stetige Zufallsvariable">stetigen Zufallsvariable</Begriff> wird es
-			subtiler. Sie kann <em>jeden</em> Wert in einem Bereich annehmen — eine Körpergröße etwa
-			könnte 180 cm sein, oder 180,1 cm, oder 180,03471… cm. Es gibt unendlich viele mögliche
-			Werte. Und genau deshalb gilt etwas, das im ersten Moment irritiert.
+			subtiler. Sie kann <em>jeden</em> Wert in einem Bereich annehmen — die Flügellänge einer
+			Amsel etwa könnte 130 mm sein, oder 130,1 mm, oder 130,03471… mm. Es gibt unendlich viele
+			mögliche Werte. Und genau deshalb gilt etwas, das im ersten Moment irritiert.
 		</p>
 
 		<Intuition title="Bei stetigen Variablen ist P(X = x) = 0">
-			Frag nach der Wahrscheinlichkeit für einen <em>exakten</em> Wert — etwa genau 180,000… cm auf
-			unendlich viele Stellen genau — dann ist die Antwort <strong>0</strong>. Ein einzelner Punkt
-			ist unendlich dünn, er hat keine Breite und damit keine Fläche. Sinnvoll fragen kannst du nur
-			nach <strong>Intervallen</strong>: Wie wahrscheinlich ist eine Größe <em>zwischen</em> 179,5
-			und 180,5 cm? Das hat eine Breite — und eine Fläche — und damit eine Wahrscheinlichkeit.
+			Frag nach der Wahrscheinlichkeit für einen <em>exakten</em> Wert — etwa eine Flügellänge von
+			genau 130,000… mm auf unendlich viele Stellen genau — dann ist die Antwort <strong>0</strong>.
+			Ein einzelner Punkt ist unendlich dünn, er hat keine Breite und damit keine Fläche. Sinnvoll
+			fragen kannst du nur nach <strong>Intervallen</strong>: Wie wahrscheinlich ist eine
+			Flügellänge <em>zwischen</em> 129,5 und 130,5 mm? Das hat eine Breite — und eine Fläche — und
+			damit eine Wahrscheinlichkeit.
 		</Intuition>
 
 		<Analogie title="Der Punkt und das Stück Kuchen">
@@ -170,9 +174,10 @@
 		</p>
 
 		<Intuition title="Die Fläche unter der Dichtekurve ist die Wahrscheinlichkeit">
-			Die gesamte Fläche unter der Glocke ist genau <strong>1</strong> — irgendeinen Wert nimmt X
-			schließlich an. Die Fläche über einem Teilstück [a, b] ist dann
-			<strong>P(a &lt; X ≤ b)</strong>: der Anteil aller Fälle, der in dieses Intervall fällt.
+			Die gesamte Fläche unter der Glocke ist genau <strong>1</strong> — irgendeine Flügellänge hat
+			jeder Vogel schließlich. Die Fläche über einem Teilstück [a, b] ist dann
+			<strong>P(a &lt; X ≤ b)</strong>: der Anteil der Tiere, deren Flügellänge in dieses Intervall
+			fällt — also die Wahrscheinlichkeit, dass ein zufällig gefangener Vogel zwischen a und b misst.
 			Schiebst du a und b zusammen auf einen einzigen Punkt, schrumpft die Fläche auf null — genau
 			deshalb ist P(X = x) = 0. Diese eine Idee macht später Konfidenzintervalle, p-Werte und
 			Streubereiche verständlich.
@@ -197,11 +202,11 @@
 		<!-- Das Widget ----------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Probier es selbst aus: der Flächen-Schieber</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Lass uns die Idee nicht behaupten, sondern anfassbar machen. Geh am besten in dieser
-			Reihenfolge vor:
+			Lass uns die Idee nicht behaupten, sondern anfassbar machen. Denk dir die Achse als die
+			Flügellänge unserer Vogelart in Millimetern. Geh am besten in dieser Reihenfolge vor:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Zieh die Grenzen <strong>a</strong> und <strong>b</strong> auseinander und beobachte, wie die korallene Fläche und der Wert <strong>P(a &lt; X ≤ b)</strong> wachsen.</li>
+			<li>Zieh die Grenzen <strong>a</strong> und <strong>b</strong> auseinander und beobachte, wie die korallene Fläche und der Wert <strong>P(a &lt; X ≤ b)</strong> — der Anteil der Vögel mit Flügellänge dazwischen — wachsen.</li>
 			<li>Schieb a und b ganz dicht zusammen — die Fläche und damit die Wahrscheinlichkeit gehen gegen null.</li>
 			<li>Verschieb <strong>μ</strong> und ändere <strong>σ</strong> und sieh zu, wie sich die Glocke (und die schattierte Fläche) umformt.</li>
 			<li>Schalte <strong>„in Standardabweichungen (z) anzeigen“</strong> ein: Die Achse zeigt nun z-Werte — so sieht jede Normalverteilung gleich aus.</li>
