@@ -16,14 +16,19 @@
 		bareTitle?: boolean;
 		/** Keep this page out of search indexes (e.g. the internal component gallery). */
 		noindex?: boolean;
+		/** Page language ('de' default) — drives og:locale. English legal pages pass 'en'. */
+		lang?: string;
 	};
 	let {
 		title,
 		description = DEFAULT_DESCRIPTION,
 		type = 'website',
 		bareTitle = false,
-		noindex = false
+		noindex = false,
+		lang = 'de'
 	}: Props = $props();
+
+	const ogLocale = $derived(lang === 'en' ? 'en_US' : 'de_DE');
 
 	const fullTitle = $derived(
 		!title ? SITE_NAME : bareTitle ? title : `${title} · ${SITE_NAME}`
@@ -49,7 +54,7 @@
 	<!-- Open Graph -->
 	<meta property="og:type" content={type} />
 	<meta property="og:site_name" content={SITE_NAME} />
-	<meta property="og:locale" content="de_DE" />
+	<meta property="og:locale" content={ogLocale} />
 	<meta property="og:title" content={fullTitle} />
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={canonical} />

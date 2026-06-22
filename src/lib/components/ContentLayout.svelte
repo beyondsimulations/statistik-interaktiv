@@ -35,7 +35,7 @@
 	// %lang% placeholder (English legal pages → "en"); `lang` here drives the date.
 </script>
 
-<Seo {title} description={subtitle} type="article" />
+<Seo {title} description={subtitle} type="article" {lang} />
 
 <main class="mx-auto max-w-2xl px-6 py-16 md:py-24">
 	<article class="prose-content">
