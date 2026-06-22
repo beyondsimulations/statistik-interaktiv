@@ -32,7 +32,7 @@
 		</h1>
 
 		<p class="text-ink-soft max-w-xl text-lg md:text-xl">
-			Hier lernst du Statistik in deinem Tempo — mit Intuition zuerst, kleinen
+			Hier lernst du Statistik in deinem Tempo: mit Intuition zuerst, kleinen
 			Schritten und interaktiven Beispielen. Du musst nichts auswendig können.
 			Du schaffst das.
 		</p>
@@ -50,7 +50,7 @@
 		<h2 class="text-3xl">Womit fangen wir an?</h2>
 		<p class="text-ink-soft mt-2 max-w-xl">
 			Die Lektionen bauen aufeinander auf, jede für sich verständlich. Am besten
-			startest du mit der ersten freigeschalteten — der Rest ergibt sich.
+			startest du mit der ersten freigeschalteten, der Rest ergibt sich.
 		</p>
 
 		<div class="bg-paper-raised shadow-soft mt-8 rounded-2xl p-6">

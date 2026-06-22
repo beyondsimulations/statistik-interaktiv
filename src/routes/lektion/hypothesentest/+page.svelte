@@ -83,10 +83,10 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Stell dir vor, du misst die Blätter von Pflanzen, die in der prallen Sonne stehen, und von
-			solchen aus dem Schatten. Die Sonnenblätter wirken im Schnitt etwas kleiner — aber ist das ein
+			solchen aus dem Schatten. Die Sonnenblätter wirken im Schnitt etwas kleiner. Aber ist das ein
 			<strong>echter</strong> Unterschied oder nur das übliche Rauschen zwischen zwei Stichproben?
 			Genau diese Frage beantwortet ein <Begriff term="Hypothesentest" />. In dieser Lektion lernst
-			du, wie er funktioniert, was der berühmte <Begriff term="p-Wert" /> wirklich sagt — und vor
+			du, wie er funktioniert, was der berühmte <Begriff term="p-Wert" /> wirklich sagt und vor
 			allem, was er <em>nicht</em> sagt.
 		</p>
 
@@ -101,7 +101,7 @@
 		<h2 class="mt-4 text-2xl">Muster oder nur Zufall? Modell statt Bauchgefühl</h2>
 		<p class="text-ink-soft leading-relaxed">
 			In deinen Daten siehst du ein <strong>Muster</strong>: Sonnenblätter sind im Mittel kleiner.
-			Aber ein Muster in einer einzelnen Stichprobe kann auch reiner Zufall sein — hättest du andere
+			Aber ein Muster in einer einzelnen Stichprobe kann auch reiner Zufall sein. Hättest du andere
 			Pflanzen erwischt, sähe es vielleicht umgekehrt aus. Ein Hypothesentest stellt dem Muster ein
 			<strong>Modell</strong> gegenüber: die nüchterne Annahme „in Wahrheit gibt es gar keinen
 			Unterschied“. Dann fragt er: Wie gut passt mein beobachtetes Muster noch zu diesem langweiligen
@@ -111,7 +111,7 @@
 		<Intuition title="Ein Mittelwertsunterschied ist eine zufällige Ziehung">
 			Aus dem Kapitel zur Stichprobenverteilung weißt du: Selbst wenn zwei Gruppen exakt gleich
 			groß sind, werden ihre Stichprobenmittelwerte fast nie identisch sein. Ein bisschen Differenz
-			gibt es <em>immer</em> — allein durch das Ziehen. Die Kunst ist zu entscheiden, ob deine
+			gibt es <em>immer</em>, allein durch das Ziehen. Die Kunst ist zu entscheiden, ob deine
 			Differenz noch in diesen Zufallsbereich fällt oder schon zu groß dafür ist.
 		</Intuition>
 
@@ -121,14 +121,14 @@
 			Eine gute wissenschaftliche Hypothese ist <strong>überprüfbar</strong> und vor allem
 			<strong>widerlegbar</strong>. Diese Idee geht auf Karl Popper zurück:
 			<Begriff term="Falsifikation" /> statt Beweis. Man kann eine Forschungshypothese niemals
-			endgültig <em>beweisen</em> — egal wie viele Sonnenblätter du misst, der nächste Datensatz
+			endgültig <em>beweisen</em>. Egal wie viele Sonnenblätter du misst, der nächste Datensatz
 			könnte sie noch kippen. Widerlegen dagegen kann man eine Hypothese mit einem einzigen
 			Gegenbeispiel.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Deshalb dreht die Statistik den Spieß um. Sie prüft nicht direkt deine
 			<Begriff term="Forschungshypothese" />, sondern versucht, die <em>gegenteilige</em> Annahme zu
-			widerlegen — die Annahme „kein Effekt“. Gelingt das, bleibt die Forschungshypothese als
+			widerlegen, die Annahme „kein Effekt“. Gelingt das, bleibt die Forschungshypothese als
 			plausibel übrig. Ein indirektes Vorgehen, aber ein logisch sauberes.
 		</p>
 
@@ -136,7 +136,7 @@
 		<h2 class="mt-4 text-2xl">H0 und HA: die zwei Hypothesen jedes Tests</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Jeder Test stellt zwei Hypothesen gegenüber. Die <Begriff term="Nullhypothese" /> H₀ ist die
-			langweilige: <strong>kein Effekt</strong>, kein Unterschied — Sonnen- und Schattenpflanzen
+			langweilige: <strong>kein Effekt</strong>. Sonnen- und Schattenpflanzen
 			sind im Mittel gleich groß (μ<sub>Sonne</sub> = μ<sub>Schatten</sub>). Die
 			<Begriff term="Alternativhypothese">Alternativhypothese</Begriff> HA (oder H₁) ist deine
 			eigentliche Vermutung und enthält <strong>immer eine Effektgröße</strong>: Es gibt einen
@@ -155,19 +155,19 @@
 		<!-- Einseitig vs. zweiseitig -------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Einseitig oder zweiseitig? Die Richtung von HA</h2>
 		<p class="text-ink-soft leading-relaxed">
-			HA enthält immer eine Effektrichtung — aber wie viel Richtung? Hier scheiden sich zwei Arten
+			HA enthält immer eine Effektrichtung. Aber wie viel Richtung? Hier scheiden sich zwei Arten
 			von Test. Ein <Begriff term="Zweiseitiger Test">zweiseitiger Test</Begriff> ist
 			<strong>ungerichtet</strong>: HA lautet <em>μ₁ ≠ μ₂</em> („irgendein Unterschied, egal in
 			welche Richtung“). So fragst du im Blattbeispiel schlicht, <em>ob</em> sich Sonnen- und
-			Schattenblätter in der Größe unterscheiden — kleiner oder größer, beides zählt. Das
+			Schattenblätter in der Größe unterscheiden, kleiner oder größer, beides zählt. Das
 			Signifikanzniveau α verteilt sich dann auf <strong>beide</strong> Schwänze der Verteilung.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Ein <Begriff term="Einseitiger Test">einseitiger Test</Begriff> ist dagegen
 			<strong>gerichtet</strong>: HA lautet <em>μ₁ &gt; μ₂</em> (oder <em>μ₁ &lt; μ₂</em>). Du
 			behauptest also nicht nur einen Unterschied, sondern legst dich vorab auf seine
-			<strong>Richtung</strong> fest. Das gesamte α liegt dann in <strong>einem</strong> Schwanz —
-			der Test ist in dieser Richtung empfindlicher (kleinere p-Werte), blind aber für eine
+			<strong>Richtung</strong> fest. Das gesamte α liegt dann in <strong>einem</strong> Schwanz.
+			Der Test ist in dieser Richtung empfindlicher (kleinere p-Werte), blind aber für eine
 			Abweichung in die Gegenrichtung. Ein klassisches biologisches Beispiel: Wenn wir aus der
 			Wirkungs-Theorie heraus erwarten, dass eine <strong>Düngung den Ertrag erhöht</strong>
 			(nicht senkt), dürfen wir gerichtet einseitig testen — H₀: μ<sub>gedüngt</sub> ≤
@@ -177,18 +177,18 @@
 			Der Haken: Einseitig testen darfst du nur, wenn die Richtung <strong>vor</strong> dem Blick in
 			die Daten biologisch begründet feststeht. Wer erst die Daten ansieht, die Richtung abliest und
 			<em>dann</em> einseitig testet, halbiert sich den p-Wert unredlich und bläht so heimlich den
-			Fehler 1. Art auf. Im Zweifel — und immer, wenn die Richtung offen ist — bleibst du ehrlich
+			Fehler 1. Art auf. Im Zweifel, und immer, wenn die Richtung offen ist, bleibst du ehrlich
 			<strong>zweiseitig</strong>.
 		</p>
 
 		<Merke title="Einseitig nur mit vorab begründeter Richtung">
 			<ul class="ml-5 list-disc space-y-1">
 				<li>
-					<strong>Zweiseitig</strong> (Standard): HA: μ₁ ≠ μ₂ — ungerichtet, fragt nur <em>ob</em>
+					<strong>Zweiseitig</strong> (Standard): HA: μ₁ ≠ μ₂, ungerichtet, fragt nur <em>ob</em>
 					es einen Unterschied gibt. α auf beide Schwänze verteilt.
 				</li>
 				<li>
-					<strong>Einseitig</strong>: HA: μ₁ &gt; μ₂ bzw. μ₁ &lt; μ₂ — gerichtet, nur erlaubt, wenn
+					<strong>Einseitig</strong>: HA: μ₁ &gt; μ₂ bzw. μ₁ &lt; μ₂, gerichtet, nur erlaubt, wenn
 					die Richtung <strong>vorab</strong> biologisch begründet ist (z. B. „Düngung
 					<em>erhöht</em> den Ertrag“). α komplett in einem Schwanz.
 				</li>
@@ -201,14 +201,14 @@
 
 		<Merke title="HA enthält immer eine Effektgröße">
 			H₀ sagt „nichts ist los“ (Effekt = 0). HA sagt „da ist etwas“ und steckt damit eine
-			<Begriff term="Effektgröße" /> ungleich null. Bewiesen wird HA nie direkt — der Test kann nur
+			<Begriff term="Effektgröße" /> ungleich null. Bewiesen wird HA nie direkt. Der Test kann nur
 			H₀ verwerfen oder sie stehen lassen.
 		</Merke>
 
 		<!-- Das 8-Schritte-Vorgehen --------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Das Vorgehen in acht Schritten</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Fast jeder klassische Test folgt demselben Ablauf — am Blattgrößen-Beispiel:
+			Fast jeder klassische Test folgt demselben Ablauf, am Blattgrößen-Beispiel:
 		</p>
 		<Merke title="Hypothesentest in 8 Schritten">
 			<ol class="ml-5 list-decimal space-y-1">
@@ -228,7 +228,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Die <Begriff term="Teststatistik" /> presst deinen Befund in eine einzige Zahl: Sie misst den
 			beobachteten Unterschied in Einheiten des Standardfehlers. Beim Vergleich zweier Mittelwerte
-			ist das ein t-Wert — grob „Signal geteilt durch Rauschen“:
+			ist das ein t-Wert, grob „Signal geteilt durch Rauschen“:
 		</p>
 
 		<FormelZeigen
@@ -259,17 +259,17 @@
 		<h2 class="mt-4 text-2xl">Die eine Sache, die fast alle am p-Wert falsch verstehen</h2>
 
 		<Callout variant="warnung" title="Der p-Wert ist NICHT die Wahrscheinlichkeit, dass H0 stimmt">
-			Der p-Wert ist <strong>P(Daten so extrem oder extremer | H₀ wahr)</strong> — eine Aussage
+			Der p-Wert ist <strong>P(Daten so extrem oder extremer | H₀ wahr)</strong>, eine Aussage
 			<em>unter der Annahme</em>, dass H₀ gilt. Er ist <strong>nicht</strong>
 			P(H₀ wahr | Daten) und <strong>nicht</strong> die Wahrscheinlichkeit, dass dein gefundener
 			Effekt echt ist. „p = 0,03“ heißt also <em>nicht</em> „es gibt zu 97 % einen echten
-			Unterschied“. Das Verwechseln dieser beiden bedingten Wahrscheinlichkeiten — P(Daten | H₀)
-			gegen P(H₀ | Daten) — ist der häufigste Fehler in der ganzen Statistik.
+			Unterschied“. Das Verwechseln dieser beiden bedingten Wahrscheinlichkeiten, P(Daten | H₀)
+			gegen P(H₀ | Daten), ist der häufigste Fehler in der ganzen Statistik.
 		</Callout>
 
 		<Intuition title="„Nicht signifikant“ heißt nicht „kein Unterschied“">
 			Genauso wichtig die Rückseite: Ein großes p (z. B. 0,21) <strong>beweist H₀ nicht</strong>. Es
-			heißt nur „kein Nachweis“ — vielleicht gibt es wirklich keinen Unterschied, vielleicht war
+			heißt nur „kein Nachweis“. Vielleicht gibt es wirklich keinen Unterschied, vielleicht war
 			deine Stichprobe schlicht zu klein, um einen vorhandenen Effekt aufzuspüren (zu wenig Power).
 			Absence of evidence ist nicht evidence of absence. Bei den Blättern: „nicht signifikant“ darf
 			nie zu „Sonne und Schatten machen keinen Unterschied“ werden.
@@ -292,7 +292,7 @@
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
 			<li>Lass den Schalter <strong>„In Wahrheit kein Unterschied (H0 wahr)“</strong> an und klick auf <strong>„100 Experimente“</strong>.</li>
-			<li>Obwohl es <em>keinen</em> Unterschied gibt, leuchten ungefähr <strong>5 %</strong> der Läufe rot — reine Fehlalarme. Das ist α.</li>
+			<li>Obwohl es <em>keinen</em> Unterschied gibt, leuchten ungefähr <strong>5 %</strong> der Läufe rot: reine Fehlalarme. Das ist α.</li>
 			<li>Schalt <strong>„H0 wahr“</strong> aus, dreh den <strong>wahren Unterschied</strong> hoch und lauf erneut: Jetzt werden viel mehr Experimente signifikant.</li>
 			<li>Setz den Effekt klein und erhöh <strong>n</strong> — auch mehr Daten machen einen echten Effekt leichter sichtbar.</li>
 		</ol>
@@ -301,8 +301,8 @@
 
 		<Merke title="Was das Spiel zeigt">
 			Unter einer wahren H₀ fallen rund <strong>α = 5 %</strong> der Tests rein zufällig
-			„signifikant“ aus. Ein einzelnes signifikantes Ergebnis ist also kein Wahrheitsbeweis —
-			deshalb sind Replikation und vorab festgelegte Hypothesen so wichtig.
+			„signifikant“ aus. Ein einzelnes signifikantes Ergebnis ist also kein Wahrheitsbeweis.
+			Deshalb sind Replikation und vorab festgelegte Hypothesen so wichtig.
 		</Merke>
 
 		<!-- Fehler 1. & 2. Art --------------------------------------------------- -->
@@ -310,9 +310,9 @@
 		<p class="text-ink-soft leading-relaxed">
 			Beim Entscheiden kann man auf zwei Weisen danebenliegen. Der
 			<Begriff term="Fehler 1. Art" /> (Wahrscheinlichkeit α): Du verwirfst eine wahre H₀ und
-			„findest“ einen Größenunterschied, den es gar nicht gibt — ein <strong>Fehlalarm</strong>. Der
+			„findest“ einen Größenunterschied, den es gar nicht gibt, einen <strong>Fehlalarm</strong>. Der
 			<Begriff term="Fehler 2. Art" /> (Wahrscheinlichkeit β): Es gibt einen echten Unterschied, aber
-			dein Test übersieht ihn — du <strong>verpasst</strong> ihn.
+			dein Test übersieht ihn. Du <strong>verpasst</strong> ihn.
 		</p>
 
 		<div class="overflow-x-auto">
@@ -355,7 +355,7 @@
 
 		<Callout variant="warnung" title="Das Tauschgeschäft zwischen α und β">
 			Bei <strong>festem n</strong> kannst du α und β nicht gleichzeitig kleinmachen. Ein strengeres
-			α (weniger Fehlalarme) schiebt die Entscheidungsschwelle nach außen — und vergrößert β, du
+			α (weniger Fehlalarme) schiebt die Entscheidungsschwelle nach außen und vergrößert β: Du
 			übersiehst mehr echte Effekte. Den Ausweg liefert nur mehr Information:
 			<strong>größeres n</strong> oder ein <strong>größerer Effekt</strong> heben die Power, ohne α
 			zu opfern. Biologisch ist das eine bewusste Abwägung: Meist ist es schlimmer, ein
@@ -371,9 +371,9 @@
 			echter Unterschied). Die gestrichelte Linie ist deine Entscheidungsschwelle. Probier:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Zieh <strong>α</strong> kleiner — die Entscheidungslinie wandert nach rechts, die korallene α-Fläche schrumpft, aber die graue β-Fläche wächst und die <strong>Power sinkt</strong>.</li>
+			<li>Zieh <strong>α</strong> kleiner: Die Entscheidungslinie wandert nach rechts, die korallene α-Fläche schrumpft, aber die graue β-Fläche wächst und die <strong>Power sinkt</strong>.</li>
 			<li>Erhöh die <strong>Effektgröße</strong> — die HA-Kurve rückt nach rechts, β schrumpft, die Power steigt.</li>
-			<li>Erhöh <strong>n</strong> — der Effekt in Standardfehlern wächst, beide Welten trennen sich klarer, die Power steigt ebenfalls.</li>
+			<li>Erhöh <strong>n</strong>: Der Effekt in Standardfehlern wächst, beide Welten trennen sich klarer, die Power steigt ebenfalls.</li>
 			<li>Stell die Effektgröße auf <strong>0</strong>: Jetzt liegen H₀ und HA übereinander und die Power fällt auf α — du „findest“ nur noch Fehlalarme.</li>
 		</ol>
 

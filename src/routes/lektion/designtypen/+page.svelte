@@ -25,15 +25,15 @@
 			id: 'designtypen-1',
 			kind: 'mc',
 			prompt:
-				'Eine Studie verteilt ein neues Futter auf 5 Becken pro Gruppe und misst in jedem Becken 20 Fische — also 100 Fische je Gruppe. Was ist die echte Stichprobengröße (Replikationseinheit)?',
+				'Eine Studie verteilt ein neues Futter auf 5 Becken pro Gruppe und misst in jedem Becken 20 Fische, also 100 Fische je Gruppe. Was ist die echte Stichprobengröße (Replikationseinheit)?',
 			options: [
-				'100 Fische pro Gruppe — jeder gemessene Fisch ist ein Datenpunkt.',
-				'5 Becken pro Gruppe — die Becken bekamen unabhängig das Futter, die 20 Fische je Becken sind nur Subsamples.',
-				'2 Gruppen — Kontrolle und Behandlung.'
+				'100 Fische pro Gruppe: jeder gemessene Fisch ist ein Datenpunkt.',
+				'5 Becken pro Gruppe: die Becken bekamen unabhängig das Futter, die 20 Fische je Becken sind nur Subsamples.',
+				'2 Gruppen: Kontrolle und Behandlung.'
 			],
 			correct: 1,
 			explanation:
-				'Genau. Das Futter wurde auf BECKEN-Ebene zugeteilt, also ist das Becken die Versuchseinheit. Die 20 Fische in einem Becken teilen Wasser, Temperatur und Futterportion — sie sind voneinander abhängig (Subsamples), keine unabhängigen Replikate. Die wahre Stichprobengröße ist 5 Becken pro Gruppe, nicht 100 Fische. Wer mit n = 100 rechnet, betreibt Pseudoreplikation.'
+				'Genau. Das Futter wurde auf BECKEN-Ebene zugeteilt, also ist das Becken die Versuchseinheit. Die 20 Fische in einem Becken teilen Wasser, Temperatur und Futterportion. Sie sind voneinander abhängig (Subsamples), keine unabhängigen Replikate. Die wahre Stichprobengröße ist 5 Becken pro Gruppe, nicht 100 Fische. Wer mit n = 100 rechnet, betreibt Pseudoreplikation.'
 		},
 		{
 			id: 'designtypen-2',
@@ -42,12 +42,12 @@
 				'Warum liefert die naive Analyse (jeder Fisch als unabhängig) einen irreführend kleinen p-Wert?',
 			options: [
 				'Weil mehr Fische die wahre Streuung verkleinern und der Effekt dadurch echt größer wird.',
-				'Weil die künstlich aufgeblähten Freiheitsgrade (n = 100 statt 5) den kritischen Wert senken und die abhängigen Subsamples als echte Information zählen — der Test wird zu optimistisch.',
+				'Weil die künstlich aufgeblähten Freiheitsgrade (n = 100 statt 5) den kritischen Wert senken und die abhängigen Subsamples als echte Information zählen. So wird der Test zu optimistisch.',
 				'Weil der Mittelwert pro Becken dadurch genauer geschätzt wird.'
 			],
 			correct: 1,
 			explanation:
-				'Richtig. Tut man so, als hätte man 100 unabhängige Beobachtungen, blähen sich die Freiheitsgrade auf, der Standardfehler wirkt künstlich klein und die kritische Schranke rückt näher an null. Die zusätzlichen Blätter/Fische tragen aber kaum neue, unabhängige Information bei — sie sind ja abhängig. Ergebnis: ein viel zu kleiner p-Wert, also Schein-Signifikanz. Die Information steckt in der Zahl der unabhängigen Einheiten, nicht in der Zahl der Messungen.'
+				'Richtig. Tut man so, als hätte man 100 unabhängige Beobachtungen, blähen sich die Freiheitsgrade auf, der Standardfehler wirkt künstlich klein und die kritische Schranke rückt näher an null. Die zusätzlichen Blätter/Fische tragen aber kaum neue, unabhängige Information bei, sie sind ja abhängig. Ergebnis: ein viel zu kleiner p-Wert, also Schein-Signifikanz. Die Information steckt in der Zahl der unabhängigen Einheiten, nicht in der Zahl der Messungen.'
 		},
 		{
 			id: 'designtypen-3',
@@ -56,7 +56,7 @@
 				'„Mehrere Messungen am selben Individuum (z. B. dreimal dasselbe Tier wiegen) sind unabhängige Replikate und dürfen als getrennte Datenpunkte in den Test eingehen.“',
 			correct: false,
 			explanation:
-				'Falsch. Wiederholte Messungen an derselben Einheit sind abhängig — sie teilen alles, was diese Einheit ausmacht (Genetik, Vorgeschichte, Messsituation). Sie sind Subsamples, keine echten Replikate. Behandelt man sie als unabhängig, entsteht Pseudoreplikation mit aufgeblähten Freiheitsgraden und falsch kleinen p-Werten. Korrekt: einen Mittelwert pro Individuum bilden, einen Error()-Term verwenden oder ein Mixed Model rechnen.'
+				'Falsch. Wiederholte Messungen an derselben Einheit sind abhängig, sie teilen alles, was diese Einheit ausmacht (Genetik, Vorgeschichte, Messsituation). Sie sind Subsamples, keine echten Replikate. Behandelt man sie als unabhängig, entsteht Pseudoreplikation mit aufgeblähten Freiheitsgraden und falsch kleinen p-Werten. Korrekt: einen Mittelwert pro Individuum bilden, einen Error()-Term verwenden oder ein Mixed Model rechnen.'
 		}
 	];
 </script>
@@ -83,7 +83,7 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Stell dir vor, du willst wissen, ob ein Dünger Blätter wachsen lässt. Du nimmst ein paar
-			Pflanzen, misst an jeder viele Blätter, rechnest einen t-Test — und bekommst einen winzigen
+			Pflanzen, misst an jeder viele Blätter, rechnest einen t-Test und bekommst einen winzigen
 			p-Wert. Klingt nach einem klaren Effekt. Aber Vorsicht: Vielleicht hast du dich gerade selbst
 			betrogen. Diese Lektion handelt davon, <strong>wie man ein Experiment so anordnet</strong>, dass
 			die Statistik den Behandlungseffekt überhaupt sauber herausrechnen kann — und vom häufigsten
@@ -138,7 +138,7 @@
 
 		<Merke title="Die Statistik trennt nur, was das Design getrennt hat">
 			Wenn alle gedüngten Pflanzen zufällig auch die kräftigsten waren, kannst du den Düngereffekt
-			nie vom Pflanzeneffekt unterscheiden — egal wie viele Blätter du misst. Deshalb entscheidet die
+			nie vom Pflanzeneffekt unterscheiden, egal wie viele Blätter du misst. Deshalb entscheidet die
 			<strong>Anordnung vor der Messung</strong> über Erfolg oder Misserfolg, nicht die Wahl des
 			Tests danach.
 		</Merke>
@@ -146,36 +146,36 @@
 		<!-- Designtypen ---------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Ein kleiner Zoo der Designtypen</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Es gibt nicht „das eine“ richtige Design — die Struktur der Störquellen bestimmt, welches passt.
+			Es gibt nicht „das eine“ richtige Design. Die Struktur der Störquellen bestimmt, welches passt.
 			Die wichtigsten Typen, jeweils mit einem biologischen Beispiel:
 		</p>
 
 		<Merke title="Die gängigen Designtypen auf einen Blick">
 			<ul class="ml-5 list-disc space-y-1.5">
 				<li>
-					<Begriff term="Vollständig randomisiertes Design">CRD (vollständig randomisiert)</Begriff> —
+					<Begriff term="Vollständig randomisiertes Design">CRD (vollständig randomisiert)</Begriff>:
 					jede Pflanze wird rein zufällig Kontrolle oder Dünger zugeteilt. Einfach und sauber, solange
 					die Einheiten ähnlich sind.
 				</li>
 				<li>
-					<Begriff term="Randomisiertes Blockdesign">RBD (randomisiertes Blockdesign)</Begriff> —
+					<Begriff term="Randomisiertes Blockdesign">RBD (randomisiertes Blockdesign)</Begriff>:
 					liegen die Pflanzen in mehreren Beeten mit unterschiedlichem Boden, fasst du jedes Beet als
 					<Begriff term="Blocking">Block</Begriff> auf und randomisierst INNERHALB jedes Beets. Die
 					Beet-Variation wird so aus dem Fehler herausgerechnet.
 				</li>
 				<li>
-					<Begriff term="Repeated Measures">Repeated Measures / Längsschnitt</Begriff> — du misst
+					<Begriff term="Repeated Measures">Repeated Measures / Längsschnitt</Begriff>: du misst
 					dasselbe Tier zu mehreren Zeitpunkten (Wachstum über Wochen). Die Messungen am selben Tier
 					sind abhängig und verlangen einen passenden Fehlerterm.
 				</li>
 				<li>
-					<Begriff term="Split-Plot-Design">Split-Plot</Begriff> — Bewässerung wird auf ganzen
+					<Begriff term="Split-Plot-Design">Split-Plot</Begriff>: Bewässerung wird auf ganzen
 					Parzellen variiert, die Düngersorte auf Teilflächen darin. Zwei Randomisierungsebenen, zwei
 					Fehlerterme.
 				</li>
 				<li>
 					<Begriff term="Verschachteltes Design">nested (verschachtelt)</Begriff> vs.
-					<Begriff term="Gekreuztes Design">crossed (gekreuzt)</Begriff> — Pflanzen sind in
+					<Begriff term="Gekreuztes Design">crossed (gekreuzt)</Begriff>: Pflanzen sind in
 					Behandlungen <em>verschachtelt</em> (jede Pflanze gehört zu genau einer Behandlung); Faktoren
 					wie Behandlung × Geschlecht sind <em>gekreuzt</em> (jede Kombination kommt vor), nur dann
 					lassen sich Wechselwirkungen schätzen.
@@ -214,7 +214,7 @@
 
 		<p class="text-ink-soft leading-relaxed">
 			Warum genau wird der p-Wert zu klein? Der t-Wert ist Signal geteilt durch Rauschen, und das
-			Rauschen — der Standardfehler — schrumpft mit √n. Schiebst du fälschlich die Zahl der
+			Rauschen, der Standardfehler, schrumpft mit √n. Schiebst du fälschlich die Zahl der
 			<em>Messungen</em> als n ein statt die Zahl der <em>unabhängigen Einheiten</em>, wird der
 			Standardfehler künstlich klein und die Freiheitsgrade groß. Der Test hält das für viel mehr
 			Information, als wirklich da ist.
@@ -262,7 +262,7 @@ aov(blattlaenge ~ behandlung + Error(pflanze), data = blaetter)
 # lmer(blattlaenge ~ behandlung + (1 | pflanze), data = blaetter)`}
 			annotations={{
 				'aov(... ~ behandlung)':
-					'Die naive ANOVA über alle Blätter: Sie nimmt jedes Blatt als eigenständige Beobachtung — die Freiheitsgrade werden aufgebläht, der p-Wert künstlich klein.',
+					'Die naive ANOVA über alle Blätter: Sie nimmt jedes Blatt als eigenständige Beobachtung, die Freiheitsgrade werden aufgebläht, der p-Wert künstlich klein.',
 				'group_by + summarise':
 					'Bildet EINEN Mittelwert pro Pflanze. Danach hat jede Pflanze genau einen Wert — die ehrliche Replikationseinheit.',
 				'aov(m ~ behandlung)':
@@ -298,7 +298,7 @@ aov(blattlaenge ~ behandlung + Error(pflanze), data = blaetter)
 		<PseudoreplikationsFalle />
 
 		<Merke title="Was die Pseudoreplikations-Falle zeigt">
-			Mehr Blätter zu messen vergrößert nicht die echte Stichprobe — es vergrößert nur die Zahl der
+			Mehr Blätter zu messen vergrößert nicht die echte Stichprobe, sondern nur die Zahl der
 			abhängigen Subsamples. Die naive Analyse verwechselt „viele Messungen“ mit „viel unabhängige
 			Information“ und meldet deshalb Schein-Signifikanz. Erst der Mittelwert pro Pflanze (oder ein
 			<code class="font-mono text-sm">Error()</code>-Term / Mixed Model) zählt ehrlich die

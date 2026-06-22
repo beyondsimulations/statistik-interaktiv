@@ -35,7 +35,7 @@
 			],
 			correct: 1,
 			explanation:
-				'Genau. Die beiden Aussagen beantworten verschiedene Fragen. Der p-Wert der Steigung sagt: Existiert der Zusammenhang überhaupt (ist β von 0 verschieden)? R² sagt: Wie viel der Y-Streuung erklärt das Modell, also wie gut sagt es vorher? Ein hochsignifikantes b bei kleinem R² ist völlig normal — der Effekt ist real, aber schwach prädiktiv. Bei großem n wird selbst ein winziger Effekt signifikant.'
+				'Genau. Die beiden Aussagen beantworten verschiedene Fragen. Der p-Wert der Steigung sagt: Existiert der Zusammenhang überhaupt (ist β von 0 verschieden)? R² sagt: Wie viel der Y-Streuung erklärt das Modell, also wie gut sagt es vorher? Ein hochsignifikantes b bei kleinem R² ist völlig normal. Der Effekt ist real, aber schwach prädiktiv. Bei großem n wird selbst ein winziger Effekt signifikant.'
 		},
 		{
 			id: 'reg-2',
@@ -99,7 +99,7 @@
 			Der entscheidende Unterschied zur <Begriff term="Korrelation" />: Die Regression hat eine
 			<strong>Richtung</strong>. Sie behandelt die beiden Variablen nicht mehr gleichberechtigt,
 			sondern unterscheidet eine <strong>erklärende</strong> Größe X (hier: die Körperlänge) und
-			eine <strong>vorhergesagte</strong> Größe Y (die Nachkommenzahl). X erklärt Y — nicht
+			eine <strong>vorhergesagte</strong> Größe Y (die Nachkommenzahl). X erklärt Y, nicht
 			umgekehrt. Und sie liefert nicht nur eine Zahl, sondern ein <strong>Vorhersagemodell</strong>:
 			eine Gerade, mit der du für jede Länge eine erwartete Nachkommenzahl ablesen kannst.
 		</p>
@@ -134,7 +134,7 @@
 
 		<Callout variant="merke" title="ŷ, ε und a, b — wer ist wer?">
 			<strong>ŷ</strong> ist die Vorhersage auf der Geraden. Der Abstand einer echten Beobachtung
-			von dieser Vorhersage ist das <Begriff term="Residuum">Residuum</Begriff> e = y − ŷ — die
+			von dieser Vorhersage ist das <Begriff term="Residuum">Residuum</Begriff> e = y − ŷ, die
 			Stichproben-Entsprechung des wahren Fehlers ε. Und <strong>a, b</strong> sind unsere
 			Schätzungen für die wahren, aber unbekannten <strong>α, β</strong>.
 		</Callout>
@@ -145,7 +145,7 @@
 			Durch eine Punktwolke kann man unendlich viele Geraden legen. Welche ist die beste? Die
 			<Begriff term="Methode der kleinsten Quadrate">Methode der kleinsten Quadrate</Begriff> gibt
 			eine klare Antwort: jene Gerade, die die <strong>Summe der quadrierten Residuen</strong>
-			minimiert. Für jeden Punkt misst man den senkrechten Abstand zur Geraden (das Residuum),
+			minimiert. Für jeden Punkt misst man den senkrechten Abstand zur Geraden, also das Residuum,
 			quadriert ihn (damit Über- und Unterschätzungen sich nicht aufheben und große Abstände stärker
 			zählen) und summiert. Die Gerade, die diese Summe so klein wie möglich macht, gewinnt.
 		</p>
@@ -179,7 +179,7 @@
 			Das <Begriff term="Residuum">Residuum</Begriff> eines Tieres ist schlicht
 			<strong>Beobachtung − Vorhersage</strong>: e = y − ŷ. Liegt ein Tier über der Geraden, ist
 			sein Residuum positiv (mehr Nachkommen als erwartet), liegt es darunter, negativ. Die
-			Residuen sind nicht nur „Rest“ — sie sind die <strong>Grundlage aller Diagnostik</strong>:
+			Residuen sind nicht bloß „Rest“. Sie sind die <strong>Grundlage aller Diagnostik</strong>:
 			An ihnen liest man später ab, ob das Modell überhaupt passt.
 		</p>
 
@@ -189,7 +189,7 @@
 			Die Nachkommenzahl streut. Ein Teil dieser Streuung erklärt das Modell (weil größere Tiere
 			eben mehr Nachkommen haben), ein Teil bleibt unerklärt (die Residuen). Das
 			<Begriff term="Bestimmtheitsmaß">Bestimmtheitsmaß R²</Begriff> ist der <strong>Anteil der
-			Y-Variabilität, den das Modell erklärt</strong> — die <Begriff term="Varianzzerlegung"
+			Y-Variabilität, den das Modell erklärt</strong>, die <Begriff term="Varianzzerlegung"
 				>Streuungszerlegung</Begriff> in erklärt und unerklärt:
 		</p>
 
@@ -222,7 +222,7 @@
 		<h2 class="mt-4 text-2xl">Ist der Zusammenhang echt? Der Test auf die Steigung</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Auch aus völlig zusammenhanglosen Daten ergibt sich rein zufällig fast nie eine perfekt
-			waagerechte Gerade — ein bisschen Steigung entsteht immer. Der Test prüft die
+			waagerechte Gerade. Ein bisschen Steigung entsteht immer. Der Test prüft die
 			<Begriff term="Nullhypothese">Nullhypothese</Begriff> H₀: β = 0, also „die wahre Steigung ist
 			null, die Gerade bringt nichts gegenüber dem reinen Mittelwert von Y“. Die Teststatistik ist
 			ein <Begriff term="t-Test">t-Wert</Begriff> mit <Begriff term="Freiheitsgrade">df = n − 2</Begriff>:
@@ -290,7 +290,7 @@
 			Die Gerade ist ein Kompromiss über alle Punkte (kleinste Summe der quadrierten Residuen).
 			Ein <strong>Hebelpunkt</strong> weit draußen in x hat überproportionalen Einfluss und kann
 			Steigung, Achsenabschnitt und R² dramatisch verändern. Deshalb reicht es nie, nur auf b und
-			den p-Wert zu schauen — man muss die <strong>Punktwolke und die Residuen</strong> ansehen.
+			den p-Wert zu schauen. Man muss die <strong>Punktwolke und die Residuen</strong> ansehen.
 		</Merke>
 
 		<!-- Annahmen & Diagnostik ----------------------------------------------- -->
@@ -300,13 +300,13 @@
 			vier Annahmen, die man an den Residuen überprüft:
 		</p>
 		<ul class="text-ink-soft ml-5 list-disc space-y-1 leading-relaxed">
-			<li><strong>Linearität</strong> — der Zusammenhang ist wirklich gerade, kein Bogen.</li>
-			<li><strong>Unabhängigkeit</strong> — die Beobachtungen beeinflussen sich nicht gegenseitig.</li>
+			<li><strong>Linearität</strong>: der Zusammenhang ist wirklich gerade, kein Bogen.</li>
+			<li><strong>Unabhängigkeit</strong>: die Beobachtungen beeinflussen sich nicht gegenseitig.</li>
 			<li>
-				<Begriff term="Varianzhomogenität" /> — die Streuung der Residuen ist über den ganzen
+				<Begriff term="Varianzhomogenität" />: die Streuung der Residuen ist über den ganzen
 				X-Bereich gleich groß (kein Trichter).
 			</li>
-			<li><strong>Normalität der Residuen</strong> — die Residuen sind ungefähr normalverteilt.</li>
+			<li><strong>Normalität der Residuen</strong>: die Residuen sind ungefähr normalverteilt.</li>
 		</ul>
 
 		<Merke title="Die zwei wichtigsten Diagnoseplots">
@@ -374,7 +374,7 @@ F-statistic: 475.0 on 1 and 5 DF,  p-value: 3.774e-06`}
 		<h2 class="mt-4 text-2xl">Vorhersagen mit Unsicherheit: KI vs. Vorhersageintervall</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Die Gerade liefert für jede Länge x einen Punktwert ŷ. Doch eine Vorhersage ohne Unsicherheit ist
-			wertlos — und hier lauert eine feine, klausurrelevante Unterscheidung. Es gibt
+			wertlos. Und hier lauert eine feine, klausurrelevante Unterscheidung. Es gibt
 			<strong>zwei</strong> Intervalle, die ganz unterschiedliche Fragen beantworten:
 		</p>
 		<ul class="text-ink-soft ml-5 list-disc space-y-1 leading-relaxed">
@@ -393,18 +393,18 @@ F-statistic: 475.0 on 1 and 5 DF,  p-value: 3.774e-06`}
 			Warum ist das Vorhersageintervall breiter? Weil es <strong>zwei</strong> Quellen von Unsicherheit
 			addiert: die Unsicherheit über die Lage der Geraden selbst (wie beim KI) <em>plus</em> die
 			zusätzliche Streuung eines einzelnen Tieres um die Gerade (der Fehlerterm ε). Ein einzelnes Tier
-			streut eben um den Mittelwert seiner Längenklasse — und diese Extra-Streuung steckt nur im
+			streut eben um den Mittelwert seiner Längenklasse, und diese Extra-Streuung steckt nur im
 			Vorhersageintervall.
 		</p>
 
 		<Merke title="Mittelwert oder Einzelfall?">
 			<ul class="ml-5 list-disc space-y-1">
 				<li>
-					<strong>Konfidenzintervall</strong> — für die <em>mittlere</em> Antwort vieler Tiere dieser
+					<strong>Konfidenzintervall</strong>: für die <em>mittlere</em> Antwort vieler Tiere dieser
 					Länge. Schmal.
 				</li>
 				<li>
-					<strong>Vorhersageintervall</strong> — für <em>eine</em> einzelne neue Beobachtung. Immer
+					<strong>Vorhersageintervall</strong>: für <em>eine</em> einzelne neue Beobachtung. Immer
 					breiter, weil zusätzlich die individuelle Streuung ε eingeht.
 				</li>
 			</ul>
@@ -431,14 +431,14 @@ predict(model, newdata = neu, interval = "prediction")`}
 1 13.5714 10.8762 16.2666`}
 			annotations={{
 				'interval = "confidence"': 'Liefert das KI der MITTLEREN Antwort: wo die wahre Gerade bei x = 3,5 liegt. Hier 12,83 bis 14,31 — schmal.',
-				'interval = "prediction"': 'Liefert das Vorhersageintervall fuer EINE neue Daphnie: 10,88 bis 16,27 — deutlich breiter, weil die individuelle Streuung dazukommt.',
-				'fit': 'Der Punktwert ŷ ist in beiden Faellen identisch (13,57) — nur die Breite des Intervalls unterscheidet sich.'
+				'interval = "prediction"': 'Liefert das Vorhersageintervall für EINE neue Daphnie: 10,88 bis 16,27, deutlich breiter, weil die individuelle Streuung dazukommt.',
+				'fit': 'Der Punktwert ŷ ist in beiden Fällen identisch (13,57), nur die Breite des Intervalls unterscheidet sich.'
 			}}
 		/>
 
 		<Callout variant="warnung" title="Niemals außerhalb des beobachteten X-Bereichs vorhersagen (Extrapolation)">
 			Deine Daphnien waren z. B. zwischen 2 und 4 mm lang. Eine Vorhersage <em>innerhalb</em> dieses
-			Bereichs ist Interpolation — solide. Eine Vorhersage <strong>außerhalb</strong>, etwa die
+			Bereichs ist Interpolation, also solide. Eine Vorhersage <strong>außerhalb</strong>, etwa die
 			Nachkommenzahl einer 8 mm langen Daphnie, ist <Begriff term="Extrapolation" /> — und riskant:
 			Dort hat niemand geprüft, ob der lineare Zusammenhang überhaupt noch gilt. Vielleicht knickt die
 			Nachkommenzahl bei großen Tieren ab oder sättigt; die Gerade läuft aber stur weiter und liefert
@@ -449,8 +449,8 @@ predict(model, newdata = neu, interval = "prediction")`}
 		<!-- Zusammenfassung ----------------------------------------------------- -->
 		<Intuition title="In einem Satz">
 			Die <strong>lineare Regression</strong> schätzt mit der <strong>Methode der kleinsten
-			Quadrate</strong> die Gerade ŷ = a + b·x (Schätzer für die wahren α, β) und sagt — mit
-			<strong>Richtung</strong> (X erklärt Y) — Y vorher; die <strong>Steigung b</strong> ist die
+			Quadrate</strong> die Gerade ŷ = a + b·x (Schätzer für die wahren α, β) und sagt, mit
+			<strong>Richtung</strong> (X erklärt Y), Y vorher; die <strong>Steigung b</strong> ist die
 			Effektgröße, <strong>R² = SS_Regression/SS_Total</strong> der erklärte Anteil, und der
 			<strong>t-Test auf β = 0</strong> (df = n − 2) prüft, ob der Zusammenhang existiert — wobei
 			<strong>Signifikanz ≠ gute Vorhersage</strong> (R² ≠ Signifikanz) ist und erst die

@@ -87,7 +87,7 @@
 			Zwei Zugvogelarten, Buchfink und Mönchsgrasmücke, legen unterschiedlich weite Strecken ins
 			Winterquartier zurück. Du misst die <strong>Zugdistanz</strong> einiger Vögel jeder Art und
 			siehst: Im Schnitt fliegt die eine Art ein gutes Stück weiter. Aber ist das ein
-			<strong>echter</strong> Artunterschied — oder nur Zufall zwischen zwei Stichproben? Der
+			<strong>echter</strong> Artunterschied oder nur Zufall zwischen zwei Stichproben? Der
 			<Begriff term="t-Test" /> beantwortet genau das. In dieser Lektion lernst du die eine Intuition,
 			die alles zusammenhält: Der t-Wert ist ein <strong>Signal-zu-Rausch-Verhältnis</strong>.
 		</p>
@@ -105,16 +105,16 @@
 			Stell dir den t-Wert als eine einzige, ehrliche Frage vor: <em
 				>Wie groß ist der beobachtete Unterschied im Vergleich dazu, wie stark er allein durch Zufall
 				schwanken würde?</em
-			> Oben im Zähler steht das <strong>Signal</strong> — die Differenz der mittleren Zugdistanzen.
-			Unten im Nenner steht das <strong>Rauschen</strong> — der <Begriff term="Standardfehler" /> der
+			> Oben im Zähler steht das <strong>Signal</strong>, die Differenz der mittleren Zugdistanzen.
+			Unten im Nenner steht das <strong>Rauschen</strong>: der <Begriff term="Standardfehler" /> der
 			Differenz, also wie stark dieser Unterschied von Stichprobe zu Stichprobe wackeln würde.
 		</p>
 
 		<Intuition title="Derselbe Unterschied — mal Lärm, mal Signal">
 			Ein Unterschied von 300 km ist für sich genommen nichts wert. Streuen die einzelnen Vögel
 			jeder Art stark (großes <Begriff term="Standardabweichung">s</Begriff>), geht der Unterschied
-			im Rauschen unter — kleines t, großes p, <strong>nicht signifikant</strong>. Streuen sie eng,
-			sticht derselbe Unterschied klar heraus — großes t, kleines p,
+			im Rauschen unter: kleines t, großes p, <strong>nicht signifikant</strong>. Streuen sie eng,
+			sticht derselbe Unterschied klar heraus: großes t, kleines p,
 			<strong>hochsignifikant</strong>. Und das <strong>√n</strong> steht im Nenner des Standardfehlers:
 			Mehr gemessene Vögel machen den Standardfehler kleiner und denselben Unterschied leichter signifikant.
 		</Intuition>
@@ -132,7 +132,7 @@
 
 		<p class="text-ink-soft leading-relaxed">
 			Die Formel <em>SE = s·√(2/n)</em> gilt für den vereinfachten Fall gleich großer Gruppen mit
-			gleicher Streuung — genau die Welt des Reglers weiter unten. Im Allgemeinen rechnet man den
+			gleicher Streuung, genau die Welt des Reglers weiter unten. Im Allgemeinen rechnet man den
 			Standardfehler aus beiden Stichprobenvarianzen; die Intuition bleibt aber dieselbe.
 		</p>
 
@@ -144,9 +144,9 @@
 			live den t-Wert und den p-Wert ab. Probier:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Lass <strong>Δ</strong> fest und dreh die <strong>Streuung s</strong> hoch — t schrumpft, p wächst: derselbe Unterschied wird unbedeutend.</li>
+			<li>Lass <strong>Δ</strong> fest und dreh die <strong>Streuung s</strong> hoch: t schrumpft, p wächst, derselbe Unterschied wird unbedeutend.</li>
 			<li>Dreh s wieder klein — t wächst, p sinkt, das Ergebnis kippt zurück auf signifikant.</li>
-			<li>Erhöh den <strong>Stichprobenumfang n</strong> — über das √n im Standardfehler steigt t ebenfalls, p fällt.</li>
+			<li>Erhöh den <strong>Stichprobenumfang n</strong>: über das √n im Standardfehler steigt t ebenfalls, p fällt.</li>
 			<li>Setz <strong>Δ = 0</strong>: Es gibt keinen Unterschied mehr, t fällt auf 0 und p geht gegen 1.</li>
 		</ol>
 
@@ -155,7 +155,7 @@
 		<Merke title="Was der Regler zeigt">
 			Signifikanz ist kein Maß für die Größe eines Effekts. Ein kleiner Unterschied wird bei riesigem
 			n signifikant, ein großer Unterschied bleibt bei viel Rauschen unentdeckt. Der t-Wert wägt
-			immer <strong>Signal gegen Rausch</strong> ab — deshalb gehört zu jedem p-Wert auch ein Blick
+			immer <strong>Signal gegen Rausch</strong> ab. Deshalb gehört zu jedem p-Wert auch ein Blick
 			auf die Effektgröße.
 		</Merke>
 
@@ -166,13 +166,13 @@
 			<strong>groß</strong> er ist. Genau das ist der Unterschied zwischen <strong>signifikant</strong>
 			und <strong>relevant</strong>. Wie du am Regler gesehen hast, wird bei riesigem n schon eine
 			winzige Differenz signifikant: Buchfink und Mönchsgrasmücke könnten sich im Mittel um lächerliche
-			5 km unterscheiden, und mit genug Vögeln wäre selbst das „hochsignifikant“ — biologisch aber
+			5 km unterscheiden, und mit genug Vögeln wäre selbst das „hochsignifikant“, biologisch aber
 			völlig belanglos. Deshalb gehört zu jedem p-Wert eine <Begriff term="Effektstärke" />.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Das gängigste Maß beim t-Test ist <strong>Cohen's d</strong>. Die Idee ist verblüffend einfach:
 			Miss die Mittelwertdifferenz nicht in Kilometern, sondern in <strong>Standardabweichungen</strong>.
-			Ein d = 1 heißt dann „die beiden Arten liegen im Schnitt eine ganze Streuungsbreite auseinander“ —
+			Ein d = 1 heißt dann „die beiden Arten liegen im Schnitt eine ganze Streuungsbreite auseinander“,
 			eine Aussage, die unabhängig von Stichprobengröße und Messeinheit ist.
 		</p>
 
@@ -188,7 +188,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Rechnen wir es für die Zugvögel durch. Die beiden Arten unterscheiden sich um Δ = 310 km, und die
 			gepoolte Streuung der Zugdistanzen beträgt s<sub>p</sub> ≈ 320 km. Also d = 310 / 320 ≈
-			<strong>0,97</strong> — ein <strong>großer</strong> Effekt: Die mittlere Zugdistanz der beiden
+			<strong>0,97</strong>, ein <strong>großer</strong> Effekt: Die mittlere Zugdistanz der beiden
 			Arten liegt fast eine volle Standardabweichung auseinander. Zur Einordnung dienen Cohens
 			Faustwerte:
 		</p>
@@ -199,12 +199,12 @@
 				<li><strong>d ≈ 0,5</strong> — mittlerer Effekt (mit bloßem Auge erkennbar).</li>
 				<li><strong>d ≈ 0,8</strong> — großer Effekt (die Gruppen trennen sich deutlich).</li>
 			</ul>
-			Unser d ≈ 0,97 liegt darüber: ein klar großer, biologisch bedeutsamer Artunterschied — nicht
+			Unser d ≈ 0,97 liegt darüber: ein klar großer, biologisch bedeutsamer Artunterschied, nicht
 			nur ein signifikanter.
 		</Merke>
 
 		<Callout variant="warnung" title="Signifikant heißt nicht relevant">
-			Der <strong>p-Wert</strong> hängt von Effekt <em>und</em> Stichprobengröße ab — Cohen's d
+			Der <strong>p-Wert</strong> hängt von Effekt <em>und</em> Stichprobengröße ab, Cohen's d
 			dagegen <strong>nur vom Effekt</strong>. Ein winziges, belangloses d kann bei riesigem n
 			signifikant werden; ein großes, biologisch wichtiges d kann bei kleinem n unentdeckt bleiben.
 			Berichte deshalb immer <strong>beides</strong>: den p-Wert (gibt es den Effekt?) und die
@@ -216,7 +216,7 @@
 		<!-- Die drei t-Test-Varianten ------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Drei Situationen, drei t-Tests</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Je nach Datenlage gibt es verschiedene Spielarten des t-Tests — die Signal-durch-Rausch-Idee
+			Je nach Datenlage gibt es verschiedene Spielarten des t-Tests. Die Signal-durch-Rausch-Idee
 			steckt in allen.
 		</p>
 
@@ -224,7 +224,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Der <Begriff term="Ein-Stichproben-t-Test" /> vergleicht den Mittelwert
 			<em>einer</em> Stichprobe mit einem festen Erwartungswert μ₀. Beispiel: Aus der Literatur „weiß“
-			man, Buchfinken ziehen im Mittel 1500 km — stimmt das für deine gemessene Population? Signal ist
+			man, Buchfinken ziehen im Mittel 1500 km. Stimmt das für deine gemessene Population? Signal ist
 			x̄ − μ₀, Rauschen der Standardfehler des einen Mittelwerts.
 		</p>
 
@@ -233,7 +233,7 @@
 			Bei zwei <strong>unabhängigen</strong> Gruppen (Buchfink vs. Mönchsgrasmücke) gibt es zwei
 			Varianten. Der <Begriff term="Student-t-Test" /> nimmt an, dass beide Gruppen
 			<strong>dieselbe Varianz</strong> haben, und „poolt“ die Streuung zu einem gemeinsamen
-			Schätzer. Der <Begriff term="Welch-Test" /> verzichtet auf diese Annahme — er erlaubt
+			Schätzer. Der <Begriff term="Welch-Test" /> verzichtet auf diese Annahme: Er erlaubt
 			<strong>ungleiche Varianzen</strong> und korrigiert dafür die Freiheitsgrade
 			(Welch-Satterthwaite). In R ist Welch der <strong>Standard</strong> von <code class="font-mono text-sm">t.test()</code>, und das aus gutem Grund: Er ist robuster und kostet bei
 			gleichen Varianzen kaum Genauigkeit.
@@ -252,7 +252,7 @@
 			derselbe Vogel in zwei aufeinanderfolgenden Jahren. Dann bildet der
 			<Begriff term="gepaarter t-Test">gepaarte t-Test</Begriff> für jedes Paar die
 			<strong>Differenz</strong> und testet, ob deren Mittelwert null ist. Der entscheidende Vorteil:
-			Die Paarbildung rechnet die Schwankung zwischen den Individuen heraus — weniger Rauschen, mehr
+			Die Paarbildung rechnet die Schwankung zwischen den Individuen heraus: weniger Rauschen, mehr
 			Power. Wichtig: Die Normalverteilungsannahme betrifft hier die <strong>Differenzen</strong>,
 			nicht die Rohwerte.
 		</p>
@@ -283,7 +283,7 @@
 			Prüfen kannst du das mit eigenen Tests: der <Begriff term="Shapiro-Wilk-Test" /> für die
 			Normalität (in R <code class="font-mono text-sm">shapiro.test()</code>) und der F-Test für die
 			<Begriff term="Varianzhomogenität" /> (in R <code class="font-mono text-sm">var.test()</code>).
-			Doch Vorsicht — hier lauert ein klassischer Stolperstein.
+			Doch Vorsicht: Hier lauert ein klassischer Stolperstein.
 		</p>
 
 		<Callout variant="warnung" title="Bei Voraussetzungstests ist p > 0,05 das, was du willst">
@@ -334,12 +334,12 @@ sample estimates:
 		<!-- Nicht-parametrische Alternativen ------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Wenn die Normalität nicht hält: rangbasierte Alternativen</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Ist die Normalverteilungsannahme deutlich verletzt — oder ist deine Stichprobe so klein, dass du
-			es nicht beurteilen kannst —, dann greifst du zu einem
+			Ist die Normalverteilungsannahme deutlich verletzt (oder ist deine Stichprobe so klein, dass du
+			es nicht beurteilen kannst), dann greifst du zu einem
 			<Begriff term="nicht-parametrischer Test">nicht-parametrischen Test</Begriff>. Statt mit den
 			Rohwerten arbeiten diese Tests mit deren <strong>Rängen</strong> und vergleichen eher die Lage
 			(Mediane) als die Mittelwerte. Sie sind <strong>verteilungsfrei</strong> und
-			<strong>robuster gegen Ausreißer</strong> — ein einzelner extrem weit ziehender Vogel kippt das
+			<strong>robuster gegen Ausreißer</strong>: Ein einzelner extrem weit ziehender Vogel kippt das
 			Ergebnis nicht. Der Preis: etwas geringere Power, wenn die Daten in Wahrheit doch normalverteilt
 			wären.
 		</p>

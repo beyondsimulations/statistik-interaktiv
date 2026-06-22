@@ -44,7 +44,7 @@
 			],
 			correct: 1,
 			explanation:
-				'Genau. Der Parameter μ (die wahre mittlere Zugdistanz der Art) ist fest — er liegt entweder in Ottos Intervall oder nicht. Zufällig ist das Intervall, weil es aus einer zufälligen Auswahl von Vögeln entsteht. Die 95 % beziehen sich auf das Verfahren über viele Wiederholungen, nicht auf dieses eine Intervall.'
+				'Genau. Der Parameter μ (die wahre mittlere Zugdistanz der Art) ist fest: Er liegt entweder in Ottos Intervall oder nicht. Zufällig ist das Intervall, weil es aus einer zufälligen Auswahl von Vögeln entsteht. Die 95 % beziehen sich auf das Verfahren über viele Wiederholungen, nicht auf dieses eine Intervall.'
 		},
 		{
 			id: 'ki-2',
@@ -58,7 +58,7 @@
 			],
 			correct: 0,
 			explanation:
-				'Richtig. Die rohe Varianz streut um x̄ (selbst aus den Daten geschätzt) statt um das wahre μ und unterschätzt σ² systematisch; n − 1 (die Freiheitsgrade) korrigiert das und macht den Schätzer erwartungstreu. Und weil der Standardfehler σ/√n mit wachsendem n kleiner wird, wird auch das Konfidenzintervall schmaler — mehr Daten, präzisere Schätzung.'
+				'Richtig. Die rohe Varianz streut um x̄ (selbst aus den Daten geschätzt) statt um das wahre μ und unterschätzt σ² systematisch; n − 1 (die Freiheitsgrade) korrigiert das und macht den Schätzer erwartungstreu. Und weil der Standardfehler σ/√n mit wachsendem n kleiner wird, wird auch das Konfidenzintervall schmaler: mehr Daten, präzisere Schätzung.'
 		},
 		{
 			id: 'ki-3',
@@ -95,7 +95,7 @@
 			Im letzten Kapitel hast du gesehen: Ein Stichprobenmittelwert ist nicht „die Wahrheit“,
 			sondern eine zufällige Ziehung. In dieser Lektion machen wir das nutzbar. Otto hat 20 Vögel
 			einer Art besendert und ihre Zugdistanz gemessen; daraus will er auf die <em>wahre mittlere
-			Zugdistanz der ganzen Art</em> schließen — und <strong>ehrlich dazu sagen, wie präzise</strong>
+			Zugdistanz der ganzen Art</em> schließen, und <strong>ehrlich dazu sagen, wie präzise</strong>
 			er sie damit eingegrenzt hat. Am Ende steht ein Satz, den fast alle falsch deuten, und du
 			wirst ihn richtig verstehen.
 		</p>
@@ -105,13 +105,13 @@
 		<p class="text-ink-soft leading-relaxed">
 			Die ganze schließende Statistik dreht sich um eine Unterscheidung. Auf der einen Seite steht
 			der <Begriff term="Kennwert" />: eine Größe, die du aus deiner <Begriff term="Stichprobe" />
-			berechnest — der Mittelwert <strong>x̄</strong>, die Standardabweichung <strong>s</strong>.
+			berechnest: der Mittelwert <strong>x̄</strong>, die Standardabweichung <strong>s</strong>.
 			Kennwerte schreibt man mit <em>lateinischen</em> Buchstaben, und sie schwanken von Stichprobe
 			zu Stichprobe.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Auf der anderen Seite steht der <Begriff term="Parameter" />: eine feste, meist unbekannte
-			Größe der <Begriff term="Grundgesamtheit" /> — der wahre Mittelwert <strong>μ</strong>, die
+			Größe der <Begriff term="Grundgesamtheit" />: der wahre Mittelwert <strong>μ</strong>, die
 			wahre Standardabweichung <strong>σ</strong>. Parameter schreibt man mit
 			<em>griechischen</em> Buchstaben, und sie ändern sich nicht. Dein Ziel: vom beobachteten
 			Kennwert auf den unbekannten Parameter schließen.
@@ -125,7 +125,7 @@
 
 		<Intuition title="Ein Mittelwert ist eine zufällige Ziehung — nicht die Wahrheit">
 			Das ist die Brücke aus dem letzten Kapitel: Dein x̄ ist <strong>ein</strong> Wert aus der
-			<Begriff term="Stichprobenkennwertverteilung" /> — der Verteilung aller Mittelwerte, die du
+			<Begriff term="Stichprobenkennwertverteilung" />, der Verteilung aller Mittelwerte, die du
 			bei lauter verschiedenen Stichproben bekommen würdest. Hätte Otto andere Vögel besendert,
 			läge sein x̄ woanders. Deshalb darfst du x̄ nie mit μ verwechseln: x̄ ist ein zufälliger
 			Schätzer, μ ist der feste, gesuchte Wert dahinter.
@@ -138,7 +138,7 @@
 			Zahl. Für μ nimmt man naheliegenderweise x̄. Was diesen Schätzer gut macht, ist seine
 			<Begriff term="Erwartungstreue" /> (englisch <em>unbiased</em>): Er trifft im Mittel über
 			alle möglichen Stichproben genau den wahren Wert. Er ist also nicht systematisch zu hoch oder
-			zu niedrig — nur eben von Stichprobe zu Stichprobe verstreut.
+			zu niedrig, nur eben von Stichprobe zu Stichprobe verstreut.
 		</p>
 
 		<FormelZeigen
@@ -159,11 +159,11 @@
 			denselben Daten geschätzt.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
-			Die Daten liegen per Konstruktion möglichst nah an ihrem eigenen x̄ — näher, als sie im
+			Die Daten liegen per Konstruktion möglichst nah an ihrem eigenen x̄, näher, als sie im
 			Schnitt am wahren μ lägen. Würdest du durch n teilen, unterschätztest du σ² deshalb
 			systematisch. Ein <Begriff term="Freiheitsgrade">Freiheitsgrad</Begriff> ist bereits für die
 			Schätzung von x̄ „verbraucht“: Kennst du x̄ und n − 1 der Werte, liegt der letzte fest. Es
-			bleiben nur n − 1 frei variierbare Abweichungen — und genau durch diese Zahl wird geteilt.
+			bleiben nur n − 1 frei variierbare Abweichungen, und genau durch diese Zahl wird geteilt.
 		</p>
 
 		<FormelZeigen
@@ -178,7 +178,7 @@
 		<Merke title="n − 1 macht den Schätzer ehrlich">
 			Durch n − 1 (statt n) zu teilen, korrigiert die Unterschätzung, die entsteht, weil die
 			Varianz um das selbst geschätzte x̄ statt um das wahre μ gemessen wird. So wird s² zu einem
-			<strong>erwartungstreuen</strong> Schätzer für σ². Für große n ist der Unterschied winzig —
+			<strong>erwartungstreuen</strong> Schätzer für σ². Für große n ist der Unterschied winzig,
 			bei kleinem n aber spürbar.
 		</Merke>
 
@@ -211,7 +211,7 @@
 			Ein einzelner Punktschätzer verschweigt seine Unsicherheit. Ehrlicher ist ein
 			<Begriff term="Konfidenzintervall" /> (KI): ein ganzer Bereich um x̄ herum, der den wahren
 			Wert plausibel einschließt. Du baust ihn, indem du an x̄ ein Vielfaches des Standardfehlers
-			anhängst — nach beiden Seiten, denn ein KI ist immer <strong>zweiseitig</strong>.
+			anhängst, nach beiden Seiten, denn ein KI ist immer <strong>zweiseitig</strong>.
 		</p>
 
 		<FormelZeigen
@@ -239,7 +239,7 @@
 		<h2 class="mt-4 text-2xl">Die eine Deutung, die fast alle falsch machen</h2>
 
 		<Callout variant="warnung" title="Vorsicht: der berühmte Trugschluss">
-			Es ist <strong>verlockend</strong> — und <strong>falsch</strong> — zu sagen: „Der wahre Wert
+			Es ist <strong>verlockend</strong> (und <strong>falsch</strong>), zu sagen: „Der wahre Wert
 			liegt mit 95 % Wahrscheinlichkeit in diesem Intervall.“ Der Parameter μ ist
 			<strong>fest</strong>. Er ist keine Zufallsgröße. Er liegt in deinem konkreten Intervall —
 			oder eben nicht. Eine Wahrscheinlichkeit von „95 %, dass μ hier drin ist“ gibt es für dein
@@ -247,7 +247,7 @@
 		</Callout>
 
 		<Intuition title="Das Intervall ist zufällig, der Parameter ist fest">
-			Dreh die Sicht um: Zufällig ist nicht μ, sondern <strong>das Intervall</strong> — denn es
+			Dreh die Sicht um: Zufällig ist nicht μ, sondern <strong>das Intervall</strong>, denn es
 			entsteht aus einer zufälligen Stichprobe. Die korrekte Aussage lautet daher:
 			<strong
 				>Bei sehr häufiger Wiederholung enthalten 95 % der so konstruierten Intervalle den
@@ -258,25 +258,25 @@
 		</Intuition>
 
 		<Analogie title="Hufeisenwerfen auf einen festen Pflock">
-			Der Pflock (μ) steht fest im Boden — er bewegt sich nie. Jeder Wurf ist ein Hufeisen
+			Der Pflock (μ) steht fest im Boden, er bewegt sich nie. Jeder Wurf ist ein Hufeisen
 			(ein KI), das mal über den Pflock fällt, mal daneben. „95 % Konfidenz“ heißt: Auf lange
 			Sicht landen 95 % deiner Würfe um den Pflock. Bei einem einzelnen, schon geworfenen Hufeisen
-			zu sagen „es liegt mit 95 % um den Pflock“ ergibt keinen Sinn — es liegt drum herum oder
+			zu sagen „es liegt mit 95 % um den Pflock“ ergibt keinen Sinn, es liegt drum herum oder
 			nicht. Nicht der Pflock wackelt, die Würfe streuen.
 		</Analogie>
 
 		<!-- Das Flaggschiff-Widget ---------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Probier es selbst aus: die Sampling-Maschine</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Hier wird die richtige Deutung anfassbar. Das wahre μ — die wahre mittlere Zugdistanz der Art
-			— steht als rote Linie fest und bewegt sich <em>nie</em>. Jede Stichprobe (eine neue Gruppe
+			Hier wird die richtige Deutung anfassbar. Das wahre μ, die wahre mittlere Zugdistanz der Art,
+			steht als rote Linie fest und bewegt sich <em>nie</em>. Jede Stichprobe (eine neue Gruppe
 			besenderter Vögel) erzeugt ein Konfidenzintervall, das darunter gestapelt wird. Geh am besten
 			so vor:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Klick ein paarmal auf <strong>„Stichprobe ziehen“</strong> — als würdest du jedes Mal eine neue Gruppe Vögel besendern — und beobachte, wie die Intervalle um die feste μ-Linie tanzen; manche treffen, manche verfehlen.</li>
+			<li>Klick ein paarmal auf <strong>„Stichprobe ziehen“</strong> (als würdest du jedes Mal eine neue Gruppe Vögel besendern) und beobachte, wie die Intervalle um die feste μ-Linie tanzen; manche treffen, manche verfehlen.</li>
 			<li>Drück <strong>„100 ziehen“</strong> und sieh zu, wie der Trefferanteil sich beim <strong>Konfidenzniveau</strong> einpendelt (~95 %).</li>
-			<li>Stell das Niveau auf <strong>99 %</strong> — die Intervalle werden breiter und es gibt weniger Fehlschüsse. Auf <strong>90 %</strong> werden sie schmaler, dafür verfehlen mehr.</li>
+			<li>Stell das Niveau auf <strong>99 %</strong>: Die Intervalle werden breiter und es gibt weniger Fehlschüsse. Auf <strong>90 %</strong> werden sie schmaler, dafür verfehlen mehr.</li>
 			<li>Erhöh <strong>n</strong>: Die Intervalle werden schmaler (der Standardfehler sinkt), der Trefferanteil bleibt aber beim Niveau.</li>
 		</ol>
 
@@ -285,14 +285,14 @@
 		<Callout variant="merke" title="Hinweis zur Maschine">
 			In der Maschine ist σ <strong>bekannt</strong> (wir kennen die Population), daher rechnet sie
 			sauber mit dem z-basierten KI x̄ ± z·σ/√n und z = Φ⁻¹(0,975) für 95 %. Im echten Leben ist σ
-			meist unbekannt — dann kommt die t-Verteilung ins Spiel, gleich im nächsten Abschnitt.
+			meist unbekannt, dann kommt die t-Verteilung ins Spiel, gleich im nächsten Abschnitt.
 		</Callout>
 
 		<!-- z vs. t -------------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">z oder t? Kleine Stichproben brauchen breitere Netze</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Den z-Wert darfst du nur verwenden, wenn σ bekannt ist oder die Stichprobe groß ist. Bei
-			<strong>kleinem n</strong> und <strong>unbekanntem σ</strong> musst du σ durch s schätzen —
+			<strong>kleinem n</strong> und <strong>unbekanntem σ</strong> musst du σ durch s schätzen,
 			und diese zusätzliche Unsicherheit muss ins Intervall. Dafür gibt es die
 			<Begriff term="Student-t-Verteilung" />: glockenförmig wie die Normalverteilung, aber mit
 			<strong>schwereren Rändern</strong>. Ihre Form hängt von den Freiheitsgraden
@@ -311,7 +311,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Konkret für ein 95-%-KI (zweiseitig, also das 0,975-Quantil): Der z-Wert ist
 			<strong>{fmt(zExample)}</strong>. Bei einer kleinen Stichprobe von n = 10 (df = 9) ist der
-			t-Wert dagegen <strong>{fmt(tExample9)}</strong> — deutlich größer, das Intervall also
+			t-Wert dagegen <strong>{fmt(tExample9)}</strong>, deutlich größer, das Intervall also
 			breiter. Bei n = 31 (df = 30) sind es nur noch <strong>{fmt(tExample30)}</strong>, schon
 			nah an z. Je größer die Stichprobe, desto mehr verschmilzt t mit z.
 		</p>
@@ -328,7 +328,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Die KI-Formel lässt sich umdrehen. Will Otto, dass sein 95-%-Intervall für die mittlere
 			Zugdistanz höchstens eine gewünschte Genauigkeit E (die halbe Intervallbreite, der „Fehler“)
-			hat, kann er den nötigen Stichprobenumfang — also wie viele Vögel er besendern muss — vorab
+			hat, kann er den nötigen Stichprobenumfang (also wie viele Vögel er besendern muss) vorab
 			ausrechnen:
 		</p>
 
@@ -369,7 +369,7 @@
 			>
 				<span class="text-xl" aria-hidden="true">✓</span>
 				<p class="font-semibold">
-					Geschafft! Diese Lektion ist als abgeschlossen markiert — du findest den Haken jetzt
+					Geschafft! Diese Lektion ist als abgeschlossen markiert. Den Haken findest du jetzt
 					auch in der Seitenleiste.
 				</p>
 			</div>

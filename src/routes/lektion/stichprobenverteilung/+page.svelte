@@ -31,7 +31,7 @@
 			],
 			correct: 1,
 			explanation:
-				'Genau das ist der Kern: Nicht die einzelnen Flügellängen müssen glockenförmig sein, sondern die Verteilung der Stichprobenmittelwerte wird es — auch wenn die Flügellängen im Wald ganz anders verteilt sind.'
+				'Genau das ist der Kern: Nicht die einzelnen Flügellängen müssen glockenförmig sein, sondern die Verteilung der Stichprobenmittelwerte wird es, auch wenn die Flügellängen im Wald ganz anders verteilt sind.'
 		},
 		{
 			id: 'sv-2',
@@ -44,7 +44,7 @@
 			],
 			correct: 1,
 			explanation:
-				'Richtig — der Standardfehler ist σ/√n. Größeres n im Nenner heißt: kleinerer Standardfehler, also schwankt die mittlere Flügellänge weniger von Fang zu Fang. Mehr gemessene Vögel, verlässlichere Schätzung.'
+				'Richtig. Der Standardfehler ist σ/√n. Größeres n im Nenner heißt: kleinerer Standardfehler, also schwankt die mittlere Flügellänge weniger von Fang zu Fang. Mehr gemessene Vögel, verlässlichere Schätzung.'
 		},
 		{
 			id: 'sv-3',
@@ -81,8 +81,8 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Fast die gesamte schließende Statistik hängt an einer einzigen Idee. Wenn die
-			klick macht, verstehst du den Rest viel leichter — Konfidenzintervalle,
-			p-Werte, t-Tests, alles. Schauen wir sie uns also in Ruhe an.
+			klick macht, verstehst du den Rest viel leichter: Konfidenzintervalle,
+			p-Werte, t-Tests. Schauen wir sie uns also in Ruhe an.
 		</p>
 
 		<p class="text-ink-soft leading-relaxed">
@@ -90,20 +90,20 @@
 			kleine <Begriff term="Stichprobe" /> überhaupt etwas über eine riesige
 			<Begriff term="Grundgesamtheit" />? Stell dir vor, du willst die
 			Flügellänge <em>aller</em> Amseln in einem großen Wald kennen. Die kannst du
-			niemals alle fangen — du fängst und misst ein paar Dutzend Vögel und willst
-			daraus auf den ganzen Bestand schließen. Wie kann das funktionieren — und vor
+			niemals alle fangen. Du fängst und misst ein paar Dutzend Vögel und willst
+			daraus auf den ganzen Bestand schließen. Wie kann das funktionieren? Und vor
 			allem: Wie sicher darfst du dir dabei sein?
 		</p>
 
 		<p class="text-ink-soft leading-relaxed">
 			Stell dir kurz das Setup vor. Die Grundgesamtheit sind alle Amseln des
 			Waldes, die dich eigentlich interessieren. Du kannst sie nie ganz messen,
-			also ziehst du eine Stichprobe — du fängst ein paar Vögel — und rechnest
+			also ziehst du eine Stichprobe, du fängst ein paar Vögel, und rechnest
 			daraus einen <Begriff term="Mittelwert" />, hier die mittlere Flügellänge der
 			gefangenen Tiere. Dieser eine Mittelwert ist dein Schätzwert. Die spannende
 			Frage ist: Wie sehr würde er schwanken, wenn du noch einmal losziehst und
 			andere Amseln fängst? Genau diese Schwankung ist der
-			<Begriff term="Standardfehler" /> — und sie ist der Schlüssel zu allem, was
+			<Begriff term="Standardfehler" />, und sie ist der Schlüssel zu allem, was
 			danach kommt.
 		</p>
 
@@ -120,17 +120,17 @@
 			dieser Reihenfolge vor:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Zieh ein paar einzelne Stichproben — stell dir vor, du fängst jedes Mal eine Handvoll Amseln — und beobachte, wie jeder Fang eine mittlere Flügellänge liefert.</li>
+			<li>Zieh ein paar einzelne Stichproben (stell dir vor, du fängst jedes Mal eine Handvoll Amseln) und beobachte, wie jeder Fang eine mittlere Flügellänge liefert.</li>
 			<li>Klick dann auf <strong>×100</strong> und sieh zu, wie sich aus den vielen Mittelwerten eine neue Verteilung aufbaut.</li>
-			<li>Mach den Stichprobenumfang <strong>n</strong> größer — also miss mehr Vögel pro Fang — und achte darauf, wie schmal die Verteilung der Mittelwerte wird.</li>
-			<li>Stell zum Schluss die Grundgesamtheit auf <strong>rechtsschief</strong> um — und schau, was mit den Mittelwerten passiert.</li>
+			<li>Mach den Stichprobenumfang <strong>n</strong> größer, miss also mehr Vögel pro Fang, und achte darauf, wie schmal die Verteilung der Mittelwerte wird.</li>
+			<li>Stell zum Schluss die Grundgesamtheit auf <strong>rechtsschief</strong> um und schau, was mit den Mittelwerten passiert.</li>
 		</ol>
 
 		<StichprobenverteilungWidget />
 
 		<!-- Aha-Beat (a): viele Mittelwerte bilden eine neue Verteilung ---------- -->
 		<Intuition title="Beat 1 — eine neue Verteilung entsteht">
-			Jeder Fang gibt dir genau <em>einen</em> Mittelwert — eine mittlere
+			Jeder Fang gibt dir genau <em>einen</em> Mittelwert, eine mittlere
 			Flügellänge. Für sich genommen ist das nur ein Punkt. Aber wenn du das
 			hundertfach wiederholst und alle Mittelwerte sammelst, entsteht eine ganz
 			eigene Verteilung: die <strong>Stichprobenverteilung des Mittelwerts</strong>.
@@ -144,7 +144,7 @@
 			<strong>schmaler</strong> ist als die Grundgesamtheit? Das ist kein Zufall.
 			Ein Mittelwert mittelt Ausreißer nach oben und unten gegeneinander weg, also
 			liegt er fast immer näher an der Wahrheit als ein einzelner Wert. Und je
-			größer du n machst, desto stärker passiert dieses Wegmitteln — die Verteilung
+			größer du n machst, desto stärker passiert dieses Wegmitteln. Die Verteilung
 			wird immer schmaler.
 		</p>
 
@@ -158,8 +158,8 @@
 		<!-- Aha-Beat (c): auch bei schiefer Grundgesamtheit eine Glocke --------- -->
 		<p class="text-ink-soft leading-relaxed">
 			Und jetzt der Teil, der die meisten überrascht. Selbst wenn du die
-			Grundgesamtheit auf <strong>rechtsschief</strong> stellst — also auf etwas,
-			das überhaupt nicht nach Glocke aussieht — formen die Mittelwerte trotzdem
+			Grundgesamtheit auf <strong>rechtsschief</strong> stellst (also auf etwas,
+			das überhaupt nicht nach Glocke aussieht), formen die Mittelwerte trotzdem
 			eine schöne, symmetrische Glocke. Die Daten dürfen schief sein; die
 			Mittelwerte werden es nicht bleiben.
 		</p>
@@ -175,7 +175,7 @@
 		<h2 class="mt-4 text-2xl">Die eine Formel dahinter</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Die ganze Beobachtung „schmaler mit mehr Daten“ steckt in einer einzigen,
-			erstaunlich kurzen Formel. Du musst sie nicht auswendig lernen — schau sie dir
+			erstaunlich kurzen Formel. Du musst sie nicht auswendig lernen, schau sie dir
 			einfach an und prüfe, ob sie zu dem passt, was du gerade im Widget gesehen hast.
 		</p>
 
@@ -192,7 +192,7 @@
 			Lies sie ruhig Symbol für Symbol: Oben steht <Begriff term="Standardabweichung">σ</Begriff>,
 			die Streuung der Grundgesamtheit. Unten steht <strong>√n</strong>, also die
 			Wurzel aus deinem Stichprobenumfang. Weil n unten im Nenner steht, wird der
-			ganze Bruch — der Standardfehler — kleiner, sobald n größer wird. Und weil
+			ganze Bruch, der Standardfehler, kleiner, sobald n größer wird. Und weil
 			dort die <em>Wurzel</em> steht, brauchst du die vierfache Stichprobe, um den
 			Standardfehler zu halbieren. Mehr Daten helfen, aber mit abnehmendem Tempo.
 		</p>
@@ -220,8 +220,8 @@
 			>
 				<span class="text-xl" aria-hidden="true">✓</span>
 				<p class="font-semibold">
-					Geschafft! Diese Lektion ist als abgeschlossen markiert — du findest den
-					Haken jetzt auch in der Seitenleiste.
+					Geschafft! Diese Lektion ist als abgeschlossen markiert. Den Haken
+					findest du jetzt auch in der Seitenleiste.
 				</p>
 			</div>
 		{/if}

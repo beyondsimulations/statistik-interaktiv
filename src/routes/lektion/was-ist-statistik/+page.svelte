@@ -98,7 +98,7 @@
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Bevor wir uns in Formeln und Tests stürzen, lohnt ein Schritt zurück: Was
 			macht Statistik eigentlich? Kurz gesagt ist sie die Kunst, aus Daten
-			vernünftige Schlüsse zu ziehen — und ehrlich zu sagen, wie sicher diese
+			vernünftige Schlüsse zu ziehen, und ehrlich zu sagen, wie sicher diese
 			Schlüsse sind. In dieser Lektion bekommst du die Landkarte, auf der sich
 			alle späteren Themen einordnen lassen.
 		</p>
@@ -115,15 +115,15 @@
 		<p class="text-ink-soft leading-relaxed">
 			Die <Begriff term="Deskriptive Statistik" /> ist die bescheidenste der drei:
 			Sie <strong>beschreibt und fasst zusammen</strong>, was du ohnehin schon hast.
-			Ein Mittelwert, ein Anteil in Prozent, ein Histogramm — all das verdichtet
+			Ein Mittelwert, ein Anteil in Prozent, ein Histogramm: all das verdichtet
 			einen Haufen Zahlen zu etwas Greifbarem. Sie geht aber nie über die
 			gemessenen Daten hinaus; sie behauptet nichts über Fälle, die du nicht
 			gesehen hast.
 		</p>
 
 		<p class="text-ink-soft leading-relaxed">
-			Die <Begriff term="Inferentielle Statistik" /> — auch schließende oder
-			induktive Statistik genannt — geht den entscheidenden Schritt weiter. Sie
+			Die <Begriff term="Inferentielle Statistik" />, auch schließende oder
+			induktive Statistik genannt, geht den entscheidenden Schritt weiter. Sie
 			<strong>schließt von der <Begriff term="Stichprobe" /> auf die
 			<Begriff term="Grundgesamtheit" /></strong>. Du hast nur ein paar Hundert
 			Menschen befragt, möchtest aber etwas über Millionen sagen. Das passiert auf
@@ -155,7 +155,7 @@
 			Diese beiden Begriffe begleiten dich durch die gesamte schließende
 			Statistik, also lohnt es sich, sie sauber auseinanderzuhalten. Die
 			<Begriff term="Grundgesamtheit" /> sind <em>alle</em> Fälle, über die du
-			eigentlich etwas wissen möchtest — etwa alle Wahlberechtigten eines Landes.
+			eigentlich etwas wissen möchtest, etwa alle Wahlberechtigten eines Landes.
 			Die <Begriff term="Stichprobe" /> ist die Teilmenge, die du tatsächlich
 			gemessen hast. Fast immer ist die Grundgesamtheit zu groß, um sie komplett
 			zu erfassen; deshalb arbeitest du mit einer Stichprobe und schließt von ihr
@@ -165,7 +165,7 @@
 		<Analogie title="Die Suppe abschmecken">
 			Du musst nicht den ganzen Topf essen, um zu wissen, ob die Suppe gut
 			gewürzt ist. Ein gut umgerührter Löffel genügt. Der Topf ist die
-			Grundgesamtheit, der Löffel die Stichprobe — und „gut umgerührt“ heißt:
+			Grundgesamtheit, der Löffel die Stichprobe. „Gut umgerührt“ heißt:
 			zufällig und repräsentativ gezogen. Schöpfst du nur oben den Schaum ab, hilft
 			dir der beste Löffel nichts.
 		</Analogie>
@@ -176,13 +176,13 @@
 			Bevor du eine einzige Zahl berechnest, lohnt eine Frage: <em>Was für eine Art
 			von Variable</em> hast du da überhaupt gemessen? Nicht jede Zahl darf man
 			gleich behandeln. Das <Begriff term="Skalenniveau" /> sagt dir, wie „reichhaltig“
-			eine Variable ist — und damit, welche Rechnungen und welche Tests erlaubt sind.
+			eine Variable ist, und damit, welche Rechnungen und welche Tests erlaubt sind.
 			Man unterscheidet drei Stufen, die aufeinander aufbauen.
 		</p>
 
 		<p class="text-ink-soft leading-relaxed">
 			Auf der untersten Stufe steht die <Begriff term="Nominalskala" />. Hier gibt
-			es nur <strong>Kategorien ohne Rangfolge</strong> — du kannst nur sagen, ob
+			es nur <strong>Kategorien ohne Rangfolge</strong>. Du kannst nur sagen, ob
 			zwei Fälle gleich oder ungleich sind. Die <em>Art</em> eines gefangenen Tieres
 			(Lachs, Forelle, Hecht), das <em>Geschlecht</em> oder die <em>Blutgruppe</em>
 			sind nominal. „Lachs ist größer als Forelle“ ergibt als Skala keinen Sinn; du
@@ -196,7 +196,7 @@
 			<em>Rangstufen</em>: ein Befall „gering – mittel – stark“, eine Blühintensität
 			von 1 bis 5. Du darfst die Stufen <strong>ordnen</strong>, aber nicht sagen,
 			der Sprung von „gering“ zu „mittel“ sei genauso groß wie der von „mittel“ zu
-			„stark“. Mittelwerte sind hier mit Vorsicht zu genießen — der Median passt
+			„stark“. Mittelwerte sind hier mit Vorsicht zu genießen, der Median passt
 			besser.
 		</p>
 
@@ -241,7 +241,7 @@
 			<strong>ordinalen</strong> greifst du zu Rangverfahren (z. B. Spearman statt
 			Pearson), bei <strong>nominalen</strong> zählst du Häufigkeiten und nutzt den
 			Chi-Quadrat-Test. Deshalb steht die Frage nach dem Skalenniveau ganz am Anfang
-			jeder Testwahl — du triffst sie wieder, wenn es um „welcher Test passt?“ geht.
+			jeder Testwahl. Du triffst sie wieder, wenn es um „welcher Test passt?“ geht.
 		</Merke>
 
 		<Analogie title="Vom Etikett zum Lineal">
@@ -285,7 +285,7 @@
 
 		<Analogie title="Eis und Sonnenbrände">
 			An Tagen mit viel Eisverkauf gibt es auch viele Sonnenbrände. Verursacht das
-			Eis den Sonnenbrand? Natürlich nicht — die <em>Sonne</em> treibt beides
+			Eis den Sonnenbrand? Natürlich nicht. Die <em>Sonne</em> treibt beides
 			gleichzeitig nach oben. Sie ist der Störfaktor. Erst wenn du gezielt
 			eingreifst (und nicht nur beobachtest), kannst du solche Scheinzusammenhänge
 			ausschließen.
@@ -305,13 +305,13 @@
 			Die Falle dabei: Eine Hypothese, die du erst in einem Datensatz
 			<em>gefunden</em> hast, darfst du nicht an <em>genau denselben</em> Daten als
 			„bestätigt“ ausgeben. Wer lange genug sucht, findet in jedem Datensatz ein
-			Muster — auch eines, das nur Zufall ist. Eine explorativ entdeckte Hypothese
+			Muster, auch eines, das nur Zufall ist. Eine explorativ entdeckte Hypothese
 			braucht zur Bestätigung <strong>neue, unabhängige Daten</strong>.
 		</p>
 
 		<Merke title="Die goldene Regel">
 			Such und prüf nie am selben Datensatz. Erst explorieren, dann mit frischen
-			Daten konfirmatorisch testen — sonst bestätigst du dir nur deinen eigenen
+			Daten konfirmatorisch testen, sonst bestätigst du dir nur deinen eigenen
 			Zufallsfund.
 		</Merke>
 
@@ -341,8 +341,8 @@
 			>
 				<span class="text-xl" aria-hidden="true">✓</span>
 				<p class="font-semibold">
-					Geschafft! Diese Lektion ist als abgeschlossen markiert — du findest den
-					Haken jetzt auch in der Seitenleiste.
+					Geschafft! Diese Lektion ist als abgeschlossen markiert. Den Haken
+					findest du jetzt auch in der Seitenleiste.
 				</p>
 			</div>
 		{/if}

@@ -26,15 +26,15 @@
 			id: 'power-1',
 			kind: 'mc',
 			prompt:
-				'Otto vergleicht die Zugdistanz zweier Vogelpopulationen mit je 8 besenderten Vögeln. Der t-Test liefert p = 0,21 — nicht signifikant. Welche Schlussfolgerung ist korrekt?',
+				'Otto vergleicht die Zugdistanz zweier Vogelpopulationen mit je 8 besenderten Vögeln. Der t-Test liefert p = 0,21, also nicht signifikant. Welche Schlussfolgerung ist korrekt?',
 			options: [
 				'Damit ist bewiesen, dass es keinen Unterschied in der Zugdistanz gibt.',
-				'Ein nicht-signifikantes Ergebnis beweist NICHT „kein Effekt“. Bei nur 8 Vögeln pro Gruppe und großer Streuung der Zugdistanz hatte der Test womöglich zu wenig Power — ein real existierender Unterschied könnte schlicht übersehen worden sein.',
+				'Ein nicht-signifikantes Ergebnis beweist NICHT „kein Effekt“. Bei nur 8 Vögeln pro Gruppe und großer Streuung der Zugdistanz hatte der Test womöglich zu wenig Power. Ein real existierender Unterschied könnte schlicht übersehen worden sein.',
 				'Der p-Wert von 0,21 bedeutet, dass die Wahrscheinlichkeit für „kein Unterschied“ 79 % beträgt.'
 			],
 			correct: 1,
 			explanation:
-				'Genau. „Nicht signifikant“ heißt nur: Die Daten reichten nicht aus, um H₀ zu verwerfen — nicht, dass H₀ wahr ist. Bei kleinem n und großer Streuung ist die Power niedrig, und dann verfehlt man auch echte Effekte (Fehler 2. Art). Erst eine Power-Analyse zeigt, ob die Stichprobe überhaupt groß genug war, um den interessierenden Unterschied zu entdecken. Abwesenheit von Beweis ist nicht Beweis der Abwesenheit.'
+				'Genau. „Nicht signifikant“ heißt nur: Die Daten reichten nicht aus, um H₀ zu verwerfen, nicht, dass H₀ wahr ist. Bei kleinem n und großer Streuung ist die Power niedrig, und dann verfehlt man auch echte Effekte (Fehler 2. Art). Erst eine Power-Analyse zeigt, ob die Stichprobe überhaupt groß genug war, um den interessierenden Unterschied zu entdecken. Abwesenheit von Beweis ist nicht Beweis der Abwesenheit.'
 		},
 		{
 			id: 'power-2',
@@ -48,7 +48,7 @@
 			],
 			correct: 2,
 			explanation:
-				'Richtig — α zu senken erhöht die Power NICHT, sondern senkt sie (bei festem n). Power steigt mit größerem n, größerer Effektgröße und kleinerer Streuung σ. α kleiner zu machen schiebt die Entscheidungsschwelle nach außen, schützt stärker vor dem Fehler 1. Art — aber genau dadurch übersieht man echte Effekte häufiger (β steigt). Power und α ziehen bei festem n gegeneinander.'
+				'Richtig: α zu senken erhöht die Power NICHT, sondern senkt sie (bei festem n). Power steigt mit größerem n, größerer Effektgröße und kleinerer Streuung σ. α kleiner zu machen schiebt die Entscheidungsschwelle nach außen und schützt stärker vor dem Fehler 1. Art, aber genau dadurch übersieht man echte Effekte häufiger (β steigt). Power und α ziehen bei festem n gegeneinander.'
 		},
 		{
 			id: 'power-3',
@@ -84,7 +84,7 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Otto will wissen, ob zwei Vogelpopulationen unterschiedlich weit ziehen. Er besendert ein paar
-			Tiere pro Gruppe, misst die Zugdistanz, rechnet einen t-Test — und bekommt
+			Tiere pro Gruppe, misst die Zugdistanz, rechnet einen t-Test und bekommt
 			<em>nicht signifikant</em>. Heißt das: kein Unterschied? Nicht unbedingt. Vielleicht war seine
 			Studie schlicht <strong>zu klein</strong>, um den Unterschied zu entdecken. Genau hier setzt
 			diese Lektion an: <strong>Wie plant man ein Experiment so, dass es eine echte Chance hat, einen
@@ -103,39 +103,39 @@
 		<Merke title="Die Planungskriterien auf einen Blick">
 			<ul class="ml-5 list-disc space-y-1.5">
 				<li>
-					<Begriff term="Repräsentativität" /> — deine Stichprobe muss die
+					<Begriff term="Repräsentativität" />: deine Stichprobe muss die
 					<Begriff term="Grundgesamtheit" /> widerspiegeln. Misst du nur die kräftigsten Vögel,
 					darfst du nicht auf die ganze Population schließen.
 				</li>
 				<li>
-					<Begriff term="Randomisierung" /> (der <strong>Goldstandard</strong>) — verteile die Tiere
+					<Begriff term="Randomisierung" /> (der <strong>Goldstandard</strong>): verteile die Tiere
 					per Zufall auf die Gruppen. Das streut bekannte UND unbekannte Störvariablen gleichmäßig
 					und schützt vor systematischem Bias.
 				</li>
 				<li>
-					<Begriff term="Blocking" /> — fasse ähnliche Einheiten zu Blöcken zusammen (z. B. nach
+					<Begriff term="Blocking" />: fasse ähnliche Einheiten zu Blöcken zusammen (z. B. nach
 					Fanggebiet oder Alter) und randomisiere innerhalb jedes Blocks. So rechnest du störende
 					Variation aus dem Fehler heraus — das senkt σ und hebt die Power.
 				</li>
 				<li>
-					<strong>Kontrollen</strong> — die <Begriff term="Negativkontrolle" /> zeigt, was ohne
+					<strong>Kontrollen</strong>: die <Begriff term="Negativkontrolle" /> zeigt, was ohne
 					Behandlung passiert, die <Begriff term="Positivkontrolle" /> zeigt, dass dein Aufbau einen
 					echten Effekt überhaupt erkennen kann.
 				</li>
 				<li>
-					<Begriff term="Verblindung" /> — single-blind (die Versuchseinheit weiß nicht, in welcher
+					<Begriff term="Verblindung" />: single-blind (die Versuchseinheit weiß nicht, in welcher
 					Gruppe sie ist) oder double-blind (auch der Beobachter nicht). Das verhindert unbewusste
 					Verzerrung der Messung.
 				</li>
 				<li>
-					<Begriff term="Confounding" /> — isoliere den eigentlichen Effekt, sodass keine dritte
+					<Begriff term="Confounding" />: isoliere den eigentlichen Effekt, sodass keine dritte
 					Variable Behandlung und Ergebnis gleichzeitig beeinflusst und den Vergleich verfälscht.
 				</li>
 			</ul>
 		</Merke>
 
 		<Analogie title="Randomisierung als fairer Münzwurf">
-			Stell dir vor, du verteilst deine Vögel von Hand auf zwei Gruppen — ganz unabsichtlich landen
+			Stell dir vor, du verteilst deine Vögel von Hand auf zwei Gruppen. Ganz unabsichtlich landen
 			die größeren in Gruppe A. Schon ist der Vergleich vergiftet: Findest du später einen
 			Unterschied, weißt du nicht, ob er von der Behandlung kommt oder von der Körpergröße. Die
 			<strong>Randomisierung</strong> ist der faire Münzwurf, der genau das verhindert — sie verteilt
@@ -146,7 +146,7 @@
 		<h2 class="mt-4 text-2xl">Echte Wiederholungen: Replikation vs. Pseudoreplikation</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Damit du den Behandlungseffekt von der zufälligen Streuung trennen kannst, brauchst du
-			<Begriff term="Replikation">echte Replikate</Begriff> — mehrere voneinander
+			<Begriff term="Replikation">echte Replikate</Begriff>, also mehrere voneinander
 			<strong>unabhängige</strong> Wiederholungen. Der häufigste Designfehler ist die
 			<Begriff term="Pseudoreplikation" />: Du misst denselben Vogel zehnmal und tust so, als hättest
 			du zehn unabhängige Tiere. Das bläht die Stichprobe künstlich auf und liefert falsch kleine
@@ -159,9 +159,9 @@
 		<p class="text-ink-soft leading-relaxed">
 			Zwei Qualitäten einer Messung, die man leicht verwechselt:
 			<Begriff term="Treffgenauigkeit">Treffgenauigkeit (accuracy)</Begriff> heißt, die Messungen
-			liegen <em>im Mittel</em> nah am wahren Wert — wenig systematischer Fehler (Bias).
+			liegen <em>im Mittel</em> nah am wahren Wert, also wenig systematischer Fehler (Bias).
 			<Begriff term="Exaktheit">Exaktheit (precision)</Begriff> heißt, die Messungen streuen
-			<em>untereinander</em> wenig — gute Reproduzierbarkeit. Beides ist unabhängig: Ein Sender kann
+			<em>untereinander</em> wenig, also gute Reproduzierbarkeit. Beides ist unabhängig: Ein Sender kann
 			sehr exakt immer dieselbe falsche Distanz liefern (exakt, aber nicht treffgenau) — oder breit
 			streuen, aber im Mittel richtig liegen (treffgenau, aber nicht exakt).
 		</p>
@@ -176,7 +176,7 @@
 		<Intuition title="Die zentrale Intuition: ein gekoppeltes System">
 			<p>
 				Das ist der wichtigste Gedanke der Lektion. <strong>Power, Effektgröße, Streuung σ, das
-				Signifikanzniveau α und der Stichprobenumfang n hängen alle zusammen</strong> — sie bilden
+				Signifikanzniveau α und der Stichprobenumfang n hängen alle zusammen</strong>, sie bilden
 				ein einziges gekoppeltes System:
 			</p>
 			<ul class="mt-2 ml-5 list-disc space-y-1">
@@ -186,7 +186,7 @@
 				</li>
 				<li>
 					Sie steigt mit größerer <Begriff term="Effektgröße" />, größerem n und kleinerer Streuung
-					σ — und sie sinkt, wenn du α strenger setzt.
+					σ, und sie sinkt, wenn du α strenger setzt.
 				</li>
 			</ul>
 			<p class="mt-2">
@@ -302,7 +302,7 @@ NOTE: n is number in *each* group`}
 		/>
 
 		<p class="text-ink-soft leading-relaxed">
-			R sagt: rund <strong>64 Vögel pro Gruppe</strong> — fast identisch zur Faustformel (n ≈ 64).
+			R sagt: rund <strong>64 Vögel pro Gruppe</strong>, fast identisch zur Faustformel (n ≈ 64).
 			Genauso gut könntest du n vorgeben und <code class="font-mono text-sm">power = NULL</code>
 			setzen, um die erreichbare Power deiner geplanten Studie abzulesen.
 		</p>
@@ -310,7 +310,7 @@ NOTE: n is number in *each* group`}
 		<!-- Flagship-Widget ------------------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Selbst ausprobieren: der Power-Spielplatz</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Zieh an den vier Schiebern — <strong>Effektgröße δ</strong> (Unterschied der Zugdistanz),
+			Zieh an den vier Schiebern: <strong>Effektgröße δ</strong> (Unterschied der Zugdistanz),
 			<strong>Streuung σ</strong>, <strong>Stichprobenumfang n</strong> (pro Gruppe) und
 			<strong>α</strong>. Die große Zahl ist die resultierende <strong>Power (1 − β)</strong>, die
 			Kurve zeigt die Power als Funktion von n (mit der Ziellinie bei 0,8 und einer Marke am aktuellen

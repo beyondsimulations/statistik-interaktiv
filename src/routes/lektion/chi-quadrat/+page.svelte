@@ -84,7 +84,7 @@
 		</header>
 
 		<p class="text-ink-soft text-lg leading-relaxed">
-			Bisher ging es um Mittelwerte und Streuungen — gemessene Größen wie die Zugdistanz in
+			Bisher ging es um Mittelwerte und Streuungen, gemessene Größen wie die Zugdistanz in
 			Kilometern. Jetzt geht es um etwas anderes: ums <strong>Zählen</strong>. Wie viele Erbsen sind
 			gelb-rund, wie viele grün-runzlig? Wie viele Tiere einer Art leben in welchem Habitat? Solche
 			<strong>kategorialen Häufigkeitsdaten</strong> wertet der
@@ -97,7 +97,7 @@
 		<Callout variant="warnung" title="Chi-Quadrat will Anzahlen — keine Prozente, keine Mittelwerte">
 			Der erste und häufigste Fehler: χ² in eine Prozent- oder Mittelwerttabelle stecken. Das geht
 			schief. χ² rechnet immer mit <strong>absoluten Häufigkeiten</strong> (ganze Anzahlen, „counts“).
-			36 von 80 ist etwas anderes als „45 %“ — die Stichprobengröße steckt in der Zahl drin, und genau
+			36 von 80 ist etwas anderes als „45 %“: Die Stichprobengröße steckt in der Zahl drin, und genau
 			die braucht der Test.
 		</Callout>
 
@@ -107,7 +107,7 @@
 			Stell dir χ² als ehrliche Buchhaltung der Überraschung vor. Für jede Kategorie hast du eine
 			<strong>beobachtete</strong> Anzahl <em>B</em> (das, was du gezählt hast) und eine
 			<strong>erwartete</strong> Anzahl <em>E</em> (das, was ein Modell vorhersagt). χ² summiert die
-			quadrierten Abweichungen <em>(B − E)²</em> — aber jede relativiert an ihrem eigenen
+			quadrierten Abweichungen <em>(B − E)²</em>, jede aber relativiert an ihrem eigenen
 			Erwartungswert <em>E</em>. So zählt eine Abweichung von 10 bei E = 5 viel schwerer als
 			dieselbe 10 bei E = 1000.
 		</p>
@@ -120,7 +120,7 @@
 			von 500 ein Nichts. Stimmen Beobachtung und Modell überall überein, ist jeder Summand 0 und
 			χ² = 0. Je größer χ², desto unwahrscheinlicher unter H₀ — desto kleiner der p-Wert.
 			Entscheidend: Die <strong>erwarteten Werte sind keine Daten</strong>. Sie verkörpern die
-			Nullhypothese — das genetische Modell bzw. die Unabhängigkeit zweier Merkmale.
+			Nullhypothese, also das genetische Modell bzw. die Unabhängigkeit zweier Merkmale.
 		</Intuition>
 
 		<FormelZeigen
@@ -182,7 +182,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Die zweite Variante prüft, ob <strong>zwei kategoriale Merkmale unabhängig</strong> sind.
 			Beispiel: Du fängst Tiere zweier Arten und notierst, in welchem von zwei Habitaten sie
-			leben. Das ergibt eine <Begriff term="Kontingenztafel" /> — eine Kreuztabelle der Anzahlen:
+			leben. Das ergibt eine <Begriff term="Kontingenztafel" />, eine Kreuztabelle der Anzahlen:
 		</p>
 
 		<div class="border-ink/10 bg-paper-raised shadow-soft my-3 overflow-x-auto rounded-2xl border">
@@ -219,7 +219,7 @@
 		</div>
 
 		<p class="text-ink-soft leading-relaxed">
-			Die Nullhypothese lautet: <strong>Art und Habitat sind unabhängig</strong> — die
+			Die Nullhypothese lautet: <strong>Art und Habitat sind unabhängig</strong>. Die
 			Habitatwahl hängt nicht von der Art ab. Wären sie unabhängig, müsste sich jede Zelle aus
 			ihren <strong>Rändern</strong> ergeben: aus der Zeilensumme (wie viele Tiere der Art) und
 			der Spaltensumme (wie viele Tiere im Habitat), geteilt durch die Gesamtzahl N. Genau das
@@ -239,7 +239,7 @@
 
 		<p class="text-ink-soft leading-relaxed">
 			Für unsere Tafel ist z. B. E<sub>11</sub> = (40·42)/80 = 21 erwartete Tiere der Art A in
-			Habitat 1 — beobachtet sind aber 30. Die Art A sitzt also häufiger in Habitat 1, als
+			Habitat 1, beobachtet sind aber 30. Die Art A sitzt also häufiger in Habitat 1, als
 			Unabhängigkeit erwarten ließe. Ob diese Abweichung signifikant ist, sagt χ².
 			Probier es gleich selbst aus.
 		</p>
@@ -253,8 +253,8 @@
 			<strong>χ², df und der p-Wert</strong>. Probier:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Mach die Verteilung gleichmäßiger (z. B. überall 20) — die Beiträge schrumpfen, χ² geht gegen 0, p steigt: kein Zusammenhang mehr.</li>
-			<li>Verschärf den Kontrast (z. B. 38/2 und 4/36) — die Beiträge leuchten auf, χ² steigt, p sinkt.</li>
+			<li>Mach die Verteilung gleichmäßiger (z. B. überall 20): Die Beiträge schrumpfen, χ² geht gegen 0, p steigt, kein Zusammenhang mehr.</li>
+			<li>Verschärf den Kontrast (z. B. 38/2 und 4/36): Die Beiträge leuchten auf, χ² steigt, p sinkt.</li>
 			<li>Setz eine Zelle sehr klein, bis ein <strong>E &lt; 5</strong> auftaucht — die Warnung erscheint: lieber Fisher-Test.</li>
 			<li>Schalte die <strong>Yates-Korrektur</strong> an und aus — bei 2×2 verkleinert sie χ² etwas (konservativer).</li>
 		</ol>
@@ -263,7 +263,7 @@
 
 		<Merke title="Was der Editor zeigt">
 			Die erwarteten Werte kommen ausschließlich aus den <strong>Rändern</strong> (Zeilen- und
-			Spaltensummen) — sie sind das, was bei Unabhängigkeit „herauskommen müsste“. χ² ist die
+			Spaltensummen): Sie sind das, was bei Unabhängigkeit „herauskommen müsste“. χ² ist die
 			Summe der vier Zellbeiträge. Eine einzige stark abweichende Zelle kann den Test schon
 			signifikant machen.
 		</Merke>
@@ -271,7 +271,7 @@
 		<!-- Voraussetzungen & Stolpersteine ------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Voraussetzungen & Stolpersteine</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Der χ²-Test ist eine <strong>Näherung</strong> — die Teststatistik folgt nur ungefähr einer
+			Der χ²-Test ist eine <strong>Näherung</strong>: Die Teststatistik folgt nur ungefähr einer
 			χ²-Verteilung. Damit die Näherung trägt, müssen ein paar Dinge stimmen:
 		</p>
 
@@ -316,8 +316,8 @@ X-squared = 14.486, df = 1, p-value = 0.0001416`}
 		/>
 
 		<p class="text-ink-soft leading-relaxed">
-			Wichtig: Schau dir immer <code class="font-mono text-sm">chisq.test(tafel)$expected</code> an
-			— das gibt die erwarteten Häufigkeiten aus. So prüfst du direkt die Faustregel E ≥ 5, bevor
+			Wichtig: Schau dir immer <code class="font-mono text-sm">chisq.test(tafel)$expected</code> an.
+			Das gibt die erwarteten Häufigkeiten aus. So prüfst du direkt die Faustregel E ≥ 5, bevor
 			du dem p-Wert traust. Warnt R „Chi-squared approximation may be incorrect“, ist genau das
 			verletzt, und du wechselst auf <code class="font-mono text-sm">fisher.test(tafel)</code>.
 		</p>
@@ -345,7 +345,7 @@ X-squared = 0.47002, df = 3, p-value = 0.9254`}
 		<Callout variant="merke" title="Großes p ist hier kein Beweis — aber Rückenwind fürs Modell">
 			Wie bei Voraussetzungstests ist die Logik beim Anpassungstest „umgekehrt“: H₀ ist das Modell
 			selbst (9:3:3:1). Ein <strong>großes</strong> p (wie 0,93) heißt „kein Widerspruch zum
-			Modell“ — die Daten sind damit gut verträglich. Es <em>beweist</em> das Modell nicht, aber es
+			Modell“: Die Daten sind damit gut verträglich. Es <em>beweist</em> das Modell nicht, aber es
 			gibt keinen Grund, es zu verwerfen. Ein <strong>kleines</strong> p würde das genetische
 			Modell in Frage stellen.
 		</Callout>

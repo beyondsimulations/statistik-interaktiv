@@ -33,7 +33,7 @@
 			],
 			correct: 0,
 			explanation:
-				'Genau. Die Sensitivität ist P(positiv | infiziert): die Richtung "von der Infektion zum Testergebnis". Die viel wichtigere Frage P(infiziert | positiv) ist die umgekehrte Richtung — und kann ganz anders ausfallen.'
+				'Genau. Die Sensitivität ist P(positiv | infiziert): die Richtung "von der Infektion zum Testergebnis". Die viel wichtigere Frage P(infiziert | positiv) ist die umgekehrte Richtung und kann ganz anders ausfallen.'
 		},
 		{
 			id: 'wb-2',
@@ -47,7 +47,7 @@
 			],
 			correct: 1,
 			explanation:
-				'Richtig — das ist der Basisraten-Effekt. Bei 10.000 gefangenen Tieren sind nur etwa 50 infiziert (davon ~50 positiv), aber 9.950 gesund, von denen 5 % (~498) fälschlich positiv anschlagen. Die falsch-positiven übertreffen die richtig-positiven deutlich, also ist P(infiziert|positiv) klein (~9 %).'
+				'Richtig, das ist der Basisraten-Effekt. Bei 10.000 gefangenen Tieren sind nur etwa 50 infiziert (davon ~50 positiv), aber 9.950 gesund, von denen 5 % (~498) fälschlich positiv anschlagen. Die falsch-positiven übertreffen die richtig-positiven deutlich, also ist P(infiziert|positiv) klein (~9 %).'
 		},
 		{
 			id: 'wb-3',
@@ -85,9 +85,9 @@
 			Wahrscheinlichkeit ist die Sprache, in der die ganze schließende Statistik
 			spricht. In dieser Lektion legen wir die Bausteine: Was ein Zufallsexperiment
 			ist, wie man Wahrscheinlichkeiten überhaupt bestimmt, mit welchen Regeln man
-			rechnet — und am Ende der vielleicht überraschendste Satz der ganzen
+			rechnet. Und am Ende wartet der vielleicht überraschendste Satz der ganzen
 			Statistik. Er erklärt, warum ein positiver Krankheitstest oft viel weniger
-			bedeutet, als man denkt — etwa wenn Otto im Feld ein gefangenes Wildtier auf
+			bedeutet, als man denkt, etwa wenn Otto im Feld ein gefangenes Wildtier auf
 			einen seltenen Erreger testet.
 		</p>
 
@@ -96,11 +96,11 @@
 		<p class="text-ink-soft leading-relaxed">
 			Alles beginnt mit einem <Begriff term="Zufallsexperiment" />: einem Vorgang,
 			dessen Ausgang ungewiss ist und den man sich beliebig oft wiederholt denken
-			kann — ein Würfelwurf, ein Münzwurf, ein Erreger-Feldtest. Alle möglichen Ergebnisse
+			kann: ein Würfelwurf, ein Münzwurf, ein Erreger-Feldtest. Alle möglichen Ergebnisse
 			zusammen bilden den <Begriff term="Ergebnisraum" />. Beim Würfel ist das
 			&#123;1, 2, 3, 4, 5, 6&#125;. Ein <Begriff term="Ereignis" /> ist dann
-			einfach eine Teilmenge davon, also eine Aussage, die eintreten kann oder nicht
-			— zum Beispiel „eine gerade Zahl würfeln“ = &#123;2, 4, 6&#125;.
+			einfach eine Teilmenge davon, also eine Aussage, die eintreten kann oder
+			nicht, zum Beispiel „eine gerade Zahl würfeln“ = &#123;2, 4, 6&#125;.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Die <Begriff term="Wahrscheinlichkeit" /> eines Ereignisses ist eine Zahl
@@ -112,7 +112,7 @@
 		<h2 class="mt-4 text-2xl">Woher kommt die Wahrscheinlichkeit?</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Es gibt zwei klassische Wege. Wenn alle Ergebnisse gleich wahrscheinlich sind
-			— wie beim fairen Würfel — nutzt du die
+			(wie beim fairen Würfel), nutzt du die
 			<Begriff term="Laplace-Wahrscheinlichkeit" />: <strong>günstige durch
 			mögliche</strong> Fälle. Für „gerade Zahl“ sind 3 von 6 Ergebnissen günstig,
 			also ist die Wahrscheinlichkeit 3/6 = 0,5.
@@ -135,7 +135,7 @@
 
 		<p class="text-ink-soft leading-relaxed">
 			Oft sind die Ergebnisse aber nicht gleich wahrscheinlich, oder du kennst die
-			„wahre“ Wahrscheinlichkeit gar nicht — etwa ob eine Reißzwecke auf den Kopf
+			„wahre“ Wahrscheinlichkeit gar nicht, etwa ob eine Reißzwecke auf den Kopf
 			oder auf die Seite fällt. Dann hilft die <strong>empirische
 			Wahrscheinlichkeit</strong>: Du wiederholst das Experiment oft und nimmst die
 			<Begriff term="relative Häufigkeit" /> (Treffer geteilt durch Versuche) als
@@ -146,11 +146,11 @@
 		<Merke title="Zwei Wege zur Wahrscheinlichkeit">
 			<ul class="ml-5 list-disc space-y-1">
 				<li>
-					<strong>Laplace:</strong> günstige/mögliche — nur bei gleich wahrscheinlichen
+					<strong>Laplace:</strong> günstige/mögliche, nur bei gleich wahrscheinlichen
 					Ergebnissen.
 				</li>
 				<li>
-					<strong>Empirisch:</strong> relative Häufigkeit aus vielen Wiederholungen —
+					<strong>Empirisch:</strong> relative Häufigkeit aus vielen Wiederholungen,
 					immer möglich, wenn du das Experiment wiederholen kannst.
 				</li>
 			</ul>
@@ -160,7 +160,7 @@
 		<h2 class="mt-4 text-2xl">Kombinatorik: die möglichen Fälle zählen</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Die Laplace-Formel verlangt die <em>Anzahl möglicher Fälle</em>. Bei einem
-			Würfel sind das sechs — leicht abgezählt. Aber wie viele Möglichkeiten gibt es,
+			Würfel sind das sechs, leicht abgezählt. Aber wie viele Möglichkeiten gibt es,
 			<strong>k von n</strong> markierten Tieren wieder einzufangen, oder in welcher
 			Reihenfolge drei Würfel fallen können? Hier hilft die
 			<Begriff term="Kombinatorik" />, die Kunst des systematischen Zählens. Schon
@@ -196,7 +196,7 @@
 			Zählt die <strong>Reihenfolge</strong> und ziehst du <strong>ohne
 			Zurücklegen</strong>, sprichst du von einer <Begriff term="Permutation" />: Für
 			das erste Tier hast du n Möglichkeiten, fürs zweite nur noch n − 1 und so
-			weiter — das führt direkt auf n!/(n−k)!. Werden alle n angeordnet, sind es n!.
+			weiter, das führt direkt auf n!/(n−k)!. Werden alle n angeordnet, sind es n!.
 		</p>
 
 		<FormelZeigen
@@ -210,7 +210,7 @@
 
 		<p class="text-ink-soft leading-relaxed">
 			Ist die <strong>Reihenfolge egal</strong> (auch ohne Zurücklegen), zählst du
-			jede Gruppe nur einmal — das ist eine <Begriff term="Kombination" />. Du teilst
+			jede Gruppe nur einmal, das ist eine <Begriff term="Kombination" />. Du teilst
 			die Permutationen noch durch die k! Anordnungen innerhalb jeder Gruppe und
 			erhältst den <Begriff term="Binomialkoeffizient">Binomialkoeffizienten</Begriff>
 			„n über k“. So zählst du etwa, auf wie viele Arten du <strong>k von n</strong>
@@ -229,7 +229,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Darf ein Objekt <strong>mehrfach</strong> vorkommen (Ziehen
 			<strong>mit Zurücklegen</strong>, Reihenfolge zählt), bleibt es bei jedem der k
-			Schritte bei allen n Möglichkeiten — das Zählprinzip liefert direkt
+			Schritte bei allen n Möglichkeiten, das Zählprinzip liefert direkt
 			<strong>n<sup>k</sup></strong>. Genau so entstehen die 6³ = 216 Wurffolgen
 			dreier Würfel.
 		</p>
@@ -273,7 +273,7 @@
 		<h2 class="mt-4 text-2xl">Die wichtigsten Rechenregeln</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Mit drei Regeln kommst du erstaunlich weit. Du musst sie nicht auswendig
-			lernen — wichtiger ist, dass du verstehst, <em>warum</em> sie so aussehen.
+			lernen. Wichtiger ist, dass du verstehst, <em>warum</em> sie so aussehen.
 		</p>
 
 		<p class="text-ink-soft leading-relaxed">
@@ -297,7 +297,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			Die <strong>Additionsregel</strong> beantwortet „A <em>oder</em> B“. Du
 			addierst beide Wahrscheinlichkeiten, musst aber die Überschneidung wieder
-			abziehen — sonst zählst du sie doppelt.
+			abziehen, sonst zählst du sie doppelt.
 		</p>
 
 		<FormelZeigen
@@ -310,8 +310,8 @@
 
 		<p class="text-ink-soft leading-relaxed">
 			Die <strong>Multiplikationsregel</strong> beantwortet „A <em>und</em> B“. Sind
-			beide Ereignisse <strong>unabhängig</strong> — beeinflusst das eine das andere
-			also nicht —, multiplizierst du ihre Wahrscheinlichkeiten einfach.
+			beide Ereignisse <strong>unabhängig</strong> (beeinflusst das eine das andere
+			also nicht), multiplizierst du ihre Wahrscheinlichkeiten einfach.
 		</p>
 
 		<FormelZeigen
@@ -357,9 +357,9 @@
 		<h2 class="mt-4 text-2xl">Der Satz von Bayes</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Häufig kennst du eine bedingte Wahrscheinlichkeit in der einen Richtung,
-			brauchst aber die andere. Ottos Feldtest sagt ihm P(positiv | infiziert) —
+			brauchst aber die andere. Ottos Feldtest sagt ihm P(positiv | infiziert),
 			wie gut er infizierte Tiere erkennt. Ihn interessiert aber P(infiziert |
-			positiv) — ist das gefangene Tier <em>wirklich</em> infiziert, jetzt wo sein
+			positiv): Ist das gefangene Tier <em>wirklich</em> infiziert, jetzt wo sein
 			Test positiv anschlägt? Der <Begriff term="Satz von Bayes" /> dreht genau
 			diese Richtung um.
 		</p>
@@ -380,21 +380,21 @@
 		</p>
 		<ul class="text-ink-soft ml-5 list-disc space-y-1 leading-relaxed">
 			<li>
-				die <Begriff term="Prävalenz" /> P(infiziert) — wie verbreitet der Erreger
+				die <Begriff term="Prävalenz" /> P(infiziert), also wie verbreitet der Erreger
 				in der Population überhaupt ist,
 			</li>
 			<li>
-				die <Begriff term="Sensitivität" /> P(positiv | infiziert) — wie
+				die <Begriff term="Sensitivität" /> P(positiv | infiziert), also wie
 				zuverlässig der Test infizierte Tiere erkennt,
 			</li>
 			<li>
-				die <Begriff term="Spezifität" /> P(negativ | gesund) — wie zuverlässig er
+				die <Begriff term="Spezifität" /> P(negativ | gesund), also wie zuverlässig er
 				gesunde Tiere als gesund erkennt.
 			</li>
 		</ul>
 		<p class="text-ink-soft leading-relaxed">
 			Daraus berechnet Bayes den <Begriff term="Positiver prädiktiver Wert">positiven
-			prädiktiven Wert</Begriff> P(infiziert | positiv) — die Zahl, die Otto bei
+			prädiktiven Wert</Begriff> P(infiziert | positiv), die Zahl, die Otto bei
 			einem positiv getesteten Tier wirklich interessiert.
 		</p>
 
@@ -424,7 +424,7 @@
 			</li>
 			<li>
 				Vergleiche die <strong>richtig-positiven</strong> mit den
-				<strong>falsch-positiven</strong> — obwohl der Test gut ist, dominieren die
+				<strong>falsch-positiven</strong>: Obwohl der Test gut ist, dominieren die
 				Fehlalarme.
 			</li>
 			<li>
@@ -438,7 +438,7 @@
 		<Intuition title="Der Basisraten-Effekt, in Zahlen">
 			Bei 10.000 gefangenen Tieren und 0,5 % Prävalenz sind nur etwa 50 wirklich
 			infiziert. Davon erkennt der Test bei 99 % Sensitivität rund 50. Unter den
-			9.950 gesunden Tieren schlägt er aber bei 5 % fälschlich an — das sind fast
+			9.950 gesunden Tieren schlägt er aber bei 5 % fälschlich an, das sind fast
 			500 falsch-positive. Von allen rund 550 positiven Tests sind also nur etwa 50
 			echt: knapp 9 %. Eine hohe Sensitivität rettet dich nicht vor einer niedrigen
 			Basisrate.
@@ -467,8 +467,8 @@
 			>
 				<span class="text-xl" aria-hidden="true">✓</span>
 				<p class="font-semibold">
-					Geschafft! Diese Lektion ist als abgeschlossen markiert — du findest den
-					Haken jetzt auch in der Seitenleiste.
+					Geschafft! Diese Lektion ist als abgeschlossen markiert. Den Haken
+					findest du jetzt auch in der Seitenleiste.
 				</p>
 			</div>
 		{/if}

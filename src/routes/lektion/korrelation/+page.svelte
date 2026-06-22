@@ -84,17 +84,17 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Bisher haben wir Gruppen <em>verglichen</em>. Jetzt fragen wir: Hängen zwei Messgrößen
-			<strong>zusammen</strong>? Wenn ein Säugetier schwerer ist — hat es dann auch ein größeres
+			<strong>zusammen</strong>? Wenn ein Säugetier schwerer ist, hat es dann auch ein größeres
 			Gehirn? Misst man bei vielen Arten <strong>Körpermasse</strong> und
 			<strong>Hirnmasse</strong>, schwanken beide gemeinsam. Genau das fasst die
 			<Begriff term="Korrelation" /> in einer einzigen Zahl. In dieser Lektion lernst du, was diese
-			Zahl wirklich misst — und wo sie täuscht.
+			Zahl wirklich misst und wo sie täuscht.
 		</p>
 
 		<!-- Korrelation vs. Regression ------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Korrelation: Zusammenhang ohne Richtung</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Wichtig vorab: Korrelation misst nur die <strong>Stärke des Zusammenhangs</strong> — sie kennt
+			Wichtig vorab: Korrelation misst nur die <strong>Stärke des Zusammenhangs</strong>. Sie kennt
 			<strong>keine Richtung</strong> und behauptet <strong>keine Ursache</strong>. Beide Variablen
 			sind gleichberechtigt und zufällig; es ist egal, welche du als x und welche als y aufträgst.
 			Das ist der Unterschied zur <strong>Regression</strong> (nächste Lektion): Dort gibt es eine
@@ -130,7 +130,7 @@
 
 		<Callout variant="warnung" title="Die Kovarianz ist skalenabhängig">
 			Die Kovarianz hat einen Haken: Ihr Wert hängt von den <strong>Einheiten</strong> ab. Misst du
-			die Körpermasse in Gramm statt in Kilogramm, wird die Kovarianz tausendmal so groß — obwohl
+			die Körpermasse in Gramm statt in Kilogramm, wird die Kovarianz tausendmal so groß, obwohl
 			sich am Zusammenhang nichts geändert hat. Deshalb kannst du Kovarianzen verschiedener
 			Variablenpaare <strong>nicht vergleichen</strong>. Genau dieses Problem löst der nächste
 			Schritt.
@@ -157,12 +157,12 @@
 		<Intuition title="r ist die standardisierte Kovarianz — und misst NUR Lineares">
 			<p>
 				<strong>r = Cov(x, y) / (s<sub>x</sub>·s<sub>y</sub>).</strong> Durch das Teilen wird r
-				<strong>einheitenlos</strong> und liegt immer zwischen <strong>−1 und +1</strong> — egal in
+				<strong>einheitenlos</strong> und liegt immer zwischen <strong>−1 und +1</strong>, egal in
 				welchen Einheiten du misst. Deshalb sind Korrelationen verschiedener Variablenpaare
 				<strong>vergleichbar</strong>, Kovarianzen nicht.
 			</p>
 			<p class="mt-2">
-				Aber Vorsicht — und das ist der zweite Teil der Intuition: r misst nur die
+				Aber Vorsicht, und das ist der zweite Teil der Intuition: r misst nur die
 				<strong>LINEARE</strong> Stärke. <strong>r ≈ 0 heißt „kein <em>linearer</em>
 				Zusammenhang“, nicht „kein Zusammenhang“.</strong> Eine symmetrische U-Form (Parabel) kann
 				r ≈ 0 liefern, obwohl ein glasklares Muster vorliegt. Genau das machst du gleich im
@@ -172,17 +172,17 @@
 
 		<Analogie title="Zwei Tänzer im Gleichschritt">
 			Stell dir zwei Tänzer vor. Die <strong>Kovarianz</strong> sagt nur: Bewegen sie sich in
-			dieselbe Richtung? Aber sie hängt davon ab, ob sie kleine oder große Schritte machen — nicht
+			dieselbe Richtung? Aber sie hängt davon ab, ob sie kleine oder große Schritte machen, also nicht
 			vergleichbar. <strong>r</strong> rechnet die Schrittgröße heraus und fragt nur noch: Wie
 			<em>synchron</em> sind sie, auf einer Skala von −1 (perfekter Gegentakt) über 0 (völlig
-			unabhängig) bis +1 (perfekter Gleichschritt)? Aber nur im <em>geraden</em> Tanz — drehen sie
+			unabhängig) bis +1 (perfekter Gleichschritt)? Aber nur im <em>geraden</em> Tanz. Drehen sie
 			eine Kurve, sieht r plötzlich nichts mehr.
 		</Analogie>
 
 		<!-- Flagship-Widget: Scatter-Builder ------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Selbst ausprobieren: der Scatter-Builder</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Zieh Punkte, füge welche hinzu, oder lade eine Vorlage — und beobachte
+			Zieh Punkte, füge welche hinzu, oder lade eine Vorlage, und beobachte
 			<strong>Pearson r</strong> und <strong>Spearman ρ</strong> live nebeneinander. Zwei
 			Aha-Momente solltest du dir holen:
 		</p>
@@ -214,7 +214,7 @@
 			Die <Begriff term="Spearman-Korrelation">Spearman-Korrelation ρ</Begriff> ist einfach der
 			Pearson-Koeffizient der <strong>Ränge</strong>: Statt der Originalwerte korreliert man ihre
 			Rangplätze. Das hat drei schöne Folgen. Sie erfasst jeden <Begriff term="monotoner Zusammenhang"
-				>monotonen Zusammenhang</Begriff> — auch gekrümmte wie eine Sättigungskurve y = log(x).
+				>monotonen Zusammenhang</Begriff>, auch gekrümmte wie eine Sättigungskurve y = log(x).
 			Sie ist <strong>robust gegen Ausreißer</strong>, weil ein extremer Wert nur einen Rangplatz
 			weiterrückt, nicht beliebig weit. Und sie ist für <strong>ordinale</strong> (Rang-)Daten
 			zulässig, für die Pearson gar nicht definiert ist.
@@ -223,7 +223,7 @@
 		<p class="text-ink-soft leading-relaxed">
 			<Begriff term="Kendall-Korrelation">Kendalls τ</Begriff> verfolgt dieselbe Idee über einen
 			anderen Weg: Es zählt, wie viele Paare <em>konkordant</em> (gleichsinnig geordnet) gegenüber
-			<em>diskordant</em> sind. Auch τ erfasst monotone Zusammenhänge und ist robust — es wird oft
+			<em>diskordant</em> sind. Auch τ erfasst monotone Zusammenhänge und ist robust. Oft wird es
 			bei vielen Bindungen oder kleinen Stichproben bevorzugt.
 		</p>
 
@@ -272,14 +272,14 @@
 		<h2 class="mt-4 text-2xl">Die große Warnung: Korrelation ≠ Kausalität</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Zwei Größen können stark korrelieren, ohne dass die eine die andere <em>verursacht</em>. Oft
-			steckt ein dritter Faktor dahinter — ein <Begriff term="Störfaktor">Confounder</Begriff> —,
+			steckt ein dritter Faktor dahinter, ein <Begriff term="Störfaktor">Confounder</Begriff>,
 			der beide gemeinsam beeinflusst. Das nennt man eine
 			<Begriff term="Scheinkorrelation" />.
 		</p>
 
 		<Callout variant="warnung" title="Störche und Geburten">
 			Über mehrere Regionen hinweg korreliert die Zahl der <strong>Storchenpaare</strong> mit der
-			<strong>Geburtenrate</strong> — positiv und deutlich. Bringen Störche also Babys? Natürlich
+			<strong>Geburtenrate</strong>, positiv und deutlich. Bringen Störche also Babys? Natürlich
 			nicht. Der versteckte dritte Faktor ist die <strong>Ländlichkeit/Fläche</strong>: Große,
 			ländliche Regionen haben mehr Störche <em>und</em> mehr Einwohner und damit mehr Geburten. Die
 			Korrelation ist echt — die Kausalgeschichte ist erfunden. Eine Korrelation darf dich nie
@@ -294,7 +294,7 @@
 			ergibt sich eine stark gekrümmte Wolke: Wenige Riesen (Elefant, Wal) quetschen alle kleinen
 			Tiere in eine Ecke, und Pearson r passt nicht zur klaren Wolke. Die Lösung ist eine
 			<Begriff term="Transformation" />: Logarithmiert man <em>beide</em> Achsen, wird aus der
-			Kurve eine schöne Gerade — der berühmte log-log-Zusammenhang zwischen Hirn- und Körpermasse.
+			Kurve eine schöne Gerade: der berühmte log-log-Zusammenhang zwischen Hirn- und Körpermasse.
 		</p>
 
 		<Merke title="Die gängigen Transformationen">
@@ -319,12 +319,12 @@
 			Der Zusammenhang zwischen Körpermasse und Hirnmasse ist nicht additiv, sondern
 			<strong>multiplikativ</strong> (eine Potenzfunktion: Hirn ≈ a · Körper<sup>b</sup>). Logarithmieren
 			verwandelt Multiplikation in Addition und Potenzen in Geraden: log(Hirn) ≈ log(a) + b · log(Körper).
-			Aus der Kurve wird eine Linie — und Pearson r darf wieder ran.
+			Aus der Kurve wird eine Linie, und Pearson r darf wieder ran.
 		</Intuition>
 
 		<h2 class="mt-4 text-2xl">Welche Transformation wann? Eine Entscheidungshilfe</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Welche Transformation passt, hängt von der <strong>Art der Daten</strong> ab — und das lässt sich
+			Welche Transformation passt, hängt von der <strong>Art der Daten</strong> ab, und das lässt sich
 			zu einer kleinen Faustregel verdichten. Drei typische biologische Datensorten, drei typische
 			Transformationen, mit Box-Cox als allgemeinem Rahmen darüber:
 		</p>

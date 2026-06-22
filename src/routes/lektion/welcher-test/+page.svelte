@@ -26,13 +26,13 @@
 			prompt:
 				'Du misst die Genexpression unter DREI Behandlungsgruppen und willst wissen, ob sich die Mittelwerte unterscheiden. Welcher Test, und was kommt danach?',
 			options: [
-				'Drei einzelne t-Tests (A–B, A–C, B–C) — so deckst du alle Paare ab.',
+				'Drei einzelne t-Tests (A–B, A–C, B–C): so deckst du alle Paare ab.',
 				'Eine einfaktorielle ANOVA; wird sie signifikant, danach ein Post-hoc-Test (z. B. Tukey HSD).',
 				'Ein Chi-Quadrat-Test, weil es drei Kategorien sind.'
 			],
 			correct: 1,
 			explanation:
-				'Richtig. Bei drei (oder mehr) Gruppen nimmt man EINEN gemeinsamen Test: die einfaktorielle ANOVA. Drei separate t-Tests würden die familienweise Fehlerrate aufblähen (α-Inflation — bei drei Vergleichen zu je 5 % rund 14 % Fehlalarm-Risiko). Wird die ANOVA signifikant, sagt dir erst ein Post-hoc-Test wie Tukey HSD, welche Paare sich konkret unterscheiden, und hält dabei die Fehlerrate auf α.'
+				'Richtig. Bei drei (oder mehr) Gruppen nimmt man EINEN gemeinsamen Test: die einfaktorielle ANOVA. Drei separate t-Tests würden die familienweise Fehlerrate aufblähen (α-Inflation: bei drei Vergleichen zu je 5 % rund 14 % Fehlalarm-Risiko). Wird die ANOVA signifikant, sagt dir erst ein Post-hoc-Test wie Tukey HSD, welche Paare sich konkret unterscheiden, und hält dabei die Fehlerrate auf α.'
 		},
 		{
 			id: 'welcher-test-2',
@@ -40,13 +40,13 @@
 			prompt:
 				'Bei welcher dieser Studien sind die Daten GEPAART (abhängig) und nicht unabhängig?',
 			options: [
-				'Ertrag von Pflanzen unter Dünger A vs. Dünger B — zwei getrennte Pflanzengruppen.',
+				'Ertrag von Pflanzen unter Dünger A vs. Dünger B, zwei getrennte Pflanzengruppen.',
 				'Blutdruck derselben Personen vorher und nachher (nach einer Behandlung).',
 				'Cholesterinwerte von Männern vs. Frauen.'
 			],
 			correct: 1,
 			explanation:
-				'Richtig. „Vorher/nachher bei denselben Personen“ heißt: jede Messung in der einen Reihe gehört zu genau einer in der anderen — die Daten sind paarweise verbunden (gepaart). Hier nimmt man den gepaarten t-Test (t.test(..., paired = TRUE)). Die beiden anderen Fälle vergleichen zwei getrennte, unabhängige Gruppen — dafür ist der unabhängige Zwei-Stichproben-t-Test zuständig. Gepaart und unabhängig nicht zu verwechseln ist entscheidend, sonst verschenkst du Power oder rechnest falsch.'
+				'Richtig. „Vorher/nachher bei denselben Personen“ heißt: jede Messung in der einen Reihe gehört zu genau einer in der anderen, die Daten sind also paarweise verbunden (gepaart). Hier nimmt man den gepaarten t-Test (t.test(..., paired = TRUE)). Die beiden anderen Fälle vergleichen zwei getrennte, unabhängige Gruppen. Dafür ist der unabhängige Zwei-Stichproben-t-Test zuständig. Gepaart und unabhängig nicht zu verwechseln ist entscheidend, sonst verschenkst du Power oder rechnest falsch.'
 		},
 		{
 			id: 'welcher-test-3',
@@ -81,7 +81,7 @@
 		</header>
 
 		<p class="text-ink-soft text-lg leading-relaxed">
-			Du hast den ganzen Werkzeugkasten kennengelernt — t-Tests, Chi-Quadrat, ANOVA, Korrelation,
+			Du hast den ganzen Werkzeugkasten kennengelernt: t-Tests, Chi-Quadrat, ANOVA, Korrelation,
 			Regression und ihre nicht-parametrischen Geschwister. Diese letzte Lektion verknüpft alles zu
 			der einen praktischen Frage, vor der du in der echten Auswertung stehst:
 			<strong>Welchen Test nimmst du eigentlich?</strong> Die gute Nachricht: Es ist kein Raten. Mit
@@ -96,21 +96,21 @@
 			</p>
 			<ol class="mt-2 ml-5 list-decimal space-y-1">
 				<li>
-					<strong>Datentyp</strong> — kategorial (Häufigkeiten) → <Begriff
+					<strong>Datentyp</strong>: kategorial (Häufigkeiten) → <Begriff
 						term="Chi-Quadrat-Test">χ²</Begriff>; kontinuierlich (Messwerte) → t-Test / <Begriff
 						term="ANOVA"
 					/> / <Begriff term="Lineare Regression">Regression</Begriff>.
 				</li>
 				<li>
-					<strong>Anzahl der Gruppen</strong> — eine gegen einen Referenzwert, zwei, oder drei und
+					<strong>Anzahl der Gruppen</strong>: eine gegen einen Referenzwert, zwei, oder drei und
 					mehr.
 				</li>
 				<li>
-					<strong>Gepaart vs. unabhängig</strong> — dieselben Einheiten zweimal gemessen, oder
+					<strong>Gepaart vs. unabhängig</strong>: dieselben Einheiten zweimal gemessen, oder
 					getrennte Gruppen?
 				</li>
 				<li>
-					<strong>Annahmen erfüllt?</strong> — Normalverteilung, Varianzhomogenität. Sind sie
+					<strong>Annahmen erfüllt?</strong> Normalverteilung, Varianzhomogenität. Sind sie
 					verletzt, weichst du auf einen <Begriff term="nicht-parametrischer Test"
 						>nicht-parametrischen Test</Begriff
 					> aus.
@@ -192,7 +192,7 @@
 		<!-- R-Code-Spickzettel --------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">In R: ein Spickzettel der Aufrufe</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Dieselben sechs Tests, jeweils als R-Aufruf. Diesen Block kannst du dir gut merken — er deckt
+			Dieselben sechs Tests, jeweils als R-Aufruf. Diesen Block kannst du dir gut merken, er deckt
 			fast alles ab, was in der Biologie-Auswertung vorkommt.
 		</p>
 
@@ -218,7 +218,7 @@ TukeyHSD(modell)
 lm(lungenkapazitaet ~ groesse)`}
 			annotations={{
 				'chisq.test(beobachtet, p = erwartet)':
-					'Kategoriale Häufigkeiten gegen ein erwartetes Verhältnis — der Anpassungstest. Bei kleinen Erwartungswerten stattdessen fisher.test().',
+					'Kategoriale Häufigkeiten gegen ein erwartetes Verhältnis: der Anpassungstest. Bei kleinen Erwartungswerten stattdessen fisher.test().',
 				'mu = 200':
 					'Der feste Referenzwert μ₀ beim Ein-Stichproben-t-Test. alternative = "greater" macht ihn einseitig.',
 				't.test(ertrag ~ duenger)':
@@ -241,7 +241,7 @@ lm(lungenkapazitaet ~ groesse)`}
 				bläht die <Begriff term="FWER">familienweise Fehlerrate</Begriff> auf (<Begriff
 					term="multiples Testen">α-Inflation</Begriff
 				>): Schon drei Vergleiche zu je 5 % ergeben rund 14 % Chance auf mindestens einen Fehlalarm.
-				Richtig: <strong>eine ANOVA</strong>, und erst <em>danach</em> — falls signifikant — ein
+				Richtig: <strong>eine ANOVA</strong>, und erst <em>danach</em>, falls signifikant, ein
 				<Begriff term="Post-hoc-Test" /> wie <Begriff term="Tukey HSD" />.
 			</p>
 		</Callout>
@@ -279,7 +279,7 @@ lm(lungenkapazitaet ~ groesse)`}
 		<h2 class="mt-4 text-2xl">Selbst ausprobieren: der Entscheidungsbaum & das Szenario-Spiel</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Jetzt bist du dran. Das Widget hat zwei Modi. Im <strong>Entscheidungsbaum</strong>
-			beantwortest du Schritt für Schritt die vier Fragen und landest auf dem passenden Test — quer
+			beantwortest du Schritt für Schritt die vier Fragen und landest auf dem passenden Test, quer
 			durch alle Familien. Im <strong>Szenario-Spiel</strong> bekommst du die sechs biologischen
 			Studien und wählst jeweils den richtigen Test; achte beim Drei-Gruppen-Fall auf die verlockende
 			Falle.

@@ -87,7 +87,7 @@
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Der t-Test vergleicht zwei Gruppen. Aber was, wenn du <strong>mehr</strong> hast? Otto
 			züchtet Lachse (<em>Salmo salar</em>) in vier verschiedenen Käfigtypen und will wissen, ob
-			der Käfigtyp die <strong>Größe</strong> der Fische beeinflusst. Vier Gruppen — der naive
+			der Käfigtyp die <strong>Größe</strong> der Fische beeinflusst. Vier Gruppen: Der naive
 			Reflex wäre, einfach alle Paare mit t-Tests durchzuprobieren. Genau das geht schief. In
 			dieser Lektion lernst du, warum man stattdessen <strong>einen</strong> Test über alle Gruppen
 			rechnet: die <Begriff term="ANOVA">Varianzanalyse (ANOVA)</Begriff>.
@@ -99,7 +99,7 @@
 			Bei vier Käfigtypen gibt es <strong>sechs</strong> Paare (1–2, 1–3, 1–4, 2–3, 2–4, 3–4).
 			Jeder einzelne t-Test hat seine eigene 5 %-Chance auf einen <Begriff term="Fehler 1. Art"
 				>Fehlalarm</Begriff
-			> — auch wenn in Wahrheit gar kein Unterschied besteht. Diese kleinen Risiken summieren sich.
+			>, auch wenn in Wahrheit gar kein Unterschied besteht. Diese kleinen Risiken summieren sich.
 			Die Wahrscheinlichkeit, in der ganzen Familie von Tests <strong>mindestens einen</strong>
 			Fehlalarm zu erwischen, heißt <Begriff term="FWER">familienweise Fehlerrate (FWER)</Begriff>.
 		</p>
@@ -124,7 +124,7 @@
 
 		<p class="text-ink-soft leading-relaxed">
 			Probier es im <strong>FWER-Roulette</strong> unten gleich selbst aus: rein zufällige Daten,
-			keinerlei echter Unterschied — und trotzdem klettert die Fehlalarmrate mit jedem Vergleich
+			keinerlei echter Unterschied, und trotzdem klettert die Fehlalarmrate mit jedem Vergleich
 			nach oben. Die <Begriff term="Bonferroni-Korrektur" /> (jeden Test zum strengeren Niveau
 			α/c) zieht sie wieder herunter.
 		</p>
@@ -151,7 +151,7 @@
 		/>
 
 		<p class="text-ink-soft leading-relaxed">
-			Anschaulich teilt sich die Gesamtstreuung wie dieser Balken auf — der korallene Anteil ist
+			Anschaulich teilt sich die Gesamtstreuung wie dieser Balken auf: Der korallene Anteil ist
 			das, was die Käfigtypen <strong>erklären</strong>, der gedämpfte Teil bleibt
 			<strong>unerklärt</strong>:
 		</p>
@@ -171,7 +171,7 @@
 		<h2 class="mt-4 text-2xl">Die zentrale Intuition: F = zwischen ÷ innerhalb</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Jetzt die wichtigste Idee der Lektion. Die ANOVA heißt
-			<Begriff term="Varianzanalyse" /> — aber sie testet Unterschiede in den
+			<Begriff term="Varianzanalyse" />, aber sie testet Unterschiede in den
 			<strong>Mittelwerten</strong>. Über einen Umweg: Sie setzt die beiden Streuungsanteile ins
 			Verhältnis. Aus den Quadratsummen werden zuerst <strong>mittlere Quadrate (MS)</strong>
 			(Quadratsumme geteilt durch Freiheitsgrade), und ihr Quotient ist das
@@ -182,14 +182,14 @@
 			<p>
 				<strong>F = Varianz ZWISCHEN den Gruppen / Varianz INNERHALB der Gruppen.</strong> Frag
 				dich: Ist die Streuung zwischen den Käfig-Mittelwerten groß im Vergleich zur Streuung
-				innerhalb der Käfige? Dann liegt ein echtes Signal über dem Rauschen — F wird groß.
+				innerhalb der Käfige? Dann liegt ein echtes Signal über dem Rauschen, und F wird groß.
 				Streuen die Mittelwerte dagegen kaum mehr als die Fische innerhalb eines Käfigs, ist F nahe
 				1: kein erkennbarer Effekt.
 			</p>
 			<p class="mt-2">
 				F wird <strong>immer rechtsseitig</strong> getestet: nur ein <em>großes</em> F spricht
 				gegen H₀. Derselbe Mittelwert-Abstand kann signifikant sein, wenn die Streuung innerhalb
-				klein ist — und unbedeutend, wenn sie groß ist. Genau das machst du gleich im Widget
+				klein ist, und unbedeutend, wenn sie groß ist. Genau das machst du gleich im Widget
 				sichtbar.
 			</p>
 		</Intuition>
@@ -224,9 +224,9 @@
 			Streuung live in „zwischen“ und „innerhalb“, und du siehst F, p und η². Probier:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Setz einen klaren <strong>Abstand</strong> und dreh die <strong>Streuung innerhalb klein</strong> — F schießt hoch, p wird winzig, der korallene „zwischen“-Anteil dominiert.</li>
+			<li>Setz einen klaren <strong>Abstand</strong> und dreh die <strong>Streuung innerhalb klein</strong>: F schießt hoch, p wird winzig, der korallene „zwischen“-Anteil dominiert.</li>
 			<li>Lass den Abstand stehen, aber dreh die <strong>Streuung innerhalb groß</strong> — dasselbe Signal, jetzt im Rauschen ertränkt: F fällt, p steigt, nicht mehr signifikant.</li>
-			<li>Zieh den <strong>Abstand auf 0</strong> — alle Käfige gleich: F geht gegen 0, η² gegen 0.</li>
+			<li>Zieh den <strong>Abstand auf 0</strong>: alle Käfige gleich, F geht gegen 0, η² gegen 0.</li>
 		</ol>
 
 		<FRatio />
@@ -254,7 +254,7 @@
 
 		<Callout variant="merke" title="Wenn die Annahmen wackeln: Kruskal-Wallis">
 			Sind Normalverteilung oder Varianzhomogenität deutlich verletzt (oder hast du nur
-			Rangdaten), nimmst du den <Begriff term="Kruskal-Wallis-Test" /> — die rangbasierte,
+			Rangdaten), nimmst du den <Begriff term="Kruskal-Wallis-Test" />: die rangbasierte,
 			verteilungsfreie Alternative zur einfaktoriellen ANOVA. Er vergleicht die Lage mehrerer
 			Gruppen über ihre Ränge, ganz ohne Normalverteilungsannahme. In R:
 			<code class="font-mono text-sm">kruskal.test(groesse ~ kaefig)</code>.
@@ -263,18 +263,18 @@
 		<!-- Nach der ANOVA: Post-hoc + Effektstärke ----------------------------- -->
 		<h2 class="mt-4 text-2xl">Nach der ANOVA: welche Gruppen? Und wie stark?</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Ein signifikantes Ergebnis sagt nur: <strong>irgendein</strong> Käfig-Mittelwert weicht ab —
+			Ein signifikantes Ergebnis sagt nur: <strong>irgendein</strong> Käfig-Mittelwert weicht ab,
 			aber nicht welcher. Diese Frage beantwortet ein
 			<Begriff term="Post-hoc-Test">Post-hoc-Test</Begriff>. Der gängigste ist
 			<Begriff term="Tukey HSD" />: Er vergleicht alle Gruppenpaare und hält dabei die
-			familienweise Fehlerrate auf α — er löst das multiple-Testen-Problem also sauber, statt es
+			familienweise Fehlerrate auf α. Er löst das multiple-Testen-Problem also sauber, statt es
 			wie naive t-Tests zu ignorieren.
 		</p>
 
 		<Callout variant="warnung" title="ANOVA ist das Eingangstor, nicht das Ziel">
 			Eine signifikante ANOVA <strong>allein</strong> verrät dir nie, welche Käfige sich
 			unterscheiden. Wer aus p &lt; 0,05 direkt „Käfig 1 unterscheidet sich von Käfig 3“ liest,
-			überspringt den Post-hoc-Test. Erst <strong>Tukey HSD</strong> nennt die konkreten Paare —
+			überspringt den Post-hoc-Test. Erst <strong>Tukey HSD</strong> nennt die konkreten Paare,
 			mit kontrollierter Fehlerrate.
 		</Callout>
 
@@ -282,7 +282,7 @@
 			Und wie <strong>stark</strong> ist der Effekt? Dafür gibt es die
 			<Begriff term="Effektstärke" /> <Begriff term="Eta-Quadrat">η² (Eta-Quadrat)</Begriff>: der
 			Anteil der Gesamtstreuung, den die Gruppenzugehörigkeit erklärt. Es ist genau der korallene
-			Anteil aus der Varianzzerlegung — und das ANOVA-Pendant zum R² der Regression.
+			Anteil aus der Varianzzerlegung, und das ANOVA-Pendant zum R² der Regression.
 		</p>
 
 		<FormelZeigen
@@ -298,7 +298,7 @@
 			Rechnen wir es für die Lachse durch. Aus der Varianzzerlegung kennen wir SS<sub>zwischen</sub> =
 			106,17 und SS<sub>innerhalb</sub> = 18,75, zusammen SS<sub>total</sub> = 124,92. Also η² =
 			106,17 / 124,92 ≈ <strong>0,85</strong>: Der Käfigtyp erklärt rund 85 % der gesamten Streuung in
-			der Lachsgröße — genau der korallene Anteil aus dem Balken oben. Zur Einordnung dienen Cohens
+			der Lachsgröße, genau der korallene Anteil aus dem Balken oben. Zur Einordnung dienen Cohens
 			Faustwerte für η²:
 		</p>
 
@@ -308,8 +308,8 @@
 				<li><strong>η² ≈ 0,06</strong> — mittlerer Effekt.</li>
 				<li><strong>η² ≈ 0,14</strong> — großer Effekt.</li>
 			</ul>
-			Unser η² ≈ 0,85 liegt weit über der 0,14-Schwelle: ein sehr großer Effekt des Käfigtyps — der
-			Unterschied ist nicht nur signifikant, sondern erklärt auch den Löwenanteil der Streuung.
+			Unser η² ≈ 0,85 liegt weit über der 0,14-Schwelle: ein sehr großer Effekt des Käfigtyps. Der
+			Unterschied ist nicht bloß signifikant, er erklärt auch den Löwenanteil der Streuung.
 		</Merke>
 
 		<!-- R-Code -------------------------------------------------------------- -->
@@ -341,7 +341,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1`}
 		/>
 
 		<p class="text-ink-soft leading-relaxed">
-			Die ANOVA war signifikant — aber welche Käfige unterscheiden sich? Das sagt der Post-hoc-Test:
+			Die ANOVA war signifikant. Aber welche Käfige unterscheiden sich? Das sagt der Post-hoc-Test:
 		</p>
 
 		<RCode
@@ -369,17 +369,17 @@ Tiefkaefig-Festkaefig -4.0  -6.773 -1.227  0.0079`}
 			Bisher hatten wir <strong>einen</strong> Faktor (den Käfigtyp). Oft wirken aber zwei Einflüsse
 			gleichzeitig. Stell dir vor, du untersuchst das Wachstum von Pflanzen unter zwei Faktoren:
 			<strong>Düngung</strong> (mit/ohne) und <strong>Lichtmenge</strong> (wenig/viel). Werden beide
-			Faktoren in allen Kombinationen geprüft — sie sind also
-			<Begriff term="Gekreuztes Design">gekreuzt</Begriff> —, dann rechnet man eine
+			Faktoren in allen Kombinationen geprüft (sie sind also
+			<Begriff term="Gekreuztes Design">gekreuzt</Begriff>), dann rechnet man eine
 			<Begriff term="Zweifaktorielle ANOVA">zweifaktorielle ANOVA</Begriff>. Sie liefert nicht einen,
-			sondern <strong>drei</strong> Tests: den Haupteffekt der Düngung, den Haupteffekt des Lichts und
-			— besonders spannend — ihre <strong>Wechselwirkung</strong>.
+			sondern <strong>drei</strong> Tests: den Haupteffekt der Düngung, den Haupteffekt des Lichts und,
+			besonders spannend, ihre <strong>Wechselwirkung</strong>.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Ein <Begriff term="Interaktionseffekt">Interaktionseffekt</Begriff> bedeutet: Die Wirkung des
 			einen Faktors <strong>hängt von der Stufe des anderen ab</strong>. Vielleicht hilft die Düngung
 			den Pflanzen nur, <em>wenn</em> genug Licht da ist, und bleibt im Schatten wirkungslos. Dann
-			kannst du den Düngeeffekt nicht mehr für sich allein angeben — er ist eben licht-abhängig. Genau
+			kannst du den Düngeeffekt nicht mehr für sich allein angeben, er ist eben licht-abhängig. Genau
 			diese „es kommt darauf an“-Situation steckt im Interaktionsterm.
 		</p>
 

@@ -34,7 +34,7 @@
 			],
 			correct: 1,
 			explanation:
-				'Genau. Bei stetigen Verteilungen ist nicht die Höhe der Kurve die Wahrscheinlichkeit, sondern die Fläche darunter. Die Fläche über [a, b] ist P(a < X ≤ b) = F(b) − F(a) — der Anteil der Vögel, deren Flügellänge dazwischen liegt.'
+				'Genau. Bei stetigen Verteilungen ist nicht die Höhe der Kurve die Wahrscheinlichkeit, sondern die Fläche darunter. Die Fläche über [a, b] ist P(a < X ≤ b) = F(b) − F(a), also der Anteil der Vögel, deren Flügellänge dazwischen liegt.'
 		},
 		{
 			id: 'vt-2',
@@ -44,7 +44,7 @@
 			options: ['Genau 0.', 'Ungefähr 50 %.', 'Hängt nur von σ ab.'],
 			correct: 0,
 			explanation:
-				'Richtig — bei einer stetigen Variable ist P(X = ein exakter Wert) = 0. Ein einzelner Punkt hat keine Fläche. Nur Intervalle (Flächen) tragen eine positive Wahrscheinlichkeit.'
+				'Richtig, bei einer stetigen Variable ist P(X = ein exakter Wert) = 0. Ein einzelner Punkt hat keine Fläche. Nur Intervalle (Flächen) tragen eine positive Wahrscheinlichkeit.'
 		},
 		{
 			id: 'vt-3',
@@ -80,8 +80,8 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			In dieser Lektion lernst du, wie man beschreibt, welche Werte wie häufig oder wie
-			wahrscheinlich auftreten. Viele biologische Messgrößen — die Flügellänge einer Vogelart,
-			die Blütenblattlänge einer Iris, die Größe von Blättern — sind näherungsweise
+			wahrscheinlich auftreten. Viele biologische Messgrößen (die Flügellänge einer Vogelart,
+			die Blütenblattlänge einer Iris, die Größe von Blättern) sind näherungsweise
 			normalverteilt, und genau daran machen wir die Idee fest. Am Ende steht ein einziger,
 			großer Gedanke, den du in fast jedem weiteren Kapitel wiedersehen wirst: <strong>Die
 			Fläche unter einer Kurve ist eine Wahrscheinlichkeit.</strong> Bauen wir uns langsam
@@ -92,7 +92,7 @@
 		<h2 class="mt-4 text-2xl">Beobachtet oder erwartet?</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Wenn du echte Daten sammelst und zählst, wie oft jeder Wert vorkommt, erhältst du eine
-			<Begriff term="Häufigkeitsverteilung" />. Sie ist <em>beobachtet</em> — du liest sie direkt
+			<Begriff term="Häufigkeitsverteilung" />. Sie ist <em>beobachtet</em>, du liest sie direkt
 			aus deinen Messungen ab, etwa als Histogramm. Würfelst du 60-mal, könntest du jede Augenzahl
 			vielleicht 8- bis 12-mal sehen.
 		</p>
@@ -113,23 +113,23 @@
 		<!-- Diskret vs. stetig --------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Diskret oder stetig?</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Eine <Begriff term="Diskrete Zufallsvariable" /> nimmt abzählbar viele Werte an — die
+			Eine <Begriff term="Diskrete Zufallsvariable" /> nimmt abzählbar viele Werte an: die
 			Augenzahl eines Würfels, die Anzahl der Treffer. Hier hat <em>jeder einzelne Wert</em> eine
 			eigene Wahrscheinlichkeit: P(Würfel = 3) = 1/6. Das ist anschaulich und unproblematisch.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Bei einer <Begriff term="Stetige Zufallsvariable">stetigen Zufallsvariable</Begriff> wird es
-			subtiler. Sie kann <em>jeden</em> Wert in einem Bereich annehmen — die Flügellänge einer
+			subtiler. Sie kann <em>jeden</em> Wert in einem Bereich annehmen: die Flügellänge einer
 			Amsel etwa könnte 130 mm sein, oder 130,1 mm, oder 130,03471… mm. Es gibt unendlich viele
 			mögliche Werte. Und genau deshalb gilt etwas, das im ersten Moment irritiert.
 		</p>
 
 		<Intuition title="Bei stetigen Variablen ist P(X = x) = 0">
-			Frag nach der Wahrscheinlichkeit für einen <em>exakten</em> Wert — etwa eine Flügellänge von
-			genau 130,000… mm auf unendlich viele Stellen genau — dann ist die Antwort <strong>0</strong>.
+			Frag nach der Wahrscheinlichkeit für einen <em>exakten</em> Wert (etwa eine Flügellänge von
+			genau 130,000… mm auf unendlich viele Stellen genau), dann ist die Antwort <strong>0</strong>.
 			Ein einzelner Punkt ist unendlich dünn, er hat keine Breite und damit keine Fläche. Sinnvoll
 			fragen kannst du nur nach <strong>Intervallen</strong>: Wie wahrscheinlich ist eine
-			Flügellänge <em>zwischen</em> 129,5 und 130,5 mm? Das hat eine Breite — und eine Fläche — und
+			Flügellänge <em>zwischen</em> 129,5 und 130,5 mm? Das hat eine Breite, eine Fläche und
 			damit eine Wahrscheinlichkeit.
 		</Intuition>
 
@@ -144,8 +144,8 @@
 		<!-- Die Normalverteilung ------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Die Normalverteilung</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Die wichtigste stetige Verteilung ist die <Begriff term="Normalverteilung" />, kurz N(μ, σ)
-			— die berühmte Glockenkurve. Sie ist symmetrisch, hat ihren Gipfel beim Mittelwert
+			Die wichtigste stetige Verteilung ist die <Begriff term="Normalverteilung" />, kurz
+			N(μ, σ), die berühmte Glockenkurve. Sie ist symmetrisch, hat ihren Gipfel beim Mittelwert
 			<strong>μ</strong> und ihre Breite bestimmt die <Begriff term="Standardabweichung" />
 			<strong>σ</strong>. Verschiebst du μ, wandert die ganze Glocke nach links oder rechts;
 			machst du σ größer, wird sie flacher und breiter, machst du σ kleiner, wird sie schmal und
@@ -153,7 +153,7 @@
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Die Kurve selbst ist die <Begriff term="Dichtefunktion" /> (in R: <code>dnorm</code>). Ihre
-			Formel musst du nicht auswendig können — schau sie dir nur einmal an, damit du μ und σ darin
+			Formel musst du nicht auswendig können, schau sie dir nur einmal an, damit du μ und σ darin
 			wiedererkennst.
 		</p>
 
@@ -176,11 +176,11 @@
 		</p>
 
 		<Intuition title="Die Fläche unter der Dichtekurve ist die Wahrscheinlichkeit">
-			Die gesamte Fläche unter der Glocke ist genau <strong>1</strong> — irgendeine Flügellänge hat
+			Die gesamte Fläche unter der Glocke ist genau <strong>1</strong>, irgendeine Flügellänge hat
 			jeder Vogel schließlich. Die Fläche über einem Teilstück [a, b] ist dann
 			<strong>P(a &lt; X ≤ b)</strong>: der Anteil der Tiere, deren Flügellänge in dieses Intervall
-			fällt — also die Wahrscheinlichkeit, dass ein zufällig gefangener Vogel zwischen a und b misst.
-			Schiebst du a und b zusammen auf einen einzigen Punkt, schrumpft die Fläche auf null — genau
+			fällt, also die Wahrscheinlichkeit, dass ein zufällig gefangener Vogel zwischen a und b misst.
+			Schiebst du a und b zusammen auf einen einzigen Punkt, schrumpft die Fläche auf null, genau
 			deshalb ist P(X = x) = 0. Diese eine Idee macht später Konfidenzintervalle, p-Werte und
 			Streubereiche verständlich.
 		</Intuition>
@@ -208,8 +208,8 @@
 			Flügellänge unserer Vogelart in Millimetern. Geh am besten in dieser Reihenfolge vor:
 		</p>
 		<ol class="text-ink-soft ml-5 list-decimal space-y-1 leading-relaxed">
-			<li>Zieh die Grenzen <strong>a</strong> und <strong>b</strong> auseinander und beobachte, wie die korallene Fläche und der Wert <strong>P(a &lt; X ≤ b)</strong> — der Anteil der Vögel mit Flügellänge dazwischen — wachsen.</li>
-			<li>Schieb a und b ganz dicht zusammen — die Fläche und damit die Wahrscheinlichkeit gehen gegen null.</li>
+			<li>Zieh die Grenzen <strong>a</strong> und <strong>b</strong> auseinander und beobachte, wie die korallene Fläche und der Wert <strong>P(a &lt; X ≤ b)</strong> (der Anteil der Vögel mit Flügellänge dazwischen) wachsen.</li>
+			<li>Schieb a und b ganz dicht zusammen, die Fläche und damit die Wahrscheinlichkeit gehen gegen null.</li>
 			<li>Verschieb <strong>μ</strong> und ändere <strong>σ</strong> und sieh zu, wie sich die Glocke (und die schattierte Fläche) umformt.</li>
 			<li>Schalte <strong>„in Standardabweichungen (z) anzeigen“</strong> ein: Die Achse zeigt nun z-Werte — so sieht jede Normalverteilung gleich aus.</li>
 			<li>Blende die <strong>68/95/99,7-Bereiche</strong> ein und stell a = μ − 2σ, b = μ + 2σ ein. Du solltest rund 95 % ablesen.</li>
@@ -220,7 +220,7 @@
 		<!-- Z-Transformation ----------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Die Z-Transformation</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Es gibt unendlich viele Normalverteilungen — für jede Kombination aus μ und σ eine. Wäre es
+			Es gibt unendlich viele Normalverteilungen, für jede Kombination aus μ und σ eine. Wäre es
 			nicht praktisch, sie alle auf <em>eine</em> gemeinsame zurückzuführen? Genau das leistet die
 			<Begriff term="Z-Transformation" />: Du ziehst von jedem Wert den Mittelwert ab und teilst
 			durch die Standardabweichung.
@@ -240,7 +240,7 @@
 			Das Ergebnis ist die <Begriff term="Standardnormalverteilung" /> N(0, 1): Mittelwert 0,
 			Standardabweichung 1. Ein z-Wert von +1 bedeutet „eine Standardabweichung über dem
 			Mittelwert“, unabhängig davon, ob es um Körpergrößen, Testergebnisse oder Temperaturen geht.
-			Genau das siehst du, wenn du im Flächen-Schieber den z-Schalter aktivierst — die Achse wird
+			Genau das siehst du, wenn du im Flächen-Schieber den z-Schalter aktivierst, die Achse wird
 			in Standardabweichungen beschriftet.
 		</p>
 
@@ -263,8 +263,8 @@
 
 		<Merke title="dnorm ist die Höhe, pnorm ist die Fläche">
 			Verwechsle die beiden nicht: <code>dnorm</code> (die Dichte) gibt dir die <em>Höhe</em> der
-			Kurve — das ist <strong>keine</strong> Wahrscheinlichkeit. <code>pnorm</code> (die
-			Verteilungsfunktion) gibt dir die <em>Fläche von links</em>, also P(X ≤ x) — und Flächen
+			Kurve, das ist <strong>keine</strong> Wahrscheinlichkeit. <code>pnorm</code> (die
+			Verteilungsfunktion) gibt dir die <em>Fläche von links</em>, also P(X ≤ x), und Flächen
 			<strong>sind</strong> Wahrscheinlichkeiten. Willst du P(a &lt; X ≤ b), rechnest du
 			pnorm(b) − pnorm(a).
 		</Merke>
@@ -272,10 +272,10 @@
 		<!-- Diskrete Verteilungen ------------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Jenseits der Glocke: zwei diskrete Verteilungen</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Die Normalverteilung beschreibt stetige Messgrößen — Längen, Gewichte,
+			Die Normalverteilung beschreibt stetige Messgrößen: Längen, Gewichte,
 			Temperaturen. Viele biologische Fragen sind aber <em>Zählfragen</em>: Wie viele
 			von 20 Samen keimen? Wie viele Tiere sitzen in einem Probequadrat? Solche
-			Anzahlen sind <Begriff term="Diskrete Zufallsvariable">diskret</Begriff> — und
+			Anzahlen sind <Begriff term="Diskrete Zufallsvariable">diskret</Begriff>, und
 			zwei diskrete Verteilungen begegnen dir immer wieder.
 		</p>
 
@@ -285,7 +285,7 @@
 			<strong>Erfolge</strong> du in <strong>n unabhängigen Versuchen</strong> mit
 			jeweils gleicher Erfolgswahrscheinlichkeit <strong>p</strong> erzielst.
 			Das klassische biologische Beispiel: Du säst n = 20 Samen aus, jeder keimt mit
-			Wahrscheinlichkeit p = 0,7 — wie viele der 20 keimen am Ende? Die Antwort ist
+			Wahrscheinlichkeit p = 0,7. Wie viele der 20 keimen am Ende? Die Antwort ist
 			keine feste Zahl, sondern eine ganze Verteilung über k = 0, 1, …, n. Ihr
 			Erwartungswert ist schlicht n · p.
 		</p>
@@ -328,7 +328,7 @@ pbinom(12, size = 20, prob = 0.7)`}
 			seltenes Ereignis pro Einheit auftritt: Tiere pro Probequadrat, Mutationen pro
 			Genom, Pollenkörner pro Sichtfeld. Dafür ist die
 			<Begriff term="Poissonverteilung" /> gemacht. Sie hat einen einzigen Parameter,
-			die mittlere Rate <strong>λ</strong> — und das Besondere: bei ihr sind
+			die mittlere Rate <strong>λ</strong>. Das Besondere: bei ihr sind
 			<strong>Mittelwert und Varianz beide gleich λ</strong>.
 		</p>
 
@@ -375,7 +375,7 @@ ppois(2, lambda = 3)`}
 
 		<p class="text-ink-soft leading-relaxed">
 			Anders als bei der stetigen Glockenkurve hat hier <em>jeder einzelne Wert</em> k
-			eine echte, positive Wahrscheinlichkeit — die Höhe jedes Balkens. Probier im
+			eine echte, positive Wahrscheinlichkeit, nämlich die Höhe jedes Balkens. Probier im
 			Erkunder beide Verteilungen aus: Schieb bei der Binomial p von 0,1 bis 0,9 und
 			beobachte, wie der Gipfel wandert; mach bei der Poisson λ größer und sieh, wie
 			die schiefe Form immer symmetrischer (glockenähnlicher) wird.
@@ -407,7 +407,7 @@ ppois(2, lambda = 3)`}
 			>
 				<span class="text-xl" aria-hidden="true">✓</span>
 				<p class="font-semibold">
-					Geschafft! Diese Lektion ist als abgeschlossen markiert — du findest den Haken jetzt
+					Geschafft! Diese Lektion ist als abgeschlossen markiert. Den Haken findest du jetzt
 					auch in der Seitenleiste.
 				</p>
 			</div>
