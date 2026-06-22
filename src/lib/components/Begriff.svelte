@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { lookup } from '$lib/glossary';
-	import { useId } from '$lib/use-id';
 
 	type Props = {
 		/** Schlüssel ins Glossar (Groß-/Kleinschreibung egal). */
@@ -14,7 +13,8 @@
 
 	const entry = $derived(lookup(term));
 	let open = $state(false);
-	const popId = useId('begriff');
+	// SSR/hydration-stable unique id (see FormelZeigen for why not a counter).
+	const popId = $props.id();
 
 	function show() {
 		open = true;

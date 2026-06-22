@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Katex from '$lib/Katex.svelte';
-	import { useId } from '$lib/use-id';
 
 	export type Symbol = {
 		/** Das Symbol als TeX-Ausschnitt (inline gerendert), z. B. `\sigma`. */
@@ -19,7 +18,10 @@
 	let { formula, symbols = [] }: Props = $props();
 
 	let open = $state(false);
-	const panelId = useId('formel');
+	// $props.id() is unique per instance AND consistent across SSR prerender and
+	// client hydration (a global counter is not — it carries across pages on the
+	// server but resets on the client, breaking the aria-controls link).
+	const panelId = $props.id();
 </script>
 
 <div class="border-ink/10 bg-paper-raised shadow-soft my-5 overflow-hidden rounded-2xl border">

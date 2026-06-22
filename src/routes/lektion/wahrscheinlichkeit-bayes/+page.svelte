@@ -164,8 +164,9 @@
 			<strong>k von n</strong> markierten Tieren wieder einzufangen, oder in welcher
 			Reihenfolge drei Würfel fallen können? Hier hilft die
 			<Begriff term="Kombinatorik" />, die Kunst des systematischen Zählens. Schon
-			Galileo zählte die Würfe dreier Würfel durch, um ein Glücksspiel-Rätsel zu
-			lösen.
+			Galileo zählte die Würfe dreier Würfel durch, um zu klären, warum bei drei
+			Würfeln die Augensumme 10 etwas häufiger fällt als die 9 — obwohl sich beide
+			scheinbar gleich oft als Summe darstellen lassen.
 		</p>
 
 		<p class="text-ink-soft leading-relaxed">
@@ -173,8 +174,11 @@
 			Hat ein erster Schritt <strong>a</strong> Möglichkeiten und ein unabhängiger
 			zweiter <strong>b</strong>, so gibt es zusammen <strong>a · b</strong>
 			Kombinationen. Drei Würfel haben deshalb 6 · 6 · 6 = 216 mögliche Wurf­folgen.
-			Genau dieses „mal“ erklärt, warum beim <em>de-Méré-Paradox</em> die Zahlen so
-			schnell groß werden.
+			Genau dieses „mal“ erklärt, warum die Zahl der Möglichkeiten so schnell groß
+			wird. Ein anderes berühmtes Würfelrätsel ist das <em>de-Méré-Paradox</em>: Wie
+			wahrscheinlich ist mindestens eine Doppelsechs in 24 Würfen zweier Würfel? Auch
+			das löst man, indem man die günstigen gegen die 36<sup>24</sup> möglichen
+			Wurffolgen abzählt.
 		</p>
 
 		<FormelZeigen

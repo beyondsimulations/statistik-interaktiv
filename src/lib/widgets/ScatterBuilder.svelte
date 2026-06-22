@@ -198,7 +198,9 @@
 		activePreset = 'custom' as keyof typeof PRESETS;
 	}
 	function removeLast() {
-		if (points.length <= 2) return; // mindestens 2 Punkte behalten
+		// Mindestens 3 Punkte behalten: die Trendgerade (linearRegression) ist erst
+		// ab n ≥ 3 definiert — darunter würde sie verschwinden, während r noch zählt.
+		if (points.length <= 3) return;
 		points = points.slice(0, -1);
 		activePreset = 'custom' as keyof typeof PRESETS;
 	}
@@ -329,7 +331,7 @@
 					fill-opacity={dragId === p.id ? 0.95 : 0.75}
 					stroke="var(--color-paper-raised)"
 					stroke-width="2"
-					class="cursor-grab focus:outline-none"
+					class="dot cursor-grab"
 					style="touch-action: none;"
 					role="button"
 					tabindex="0"
@@ -377,3 +379,17 @@
 		</div>
 	{/snippet}
 </Widget>
+
+<style>
+	/* Sichtbarer Tastatur-Fokus (WCAG 2.4.7): statt den Outline zu unterdrücken,
+	   bekommt der fokussierte Punkt einen klar erkennbaren Ring. */
+	.dot:focus {
+		outline: none;
+	}
+	.dot:focus-visible {
+		stroke: var(--color-ink);
+		stroke-width: 3;
+		outline: 2px solid var(--color-ink);
+		outline-offset: 2px;
+	}
+</style>

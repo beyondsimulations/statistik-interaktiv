@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
 	import SSZerlegung from './SSZerlegung.svelte';
-	import { oneWayAnova, makeRng, standardNormal } from '$lib/stats';
-	import { bellCurvePath } from '$lib/widgets/curve';
+	import { oneWayAnova, makeRng, standardNormal, mean } from '$lib/stats';
+	import { makeLinearScale, bellCurvePath } from '$lib/widgets/curve';
 
 	// --- Idee ------------------------------------------------------------------
 	// Drei Käfigtypen, in denen wir die Größe (cm) von Lachsen (Salmo salar)
@@ -39,7 +39,7 @@
 			const rng = makeRng(SEEDS[gi]);
 			const raw: number[] = [];
 			for (let i = 0; i < N_PER_GROUP; i++) raw.push(standardNormal(rng));
-			const m = raw.reduce((a, b) => a + b, 0) / raw.length;
+			const m = mean(raw);
 			// Zentrieren auf 0, dann auf within skalieren und um mu verschieben.
 			return raw.map((z) => mu + (z - m) * within);
 		});
@@ -62,7 +62,8 @@
 	const halfSpan = $derived(Math.max(spacing + 3 * within, 24));
 	const lo = $derived(BASE - halfSpan);
 	const hi = $derived(BASE + halfSpan);
-	const sx = $derived.by(() => (x: number) => PAD_L + ((x - lo) / (hi - lo)) * plotW);
+	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
+	const sx = $derived(scaleX.map);
 	// sy bildet einen Höhen-Anteil (0..1, Gipfel = 1) auf die SVG-y-Achse ab;
 	// peakFrac 0.8 hält die Gipfelhöhe wie zuvor (Gipfel ist σ-invariant).
 	const PEAK_FRAC = 0.8;

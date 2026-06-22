@@ -62,7 +62,7 @@
 
 	// x-Wert (Datenraum) → SVG-x über die geteilte lineare Skala.
 	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
-	const sx = $derived.by(() => (x: number) => scaleX.map(x));
+	const sx = $derived(scaleX.map);
 
 	// Kurvenpunkte (Polyline der gesamten Dichte) über die geteilte Helferin.
 	const curvePoints = $derived(

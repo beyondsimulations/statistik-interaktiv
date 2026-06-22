@@ -449,8 +449,9 @@ predict(model, newdata = neu, interval = "prediction")`}
 		<!-- Zusammenfassung ----------------------------------------------------- -->
 		<Intuition title="In einem Satz">
 			Die <strong>lineare Regression</strong> schätzt mit der <strong>Methode der kleinsten
-			Quadrate</strong> die Gerade ŷ = a + b·x (Schätzer für die wahren α, β) und sagt, mit
-			<strong>Richtung</strong> (X erklärt Y), Y vorher; die <strong>Steigung b</strong> ist die
+			Quadrate</strong> die Gerade ŷ = a + b·x (Schätzer für die wahren α, β) und sagt Y aus X
+			vorher — sie hat im Gegensatz zur Korrelation eine <strong>Richtung</strong> (X erklärt Y);
+			die <strong>Steigung b</strong> ist die
 			Effektgröße, <strong>R² = SS_Regression/SS_Total</strong> der erklärte Anteil, und der
 			<strong>t-Test auf β = 0</strong> (df = n − 2) prüft, ob der Zusammenhang existiert — wobei
 			<strong>Signifikanz ≠ gute Vorhersage</strong> (R² ≠ Signifikanz) ist und erst die

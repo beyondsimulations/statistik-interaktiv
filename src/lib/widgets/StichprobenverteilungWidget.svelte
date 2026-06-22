@@ -12,6 +12,7 @@
 		binCounts,
 		type PopulationKind
 	} from '$lib/stats';
+	import { makeLinearScale } from '$lib/widgets/curve';
 
 	// --- Reproducible RNG -----------------------------------------------------
 	// One stream for the static reference population (so it doesn't reshuffle on
@@ -162,10 +163,10 @@
 	const STRIP_H = 64;
 	const stripScale = $derived.by(() => {
 		const [lo, hi] = popDomain;
-		return (v: number) => {
-			const t = (v - lo) / (hi - lo);
-			return Math.max(0, Math.min(1, t)) * (STRIP_W - 16) + 8;
-		};
+		const scale = makeLinearScale(lo, hi, 8, STRIP_W - 8);
+		// Clamp to the drawable strip [8, STRIP_W − 8] so out-of-domain values stay
+		// on the strip instead of overshooting its ends.
+		return (v: number) => Math.max(8, Math.min(STRIP_W - 8, scale.map(v)));
 	});
 
 	function fmt(v: number | null, digits = 2): string {

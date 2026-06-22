@@ -324,6 +324,21 @@
 
 			<!-- Datenpunkte -->
 			{#each points as p (p.id)}
+				<!-- Hebelpunkt: zusätzlich zum Farbunterschied (koralle vs. grün) ein
+				     nicht-farblicher Hinweis — ein zweiter, abgesetzter gestrichelter Ring —
+				     damit auch farbenblinde Nutzer ihn erkennen. -->
+				{#if p.leverage}
+					<circle
+						cx={toPxX(p.x)}
+						cy={toPxY(p.y)}
+						r={(dragId === p.id || selectedId === p.id ? 9 : 7) + 4}
+						fill="none"
+						stroke="var(--color-coral-500)"
+						stroke-width="1.5"
+						stroke-dasharray="3 2"
+						pointer-events="none"
+					/>
+				{/if}
 				<circle
 					cx={toPxX(p.x)}
 					cy={toPxY(p.y)}
@@ -332,7 +347,7 @@
 					fill-opacity={dragId === p.id ? 0.95 : 0.8}
 					stroke="var(--color-paper-raised)"
 					stroke-width="2"
-					class="cursor-grab focus:outline-none"
+					class="dot cursor-grab"
 					style="touch-action: none;"
 					role="button"
 					tabindex="0"
@@ -381,3 +396,17 @@
 		</div>
 	{/snippet}
 </Widget>
+
+<style>
+	/* Sichtbarer Tastatur-Fokus (WCAG 2.4.7): statt den Outline zu unterdrücken,
+	   bekommt der fokussierte Punkt einen klar erkennbaren Ring. */
+	.dot:focus {
+		outline: none;
+	}
+	.dot:focus-visible {
+		stroke: var(--color-ink);
+		stroke-width: 3;
+		outline: 2px solid var(--color-ink);
+		outline-offset: 2px;
+	}
+</style>

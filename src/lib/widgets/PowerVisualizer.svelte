@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
 	import { normalCdf, normalQuantile } from '$lib/stats';
-	import { bellCurvePath, bellAreaPath } from '$lib/widgets/curve';
+	import { makeLinearScale, bellCurvePath, bellAreaPath } from '$lib/widgets/curve';
 
 	// --- Idee ------------------------------------------------------------------
 	// Zwei Glockenkurven auf der Skala der Teststatistik (z-Skala, SD = 1):
@@ -52,7 +52,8 @@
 	const lo = $derived(Math.min(-3.5, delta - 3.5));
 	const hi = $derived(Math.max(3.5, delta + 3.5));
 
-	const sx = $derived.by(() => (x: number) => PAD_L + ((x - lo) / (hi - lo)) * plotW);
+	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
+	const sx = $derived(scaleX.map);
 	// sy bildet einen Höhen-Anteil (0..1, Gipfel = 1) auf SVG-y ab; peakFrac 0.9
 	// hält die Gipfelhöhe wie zuvor. Wird für die H0/HA-Beschriftung gebraucht.
 	const PEAK_FRAC = 0.9;

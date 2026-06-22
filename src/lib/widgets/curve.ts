@@ -68,7 +68,9 @@ export interface BellCurveOpts {
  * unten). Der Gipfel ist konstruktionsbedingt invariant gegen σ.
  */
 function densityToY(d: number, peak: number, baseY: number, plotH: number, peakFrac: number): number {
-	if (peak <= 0) return baseY;
+	// `!(peak > 0)` also catches NaN (σ = 0 makes the peak NaN); guard `d` too so
+	// a degenerate curve collapses to the baseline instead of emitting NaN coords.
+	if (!(peak > 0) || !Number.isFinite(d)) return baseY;
 	return baseY - (d / peak) * plotH * peakFrac;
 }
 

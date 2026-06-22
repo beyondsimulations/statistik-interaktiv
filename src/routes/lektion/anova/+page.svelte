@@ -28,15 +28,15 @@
 			id: 'an-1',
 			kind: 'mc',
 			prompt:
-				'Du willst die Größe von Lachsen in vier Käfigtypen vergleichen. Warum rechnest du EINE ANOVA statt sechs einzelner paarweiser t-Tests?',
+				'Du willst die Größe von Lachsen in drei Käfigtypen vergleichen. Warum rechnest du EINE ANOVA statt mehrerer einzelner paarweiser t-Tests?',
 			options: [
-				'Weil die ANOVA rechnerisch einfacher ist als sechs t-Tests und schneller läuft.',
-				'Weil jeder einzelne t-Test das Niveau α verbraucht: Bei sechs Vergleichen steigt die familienweise Fehlerrate auf 1 − (1 − 0,05)⁶ ≈ 26 %. Die ANOVA prüft alle Gruppen in einem Test und hält α ein.',
+				'Weil die ANOVA rechnerisch einfacher ist als drei t-Tests und schneller läuft.',
+				'Weil jeder einzelne t-Test das Niveau α verbraucht: Schon bei drei Vergleichen steigt die familienweise Fehlerrate auf 1 − (1 − 0,05)³ ≈ 14 %, und mit jeder weiteren Gruppe wächst sie rasant. Die ANOVA prüft alle Gruppen in einem Test und hält α ein.',
 				'Weil t-Tests nur für genau zwei Gruppen erlaubt sind und bei mehr Gruppen falsche Mittelwerte berechnen.'
 			],
 			correct: 1,
 			explanation:
-				'Genau. Das ist das Problem des multiplen Testens: Jeder Vergleich hat seine eigene 5 %-Chance auf einen Fehlalarm. Bei c Vergleichen wächst die familienweise Fehlerrate (FWER) auf 1 − (1 − α)^c — bei vier Gruppen sind das c = 6 Vergleiche und schon ~26 %. Die ANOVA bündelt alles in einen einzigen Test über das F-Verhältnis und kontrolliert α.'
+				'Genau. Das ist das Problem des multiplen Testens: Jeder Vergleich hat seine eigene 5 %-Chance auf einen Fehlalarm. Bei c Vergleichen wächst die familienweise Fehlerrate (FWER) auf 1 − (1 − α)^c — bei drei Gruppen sind das c = 3 Vergleiche und schon ~14 %, bei fünf Gruppen schon c = 10 Vergleiche. Die ANOVA bündelt alles in einen einzigen Test über das F-Verhältnis und kontrolliert α.'
 		},
 		{
 			id: 'an-2',
@@ -86,8 +86,8 @@
 
 		<p class="text-ink-soft text-lg leading-relaxed">
 			Der t-Test vergleicht zwei Gruppen. Aber was, wenn du <strong>mehr</strong> hast? Otto
-			züchtet Lachse (<em>Salmo salar</em>) in vier verschiedenen Käfigtypen und will wissen, ob
-			der Käfigtyp die <strong>Größe</strong> der Fische beeinflusst. Vier Gruppen: Der naive
+			züchtet Lachse (<em>Salmo salar</em>) in drei verschiedenen Käfigtypen und will wissen, ob
+			der Käfigtyp die <strong>Größe</strong> der Fische beeinflusst. Drei Gruppen: Der naive
 			Reflex wäre, einfach alle Paare mit t-Tests durchzuprobieren. Genau das geht schief. In
 			dieser Lektion lernst du, warum man stattdessen <strong>einen</strong> Test über alle Gruppen
 			rechnet: die <Begriff term="ANOVA">Varianzanalyse (ANOVA)</Begriff>.
@@ -96,7 +96,8 @@
 		<!-- Das Problem des multiplen Testens ----------------------------------- -->
 		<h2 class="mt-4 text-2xl">Das Problem: viele Vergleiche blähen den Fehler auf</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Bei vier Käfigtypen gibt es <strong>sechs</strong> Paare (1–2, 1–3, 1–4, 2–3, 2–4, 3–4).
+			Bei drei Käfigtypen gibt es <strong>drei</strong> Paare (Netz–Fest, Netz–Tief, Fest–Tief),
+			bei vier Gruppen wären es schon sechs und bei fünf zehn.
 			Jeder einzelne t-Test hat seine eigene 5 %-Chance auf einen <Begriff term="Fehler 1. Art"
 				>Fehlalarm</Begriff
 			>, auch wenn in Wahrheit gar kein Unterschied besteht. Diese kleinen Risiken summieren sich.
@@ -115,9 +116,10 @@
 		/>
 
 		<Callout variant="warnung" title="Viele t-Tests = aufgeblähtes Fehlerrisiko">
-			Bei <strong>c = 5</strong> Vergleichen ist die familienweise Fehlerrate
-			1 − (1 − 0,05)⁵ ≈ <strong>23 %</strong>, bei sechs Vergleichen schon ~26 %. Du würdest also
-			mit hoher Wahrscheinlichkeit einen Unterschied „finden“, den es gar nicht gibt. Deshalb:
+			Schon bei <strong>c = 3</strong> Vergleichen (unsere drei Käfigtypen) ist die familienweise
+			Fehlerrate 1 − (1 − 0,05)³ ≈ <strong>14 %</strong>, bei fünf Vergleichen ~23 % und bei zehn
+			schon ~40 %. Du würdest also
+			mit wachsender Wahrscheinlichkeit einen Unterschied „finden“, den es gar nicht gibt. Deshalb:
 			<strong>nicht</strong> viele paarweise t-Tests, sondern <strong>ein</strong> Test über alle
 			Gruppen.
 		</Callout>
@@ -207,7 +209,7 @@
 		/>
 
 		<Analogie title="Käfige im Chor">
-			Stell dir die vier Käfige als vier Sängergruppen vor. Die
+			Stell dir die drei Käfige als drei Sängergruppen vor. Die
 			<strong>Streuung innerhalb</strong> ist das Gemurmel innerhalb jeder Gruppe — das Grundrauschen.
 			Die <strong>Streuung zwischen</strong> ist, wie deutlich sich die Gruppen in ihrer Tonhöhe
 			voneinander abheben. Hört man die Gruppen klar auseinander (großes Signal) trotz des Gemurmels

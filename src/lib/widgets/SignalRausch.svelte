@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Widget from '$lib/components/Widget.svelte';
 	import { summaryTTest, makeRng, standardNormal } from '$lib/stats';
-	import { bellCurvePath } from '$lib/widgets/curve';
+	import { makeLinearScale, bellCurvePath } from '$lib/widgets/curve';
 
 	// --- Idee ------------------------------------------------------------------
 	// Zwei Vogelarten, deren Zugdistanz (km) wir vergleichen: Buchfink (grün) und
@@ -47,7 +47,8 @@
 	const lo = $derived(BASE - halfSpan);
 	const hi = $derived(BASE + halfSpan);
 
-	const sx = $derived.by(() => (x: number) => PAD_L + ((x - lo) / (hi - lo)) * plotW);
+	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
+	const sx = $derived(scaleX.map);
 	// Höhe relativ zur höchsten Glocke (kleinstes s → spitzeste Kurve). peakFrac
 	// 0.82 hält die Gipfelhöhe wie zuvor; sy wird noch für die Mittelwert- und
 	// Δ-Linien gebraucht (Gipfelhöhe ist σ-invariant).
