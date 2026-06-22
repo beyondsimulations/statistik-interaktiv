@@ -9,9 +9,9 @@ lang: en
 
 Information pursuant to § 5 DDG (German Digital Services Act) and responsibility for content pursuant to § 18(2) MStV:
 
-Dr. Tobias Vlćek\
-Am Eich 9d\
-22113 Oststeinbek\
+Dr. Tobias Vlćek<br />
+Am Eich 9d<br />
+22113 Oststeinbek<br />
 Germany
 
 Email: <a href="mailto:vlcek@beyondsimulations.com">vlcek@beyondsimulations.com</a>
