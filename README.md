@@ -6,7 +6,7 @@ Design"** (Dr. Saskia Otto). It turns the statistics curriculum into 14 lessons,
 each pairing warm, plain-German explanations with a hands-on interactive widget
 and a self-check.
 
-**Live site:** https://beyondsimulations.github.io/Data-Science/
+**Live site:** https://beyondsimulations.github.io/statistik-interaktiv/
 
 ## What's inside
 
@@ -35,7 +35,7 @@ npm run build    # static build → ./build
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with
-`BASE_PATH=/Data-Science` and publishes the static `build/` to GitHub Pages.
+`BASE_PATH=/statistik-interaktiv` and publishes the static `build/` to GitHub Pages.
 
 ## Credits & license
 

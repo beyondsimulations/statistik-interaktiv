@@ -36,10 +36,10 @@ jobs:
         run: npm ci
 
       - name: Build
-        # The project deploys to https://beyondsimulations.github.io/Data-Science/,
+        # The project deploys to https://beyondsimulations.github.io/statistik-interaktiv/,
         # so the SvelteKit base path must be the repo name.
         env:
-          BASE_PATH: /Data-Science
+          BASE_PATH: /statistik-interaktiv
         run: npm run build
 
       - name: Upload Pages artifact
