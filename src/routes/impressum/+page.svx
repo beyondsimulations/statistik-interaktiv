@@ -2,6 +2,7 @@
 title: Imprint
 subtitle: Legal notice
 date: '2026-06-22'
+lang: en
 ---
 
 ## Provider and responsible for content

@@ -18,7 +18,7 @@
 			class="hover:text-coral-600 underline underline-offset-2"
 			href="https://saskiaotto.github.io/uham-bio-data-science-2/"
 			target="_blank"
-			rel="noopener noreferrer">Kurs „Data Science 2" von Dr. Saskia Otto</a
+			rel="noopener noreferrer">Kurs „Data Science 2“ von Dr. Saskia Otto</a
 		>
 		·
 		<a
@@ -28,7 +28,7 @@
 			rel="noopener noreferrer">CC&nbsp;BY-SA&nbsp;4.0</a
 		>
 	</p>
-	<nav class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1" aria-label="Rechtliches">
+	<nav class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1" aria-label="Weitere Seiten">
 		<a class="hover:text-coral-600 underline underline-offset-2" href="{base}/ueber">Über</a>
 		<a class="hover:text-coral-600 underline underline-offset-2" href="{base}/impressum">Impressum</a>
 		<a class="hover:text-coral-600 underline underline-offset-2" href="{base}/datenschutz"

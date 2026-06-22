@@ -10,16 +10,16 @@ date: '2026-06-22'
 
 ## Worum es geht
 
-„Statistik interaktiv" ist eine kostenlose, interaktive Lernumgebung zur
+„Statistik interaktiv“ ist eine kostenlose, interaktive Lernumgebung zur
 Vorlesung „Data Science 2 – Grundlagen der Statistik und experimentelles
-Design". Sie erklärt die Inhalte Schritt für Schritt, intuition-first und mit
-interaktiven Beispielen. Ziel ist, Statistik wirklich zu verstehen statt sie
+Design“. Sie erklärt die Inhalte in kleinen Schritten: zuerst die Intuition,
+dann interaktive Beispiele. Ziel ist, Statistik wirklich zu verstehen statt sie
 auswendig zu lernen.
 
 ## Inhaltliche Grundlage & Attribution
 
 Themenauswahl, Aufbau und viele Beispiele orientieren sich am Kurs
-„Data Science 2" von **Dr. Saskia Otto** (Universität Hamburg) –
+„Data Science 2“ von **Dr. Saskia Otto** (Universität Hamburg) –
 [zum Originalkurs](https://saskiaotto.github.io/uham-bio-data-science-2/).
 Diese Kursmaterialien stehen unter
 **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**.
