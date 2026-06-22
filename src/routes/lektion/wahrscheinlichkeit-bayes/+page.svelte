@@ -156,6 +156,119 @@
 			</ul>
 		</Merke>
 
+		<!-- Kombinatorik --------------------------------------------------------- -->
+		<h2 class="mt-4 text-2xl">Kombinatorik: die möglichen Fälle zählen</h2>
+		<p class="text-ink-soft leading-relaxed">
+			Die Laplace-Formel verlangt die <em>Anzahl möglicher Fälle</em>. Bei einem
+			Würfel sind das sechs — leicht abgezählt. Aber wie viele Möglichkeiten gibt es,
+			<strong>k von n</strong> markierten Tieren wieder einzufangen, oder in welcher
+			Reihenfolge drei Würfel fallen können? Hier hilft die
+			<Begriff term="Kombinatorik" />, die Kunst des systematischen Zählens. Schon
+			Galileo zählte die Würfe dreier Würfel durch, um ein Glücksspiel-Rätsel zu
+			lösen.
+		</p>
+
+		<p class="text-ink-soft leading-relaxed">
+			Das Fundament ist das <Begriff term="Zählprinzip" /> (fundamental counting):
+			Hat ein erster Schritt <strong>a</strong> Möglichkeiten und ein unabhängiger
+			zweiter <strong>b</strong>, so gibt es zusammen <strong>a · b</strong>
+			Kombinationen. Drei Würfel haben deshalb 6 · 6 · 6 = 216 mögliche Wurf­folgen.
+			Genau dieses „mal“ erklärt, warum beim <em>de-Méré-Paradox</em> die Zahlen so
+			schnell groß werden.
+		</p>
+
+		<FormelZeigen
+			formula={String.raw`N = n_1 \cdot n_2 \cdots n_k`}
+			symbols={[
+				{ sym: String.raw`N`, bedeutung: 'Gesamtzahl der Möglichkeiten über alle Schritte.' },
+				{ sym: String.raw`n_i`, bedeutung: 'Anzahl der Möglichkeiten im i-ten Schritt.' },
+				{ sym: String.raw`k`, bedeutung: 'Anzahl der (unabhängigen) Schritte.' }
+			]}
+		/>
+
+		<p class="text-ink-soft leading-relaxed">
+			Wenn du <strong>k aus n</strong> Objekten auswählst, hängt die Anzahl von zwei
+			Fragen ab: Spielt die <em>Reihenfolge</em> eine Rolle? Und legst du ein
+			gezogenes Objekt <em>zurück</em> oder nicht? Daraus ergeben sich vier Fälle.
+		</p>
+
+		<p class="text-ink-soft leading-relaxed">
+			Zählt die <strong>Reihenfolge</strong> und ziehst du <strong>ohne
+			Zurücklegen</strong>, sprichst du von einer <Begriff term="Permutation" />: Für
+			das erste Tier hast du n Möglichkeiten, fürs zweite nur noch n − 1 und so
+			weiter — das führt direkt auf n!/(n−k)!. Werden alle n angeordnet, sind es n!.
+		</p>
+
+		<FormelZeigen
+			formula={String.raw`P(n, k) = \dfrac{n!}{(n-k)!}`}
+			symbols={[
+				{ sym: String.raw`P(n,k)`, bedeutung: 'Anzahl geordneter Auswahlen von k aus n ohne Zurücklegen (Permutationen).' },
+				{ sym: String.raw`n!`, bedeutung: 'n-Fakultät: n · (n−1) · … · 1 — die Möglichkeiten, alle n anzuordnen.' },
+				{ sym: String.raw`(n-k)!`, bedeutung: 'Teilt die nicht gezogenen Plätze heraus, die du nicht mehr unterscheidest.' }
+			]}
+		/>
+
+		<p class="text-ink-soft leading-relaxed">
+			Ist die <strong>Reihenfolge egal</strong> (auch ohne Zurücklegen), zählst du
+			jede Gruppe nur einmal — das ist eine <Begriff term="Kombination" />. Du teilst
+			die Permutationen noch durch die k! Anordnungen innerhalb jeder Gruppe und
+			erhältst den <Begriff term="Binomialkoeffizient">Binomialkoeffizienten</Begriff>
+			„n über k“. So zählst du etwa, auf wie viele Arten du <strong>k von n</strong>
+			markierten Lachsen aus dem Netz greifen kannst.
+		</p>
+
+		<FormelZeigen
+			formula={String.raw`\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}`}
+			symbols={[
+				{ sym: String.raw`\binom{n}{k}`, bedeutung: '„n über k": Anzahl ungeordneter Auswahlen von k aus n ohne Zurücklegen (Kombinationen).' },
+				{ sym: String.raw`k!`, bedeutung: 'Teilt die k! Reihenfolgen innerhalb einer Gruppe heraus, weil sie hier nicht zählen.' },
+				{ sym: String.raw`(n-k)!`, bedeutung: 'Wie bei der Permutation: die nicht gewählten Objekte.' }
+			]}
+		/>
+
+		<p class="text-ink-soft leading-relaxed">
+			Darf ein Objekt <strong>mehrfach</strong> vorkommen (Ziehen
+			<strong>mit Zurücklegen</strong>, Reihenfolge zählt), bleibt es bei jedem der k
+			Schritte bei allen n Möglichkeiten — das Zählprinzip liefert direkt
+			<strong>n<sup>k</sup></strong>. Genau so entstehen die 6³ = 216 Wurffolgen
+			dreier Würfel.
+		</p>
+
+		<FormelZeigen
+			formula={String.raw`N = n^k`}
+			symbols={[
+				{ sym: String.raw`n^k`, bedeutung: 'Möglichkeiten beim Ziehen mit Zurücklegen, wenn die Reihenfolge zählt (k Schritte, je n Optionen).' },
+				{ sym: String.raw`n`, bedeutung: 'Anzahl der Optionen pro Schritt (bleibt konstant, weil zurückgelegt wird).' },
+				{ sym: String.raw`k`, bedeutung: 'Anzahl der Ziehungen.' }
+			]}
+		/>
+
+		<Merke title="Zwei Fragen entscheiden, was du rechnest">
+			<ul class="ml-5 list-disc space-y-1">
+				<li>
+					<strong>Reihenfolge zählt, ohne Zurücklegen:</strong> Permutation n!/(n−k)!.
+				</li>
+				<li>
+					<strong>Reihenfolge egal, ohne Zurücklegen:</strong> Kombination
+					„n über k“ = n!/(k!·(n−k)!).
+				</li>
+				<li>
+					<strong>Reihenfolge zählt, mit Zurücklegen:</strong> n<sup>k</sup>.
+				</li>
+			</ul>
+			Frag dich also immer zuerst: Spielt die Reihenfolge eine Rolle — und lege ich
+			zurück?
+		</Merke>
+
+		<Analogie title="Drei markierte Lachse aus dem Netz">
+			Du hast n = 10 markierte Lachse im Teich und fängst k = 3. Ist dir egal,
+			<em>welche</em> drei (nur die Gruppe zählt), gibt es „10 über 3“ = 120
+			Möglichkeiten. Achtest du dagegen auf die <em>Reihenfolge</em> des Fangs, sind
+			es 10 · 9 · 8 = 720. Und dürftest du denselben Fisch theoretisch mehrfach
+			fangen (mit Zurücklegen, mit Reihenfolge), wären es sogar 10³ = 1000. Dieselbe
+			Ausgangslage, drei sehr verschiedene Zahlen.
+		</Analogie>
+
 		<!-- Rechenregeln --------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Die wichtigsten Rechenregeln</h2>
 		<p class="text-ink-soft leading-relaxed">

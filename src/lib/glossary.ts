@@ -647,6 +647,115 @@ export const glossary: Record<string, GlossaryEntry> = {
 		term: 'Gekreuztes Design',
 		definition:
 			'Crossed: Jede Stufe des einen Faktors tritt mit jeder Stufe des anderen kombiniert auf (z. B. Behandlung × Geschlecht in allen Kombinationen). Erlaubt es, Wechselwirkungen zu schätzen.'
+	},
+
+	// --- Skalenniveaus (Lektion „Was ist Statistik?") ----------------------
+	Skalenniveau: {
+		term: 'Skalenniveau',
+		definition:
+			'Wie „reichhaltig" eine gemessene Variable ist: nominal, ordinal oder metrisch. Es entscheidet, welche Rechenoperationen und welche Tests überhaupt erlaubt sind.'
+	},
+	'Nominalskala': {
+		term: 'Nominalskala',
+		definition:
+			'Reine Kategorien ohne Rangfolge — nur gleich oder ungleich (z. B. Art, Geschlecht, Blutgruppe). Man darf zählen, aber nicht ordnen oder rechnen.'
+	},
+	'Ordinalskala': {
+		term: 'Ordinalskala',
+		definition:
+			'Geordnete Stufen mit Rangfolge, aber ohne gleiche Abstände (z. B. Boniturnoten, Befallsstufen gering/mittel/stark). Man darf ordnen, aber Differenzen nicht sinnvoll rechnen.'
+	},
+	'Metrische Skala': {
+		term: 'Metrische Skala',
+		definition:
+			'Zahlen mit echten, gleichen Abständen (z. B. Länge, Gewicht, Temperatur). Differenzen sind sinnvoll. Unterteilt in Intervall- und Verhältnisskala.'
+	},
+	'Intervallskala': {
+		term: 'Intervallskala',
+		definition:
+			'Metrische Skala mit gleichen Abständen, aber ohne echten Nullpunkt (z. B. Temperatur in °C). Differenzen sind sinnvoll, Verhältnisse nicht: 20 °C ist nicht „doppelt so warm".'
+	},
+	'Verhältnisskala': {
+		term: 'Verhältnisskala',
+		definition:
+			'Metrische Skala mit echtem Nullpunkt (z. B. Länge, Gewicht, Anzahl). Hier sind auch Verhältnisse sinnvoll: 6 cm sind doppelt so lang wie 3 cm.'
+	},
+
+	// --- Kombinatorik (Lektion „Wahrscheinlichkeit & Bayes") ---------------
+	Kombinatorik: {
+		term: 'Kombinatorik',
+		definition:
+			'Die Kunst des Zählens: Wie viele Möglichkeiten gibt es überhaupt? Liefert die „Anzahl möglicher Fälle" für die Laplace-Wahrscheinlichkeit.'
+	},
+	'Zählprinzip': {
+		term: 'Zählprinzip',
+		definition:
+			'Fundamentalprinzip des Zählens: Hat ein Schritt a Möglichkeiten und ein unabhängiger zweiter b, so gibt es a · b Kombinationen. Lässt sich über beliebig viele Schritte fortsetzen.'
+	},
+	Permutation: {
+		term: 'Permutation',
+		definition:
+			'Eine Anordnung, bei der die Reihenfolge zählt. Für k aus n ohne Zurücklegen: n!/(n−k)!. Alle n ordnen: n!.'
+	},
+	Kombination: {
+		term: 'Kombination',
+		definition:
+			'Eine Auswahl, bei der die Reihenfolge egal ist. k aus n ohne Zurücklegen: der Binomialkoeffizient C(n,k) = n!/(k!·(n−k)!).'
+	},
+	Binomialkoeffizient: {
+		term: 'Binomialkoeffizient',
+		definition:
+			'C(n,k) = n!/(k!·(n−k)!), gelesen „n über k": die Anzahl der Möglichkeiten, k Objekte aus n auszuwählen, wenn die Reihenfolge keine Rolle spielt.'
+	},
+
+	// --- Diskrete Verteilungen (Lektion „Verteilungen") --------------------
+	Binomialverteilung: {
+		term: 'Binomialverteilung',
+		definition:
+			'Verteilung der Anzahl Erfolge in n unabhängigen Versuchen mit gleicher Erfolgswahrscheinlichkeit p (z. B. wie viele von n Samen keimen). In R: dbinom/pbinom.'
+	},
+	Poissonverteilung: {
+		term: 'Poissonverteilung',
+		definition:
+			'Verteilung der Anzahl seltener, unabhängiger Ereignisse pro Einheit mit Rate λ (z. B. Tiere pro Quadrat, Mutationen pro Genom). Mittelwert und Varianz sind beide λ. In R: dpois/ppois.'
+	},
+
+	// --- Begriffe, auf die andere Lektionen verweisen ----------------------
+	// (Effektstärke und η² existieren bereits weiter oben und bleiben unverändert.)
+	'Zweifaktorielle ANOVA': {
+		term: 'Zweifaktorielle ANOVA',
+		definition:
+			'Eine ANOVA mit zwei erklärenden Faktoren gleichzeitig. Sie prüft die beiden Haupteffekte und zusätzlich deren Interaktion (Wechselwirkung).'
+	},
+	Interaktionseffekt: {
+		term: 'Interaktionseffekt',
+		definition:
+			'Wechselwirkung: Die Wirkung des einen Faktors hängt von der Stufe eines anderen ab (z. B. wirkt ein Dünger nur bei einer bestimmten Lichtstufe). Im Diagramm: nicht-parallele Linien.'
+	},
+	Vorhersageintervall: {
+		term: 'Vorhersageintervall',
+		definition:
+			'Intervall für eine einzelne neue Beobachtung — nicht für den Mittelwert. Es ist immer breiter als das Konfidenzintervall des Mittelwerts, weil es zusätzlich die Streuung einzelner Werte einschließt.'
+	},
+	Extrapolation: {
+		term: 'Extrapolation',
+		definition:
+			'Eine Vorhersage außerhalb des beobachteten X-Bereichs. Riskant, weil dort niemand geprüft hat, ob der Zusammenhang noch gilt — die Gerade kann völlig danebenliegen.'
+	},
+	'Einseitiger Test': {
+		term: 'Einseitiger Test',
+		definition:
+			'Ein Test, dessen Alternativhypothese nur eine Richtung zulässt (z. B. „größer als"). Die gesamte Irrtumswahrscheinlichkeit α liegt in einem Schwanz — empfindlicher, aber nur bei vorab festgelegter Richtung erlaubt.'
+	},
+	'Zweiseitiger Test': {
+		term: 'Zweiseitiger Test',
+		definition:
+			'Ein Test, der Abweichungen in beide Richtungen prüft (Alternativhypothese „ungleich"). α wird auf beide Schwänze verteilt. Der Standardfall, wenn die Richtung nicht vorab feststeht.'
+	},
+	'Arkussinus-Transformation': {
+		term: 'Arkussinus-Transformation',
+		definition:
+			'Eine Transformation für Anteile/Prozentwerte (arcsin√p), die deren Varianz stabilisiert, damit sie näherungsweise normalverteilt werden und in einer ANOVA/Regression verwendet werden können.'
 	}
 };
 

@@ -6,6 +6,7 @@
 	import Analogie from '$lib/components/Analogie.svelte';
 	import Selbsttest from '$lib/components/Selbsttest.svelte';
 	import Begriff from '$lib/components/Begriff.svelte';
+	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
 	import { progress } from '$lib/stores/progress.svelte';
 	import type { Question } from '$lib/components/selbsttest-logic';
 
@@ -56,6 +57,20 @@
 			correct: false,
 			explanation:
 				'Falsch. Wer am selben Datensatz erst sucht und dann "bestätigt", findet fast zwangsläufig etwas — auch reinen Zufall. Eine explorativ gefundene Hypothese braucht neue, unabhängige Daten zur konfirmatorischen Prüfung.'
+		},
+		{
+			id: 'ws-4',
+			kind: 'mc',
+			prompt:
+				'Du notierst bei gefangenen Fischen den Befall mit Parasiten in den Stufen „gering – mittel – stark“. Welches Skalenniveau hat diese Variable?',
+			options: [
+				'Nominal — es sind reine Kategorien ohne Rangfolge.',
+				'Ordinal — die Stufen haben eine Rangfolge, aber keine gleichen Abstände.',
+				'Metrisch — die Stufen haben gleiche, sinnvolle Abstände.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. „gering – mittel – stark“ ist eine Rangfolge, aber der Abstand zwischen den Stufen ist nicht definiert gleich groß — das ist ordinal. Deshalb passen hier Rangverfahren und der Median besser als ein Mittelwert.'
 		}
 	];
 </script>
@@ -155,6 +170,88 @@
 			dir der beste Löffel nichts.
 		</Analogie>
 
+		<!-- Skalenniveaus -------------------------------------------------------- -->
+		<h2 class="mt-4 text-2xl">Skalenniveaus: Wie reichhaltig ist eine Messung?</h2>
+		<p class="text-ink-soft leading-relaxed">
+			Bevor du eine einzige Zahl berechnest, lohnt eine Frage: <em>Was für eine Art
+			von Variable</em> hast du da überhaupt gemessen? Nicht jede Zahl darf man
+			gleich behandeln. Das <Begriff term="Skalenniveau" /> sagt dir, wie „reichhaltig“
+			eine Variable ist — und damit, welche Rechnungen und welche Tests erlaubt sind.
+			Man unterscheidet drei Stufen, die aufeinander aufbauen.
+		</p>
+
+		<p class="text-ink-soft leading-relaxed">
+			Auf der untersten Stufe steht die <Begriff term="Nominalskala" />. Hier gibt
+			es nur <strong>Kategorien ohne Rangfolge</strong> — du kannst nur sagen, ob
+			zwei Fälle gleich oder ungleich sind. Die <em>Art</em> eines gefangenen Tieres
+			(Lachs, Forelle, Hecht), das <em>Geschlecht</em> oder die <em>Blutgruppe</em>
+			sind nominal. „Lachs ist größer als Forelle“ ergibt als Skala keinen Sinn; du
+			darfst nur <strong>zählen</strong>, wie oft jede Kategorie vorkommt.
+		</p>
+
+		<p class="text-ink-soft leading-relaxed">
+			Eine Stufe darüber liegt die <Begriff term="Ordinalskala" />. Jetzt gibt es
+			eine <strong>Rangfolge</strong>, aber die Abstände sind nicht gleich groß.
+			Klassische Beispiele aus der Biologie sind <em>Bonituren</em> und
+			<em>Rangstufen</em>: ein Befall „gering – mittel – stark“, eine Blühintensität
+			von 1 bis 5. Du darfst die Stufen <strong>ordnen</strong>, aber nicht sagen,
+			der Sprung von „gering“ zu „mittel“ sei genauso groß wie der von „mittel“ zu
+			„stark“. Mittelwerte sind hier mit Vorsicht zu genießen — der Median passt
+			besser.
+		</p>
+
+		<p class="text-ink-soft leading-relaxed">
+			Ganz oben steht die <Begriff term="Metrische Skala">metrische Skala</Begriff>:
+			echte Zahlen mit <strong>gleichen, sinnvollen Abständen</strong>. Die
+			<em>Körperlänge</em> eines Lachses, das <em>Gewicht</em> einer Daphnie, die
+			<em>Temperatur</em> eines Gewässers. Hier darfst du Differenzen bilden und
+			rechnen. Die metrische Skala teilt man noch einmal feiner auf:
+		</p>
+
+		<ul class="text-ink-soft ml-5 list-disc space-y-1 leading-relaxed">
+			<li>
+				Die <Begriff term="Intervallskala" /> hat gleiche Abstände, aber
+				<strong>keinen echten Nullpunkt</strong>. Die Temperatur in °C ist das
+				Standardbeispiel: 20 °C ist nicht „doppelt so warm“ wie 10 °C, weil der
+				Nullpunkt willkürlich gesetzt ist. Differenzen sind sinnvoll, Verhältnisse
+				nicht.
+			</li>
+			<li>
+				Die <Begriff term="Verhältnisskala" /> hat zusätzlich einen
+				<strong>echten Nullpunkt</strong> (null bedeutet „nichts davon“). Länge,
+				Gewicht, Anzahl Eier. Hier sind auch Verhältnisse sinnvoll: ein 6 cm langer
+				Fisch ist doppelt so lang wie ein 3 cm langer.
+			</li>
+		</ul>
+
+		<FormelZeigen
+			formula={String.raw`\text{nominal} \;\subset\; \text{ordinal} \;\subset\; \underbrace{\text{Intervall} \;\subset\; \text{Verhältnis}}_{\text{metrisch}}`}
+			symbols={[
+				{ sym: String.raw`\text{nominal}`, bedeutung: 'Nur Kategorien (gleich/ungleich). Erlaubt: zählen.' },
+				{ sym: String.raw`\text{ordinal}`, bedeutung: 'Zusätzlich eine Rangfolge. Erlaubt: ordnen, Median.' },
+				{ sym: String.raw`\text{Intervall}`, bedeutung: 'Gleiche Abstände, kein echter Nullpunkt (z. B. °C). Erlaubt: Differenzen, Mittelwert.' },
+				{ sym: String.raw`\text{Verhältnis}`, bedeutung: 'Zusätzlich echter Nullpunkt (z. B. Länge). Erlaubt: auch Verhältnisse.' },
+				{ sym: String.raw`\subset`, bedeutung: 'Jede höhere Skala kann alles, was die niedrigere kann, und mehr.' }
+			]}
+		/>
+
+		<Merke title="Das Skalenniveau bestimmt den Test">
+			Welcher Test erlaubt ist, hängt direkt vom Skalenniveau ab. Ein t-Test oder
+			eine Korrelation brauchen <strong>metrische</strong> Daten; bei
+			<strong>ordinalen</strong> greifst du zu Rangverfahren (z. B. Spearman statt
+			Pearson), bei <strong>nominalen</strong> zählst du Häufigkeiten und nutzt den
+			Chi-Quadrat-Test. Deshalb steht die Frage nach dem Skalenniveau ganz am Anfang
+			jeder Testwahl — du triffst sie wieder, wenn es um „welcher Test passt?“ geht.
+		</Merke>
+
+		<Analogie title="Vom Etikett zum Lineal">
+			Stell dir drei Werkzeuge vor. Nominal ist ein <em>Etikett</em>: es benennt nur,
+			ohne zu ordnen. Ordinal ist eine <em>Treppe</em>: du weißt, welche Stufe höher
+			liegt, aber nicht, wie hoch jede einzelne ist. Metrisch ist ein <em>Lineal</em>
+			mit gleichmäßigen Strichen — und die Verhältnisskala ein Lineal, das echt bei
+			null beginnt. Je weiter rechts, desto mehr darfst du damit anstellen.
+		</Analogie>
+
 		<!-- Sortier-Spiel -------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Probier es selbst aus</h2>
 		<p class="text-ink-soft leading-relaxed">
@@ -229,7 +326,7 @@
 		</Intuition>
 
 		<!-- Selbsttest ----------------------------------------------------------- -->
-		<h2 class="mt-4 text-2xl">Sitzt es? Drei kurze Fragen</h2>
+		<h2 class="mt-4 text-2xl">Sitzt es? Vier kurze Fragen</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Keine Prüfung, nur eine Selbstkontrolle. Du bekommst zu jeder Frage sofort
 			eine Erklärung.

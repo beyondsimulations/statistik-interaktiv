@@ -289,6 +289,44 @@ export function logGamma(z: number): number {
 	return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(x);
 }
 
+/** Natural log of the binomial coefficient ln C(n, k), via logGamma. */
+function logBinomCoef(n: number, k: number): number {
+	return logGamma(n + 1) - logGamma(k + 1) - logGamma(n - k + 1);
+}
+
+/**
+ * Probability mass function of the binomial distribution:
+ *   P(X = k) = C(n, k) · p^k · (1 − p)^(n − k).
+ * `k` Erfolge aus `n` unabhängigen Versuchen mit Erfolgswahrscheinlichkeit `p`.
+ * Returns 0 for k outside {0, …, n} or non-integer k. The full mass over
+ * k = 0 … n sums to 1.
+ */
+export function binomialPmf(k: number, n: number, p: number): number {
+	if (!Number.isInteger(k) || !Number.isInteger(n)) return 0;
+	if (k < 0 || k > n || n < 0) return 0;
+	if (p < 0 || p > 1) return NaN;
+	// Handle the degenerate p = 0 / p = 1 cases without log(0).
+	if (p === 0) return k === 0 ? 1 : 0;
+	if (p === 1) return k === n ? 1 : 0;
+	const logProb = logBinomCoef(n, k) + k * Math.log(p) + (n - k) * Math.log(1 - p);
+	return Math.exp(logProb);
+}
+
+/**
+ * Probability mass function of the Poisson distribution:
+ *   P(X = k) = λ^k · e^(−λ) / k!.
+ * Modelliert die Anzahl seltener Ereignisse pro Einheit mit Rate `lambda`.
+ * Returns 0 for negative or non-integer k. The full mass over k = 0, 1, 2, …
+ * sums to 1.
+ */
+export function poissonPmf(k: number, lambda: number): number {
+	if (!Number.isInteger(k) || k < 0) return 0;
+	if (lambda < 0) return NaN;
+	if (lambda === 0) return k === 0 ? 1 : 0;
+	const logProb = k * Math.log(lambda) - lambda - logGamma(k + 1);
+	return Math.exp(logProb);
+}
+
 /** Regularized incomplete beta function I_x(a, b). */
 function incompleteBeta(x: number, a: number, b: number): number {
 	if (x <= 0) return 0;

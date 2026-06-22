@@ -1,7 +1,9 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
 	import FlaechenSchieber from '$lib/widgets/FlaechenSchieber.svelte';
+	import DiskreteVerteilung from '$lib/widgets/DiskreteVerteilung.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
+	import RCode from '$lib/components/RCode.svelte';
 	import Intuition from '$lib/components/Intuition.svelte';
 	import Merke from '$lib/components/Merke.svelte';
 	import Analogie from '$lib/components/Analogie.svelte';
@@ -267,10 +269,127 @@
 			pnorm(b) − pnorm(a).
 		</Merke>
 
+		<!-- Diskrete Verteilungen ------------------------------------------------ -->
+		<h2 class="mt-4 text-2xl">Jenseits der Glocke: zwei diskrete Verteilungen</h2>
+		<p class="text-ink-soft leading-relaxed">
+			Die Normalverteilung beschreibt stetige Messgrößen — Längen, Gewichte,
+			Temperaturen. Viele biologische Fragen sind aber <em>Zählfragen</em>: Wie viele
+			von 20 Samen keimen? Wie viele Tiere sitzen in einem Probequadrat? Solche
+			Anzahlen sind <Begriff term="Diskrete Zufallsvariable">diskret</Begriff> — und
+			zwei diskrete Verteilungen begegnen dir immer wieder.
+		</p>
+
+		<h3 class="mt-2 text-xl">Die Binomialverteilung: Erfolge zählen</h3>
+		<p class="text-ink-soft leading-relaxed">
+			Die <Begriff term="Binomialverteilung" /> zählt, wie viele
+			<strong>Erfolge</strong> du in <strong>n unabhängigen Versuchen</strong> mit
+			jeweils gleicher Erfolgswahrscheinlichkeit <strong>p</strong> erzielst.
+			Das klassische biologische Beispiel: Du säst n = 20 Samen aus, jeder keimt mit
+			Wahrscheinlichkeit p = 0,7 — wie viele der 20 keimen am Ende? Die Antwort ist
+			keine feste Zahl, sondern eine ganze Verteilung über k = 0, 1, …, n. Ihr
+			Erwartungswert ist schlicht n · p.
+		</p>
+
+		<FormelZeigen
+			formula={String.raw`P(X = k) = \binom{n}{k}\, p^{k}\, (1-p)^{\,n-k}`}
+			symbols={[
+				{ sym: String.raw`P(X = k)`, bedeutung: 'Wahrscheinlichkeit für genau k Erfolge.' },
+				{ sym: String.raw`n`, bedeutung: 'Anzahl der unabhängigen Versuche (z. B. 20 ausgesäte Samen).' },
+				{ sym: String.raw`k`, bedeutung: 'Anzahl der Erfolge, deren Wahrscheinlichkeit du suchst.' },
+				{ sym: String.raw`p`, bedeutung: 'Erfolgswahrscheinlichkeit pro Versuch (z. B. Keimrate 0,7).' },
+				{ sym: String.raw`\binom{n}{k}`, bedeutung: 'Binomialkoeffizient: auf wie viele Arten k Erfolge unter n Versuche fallen können.' }
+			]}
+		/>
+
+		<p class="text-ink-soft leading-relaxed">
+			In R brauchst du die Formel nicht selbst zu tippen: <code>dbinom</code> gibt die
+			Einzelwahrscheinlichkeit P(X = k), <code>pbinom</code> die kumulierte
+			P(X ≤ k).
+		</p>
+
+		<RCode
+			code={`# Von 20 Samen mit Keimrate p = 0,7:
+# Wahrscheinlichkeit, dass genau 15 keimen
+dbinom(15, size = 20, prob = 0.7)
+
+# Wahrscheinlichkeit, dass höchstens 12 keimen
+pbinom(12, size = 20, prob = 0.7)`}
+			output={`[1] 0.1788631
+[1] 0.2277282`}
+			annotations={{
+				'dbinom(k, size, prob)': 'Einzelwahrscheinlichkeit P(X = k) — die PMF.',
+				'pbinom(k, size, prob)': 'Kumulierte Wahrscheinlichkeit P(X ≤ k).'
+			}}
+		/>
+
+		<h3 class="mt-2 text-xl">Die Poissonverteilung: seltene Ereignisse zählen</h3>
+		<p class="text-ink-soft leading-relaxed">
+			Manchmal gibt es kein festes n. Du zählst einfach, <strong>wie oft</strong> ein
+			seltenes Ereignis pro Einheit auftritt: Tiere pro Probequadrat, Mutationen pro
+			Genom, Pollenkörner pro Sichtfeld. Dafür ist die
+			<Begriff term="Poissonverteilung" /> gemacht. Sie hat einen einzigen Parameter,
+			die mittlere Rate <strong>λ</strong> — und das Besondere: bei ihr sind
+			<strong>Mittelwert und Varianz beide gleich λ</strong>.
+		</p>
+
+		<FormelZeigen
+			formula={String.raw`P(X = k) = \dfrac{\lambda^{k}\, e^{-\lambda}}{k!}`}
+			symbols={[
+				{ sym: String.raw`P(X = k)`, bedeutung: 'Wahrscheinlichkeit für genau k Ereignisse.' },
+				{ sym: String.raw`\lambda`, bedeutung: 'Mittlere Rate, also die erwartete Anzahl pro Einheit (z. B. 3 Tiere pro Quadrat).' },
+				{ sym: String.raw`k`, bedeutung: 'Anzahl der Ereignisse, deren Wahrscheinlichkeit du suchst.' },
+				{ sym: String.raw`e`, bedeutung: 'Die eulersche Zahl ≈ 2,718.' },
+				{ sym: String.raw`k!`, bedeutung: 'k-Fakultät — sorgt dafür, dass sich die Wahrscheinlichkeiten zu 1 summieren.' }
+			]}
+		/>
+
+		<RCode
+			code={`# Im Schnitt 3 Tiere pro Probequadrat (lambda = 3):
+# Wahrscheinlichkeit, in einem Quadrat genau 0 Tiere zu finden
+dpois(0, lambda = 3)
+
+# Wahrscheinlichkeit, höchstens 2 Tiere zu finden
+ppois(2, lambda = 3)`}
+			output={`[1] 0.04978707
+[1] 0.4231901`}
+			annotations={{
+				'dpois(k, lambda)': 'Einzelwahrscheinlichkeit P(X = k) — die PMF.',
+				'ppois(k, lambda)': 'Kumulierte Wahrscheinlichkeit P(X ≤ k).'
+			}}
+		/>
+
+		<Merke title="Welche Zählverteilung passt?">
+			<ul class="ml-5 list-disc space-y-1">
+				<li>
+					<strong>Binomial</strong>, wenn es ein festes n und ein klares
+					„Erfolg/Misserfolg“ gibt (k von n Samen keimen).
+				</li>
+				<li>
+					<strong>Poisson</strong>, wenn du nur Vorkommnisse pro Einheit zählst, ohne
+					oberes n (Tiere pro Quadrat, Zählungen unter dem Mikroskop).
+				</li>
+			</ul>
+			Faustregel: Ist n groß und p klein, nähert die Poisson­verteilung mit λ = n · p
+			die Binomialverteilung gut an.
+		</Merke>
+
+		<p class="text-ink-soft leading-relaxed">
+			Anders als bei der stetigen Glockenkurve hat hier <em>jeder einzelne Wert</em> k
+			eine echte, positive Wahrscheinlichkeit — die Höhe jedes Balkens. Probier im
+			Erkunder beide Verteilungen aus: Schieb bei der Binomial p von 0,1 bis 0,9 und
+			beobachte, wie der Gipfel wandert; mach bei der Poisson λ größer und sieh, wie
+			die schiefe Form immer symmetrischer (glockenähnlicher) wird.
+		</p>
+
+		<DiskreteVerteilung />
+
 		<Intuition title="In einem Satz">
 			Eine stetige Verteilung beschreibst du über eine Dichtekurve; ihre <em>Fläche</em> über
 			einem Intervall ist die Wahrscheinlichkeit — und die Z-Transformation führt jede
-			Glockenkurve auf dieselbe Standardnormalverteilung zurück.
+			Glockenkurve auf dieselbe Standardnormalverteilung zurück. Diskrete Zählgrößen
+			dagegen modellierst du mit der Binomial- (k von n Erfolgen) oder der
+			Poissonverteilung (seltene Ereignisse pro Einheit), wo jeder einzelne Wert seine
+			eigene Wahrscheinlichkeit trägt.
 		</Intuition>
 
 		<!-- Selbsttest ----------------------------------------------------------- -->

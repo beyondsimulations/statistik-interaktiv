@@ -27,6 +27,8 @@ import {
 	ranks,
 	corTestP,
 	linearRegression,
+	binomialPmf,
+	poissonPmf,
 	POPULATIONS,
 	type PopulationKind
 } from './stats';
@@ -908,5 +910,66 @@ describe('sampleSizeForPower', () => {
 
 	it('a zero effect can never be detected → Infinity', () => {
 		expect(sampleSizeForPower({ delta: 0, sd: 1 })).toBe(Number.POSITIVE_INFINITY);
+	});
+});
+
+describe('binomialPmf', () => {
+	it('matches the textbook value binomialPmf(2, 5, 0.5) = 0.3125', () => {
+		expect(binomialPmf(2, 5, 0.5)).toBeCloseTo(0.3125, 10);
+	});
+
+	it('reduces to p^n at the upper end and (1−p)^n at the lower end', () => {
+		expect(binomialPmf(5, 5, 0.3)).toBeCloseTo(0.3 ** 5, 12);
+		expect(binomialPmf(0, 5, 0.3)).toBeCloseTo(0.7 ** 5, 12);
+	});
+
+	it('the full mass over k = 0 … n sums to 1', () => {
+		const n = 12;
+		const p = 0.37;
+		let total = 0;
+		for (let k = 0; k <= n; k++) total += binomialPmf(k, n, p);
+		expect(total).toBeCloseTo(1, 10);
+	});
+
+	it('returns 0 outside {0, …, n} and for non-integer k', () => {
+		expect(binomialPmf(-1, 5, 0.5)).toBe(0);
+		expect(binomialPmf(6, 5, 0.5)).toBe(0);
+		expect(binomialPmf(2.5, 5, 0.5)).toBe(0);
+	});
+
+	it('handles the degenerate p = 0 and p = 1 cases', () => {
+		expect(binomialPmf(0, 4, 0)).toBe(1);
+		expect(binomialPmf(1, 4, 0)).toBe(0);
+		expect(binomialPmf(4, 4, 1)).toBe(1);
+		expect(binomialPmf(3, 4, 1)).toBe(0);
+	});
+});
+
+describe('poissonPmf', () => {
+	it('poissonPmf(0, 2) = e^(−2) ≈ 0.1353', () => {
+		expect(poissonPmf(0, 2)).toBeCloseTo(Math.exp(-2), 10);
+		expect(poissonPmf(0, 2)).toBeCloseTo(0.1353, 4);
+	});
+
+	it('peaks where expected for a known rate (λ = 3, P(X=3))', () => {
+		// 3^3 e^−3 / 3! = 27 e^−3 / 6
+		expect(poissonPmf(3, 3)).toBeCloseTo((27 * Math.exp(-3)) / 6, 12);
+	});
+
+	it('the mass over k = 0 … 50 sums to ≈ 1', () => {
+		const lambda = 4.2;
+		let total = 0;
+		for (let k = 0; k <= 50; k++) total += poissonPmf(k, lambda);
+		expect(total).toBeCloseTo(1, 8);
+	});
+
+	it('returns 0 for negative or non-integer k', () => {
+		expect(poissonPmf(-1, 2)).toBe(0);
+		expect(poissonPmf(1.5, 2)).toBe(0);
+	});
+
+	it('λ = 0 puts all mass on k = 0', () => {
+		expect(poissonPmf(0, 0)).toBe(1);
+		expect(poissonPmf(1, 0)).toBe(0);
 	});
 });
