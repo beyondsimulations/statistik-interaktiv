@@ -75,15 +75,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Was ist Statistik? · DS2</title>
-	<meta
-		name="description"
-		content="Was Statistik eigentlich ist — und ihre drei Teilgebiete: deskriptiv, inferentiell und explorativ. Mit interaktivem Sortier-Spiel."
-	/>
-</svelte:head>
-
-<LessonLayout {slug}>
+<LessonLayout
+	{slug}
+	description="Was Statistik eigentlich ist — und ihre drei Teilgebiete: deskriptiv, inferentiell und explorativ. Mit interaktivem Sortier-Spiel."
+>
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

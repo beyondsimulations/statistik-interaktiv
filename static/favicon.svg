@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Statistik interaktiv">
+  <!-- Warm-paper rounded tile (matches site background #fbf8f4) -->
+  <rect x="1" y="1" width="62" height="62" rx="14" fill="#fbf8f4" stroke="#f9bcb0" stroke-width="2"/>
+  <!-- Coral Glockenkurve: filled area + bold stroke + baseline -->
+  <path d="M8 47 C20 47 24 17 32 17 C40 17 44 47 56 47 Z" fill="#fcdcd5"/>
+  <path d="M8 47 C20 47 24 17 32 17 C40 17 44 47 56 47" stroke="#e14e36" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="8" y1="47" x2="56" y2="47" stroke="#e14e36" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

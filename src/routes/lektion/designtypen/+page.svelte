@@ -61,15 +61,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Designtypen & Pseudoreplikation · DS2</title>
-	<meta
-		name="description"
-		content="Jeder Messwert ist eine Summe trennbarer Quellen: Y = Behandlungseffekt + biologischer Effekt + technischer Effekt + Fehler. Gutes Versuchsdesign ordnet diese Quellen VORAB so an, dass der Behandlungseffekt nicht mit Störquellen vermischt wird — die Statistik kann nur trennen, was das Design getrennt hat. Designtypen: vollständig randomisiert (CRD), randomisiertes Blockdesign (RBD), Messwiederholung/Längsschnitt, Split-Plot, verschachtelt vs. gekreuzt. Die zentrale Warnung: Pseudoreplikation. Subsamples (mehrere Blätter pro Pflanze, mehrere Fische pro Becken) sind abhängig; als unabhängige Replikate behandelt blähen sie die Freiheitsgrade auf und erzeugen Schein-Signifikanz. Die wahre Replikationseinheit ist die unabhängige Einheit, nicht die Einzelmessung. Mit interaktiver Pseudoreplikations-Falle und R-Code (naiv vs. Error()/Mittelwerte)."
-	/>
-</svelte:head>
-
-<LessonLayout {slug}>
+<LessonLayout
+	{slug}
+	description="Jeder Messwert ist eine Summe trennbarer Quellen: Y = Behandlungseffekt + biologischer Effekt + technischer Effekt + Fehler. Gutes Versuchsdesign ordnet diese Quellen VORAB so an, dass der Behandlungseffekt nicht mit Störquellen vermischt wird — die Statistik kann nur trennen, was das Design getrennt hat. Designtypen: vollständig randomisiert (CRD), randomisiertes Blockdesign (RBD), Messwiederholung/Längsschnitt, Split-Plot, verschachtelt vs. gekreuzt. Die zentrale Warnung: Pseudoreplikation. Subsamples (mehrere Blätter pro Pflanze, mehrere Fische pro Becken) sind abhängig; als unabhängige Replikate behandelt blähen sie die Freiheitsgrade auf und erzeugen Schein-Signifikanz. Die wahre Replikationseinheit ist die unabhängige Einheit, nicht die Einzelmessung. Mit interaktiver Pseudoreplikations-Falle und R-Code (naiv vs. Error()/Mittelwerte)."
+>
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

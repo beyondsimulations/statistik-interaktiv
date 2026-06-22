@@ -64,15 +64,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>ANOVA & Mehrstichprobentests · DS2</title>
-	<meta
-		name="description"
-		content="Die einfaktorielle Varianzanalyse (ANOVA) vergleicht die Mittelwerte mehrerer Gruppen in EINEM Test — am Beispiel der Lachsgröße in verschiedenen Käfigtypen. Das Problem des multiplen Testens und die familienweise Fehlerrate 1 − (1 − α)^c, die Varianzzerlegung SS_total = SS_zwischen + SS_innerhalb, die zentrale Intuition F = Varianz zwischen / Varianz innerhalb, Voraussetzungen (Normalität, Varianzhomogenität/Levene, Unabhängigkeit), die nicht-parametrische Alternative Kruskal-Wallis, Post-hoc-Tests (Tukey HSD), die Effektstärke η² und aov()/TukeyHSD() in R — mit zwei interaktiven Widgets."
-	/>
-</svelte:head>
-
-<LessonLayout {slug}>
+<LessonLayout
+	{slug}
+	description="Die einfaktorielle Varianzanalyse (ANOVA) vergleicht die Mittelwerte mehrerer Gruppen in EINEM Test — am Beispiel der Lachsgröße in verschiedenen Käfigtypen. Das Problem des multiplen Testens und die familienweise Fehlerrate 1 − (1 − α)^c, die Varianzzerlegung SS_total = SS_zwischen + SS_innerhalb, die zentrale Intuition F = Varianz zwischen / Varianz innerhalb, Voraussetzungen (Normalität, Varianzhomogenität/Levene, Unabhängigkeit), die nicht-parametrische Alternative Kruskal-Wallis, Post-hoc-Tests (Tukey HSD), die Effektstärke η² und aov()/TukeyHSD() in R — mit zwei interaktiven Widgets."
+>
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

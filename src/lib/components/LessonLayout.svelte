@@ -6,14 +6,17 @@
 	import TrackNav from './TrackNav.svelte';
 	import ProgressDots from './ProgressDots.svelte';
 	import Button from './Button.svelte';
+	import Seo from './Seo.svelte';
 
 	type Props = {
 		/** Slug of the lesson being rendered. Drives the title, footer and nav highlight. */
 		slug: string;
+		/** Meta/OG description for this lesson (falls back to the site default). */
+		description?: string;
 		children: Snippet;
 	};
 
-	let { slug, children }: Props = $props();
+	let { slug, description, children }: Props = $props();
 
 	const lesson = $derived(getLesson(slug));
 	const prev = $derived(prevLesson(slug));
@@ -39,6 +42,8 @@
 		<TrackNav currentSlug={slug} />
 	</div>
 {/snippet}
+
+<Seo title={lesson?.title} {description} type="article" />
 
 <div class="lesson-shell">
 <div class="mx-auto flex w-full max-w-7xl gap-8 px-4 py-6 md:px-6 lg:py-10">

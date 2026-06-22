@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /statistik-interaktiv/kit
+Disallow: /kit
+
+Sitemap: https://beyondsimulations.github.io/statistik-interaktiv/sitemap.xml

@@ -57,15 +57,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Von der Stichprobe zur Stichprobenverteilung · DS2</title>
-	<meta
-		name="description"
-		content="Warum sagt eine kleine Stichprobe etwas über eine riesige Grundgesamtheit aus? Die zentrale Idee der schließenden Statistik — interaktiv erklärt."
-	/>
-</svelte:head>
-
-<LessonLayout {slug}>
+<LessonLayout
+	{slug}
+	description="Warum sagt eine kleine Stichprobe etwas über eine riesige Grundgesamtheit aus? Die zentrale Idee der schließenden Statistik — interaktiv erklärt."
+>
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

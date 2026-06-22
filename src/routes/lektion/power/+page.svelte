@@ -62,15 +62,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Experimentelles Design & Power · DS2</title>
-	<meta
-		name="description"
-		content="Gutes experimentelles Design entscheidet, ob eine Studie überhaupt etwas zeigen kann: Repräsentativität, Randomisierung als Goldstandard, Blocking, Negativ- und Positivkontrollen, Verblindung und das Isolieren von Confounding. Die zentrale Intuition: Power (1 − β), Effektgröße, Streuung σ, α und Stichprobenumfang n bilden ein gekoppeltes System — Power ∝ (Effektgröße·√n)/σ. Kennt man vier Größen, ist die fünfte festgelegt. Ein nicht-signifikantes Ergebnis bedeutet NICHT „kein Effekt“ — vielleicht war einfach zu wenig Power. Mindeststichprobenumfang per Faustformel n ≈ 16·s²/d², R-Funktion power.t.test und ein interaktiver Power-Spielplatz am Beispiel Vogelzug."
-	/>
-</svelte:head>
-
-<LessonLayout {slug}>
+<LessonLayout
+	{slug}
+	description="Gutes experimentelles Design entscheidet, ob eine Studie überhaupt etwas zeigen kann: Repräsentativität, Randomisierung als Goldstandard, Blocking, Negativ- und Positivkontrollen, Verblindung und das Isolieren von Confounding. Die zentrale Intuition: Power (1 − β), Effektgröße, Streuung σ, α und Stichprobenumfang n bilden ein gekoppeltes System — Power ∝ (Effektgröße·√n)/σ. Kennt man vier Größen, ist die fünfte festgelegt. Ein nicht-signifikantes Ergebnis bedeutet NICHT „kein Effekt“ — vielleicht war einfach zu wenig Power. Mindeststichprobenumfang per Faustformel n ≈ 16·s²/d², R-Funktion power.t.test und ein interaktiver Power-Spielplatz am Beispiel Vogelzug."
+>
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

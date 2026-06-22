@@ -4,18 +4,16 @@
 	import Button from '$lib/components/Button.svelte';
 	import Card from '$lib/components/Card.svelte';
 	import TrackNav from '$lib/components/TrackNav.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 
 	// Erste freigeschaltete Lektion — Ziel des Haupt-CTA.
 	const startHref = `${base}/lektion/stichprobenverteilung`;
 </script>
 
-<svelte:head>
-	<title>DS2 Lernwebsite</title>
-	<meta
-		name="description"
-		content="Statistik für Data Science 2 — Schritt für Schritt, ohne Panik."
-	/>
-</svelte:head>
+<Seo
+	title="Statistik, die Klick macht."
+	description="Statistik für Data Science 2 — Intuition zuerst, Schritt für Schritt, ohne Panik. 14 interaktive Lektionen mit biologischen Beispielen, Selbsttests und R-Code."
+/>
 
 <main class="mx-auto max-w-3xl px-6 py-16 md:py-24">
 	<!-- Hero ---------------------------------------------------------------- -->

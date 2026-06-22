@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import Seo from './Seo.svelte';
 
 	type Props = {
 		/** Frontmatter: main page heading. */
@@ -34,14 +35,7 @@
 	// %lang% placeholder (English legal pages → "en"); `lang` here drives the date.
 </script>
 
-<svelte:head>
-	{#if title}
-		<title>{title} · DS2 Lernwebsite</title>
-	{/if}
-	{#if subtitle}
-		<meta name="description" content={subtitle} />
-	{/if}
-</svelte:head>
+<Seo {title} description={subtitle} type="article" />
 
 <main class="mx-auto max-w-2xl px-6 py-16 md:py-24">
 	<article class="prose-content">

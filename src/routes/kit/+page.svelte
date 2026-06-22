@@ -8,6 +8,7 @@
 	import RCode from '$lib/components/RCode.svelte';
 	import Widget from '$lib/components/Widget.svelte';
 	import Selbsttest from '$lib/components/Selbsttest.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import type { Question } from '$lib/components/selbsttest-logic';
 
 	// Triviales interaktives Beispiel für den Widget-Rahmen.
@@ -51,9 +52,7 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Teaching-Kit — Komponenten</title>
-</svelte:head>
+<Seo title="Teaching-Kit — Komponenten" noindex />
 
 <main class="mx-auto w-full max-w-3xl px-4 py-10 md:px-6">
 	<header class="mb-10">

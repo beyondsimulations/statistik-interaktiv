@@ -63,15 +63,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Chi-Quadrat-Tests · DS2</title>
-	<meta
-		name="description"
-		content="Chi-Quadrat-Tests für kategoriale Häufigkeitsdaten: der Anpassungstest (goodness of fit) an Mendels 9:3:3:1-Erbsen und der Unabhängigkeitstest auf einer Kontingenztafel (Art × Habitat). Die zentrale Intuition χ² = Σ(B−E)²/E, die Erwartungswerte aus den Rändern, Voraussetzungen (E ≥ 5, Fisher-Test, Yates-Korrektur) und chisq.test() in R — mit einem interaktiven Kontingenztafel-Editor."
-	/>
-</svelte:head>
-
-<LessonLayout {slug}>
+<LessonLayout
+	{slug}
+	description="Chi-Quadrat-Tests für kategoriale Häufigkeitsdaten: der Anpassungstest (goodness of fit) an Mendels 9:3:3:1-Erbsen und der Unabhängigkeitstest auf einer Kontingenztafel (Art × Habitat). Die zentrale Intuition χ² = Σ(B−E)²/E, die Erwartungswerte aus den Rändern, Voraussetzungen (E ≥ 5, Fisher-Test, Yates-Korrektur) und chisq.test() in R — mit einem interaktiven Kontingenztafel-Editor."
+>
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
