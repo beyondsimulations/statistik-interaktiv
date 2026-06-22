@@ -249,7 +249,7 @@
 		<Merke title="Die Voraussetzungen der ANOVA">
 			<ol class="ml-5 list-decimal space-y-1">
 				<li><strong>Normalverteilung</strong> der Werte je Gruppe (bzw. der Residuen). Bei größeren n robust.</li>
-				<li><strong><Begriff term="Varianzhomogenität" /></strong> — alle Gruppen sollten ähnlich streuen. Prüfbar mit dem <Begriff term="Levene-Test" />.</li>
+				<li><strong><Begriff term="Varianzhomogenität" /></strong> — alle Gruppen sollten ähnlich streuen. Prüfbar mit dem <Begriff term="Levene-Test" /> (er prüft formal, ob die Gruppenvarianzen gleich sind; in R <code class="font-mono text-sm">leveneTest()</code> aus dem Paket <code class="font-mono text-sm">car</code>).</li>
 				<li><strong>Unabhängigkeit</strong> der Beobachtungen: jeder Lachs zählt nur einmal, keine verdeckten Abhängigkeiten.</li>
 			</ol>
 		</Merke>
