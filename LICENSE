@@ -1,0 +1,54 @@
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+
+================================================================================
+ATTRIBUTION / SOURCE NOTICE
+================================================================================
+
+This project is an interactive German learning website that adapts and builds
+upon the course materials of:
+
+    "Data Science 2 – Grundlagen der Statistik und experimentelles Design"
+    by Dr. Saskia Otto, Universität Hamburg
+    https://saskiaotto.github.io/uham-bio-data-science-2/
+    (course hub: https://dsb-start.de/courses/ds2.html)
+
+The original course materials are licensed under
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+
+CHANGES MADE: The statistical concepts, structure, and example datasets
+(e.g. Vogelzug, Iris, Daphnia, Lachs, Mendel) follow the original course.
+This adaptation rewrites the content as original German explanatory prose with
+custom interactive visualisations and self-checks; it is not a verbatim copy.
+
+In accordance with the ShareAlike term, THIS adaptation is likewise licensed
+under CC BY-SA 4.0. You are free to share and adapt it, for any purpose, as long
+as you give appropriate credit (to both Dr. Saskia Otto for the original course
+and to this project) and distribute your contributions under the same license.
+
+Full license text and human-readable summary:
+  Legal code: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+  Summary:    https://creativecommons.org/licenses/by-sa/4.0/
+
+================================================================================
+LICENSE SUMMARY (not a substitute for the full legal code linked above)
+================================================================================
+
+You are free to:
+  - Share — copy and redistribute the material in any medium or format.
+  - Adapt — remix, transform, and build upon the material for any purpose,
+    even commercially.
+
+Under the following terms:
+  - Attribution — You must give appropriate credit, provide a link to the
+    license, and indicate if changes were made. You may do so in any reasonable
+    manner, but not in any way that suggests the licensor endorses you or your
+    use.
+  - ShareAlike — If you remix, transform, or build upon the material, you must
+    distribute your contributions under the same license as the original.
+  - No additional restrictions — You may not apply legal terms or technological
+    measures that legally restrict others from doing anything the license
+    permits.
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTIES OF ANY KIND. The licensor is
+not liable for any damages arising from the use of this work, to the extent
+permitted by applicable law.
