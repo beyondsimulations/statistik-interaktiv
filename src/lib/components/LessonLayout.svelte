@@ -40,6 +40,7 @@
 	</div>
 {/snippet}
 
+<div class="lesson-shell">
 <div class="mx-auto flex w-full max-w-7xl gap-8 px-4 py-6 md:px-6 lg:py-10">
 	<!-- Sidebar (desktop): sticky, scrollable -->
 	<aside class="hidden w-72 shrink-0 lg:block">
@@ -126,6 +127,7 @@
 		{/if}
 	</div>
 </div>
+</div>
 
 <!-- Mobile drawer -->
 {#if drawerOpen}
@@ -146,3 +148,17 @@
 		</div>
 	</div>
 {/if}
+
+<style>
+	/* Reserve room on the right of the WIDE lesson layout so the Oshu chat
+	   sidebar (overlays from the right on ≥1280px) doesn't cover the lesson.
+	   Home and text pages stay centered. Tune --oshu-space to the Oshu width. */
+	.lesson-shell {
+		--oshu-space: 24rem; /* 384px */
+	}
+	@media (min-width: 1280px) {
+		.lesson-shell {
+			padding-right: var(--oshu-space);
+		}
+	}
+</style>
