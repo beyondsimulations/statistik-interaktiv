@@ -287,7 +287,8 @@
 			Das klassische biologische Beispiel: Du säst n = 20 Samen aus, jeder keimt mit
 			Wahrscheinlichkeit p = 0,7. Wie viele der 20 keimen am Ende? Die Antwort ist
 			keine feste Zahl, sondern eine ganze Verteilung über k = 0, 1, …, n. Ihr
-			Erwartungswert ist schlicht n · p.
+			<strong>Erwartungswert</strong> E[X] — der Wert, den du im Schnitt über sehr viele
+			Wiederholungen erwartest — ist schlicht n · p.
 		</p>
 
 		<FormelZeigen

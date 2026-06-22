@@ -299,7 +299,10 @@
 		<h2 class="mt-4 text-2xl">So sieht das in R aus</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Der Befehl <code class="font-mono text-sm">t.test()</code> erledigt alles. Standardmäßig rechnet
-			er den Welch-Test. So liest du die Ausgabe:
+			er den Welch-Test. Die Schreibweise <code class="font-mono text-sm">distanz ~ art</code> liest sich
+			als „distanz, aufgeschlüsselt nach der Gruppe art“; mit
+			<code class="font-mono text-sm">data = voegel</code> sagst du R, in welchem Datensatz beide
+			Spalten stehen. So liest du die Ausgabe:
 		</p>
 
 		<RCode
