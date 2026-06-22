@@ -63,15 +63,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>t-Tests & nicht-parametrische Alternativen · DS2</title>
-	<meta
-		name="description"
-		content="Der t-Wert als Signal-zu-Rausch-Verhältnis: Ein-Stichproben-, Student-, Welch- und gepaarter t-Test, ihre Voraussetzungen (Unabhängigkeit, Normalverteilung, Varianzhomogenität) und die nicht-parametrischen Alternativen Mann-Whitney-U und Wilcoxon. Mit Signal-vs-Rausch-Regler und interaktivem Entscheidungsbaum — biologisch motiviert an der Zugdistanz von Buchfink und Mönchsgrasmücke."
-	/>
-</svelte:head>
-
-<LessonLayout {slug}>
+<LessonLayout
+	{slug}
+	description="Der t-Wert als Signal-zu-Rausch-Verhältnis: Ein-Stichproben-, Student-, Welch- und gepaarter t-Test, ihre Voraussetzungen (Unabhängigkeit, Normalverteilung, Varianzhomogenität) und die nicht-parametrischen Alternativen Mann-Whitney-U und Wilcoxon. Mit Signal-vs-Rausch-Regler und interaktivem Entscheidungsbaum — biologisch motiviert an der Zugdistanz von Buchfink und Mönchsgrasmücke."
+>
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

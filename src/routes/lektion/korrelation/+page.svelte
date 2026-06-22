@@ -62,15 +62,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Korrelation & Transformation · DS2</title>
-	<meta
-		name="description"
-		content="Korrelation misst den Zusammenhang zweier zufälliger Variablen — ohne Richtung und ohne Kausalität. Vom Scatterplot über die skalenabhängige Kovarianz zur zentralen Intuition: Pearson r ist die standardisierte Kovarianz, r = Cov(x,y)/(s_x·s_y), einheitenlos in [−1, +1], misst aber nur die LINEARE Stärke (eine U-Form gibt r ≈ 0). Spearman ρ und Kendall τ erfassen rangbasiert monotone Zusammenhänge und sind robust gegen Ausreißer. Signifikanztest ρ = 0 über t mit df = n−2, Korrelation ≠ Kausalität, und Transformationen (log/sqrt/Box-Cox), die Nichtlinearität linearisieren — am Beispiel Körpermasse vs. Hirnmasse bei Säugetieren (log-log). Mit dem interaktiven Scatter-Builder."
-	/>
-</svelte:head>
-
-<LessonLayout {slug}>
+<LessonLayout
+	{slug}
+	description="Korrelation misst den Zusammenhang zweier zufälliger Variablen — ohne Richtung und ohne Kausalität. Vom Scatterplot über die skalenabhängige Kovarianz zur zentralen Intuition: Pearson r ist die standardisierte Kovarianz, r = Cov(x,y)/(s_x·s_y), einheitenlos in [−1, +1], misst aber nur die LINEARE Stärke (eine U-Form gibt r ≈ 0). Spearman ρ und Kendall τ erfassen rangbasiert monotone Zusammenhänge und sind robust gegen Ausreißer. Signifikanztest ρ = 0 über t mit df = n−2, Korrelation ≠ Kausalität, und Transformationen (log/sqrt/Box-Cox), die Nichtlinearität linearisieren — am Beispiel Körpermasse vs. Hirnmasse bei Säugetieren (log-log). Mit dem interaktiven Scatter-Builder."
+>
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
