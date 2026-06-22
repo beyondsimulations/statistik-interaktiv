@@ -7,10 +7,11 @@
 	let { children } = $props();
 </script>
 
-{@render children()}
+<div class="page-shell">
+	{@render children()}
 
-<!-- Site-wide footer: keeps the Impressum reachable from every page
-     (German Impressumspflicht) and carries the course attribution. -->
+	<!-- Site-wide footer: keeps the Impressum reachable from every page
+	     (German Impressumspflicht) and carries the course attribution. -->
 <footer class="text-ink-faint mt-16 border-t border-ink/10 px-6 py-8 text-center text-sm">
 	<p class="mx-auto max-w-xl">
 		Angelehnt an den
@@ -36,3 +37,20 @@
 		>
 	</nav>
 </footer>
+</div>
+
+<style>
+	/* Reserve a fixed right region for the Oshu chat sidebar on wide screens so
+	   the panel never covers the page. The content (centered via mx-auto inside)
+	   then sits in the space that remains to the left. Tune --oshu-space to the
+	   Oshu sidebar width; it only applies from 1280px up (below that the chat
+	   should overlay / go full-width). */
+	.page-shell {
+		--oshu-space: 24rem; /* 384px reserved on the right */
+	}
+	@media (min-width: 1280px) {
+		.page-shell {
+			padding-right: var(--oshu-space);
+		}
+	}
+</style>
