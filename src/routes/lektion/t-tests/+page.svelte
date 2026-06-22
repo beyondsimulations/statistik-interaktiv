@@ -159,6 +159,60 @@
 			auf die Effektgröße.
 		</Merke>
 
+		<!-- Effektgröße: Cohen's d ---------------------------------------------- -->
+		<h2 class="mt-4 text-2xl">Wie groß ist der Effekt? Cohen's d</h2>
+		<p class="text-ink-soft leading-relaxed">
+			Ein p-Wert sagt dir, <em>ob</em> ein Unterschied wahrscheinlich echt ist — aber nicht, wie
+			<strong>groß</strong> er ist. Genau das ist der Unterschied zwischen <strong>signifikant</strong>
+			und <strong>relevant</strong>. Wie du am Regler gesehen hast, wird bei riesigem n schon eine
+			winzige Differenz signifikant: Buchfink und Mönchsgrasmücke könnten sich im Mittel um lächerliche
+			5 km unterscheiden, und mit genug Vögeln wäre selbst das „hochsignifikant“ — biologisch aber
+			völlig belanglos. Deshalb gehört zu jedem p-Wert eine <Begriff term="Effektstärke" />.
+		</p>
+		<p class="text-ink-soft leading-relaxed">
+			Das gängigste Maß beim t-Test ist <strong>Cohen's d</strong>. Die Idee ist verblüffend einfach:
+			Miss die Mittelwertdifferenz nicht in Kilometern, sondern in <strong>Standardabweichungen</strong>.
+			Ein d = 1 heißt dann „die beiden Arten liegen im Schnitt eine ganze Streuungsbreite auseinander“ —
+			eine Aussage, die unabhängig von Stichprobengröße und Messeinheit ist.
+		</p>
+
+		<FormelZeigen
+			formula={String.raw`d = \frac{\bar x_1 - \bar x_2}{s_p}`}
+			symbols={[
+				{ sym: String.raw`\bar x_1 - \bar x_2`, bedeutung: 'Die rohe Mittelwertdifferenz Δ (z. B. die 310 km Unterschied in der Zugdistanz).' },
+				{ sym: String.raw`s_p`, bedeutung: 'Die gepoolte (gemeinsame) Standardabweichung beider Gruppen — das Streuungsmaß, in dem die Differenz gemessen wird.' },
+				{ sym: String.raw`d`, bedeutung: 'Cohen\'s d: der Abstand der Mittelwerte in SD-Einheiten. Einheitenlos und unabhängig von n.' }
+			]}
+		/>
+
+		<p class="text-ink-soft leading-relaxed">
+			Rechnen wir es für die Zugvögel durch. Die beiden Arten unterscheiden sich um Δ = 310 km, und die
+			gepoolte Streuung der Zugdistanzen beträgt s<sub>p</sub> ≈ 320 km. Also d = 310 / 320 ≈
+			<strong>0,97</strong> — ein <strong>großer</strong> Effekt: Die mittlere Zugdistanz der beiden
+			Arten liegt fast eine volle Standardabweichung auseinander. Zur Einordnung dienen Cohens
+			Faustwerte:
+		</p>
+
+		<Merke title="Faustwerte für Cohen's d">
+			<ul class="ml-5 list-disc space-y-1">
+				<li><strong>d ≈ 0,2</strong> — kleiner Effekt (die Verteilungen überlappen stark).</li>
+				<li><strong>d ≈ 0,5</strong> — mittlerer Effekt (mit bloßem Auge erkennbar).</li>
+				<li><strong>d ≈ 0,8</strong> — großer Effekt (die Gruppen trennen sich deutlich).</li>
+			</ul>
+			Unser d ≈ 0,97 liegt darüber: ein klar großer, biologisch bedeutsamer Artunterschied — nicht
+			nur ein signifikanter.
+		</Merke>
+
+		<Callout variant="warnung" title="Signifikant heißt nicht relevant">
+			Der <strong>p-Wert</strong> hängt von Effekt <em>und</em> Stichprobengröße ab — Cohen's d
+			dagegen <strong>nur vom Effekt</strong>. Ein winziges, belangloses d kann bei riesigem n
+			signifikant werden; ein großes, biologisch wichtiges d kann bei kleinem n unentdeckt bleiben.
+			Berichte deshalb immer <strong>beides</strong>: den p-Wert (gibt es den Effekt?) und die
+			Effektstärke (wie groß ist er?). Das gilt genauso für die rangbasierten Alternativen — auch ein
+			signifikanter, einseitig getesteter Mann-Whitney-U-Test sagt nur <em>dass</em>, nicht
+			<em>wie stark</em> sich die Lagen unterscheiden.
+		</Callout>
+
 		<!-- Die drei t-Test-Varianten ------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Drei Situationen, drei t-Tests</h2>
 		<p class="text-ink-soft leading-relaxed">

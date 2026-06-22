@@ -370,6 +370,82 @@ F-statistic: 475.0 on 1 and 5 DF,  p-value: 3.774e-06`}
 			vertrauen.
 		</p>
 
+		<!-- Vorhersage: KI vs. Vorhersageintervall & Extrapolation -------------- -->
+		<h2 class="mt-4 text-2xl">Vorhersagen mit Unsicherheit: KI vs. Vorhersageintervall</h2>
+		<p class="text-ink-soft leading-relaxed">
+			Die Gerade liefert für jede Länge x einen Punktwert ŷ. Doch eine Vorhersage ohne Unsicherheit ist
+			wertlos — und hier lauert eine feine, klausurrelevante Unterscheidung. Es gibt
+			<strong>zwei</strong> Intervalle, die ganz unterschiedliche Fragen beantworten:
+		</p>
+		<ul class="text-ink-soft ml-5 list-disc space-y-1 leading-relaxed">
+			<li>
+				Das <strong>Konfidenzintervall des Mittelwerts</strong> (mean response) fragt:
+				<em>Wo liegt die mittlere Nachkommenzahl ALLER Daphnien dieser Länge?</em> Es umschließt die
+				wahre Regressionsgerade und ist relativ <strong>schmal</strong>.
+			</li>
+			<li>
+				Das <Begriff term="Vorhersageintervall">Vorhersageintervall</Begriff> fragt:
+				<em>In welchem Bereich liegt die Nachkommenzahl EINER EINZELNEN neuen Daphnie dieser Länge?</em>
+				Es ist immer <strong>breiter</strong>.
+			</li>
+		</ul>
+		<p class="text-ink-soft leading-relaxed">
+			Warum ist das Vorhersageintervall breiter? Weil es <strong>zwei</strong> Quellen von Unsicherheit
+			addiert: die Unsicherheit über die Lage der Geraden selbst (wie beim KI) <em>plus</em> die
+			zusätzliche Streuung eines einzelnen Tieres um die Gerade (der Fehlerterm ε). Ein einzelnes Tier
+			streut eben um den Mittelwert seiner Längenklasse — und diese Extra-Streuung steckt nur im
+			Vorhersageintervall.
+		</p>
+
+		<Merke title="Mittelwert oder Einzelfall?">
+			<ul class="ml-5 list-disc space-y-1">
+				<li>
+					<strong>Konfidenzintervall</strong> — für die <em>mittlere</em> Antwort vieler Tiere dieser
+					Länge. Schmal.
+				</li>
+				<li>
+					<strong>Vorhersageintervall</strong> — für <em>eine</em> einzelne neue Beobachtung. Immer
+					breiter, weil zusätzlich die individuelle Streuung ε eingeht.
+				</li>
+			</ul>
+		</Merke>
+
+		<p class="text-ink-soft leading-relaxed">
+			In R steuerst du beides über das Argument <code class="font-mono text-sm">interval</code> von
+			<code class="font-mono text-sm">predict()</code>:
+		</p>
+
+		<RCode
+			code={`# Vorhersage fuer eine neue Daphnie mit Laenge 3.5 mm
+neu <- data.frame(laenge = 3.5)
+
+# (a) Konfidenzintervall des Mittelwerts (schmal):
+predict(model, newdata = neu, interval = "confidence")
+
+# (b) Vorhersageintervall fuer eine EINZELNE neue Daphnie (breiter):
+predict(model, newdata = neu, interval = "prediction")`}
+			output={`       fit      lwr      upr
+1 13.5714 12.8329 14.3099
+
+       fit      lwr      upr
+1 13.5714 10.8762 16.2666`}
+			annotations={{
+				'interval = "confidence"': 'Liefert das KI der MITTLEREN Antwort: wo die wahre Gerade bei x = 3,5 liegt. Hier 12,83 bis 14,31 — schmal.',
+				'interval = "prediction"': 'Liefert das Vorhersageintervall fuer EINE neue Daphnie: 10,88 bis 16,27 — deutlich breiter, weil die individuelle Streuung dazukommt.',
+				'fit': 'Der Punktwert ŷ ist in beiden Faellen identisch (13,57) — nur die Breite des Intervalls unterscheidet sich.'
+			}}
+		/>
+
+		<Callout variant="warnung" title="Niemals außerhalb des beobachteten X-Bereichs vorhersagen (Extrapolation)">
+			Deine Daphnien waren z. B. zwischen 2 und 4 mm lang. Eine Vorhersage <em>innerhalb</em> dieses
+			Bereichs ist Interpolation — solide. Eine Vorhersage <strong>außerhalb</strong>, etwa die
+			Nachkommenzahl einer 8 mm langen Daphnie, ist <Begriff term="Extrapolation" /> — und riskant:
+			Dort hat niemand geprüft, ob der lineare Zusammenhang überhaupt noch gilt. Vielleicht knickt die
+			Nachkommenzahl bei großen Tieren ab oder sättigt; die Gerade läuft aber stur weiter und liefert
+			eine womöglich völlig unsinnige Zahl. Bleib mit Vorhersagen im Bereich, den deine Daten
+			tatsächlich abdecken.
+		</Callout>
+
 		<!-- Zusammenfassung ----------------------------------------------------- -->
 		<Intuition title="In einem Satz">
 			Die <strong>lineare Regression</strong> schätzt mit der <strong>Methode der kleinsten

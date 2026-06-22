@@ -152,12 +152,52 @@
 			]}
 		/>
 
+		<!-- Einseitig vs. zweiseitig -------------------------------------------- -->
+		<h2 class="mt-4 text-2xl">Einseitig oder zweiseitig? Die Richtung von HA</h2>
 		<p class="text-ink-soft leading-relaxed">
-			HA kann <strong>zweiseitig</strong> sein (irgendein Unterschied, in beide Richtungen) oder
-			<strong>einseitig</strong> (z. B. nur „Sonnenblätter sind kleiner“). Einseitig testet man nur,
-			wenn die Richtung vor dem Blick in die Daten biologisch begründet feststeht — sonst bleibt man
-			ehrlich bei zweiseitig.
+			HA enthält immer eine Effektrichtung — aber wie viel Richtung? Hier scheiden sich zwei Arten
+			von Test. Ein <Begriff term="Zweiseitiger Test">zweiseitiger Test</Begriff> ist
+			<strong>ungerichtet</strong>: HA lautet <em>μ₁ ≠ μ₂</em> („irgendein Unterschied, egal in
+			welche Richtung“). So fragst du im Blattbeispiel schlicht, <em>ob</em> sich Sonnen- und
+			Schattenblätter in der Größe unterscheiden — kleiner oder größer, beides zählt. Das
+			Signifikanzniveau α verteilt sich dann auf <strong>beide</strong> Schwänze der Verteilung.
 		</p>
+		<p class="text-ink-soft leading-relaxed">
+			Ein <Begriff term="Einseitiger Test">einseitiger Test</Begriff> ist dagegen
+			<strong>gerichtet</strong>: HA lautet <em>μ₁ &gt; μ₂</em> (oder <em>μ₁ &lt; μ₂</em>). Du
+			behauptest also nicht nur einen Unterschied, sondern legst dich vorab auf seine
+			<strong>Richtung</strong> fest. Das gesamte α liegt dann in <strong>einem</strong> Schwanz —
+			der Test ist in dieser Richtung empfindlicher (kleinere p-Werte), blind aber für eine
+			Abweichung in die Gegenrichtung. Ein klassisches biologisches Beispiel: Wenn wir aus der
+			Wirkungs-Theorie heraus erwarten, dass eine <strong>Düngung den Ertrag erhöht</strong>
+			(nicht senkt), dürfen wir gerichtet einseitig testen — H₀: μ<sub>gedüngt</sub> ≤
+			μ<sub>Kontrolle</sub> gegen HA: μ<sub>gedüngt</sub> &gt; μ<sub>Kontrolle</sub>.
+		</p>
+		<p class="text-ink-soft leading-relaxed">
+			Der Haken: Einseitig testen darfst du nur, wenn die Richtung <strong>vor</strong> dem Blick in
+			die Daten biologisch begründet feststeht. Wer erst die Daten ansieht, die Richtung abliest und
+			<em>dann</em> einseitig testet, halbiert sich den p-Wert unredlich und bläht so heimlich den
+			Fehler 1. Art auf. Im Zweifel — und immer, wenn die Richtung offen ist — bleibst du ehrlich
+			<strong>zweiseitig</strong>.
+		</p>
+
+		<Merke title="Einseitig nur mit vorab begründeter Richtung">
+			<ul class="ml-5 list-disc space-y-1">
+				<li>
+					<strong>Zweiseitig</strong> (Standard): HA: μ₁ ≠ μ₂ — ungerichtet, fragt nur <em>ob</em>
+					es einen Unterschied gibt. α auf beide Schwänze verteilt.
+				</li>
+				<li>
+					<strong>Einseitig</strong>: HA: μ₁ &gt; μ₂ bzw. μ₁ &lt; μ₂ — gerichtet, nur erlaubt, wenn
+					die Richtung <strong>vorab</strong> biologisch begründet ist (z. B. „Düngung
+					<em>erhöht</em> den Ertrag“). α komplett in einem Schwanz.
+				</li>
+				<li>
+					In <strong>jedem</strong> Fall enthält HA eine Effektrichtung. „Kein Unterschied“ ist
+					<strong>nie</strong> HA — das ist immer die Nullhypothese H₀.
+				</li>
+			</ul>
+		</Merke>
 
 		<Merke title="HA enthält immer eine Effektgröße">
 			H₀ sagt „nichts ist los“ (Effekt = 0). HA sagt „da ist etwas“ und steckt damit eine

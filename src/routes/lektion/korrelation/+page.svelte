@@ -322,6 +322,57 @@
 			Aus der Kurve wird eine Linie — und Pearson r darf wieder ran.
 		</Intuition>
 
+		<h2 class="mt-4 text-2xl">Welche Transformation wann? Eine Entscheidungshilfe</h2>
+		<p class="text-ink-soft leading-relaxed">
+			Welche Transformation passt, hängt von der <strong>Art der Daten</strong> ab — und das lässt sich
+			zu einer kleinen Faustregel verdichten. Drei typische biologische Datensorten, drei typische
+			Transformationen, mit Box-Cox als allgemeinem Rahmen darüber:
+		</p>
+
+		<div class="overflow-x-auto">
+			<table class="border-ink/10 w-full border-collapse text-left text-sm">
+				<thead>
+					<tr class="bg-paper-sunk/60">
+						<th class="border-ink/10 border px-3 py-2">Datentyp</th>
+						<th class="border-ink/10 border px-3 py-2">Transformation</th>
+						<th class="border-ink/10 border px-3 py-2">Biologisches Beispiel</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="border-ink/10 border px-3 py-2">Anteile / Prozente (in [0, 1])</td>
+						<td class="border-ink/10 border px-3 py-2"><strong>Arkussinus</strong> (arcsin√p)</td>
+						<td class="border-ink/10 border px-3 py-2">Keimungsrate, Anteil befallener Blätter, Geschlechterverhältnis</td>
+					</tr>
+					<tr>
+						<td class="border-ink/10 border px-3 py-2">Zähldaten (Poisson)</td>
+						<td class="border-ink/10 border px-3 py-2"><strong>Wurzel</strong> (√y)</td>
+						<td class="border-ink/10 border px-3 py-2">Anzahl Individuen pro Quadrat, Eier pro Gelege, Mutationen</td>
+					</tr>
+					<tr>
+						<td class="border-ink/10 border px-3 py-2">Varianz ≫ Mittelwert / multiplikativ</td>
+						<td class="border-ink/10 border px-3 py-2"><strong>Logarithmus</strong> (log y)</td>
+						<td class="border-ink/10 border px-3 py-2">Körper-/Hirnmasse, Konzentrationen, Populationsgröße</td>
+					</tr>
+					<tr>
+						<td class="border-ink/10 border px-3 py-2">unklar / allgemeiner Fall</td>
+						<td class="border-ink/10 border px-3 py-2"><strong>Box-Cox</strong> (λ datengetrieben)</td>
+						<td class="border-ink/10 border px-3 py-2">λ wird so gewählt, dass Wurzel, log usw. als Spezialfälle herauskommen</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<p class="text-ink-soft leading-relaxed">
+			Der Grund hinter der Tabelle ist immer derselbe: <strong>Varianzstabilisierung</strong>. Bei
+			Anteilen ist die Streuung an den Rändern (nahe 0 % und 100 %) kleiner als in der Mitte — die
+			<Begriff term="Arkussinus-Transformation" /> zieht sie gerade. Bei Zähldaten wächst die Varianz
+			mit dem Mittelwert (bei Poisson sind beide gleich λ), und die Wurzel fängt genau das ab. Bei
+			multiplikativen Größen wächst die Streuung proportional zum Wert, und der Logarithmus macht daraus
+			eine konstante Streuung. Erst danach passen lineare Methoden — Korrelation, t-Test, ANOVA,
+			Regression — wieder sauber.
+		</p>
+
 		<!-- R-Code -------------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">So sieht das in R aus</h2>
 		<p class="text-ink-soft leading-relaxed">

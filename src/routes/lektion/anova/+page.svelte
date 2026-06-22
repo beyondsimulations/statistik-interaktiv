@@ -294,6 +294,24 @@
 			]}
 		/>
 
+		<p class="text-ink-soft leading-relaxed">
+			Rechnen wir es für die Lachse durch. Aus der Varianzzerlegung kennen wir SS<sub>zwischen</sub> =
+			106,17 und SS<sub>innerhalb</sub> = 18,75, zusammen SS<sub>total</sub> = 124,92. Also η² =
+			106,17 / 124,92 ≈ <strong>0,85</strong>: Der Käfigtyp erklärt rund 85 % der gesamten Streuung in
+			der Lachsgröße — genau der korallene Anteil aus dem Balken oben. Zur Einordnung dienen Cohens
+			Faustwerte für η²:
+		</p>
+
+		<Merke title="Faustwerte für η²">
+			<ul class="ml-5 list-disc space-y-1">
+				<li><strong>η² ≈ 0,01</strong> — kleiner Effekt.</li>
+				<li><strong>η² ≈ 0,06</strong> — mittlerer Effekt.</li>
+				<li><strong>η² ≈ 0,14</strong> — großer Effekt.</li>
+			</ul>
+			Unser η² ≈ 0,85 liegt weit über der 0,14-Schwelle: ein sehr großer Effekt des Käfigtyps — der
+			Unterschied ist nicht nur signifikant, sondern erklärt auch den Löwenanteil der Streuung.
+		</Merke>
+
 		<!-- R-Code -------------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">So sieht das in R aus</h2>
 		<p class="text-ink-soft leading-relaxed">
@@ -344,6 +362,48 @@ Tiefkaefig-Festkaefig -4.0  -6.773 -1.227  0.0079`}
 				"p adj": "Der für alle Vergleiche KORRIGIERTE p-Wert. Hier sind alle drei Paare < 0,05 — sie unterscheiden sich alle."
 			}}
 		/>
+
+		<!-- Zweifaktorielle ANOVA & Interaktion --------------------------------- -->
+		<h2 class="mt-4 text-2xl">Zwei Faktoren auf einmal: die zweifaktorielle ANOVA</h2>
+		<p class="text-ink-soft leading-relaxed">
+			Bisher hatten wir <strong>einen</strong> Faktor (den Käfigtyp). Oft wirken aber zwei Einflüsse
+			gleichzeitig. Stell dir vor, du untersuchst das Wachstum von Pflanzen unter zwei Faktoren:
+			<strong>Düngung</strong> (mit/ohne) und <strong>Lichtmenge</strong> (wenig/viel). Werden beide
+			Faktoren in allen Kombinationen geprüft — sie sind also
+			<Begriff term="Gekreuztes Design">gekreuzt</Begriff> —, dann rechnet man eine
+			<Begriff term="Zweifaktorielle ANOVA">zweifaktorielle ANOVA</Begriff>. Sie liefert nicht einen,
+			sondern <strong>drei</strong> Tests: den Haupteffekt der Düngung, den Haupteffekt des Lichts und
+			— besonders spannend — ihre <strong>Wechselwirkung</strong>.
+		</p>
+		<p class="text-ink-soft leading-relaxed">
+			Ein <Begriff term="Interaktionseffekt">Interaktionseffekt</Begriff> bedeutet: Die Wirkung des
+			einen Faktors <strong>hängt von der Stufe des anderen ab</strong>. Vielleicht hilft die Düngung
+			den Pflanzen nur, <em>wenn</em> genug Licht da ist, und bleibt im Schatten wirkungslos. Dann
+			kannst du den Düngeeffekt nicht mehr für sich allein angeben — er ist eben licht-abhängig. Genau
+			diese „es kommt darauf an“-Situation steckt im Interaktionsterm.
+		</p>
+
+		<Merke title="Interaktion im Diagramm: parallel oder nicht?">
+			Zeichnet man die Gruppenmittel als Linien (eine Linie je Lichtstufe, Düngung auf der x-Achse),
+			verrät die Form sofort die Interaktion:
+			<ul class="mt-2 ml-5 list-disc space-y-1">
+				<li>
+					<strong>Parallele Linien</strong> → <strong>kein</strong> Interaktionseffekt: Die Düngung
+					wirkt bei wenig und bei viel Licht gleich stark (die Haupteffekte addieren sich einfach).
+				</li>
+				<li>
+					<strong>Sich kreuzende oder spreizende Linien</strong> → <strong>Interaktion</strong>: Die
+					Wirkung der Düngung ist je nach Lichtstufe verschieden — der Abstand der Linien ändert sich.
+				</li>
+			</ul>
+		</Merke>
+
+		<Callout variant="warnung" title="Erst die Interaktion lesen, dann die Haupteffekte">
+			Ist die Interaktion signifikant, sind die einzelnen Haupteffekte mit Vorsicht zu genießen: Ein
+			gemittelter „Düngeeffekt“ ist dann irreführend, weil er bei wenig und viel Licht ganz
+			unterschiedlich ausfällt. Sieh dir in diesem Fall die Kombinationen einzeln an, statt die
+			Faktoren getrennt zu interpretieren.
+		</Callout>
 
 		<!-- Zusammenfassung ----------------------------------------------------- -->
 		<Intuition title="In einem Satz">
