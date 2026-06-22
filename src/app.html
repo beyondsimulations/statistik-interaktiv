@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="%lang%">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,11 +19,14 @@
 		<script defer src="https://oshu.eu/widget.js"></script>
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
-				ChatWidget.init({
-					tenant: 'platform',
-					agent: 'statistik-interaktiv',
-					layoutMode: 'sidebar'
-				});
+				// Guard so a blocked/failed widget.js (adblock, host down) can't throw.
+				if (typeof ChatWidget !== 'undefined') {
+					ChatWidget.init({
+						tenant: 'platform',
+						agent: 'statistik-interaktiv',
+						layoutMode: 'sidebar'
+					});
+				}
 			});
 		</script>
 

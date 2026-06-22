@@ -2,6 +2,7 @@
 title: Privacy Policy
 subtitle: How we handle your data
 date: '2026-06-22'
+lang: en
 ---
 
 ## 1. Controller

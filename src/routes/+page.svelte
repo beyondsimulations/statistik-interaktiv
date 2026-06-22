@@ -20,13 +20,6 @@
 <main class="mx-auto max-w-3xl px-6 py-16 md:py-24">
 	<!-- Hero ---------------------------------------------------------------- -->
 	<header class="flex flex-col items-start gap-6">
-		<span
-			class="bg-amber-100 text-amber-600 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold tracking-wide"
-		>
-			<span class="bg-coral-400 h-2 w-2 rounded-full"></span>
-			Data Science 2 · Statistik
-		</span>
-
 		<h1 class="text-5xl leading-[1.05] font-semibold md:text-6xl">
 			Statistik, die <em class="text-coral-500 not-italic">Klick</em> macht.
 		</h1>
@@ -85,62 +78,6 @@
 				gemeinsam her.
 			</p>
 		</Card>
-	</section>
-
-	<!-- Design system swatch / primitive showcase --------------------------- -->
-	<section id="designsystem" class="mt-[var(--spacing-section)] scroll-mt-12">
-		<h2 class="text-3xl">Das Design-System</h2>
-		<p class="text-ink-soft mt-2 max-w-xl">
-			Warme Farben, weiche Ecken, klare Typografie — damit du dich beim Lernen
-			wohlfühlst.
-		</p>
-
-		<Card class="mt-6" title="Buttons">
-			<div class="flex flex-wrap items-center gap-3">
-				<Button>Primär</Button>
-				<Button variant="secondary">Sekundär</Button>
-				<Button variant="subtle">Dezent</Button>
-				<Button variant="ghost">Ghost</Button>
-				<Button disabled>Deaktiviert</Button>
-			</div>
-			<div class="mt-4 flex flex-wrap items-center gap-3">
-				<Button size="sm">Klein</Button>
-				<Button size="md">Mittel</Button>
-				<Button size="lg">Groß</Button>
-			</div>
-		</Card>
-
-		<div class="mt-5">
-			<h3 class="text-ink-faint mb-3 text-sm font-semibold tracking-wide uppercase">
-				Farbpalette
-			</h3>
-			<div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
-				<div class="flex flex-col gap-1.5">
-					<div class="bg-paper-raised ring-ink/10 h-14 rounded-2xl ring-1"></div>
-					<span class="text-ink-faint text-xs">Paper</span>
-				</div>
-				<div class="flex flex-col gap-1.5">
-					<div class="bg-coral-400 h-14 rounded-2xl shadow-soft"></div>
-					<span class="text-ink-faint text-xs">Coral</span>
-				</div>
-				<div class="flex flex-col gap-1.5">
-					<div class="bg-amber-300 h-14 rounded-2xl shadow-soft"></div>
-					<span class="text-ink-faint text-xs">Amber</span>
-				</div>
-				<div class="flex flex-col gap-1.5">
-					<div class="bg-sage-300 h-14 rounded-2xl shadow-soft"></div>
-					<span class="text-ink-faint text-xs">Sage</span>
-				</div>
-				<div class="flex flex-col gap-1.5">
-					<div class="bg-ink h-14 rounded-2xl shadow-soft"></div>
-					<span class="text-ink-faint text-xs">Ink</span>
-				</div>
-				<div class="flex flex-col gap-1.5">
-					<div class="bg-paper-sunk ring-ink/10 h-14 rounded-2xl ring-1"></div>
-					<span class="text-ink-faint text-xs">Sunk</span>
-				</div>
-			</div>
-		</div>
 	</section>
 
 	<!-- Reassuring closing note --------------------------------------------- -->

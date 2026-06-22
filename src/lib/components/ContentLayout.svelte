@@ -8,21 +8,30 @@
 		subtitle?: string;
 		/** Frontmatter: ISO date string, shown as a small "Stand"-line. */
 		date?: string;
+		/** Page language ('de' default; English legal pages pass 'en'). */
+		lang?: string;
 		/** The rendered markdown content (mdsvex passes it as a snippet). */
 		children: Snippet;
 	};
 
-	let { title, subtitle, date, children }: Props = $props();
+	let { title, subtitle, date, lang = 'de', children }: Props = $props();
 
+	const isDe = $derived(lang === 'de');
 	const formattedDate = $derived(
 		date
-			? new Intl.DateTimeFormat('de-DE', {
+			? new Intl.DateTimeFormat(isDe ? 'de-DE' : 'en-GB', {
 					day: 'numeric',
 					month: 'long',
-					year: 'numeric'
+					year: 'numeric',
+					// Format in UTC so the prerendered date can't shift a day on a
+					// build machine in a negative-UTC timezone.
+					timeZone: 'UTC'
 				}).format(new Date(date))
 			: ''
 	);
+	const dateLabel = $derived(isDe ? 'Stand: ' : 'Last updated: ');
+	// Note: the <html lang> attribute is set per route in hooks.server.ts via the
+	// %lang% placeholder (English legal pages → "en"); `lang` here drives the date.
 </script>
 
 <svelte:head>
@@ -44,7 +53,7 @@
 				<p class="text-ink-soft mt-3 text-lg md:text-xl">{subtitle}</p>
 			{/if}
 			{#if formattedDate}
-				<p class="text-ink-faint mt-4 text-sm">Stand: {formattedDate}</p>
+				<p class="text-ink-faint mt-4 text-sm">{dateLabel}{formattedDate}</p>
 			{/if}
 		</header>
 
