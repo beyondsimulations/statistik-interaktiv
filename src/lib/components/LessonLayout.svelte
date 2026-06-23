@@ -34,6 +34,37 @@
 	// A footer link is only usable if the target lesson actually has a page.
 	const prevLive = $derived(prev?.status === 'live');
 	const nextLive = $derived(next?.status === 'live');
+
+	// Track whether the Oshu chat sidebar is open. The widget (oshu.eu/widget.js,
+	// sidebar mode) injects a fixed panel that is parked off-screen when closed and
+	// only marked `.cw-sidebar__panel--open` once the user opens it. We only reserve
+	// the right gutter while it's actually open; otherwise the lesson stays centered.
+	// If that class ever changes upstream this simply stays false → centered (safe).
+	let chatOpen = $state(false);
+
+	$effect(() => {
+		let raf = 0;
+		const sync = () => {
+			raf = 0;
+			chatOpen = document.querySelector('.cw-sidebar__panel--open') !== null;
+		};
+		// Coalesce the frequent mutations the chat emits while streaming/typing.
+		const schedule = () => {
+			if (!raf) raf = requestAnimationFrame(sync);
+		};
+		sync();
+		const observer = new MutationObserver(schedule);
+		observer.observe(document.body, {
+			subtree: true,
+			childList: true,
+			attributes: true,
+			attributeFilter: ['class']
+		});
+		return () => {
+			if (raf) cancelAnimationFrame(raf);
+			observer.disconnect();
+		};
+	});
 </script>
 
 {#snippet sidebar()}
@@ -45,7 +76,7 @@
 
 <Seo title={lesson?.title} {description} type="article" />
 
-<div class="lesson-shell">
+<div class="lesson-shell" class:chat-open={chatOpen}>
 <div class="mx-auto flex w-full max-w-7xl gap-8 px-4 py-6 md:px-6 lg:py-10">
 	<!-- Sidebar (desktop): sticky, scrollable -->
 	<aside class="hidden w-72 shrink-0 lg:block">
@@ -157,13 +188,22 @@
 <style>
 	/* Reserve room on the right of the WIDE lesson layout so the Oshu chat
 	   sidebar (overlays from the right on ≥1280px) doesn't cover the lesson.
-	   Home and text pages stay centered. Tune --oshu-space to the Oshu width. */
+	   The gutter is only applied while the chat is actually open (.chat-open);
+	   when it's closed the lesson stays centered like the rest of the site.
+	   Tune --oshu-space to the Oshu panel width (~380px). */
 	.lesson-shell {
 		--oshu-space: 24rem; /* 384px */
+		transition: padding-right 0.3s ease; /* match the panel's slide-in */
 	}
 	@media (min-width: 1280px) {
-		.lesson-shell {
+		.lesson-shell.chat-open {
 			padding-right: var(--oshu-space);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.lesson-shell {
+			transition: none;
 		}
 	}
 </style>
