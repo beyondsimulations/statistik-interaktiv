@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import SignalRausch from '$lib/widgets/SignalRausch.svelte';
 	import AnnahmenBaum from '$lib/widgets/AnnahmenBaum.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
@@ -67,6 +68,8 @@
 	{slug}
 	description="Der t-Wert als Signal-zu-Rausch-Verhältnis: Ein-Stichproben-, Student-, Welch- und gepaarter t-Test, ihre Voraussetzungen (Unabhängigkeit, Normalverteilung, Varianzhomogenität) und die nicht-parametrischen Alternativen Mann-Whitney-U und Wilcoxon. Mit Signal-vs-Rausch-Regler und interaktivem Entscheidungsbaum — biologisch motiviert an der Zugdistanz von Buchfink und Mönchsgrasmücke."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

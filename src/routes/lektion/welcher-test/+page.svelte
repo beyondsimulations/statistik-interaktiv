@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import EntscheidungsbaumSpiel from '$lib/widgets/EntscheidungsbaumSpiel.svelte';
 	import Intuition from '$lib/components/Intuition.svelte';
 	import Merke from '$lib/components/Merke.svelte';
@@ -64,6 +65,8 @@
 	{slug}
 	description="Die Abschlusslektion bündelt alles: Welchen statistischen Test wählst du? Die zentrale Intuition — den Test wählst du VOR dem Blick auf den p-Wert, aus Datentyp (kategorial → Chi-Quadrat; kontinuierlich → t-Test/ANOVA/Regression), Anzahl der Gruppen (1 vs. Referenz / 2 / ≥3), gepaart vs. unabhängig und den erfüllten Annahmen (sonst nicht-parametrisch). Mit Cheatsheet-Tabelle (Fragestellung → Test → R-Funktion) für die sechs biologischen Beispiele plus die nicht-parametrischen Alternativen, einem interaktiven Entscheidungsbaum-Spiel über alle Test-Familien, einem Szenario-Quiz mit der ≥3-Gruppen-Falle und R-Code-Spickzettel."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import PowerSpielplatz from '$lib/widgets/PowerSpielplatz.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
 	import Intuition from '$lib/components/Intuition.svelte';
@@ -66,6 +67,8 @@
 	{slug}
 	description="Gutes experimentelles Design entscheidet, ob eine Studie überhaupt etwas zeigen kann: Repräsentativität, Randomisierung als Goldstandard, Blocking, Negativ- und Positivkontrollen, Verblindung und das Isolieren von Confounding. Die zentrale Intuition: Power (1 − β), Effektgröße, Streuung σ, α und Stichprobenumfang n bilden ein gekoppeltes System — Power ∝ (Effektgröße·√n)/σ. Kennt man vier Größen, ist die fünfte festgelegt. Ein nicht-signifikantes Ergebnis bedeutet NICHT „kein Effekt“ — vielleicht war einfach zu wenig Power. Mindeststichprobenumfang per Faustformel n ≈ 16·s²/d², R-Funktion power.t.test und ein interaktiver Power-Spielplatz am Beispiel Vogelzug."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import SamplingMaschine from '$lib/widgets/SamplingMaschine.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
 	import Intuition from '$lib/components/Intuition.svelte';
@@ -75,6 +76,8 @@
 	{slug}
 	description="Kennwert vs. Parameter, Punktschätzer & Erwartungstreue, warum n−1, Standardfehler und das Konfidenzintervall x̄ ± z·SE. Mit der Sampling-Maschine zur korrekten Deutung: der Parameter ist fest, das Intervall ist zufällig."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

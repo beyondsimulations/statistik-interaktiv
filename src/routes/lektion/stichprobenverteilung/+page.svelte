@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import StichprobenverteilungWidget from '$lib/widgets/StichprobenverteilungWidget.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
 	import Intuition from '$lib/components/Intuition.svelte';
@@ -61,6 +62,8 @@
 	{slug}
 	description="Warum sagt eine kleine Stichprobe etwas über eine riesige Grundgesamtheit aus? Die zentrale Idee der schließenden Statistik — interaktiv erklärt."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

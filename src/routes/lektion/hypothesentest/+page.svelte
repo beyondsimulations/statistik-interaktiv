@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import PowerVisualizer from '$lib/widgets/PowerVisualizer.svelte';
 	import PWertSpiel from '$lib/widgets/PWertSpiel.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
@@ -65,6 +66,8 @@
 	{slug}
 	description="Muster vs. Modell, H0 vs. HA, das 8-Schritte-Vorgehen, Signifikanzniveau α, Teststatistik und p-Wert, Fehler 1. & 2. Art und Teststärke. Mit Power-Visualisierer und p-Wert-Würfelspiel — und der zentralen Fehldeutung des p-Werts, biologisch motiviert an Sonnen- vs. Schattenblättern."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
