@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import FlaechenSchieber from '$lib/widgets/FlaechenSchieber.svelte';
 	import DiskreteVerteilung from '$lib/widgets/DiskreteVerteilung.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
@@ -62,6 +63,8 @@
 	{slug}
 	description="Häufigkeits- vs. Wahrscheinlichkeitsverteilung, diskret vs. stetig, die Normalverteilung und die zentrale Idee: Die Fläche unter der Dichtekurve ist die Wahrscheinlichkeit. Mit interaktivem Flächen-Schieber."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

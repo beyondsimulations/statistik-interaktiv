@@ -34,6 +34,8 @@
 		title?: string;
 		/** Axis label under the x-axis. */
 		xLabel?: string;
+		/** Axis label along the y-axis (rendered rotated). Omit to render nothing. */
+		yLabel?: string;
 		/** Bar fill colour (warm palette default). */
 		barColor?: string;
 		/** Height of the drawing area in viewBox units. */
@@ -49,6 +51,7 @@
 		markers = [],
 		title = 'Histogramm',
 		xLabel,
+		yLabel,
 		barColor = 'var(--color-amber-300)',
 		height = 200
 	}: Props = $props();
@@ -183,6 +186,19 @@
 				fill="var(--color-ink-faint)"
 			>
 				{xLabel}
+			</text>
+		{/if}
+
+		{#if yLabel}
+			<text
+				x={-2}
+				y={innerH / 2}
+				text-anchor="middle"
+				font-size="11"
+				fill="var(--color-ink-faint)"
+				transform="rotate(-90 {-2} {innerH / 2})"
+			>
+				{yLabel}
 			</text>
 		{/if}
 	</g>

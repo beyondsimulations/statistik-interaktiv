@@ -126,6 +126,16 @@
 		const clamped = Math.max(Y_LO, Math.min(Y_HI, v));
 		return h - ((clamped - Y_LO) / (Y_HI - Y_LO)) * h;
 	}
+
+	// Linker Achsen-Streifen (viewBox-Einheiten): reserviert Platz für die
+	// y-Achse „Blattlänge (cm)" mit min/max-Tick. Die Punktspalten beginnen
+	// erst rechts davon (reine Layout-Verschiebung, die Jitter-Werte bleiben).
+	const AX = 26;
+	const PLOT_W = 320 - AX;
+	// y-Positionen des obersten (Y_HI) und untersten (Y_LO) Tick, konsistent
+	// mit der Punkt-Skalierung dotY(v, 132) + 6.
+	const yTop = dotY(Y_HI, 132) + 6; // = 6  (Y_HI cm)
+	const yBottom = dotY(Y_LO, 132) + 6; // = 138 (Y_LO cm)
 </script>
 
 <Widget
@@ -162,6 +172,95 @@
 			>
 				Korrekt: Mittelwert pro Pflanze
 			</button>
+		</div>
+
+		<!-- Visualisierung: zwei Gruppen, je Pflanzen als Cluster von Blatt-Punkten -->
+		<div class="grid gap-4 sm:grid-cols-2">
+			{#each data as group, gi (group.name)}
+				{@const color = gi === 0 ? 'var(--color-ink-soft)' : 'var(--color-coral-500)'}
+				<div class="border-ink/10 bg-paper-sunk/40 rounded-xl border p-3">
+					<div class="mb-1 flex items-baseline justify-between">
+						<span class="text-ink font-semibold">{group.name}</span>
+						<span class="text-ink-faint text-xs tabular-nums">
+							{plants} Pflanzen · {leaves} Blätter
+						</span>
+					</div>
+					<svg
+						viewBox="0 0 320 150"
+						class="block h-auto w-full"
+						role="img"
+						aria-label="{group.name}: {plants} Pflanzen mit je {leaves} Blättern. Die Blätter einer Pflanze stehen als Punktwolke beieinander. Die Höhe eines Punktes ist die Blattlänge in cm (unten {Y_LO}, oben {Y_HI})."
+					>
+						<!-- y-Achse: Blattlänge (cm) mit min/max-Tick -->
+						<line x1={AX} y1={yTop} x2={AX} y2={yBottom} stroke="var(--color-ink)" stroke-opacity="0.25" />
+						<line x1={AX - 3} y1={yTop} x2={AX} y2={yTop} stroke="var(--color-ink)" stroke-opacity="0.4" />
+						<text x={AX - 5} y={yTop + 3} text-anchor="end" font-size="8" fill="var(--color-ink-faint)">
+							{Y_HI}
+						</text>
+						<line x1={AX - 3} y1={yBottom} x2={AX} y2={yBottom} stroke="var(--color-ink)" stroke-opacity="0.4" />
+						<text x={AX - 5} y={yBottom} text-anchor="end" font-size="8" fill="var(--color-ink-faint)">
+							{Y_LO}
+						</text>
+						<text
+							x={8}
+							y={(yTop + yBottom) / 2}
+							text-anchor="middle"
+							font-size="8.5"
+							fill="var(--color-ink-faint)"
+							transform="rotate(-90 8 {(yTop + yBottom) / 2})"
+						>
+							Blattlänge (cm)
+						</text>
+
+						{#each group.plants as plant, pi (pi)}
+							{@const colW = PLOT_W / plants}
+							{@const cx = AX + colW * pi + colW / 2}
+							<!-- Trennlinie zwischen Pflanzen -->
+							{#if pi > 0}
+								<line
+									x1={AX + colW * pi}
+									y1="6"
+									x2={AX + colW * pi}
+									y2="150"
+									stroke="var(--color-ink)"
+									stroke-opacity="0.06"
+								/>
+							{/if}
+							<!-- Pflanzen-Mittelwertstrich -->
+							<line
+								x1={cx - colW * 0.32}
+								y1={dotY(plant.groupMean, 132) + 6}
+								x2={cx + colW * 0.32}
+								y2={dotY(plant.groupMean, 132) + 6}
+								stroke={color}
+								stroke-width="2"
+								stroke-opacity="0.55"
+							/>
+							<!-- Blatt-Punkte dieser Pflanze (leicht horizontal gejittert) -->
+							{#each plant.leafValues as leaf, li (li)}
+								{@const jx = plant.jitter[li] * colW}
+								<circle
+									cx={cx + jx}
+									cy={dotY(leaf, 132) + 6}
+									r="2.4"
+									fill={color}
+									fill-opacity="0.6"
+								/>
+							{/each}
+							<!-- Pflanzen-Label -->
+							<text
+								x={cx}
+								y="146"
+								text-anchor="middle"
+								font-size="8"
+								fill="var(--color-ink-faint)"
+							>
+								P{pi + 1}
+							</text>
+						{/each}
+					</svg>
+				</div>
+			{/each}
 		</div>
 
 		<!-- Live-Kennzahlen -->
@@ -223,74 +322,6 @@
 					? 'Mit der ehrlichen Replikationseinheit (Pflanze) reichen die Daten nicht aus.'
 					: 'Selbst naiv kein Effekt — dann ist auch korrekt keiner zu erwarten.'}
 			{/if}
-		</div>
-
-		<!-- Visualisierung: zwei Gruppen, je Pflanzen als Cluster von Blatt-Punkten -->
-		<div class="grid gap-4 sm:grid-cols-2">
-			{#each data as group, gi (group.name)}
-				{@const color = gi === 0 ? 'var(--color-ink-soft)' : 'var(--color-coral-500)'}
-				<div class="border-ink/10 bg-paper-sunk/40 rounded-xl border p-3">
-					<div class="mb-1 flex items-baseline justify-between">
-						<span class="text-ink font-semibold">{group.name}</span>
-						<span class="text-ink-faint text-xs tabular-nums">
-							{plants} Pflanzen · {leaves} Blätter
-						</span>
-					</div>
-					<svg
-						viewBox="0 0 320 150"
-						class="block h-auto w-full"
-						role="img"
-						aria-label="{group.name}: {plants} Pflanzen mit je {leaves} Blättern. Die Blätter einer Pflanze stehen als Punktwolke beieinander."
-					>
-						{#each group.plants as plant, pi (pi)}
-							{@const colW = 320 / plants}
-							{@const cx = colW * pi + colW / 2}
-							<!-- Trennlinie zwischen Pflanzen -->
-							{#if pi > 0}
-								<line
-									x1={colW * pi}
-									y1="6"
-									x2={colW * pi}
-									y2="150"
-									stroke="var(--color-ink)"
-									stroke-opacity="0.06"
-								/>
-							{/if}
-							<!-- Pflanzen-Mittelwertstrich -->
-							<line
-								x1={cx - colW * 0.32}
-								y1={dotY(plant.groupMean, 132) + 6}
-								x2={cx + colW * 0.32}
-								y2={dotY(plant.groupMean, 132) + 6}
-								stroke={color}
-								stroke-width="2"
-								stroke-opacity="0.55"
-							/>
-							<!-- Blatt-Punkte dieser Pflanze (leicht horizontal gejittert) -->
-							{#each plant.leafValues as leaf, li (li)}
-								{@const jx = plant.jitter[li] * colW}
-								<circle
-									cx={cx + jx}
-									cy={dotY(leaf, 132) + 6}
-									r="2.4"
-									fill={color}
-									fill-opacity="0.6"
-								/>
-							{/each}
-							<!-- Pflanzen-Label -->
-							<text
-								x={cx}
-								y="146"
-								text-anchor="middle"
-								font-size="8"
-								fill="var(--color-ink-faint)"
-							>
-								P{pi + 1}
-							</text>
-						{/each}
-					</svg>
-				</div>
-			{/each}
 		</div>
 
 		<p class="text-ink-faint text-xs leading-relaxed">

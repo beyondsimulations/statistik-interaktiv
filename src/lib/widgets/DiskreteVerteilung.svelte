@@ -55,9 +55,15 @@
 			? `Binomialverteilung B(${n}, ${p.toFixed(2)})`
 			: `Poissonverteilung mit λ = ${lambda.toFixed(1)}`}
 		xLabel={modus === 'binomial' ? 'Anzahl Erfolge k' : 'Anzahl Ereignisse k'}
+		yLabel="P(X = k)"
 		barColor="var(--color-coral-300)"
 		markers={[{ x: erwartung, label: `E[X] = ${erwartung.toFixed(2)}`, color: 'var(--color-ink)' }]}
 	/>
+
+	<p class="text-ink-faint mt-2 text-xs leading-relaxed">
+		Die Höhe jedes Balkens ist die Wahrscheinlichkeit P(X = k). Der gestrichelte
+		schwarze Strich markiert den Erwartungswert E[X] = {erwartung.toFixed(2)}.
+	</p>
 
 	{#snippet controls()}
 		<div class="flex flex-col gap-4">

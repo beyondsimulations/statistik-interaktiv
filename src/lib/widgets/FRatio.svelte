@@ -59,9 +59,20 @@
 	const plotH = H - PAD_T - PAD_B;
 	const baseY = PAD_T + plotH;
 
-	const halfSpan = $derived(Math.max(spacing + 3 * within, 24));
-	const lo = $derived(BASE - halfSpan);
-	const hi = $derived(BASE + halfSpan);
+	// Slider-Grenzen als EINE Wahrheitsquelle: dieselben Consts speisen die Achsen-
+	// Mathematik UND die max-Attribute der Regler. Weitet jemand einen Slider, wächst
+	// die feste Achse strukturell mit — kein stilles Klippen mehr.
+	const SPACING_MAX = 20; // Abstand der Gruppenmittel (cm)
+	const WITHIN_MAX = 20; // Streuung innerhalb der Gruppen (SD, cm)
+
+	// KONSTANTE cm-Achse, die den GESAMTEN Reglerbereich abdeckt, damit der Rahmen
+	// beim Ziehen steht und sich nur die Kurven bewegen. Die äußerste Gruppe liegt bei
+	// BASE + SPACING_MAX mit einem 3σ-Schwanz (σ = WITHIN_MAX):
+	//   HALF_SPAN = SPACING_MAX + 3·WITHIN_MAX = 80 cm.
+	// Damit passt jede Kombination aus Abstand und Streuung vollständig in den Rahmen.
+	const HALF_SPAN = SPACING_MAX + 3 * WITHIN_MAX; // = 80 cm
+	const lo = BASE - HALF_SPAN;
+	const hi = BASE + HALF_SPAN;
 	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
 	const sx = $derived(scaleX.map);
 	// sy bildet einen Höhen-Anteil (0..1, Gipfel = 1) auf die SVG-y-Achse ab;
@@ -117,34 +128,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Anzeige F und p -->
-		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100'
-					: 'bg-paper-sunk'}"
-			>
-				<span class="text-ink-soft font-semibold">F = </span>
-				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(res.F)}</span>
-			</div>
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100 text-sage-500'
-					: 'bg-coral-50 text-coral-700'}"
-			>
-				<span class="font-semibold">p = </span>
-				<span class="text-2xl font-bold tabular-nums">{fmtP(res.p)}</span>
-				<span class="text-sm font-semibold"
-					>{significant ? '· signifikant' : '· nicht signifikant'}</span
-				>
-			</div>
-			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
-				<span>MS<sub>zw.</sub> = {fmt1(res.msBetween)}</span>
-				<span>·</span>
-				<span>MS<sub>inn.</sub> = {fmt1(res.msWithin)}</span>
-			</div>
-		</div>
-
 		<svg
 			viewBox="0 0 {W} {H}"
 			class="block h-auto w-full"
@@ -189,6 +172,34 @@
 			</text>
 		</svg>
 
+		<!-- Live-Anzeige F und p -->
+		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100'
+					: 'bg-paper-sunk'}"
+			>
+				<span class="text-ink-soft font-semibold">F = </span>
+				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(res.F)}</span>
+			</div>
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100 text-sage-500'
+					: 'bg-coral-50 text-coral-700'}"
+			>
+				<span class="font-semibold">p = </span>
+				<span class="text-2xl font-bold tabular-nums">{fmtP(res.p)}</span>
+				<span class="text-sm font-semibold"
+					>{significant ? '· signifikant' : '· nicht signifikant'}</span
+				>
+			</div>
+			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
+				<span>MS<sub>zw.</sub> = {fmt1(res.msBetween)}</span>
+				<span>·</span>
+				<span>MS<sub>inn.</sub> = {fmt1(res.msWithin)}</span>
+			</div>
+		</div>
+
 		<!-- SS-Zerlegung (zwischen vs. innerhalb) via die geteilte Komponente -->
 		<SSZerlegung
 			ssExplained={res.ssBetween}
@@ -219,7 +230,7 @@
 					id="fr-spacing"
 					type="range"
 					min="0"
-					max="20"
+					max={SPACING_MAX}
 					step="0.5"
 					bind:value={spacing}
 					class="accent-coral-500 w-full"
@@ -238,7 +249,7 @@
 					id="fr-within"
 					type="range"
 					min="1"
-					max="20"
+					max={WITHIN_MAX}
 					step="0.5"
 					bind:value={within}
 					class="accent-sage-500 w-full"

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import BayesBox from '$lib/widgets/BayesBox.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
 	import Intuition from '$lib/components/Intuition.svelte';
@@ -65,6 +66,8 @@
 	{slug}
 	description="Von der Laplace-Wahrscheinlichkeit über die Rechenregeln bis zum Satz von Bayes — warum ein positiver Test bei seltenen Krankheiten oft ein Fehlalarm ist. Mit interaktiver Bayes-Box."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

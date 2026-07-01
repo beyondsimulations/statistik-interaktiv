@@ -215,30 +215,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Kennzahlen -->
-		<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-			<div class="bg-coral-50 rounded-2xl px-4 py-3">
-				<div class="text-coral-700 text-sm font-semibold">Steigung b</div>
-				<div class="text-ink text-2xl font-bold tabular-nums">{fmt(fit.slope)}</div>
-				<div class="text-ink-faint text-xs">Nachkommen pro mm</div>
-			</div>
-			<div class="bg-sage-100 rounded-2xl px-4 py-3">
-				<div class="text-sage-500 text-sm font-semibold">Achsenabschnitt a</div>
-				<div class="text-ink text-2xl font-bold tabular-nums">{fmt(fit.intercept)}</div>
-				<div class="text-ink-faint text-xs">ŷ bei x = 0</div>
-			</div>
-			<div class="bg-paper-sunk rounded-2xl px-4 py-3">
-				<div class="text-ink-soft text-sm font-semibold">R²</div>
-				<div class="text-ink text-2xl font-bold tabular-nums">{fmt(fit.r2)}</div>
-				<div class="text-ink-faint text-xs">erklärter Anteil</div>
-			</div>
-			<div class="bg-paper-sunk rounded-2xl px-4 py-3">
-				<div class="text-ink-soft text-sm font-semibold">p-Wert (b)</div>
-				<div class="text-ink text-2xl font-bold tabular-nums">{fmtP(fit.pSlope)}</div>
-				<div class="text-ink-faint text-xs">{sigLabel(fit.pSlope)}</div>
-			</div>
-		</div>
-
 		<!-- Streudiagramm mit Gerade und Residuen -->
 		<svg
 			bind:this={svgEl}
@@ -361,6 +337,30 @@
 				/>
 			{/each}
 		</svg>
+
+		<!-- Live-Kennzahlen -->
+		<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+			<div class="bg-coral-50 rounded-2xl px-4 py-3">
+				<div class="text-coral-700 text-sm font-semibold">Steigung b</div>
+				<div class="text-ink text-2xl font-bold tabular-nums">{fmt(fit.slope)}</div>
+				<div class="text-ink-faint text-xs">Nachkommen pro mm</div>
+			</div>
+			<div class="bg-sage-100 rounded-2xl px-4 py-3">
+				<div class="text-sage-500 text-sm font-semibold">Achsenabschnitt a</div>
+				<div class="text-ink text-2xl font-bold tabular-nums">{fmt(fit.intercept)}</div>
+				<div class="text-ink-faint text-xs">ŷ bei x = 0</div>
+			</div>
+			<div class="bg-paper-sunk rounded-2xl px-4 py-3">
+				<div class="text-ink-soft text-sm font-semibold">R²</div>
+				<div class="text-ink text-2xl font-bold tabular-nums">{fmt(fit.r2)}</div>
+				<div class="text-ink-faint text-xs">erklärter Anteil</div>
+			</div>
+			<div class="bg-paper-sunk rounded-2xl px-4 py-3">
+				<div class="text-ink-soft text-sm font-semibold">p-Wert (b)</div>
+				<div class="text-ink text-2xl font-bold tabular-nums">{fmtP(fit.pSlope)}</div>
+				<div class="text-ink-faint text-xs">{sigLabel(fit.pSlope)}</div>
+			</div>
+		</div>
 
 		<!-- SS-Zerlegung: erklärt vs. unerklärt, Symbol R² -->
 		<SSZerlegung

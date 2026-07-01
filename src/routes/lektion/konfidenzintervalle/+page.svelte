@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import SamplingMaschine from '$lib/widgets/SamplingMaschine.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
 	import Intuition from '$lib/components/Intuition.svelte';
@@ -75,6 +76,8 @@
 	{slug}
 	description="Kennwert vs. Parameter, Punktschätzer & Erwartungstreue, warum n−1, Standardfehler und das Konfidenzintervall x̄ ± z·SE. Mit der Sampling-Maschine zur korrekten Deutung: der Parameter ist fest, das Intervall ist zufällig."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -98,18 +101,23 @@
 		<!-- Kennwert vs. Parameter ---------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Kennwert oder Parameter?</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Die ganze schließende Statistik dreht sich um eine Unterscheidung. Auf der einen Seite steht
-			der <Begriff term="Kennwert" />: eine Größe, die du aus deiner <Begriff term="Stichprobe" />
-			berechnest: der Mittelwert <strong>x̄</strong>, die Standardabweichung <strong>s</strong>.
-			Kennwerte schreibt man mit <em>lateinischen</em> Buchstaben, und sie schwanken von Stichprobe
-			zu Stichprobe.
+			Die ganze schließende Statistik dreht sich um eine einzige Unterscheidung: zwischen dem, was
+			du <em>misst</em>, und dem, was du eigentlich <em>wissen willst</em>. Otto misst 20 Vögel —
+			das sind seine Daten. Wissen will er aber etwas über <em>alle</em> Vögel der Art, und die kann
+			er nie alle fangen. Für diese zwei Seiten gibt es zwei Namen.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
-			Auf der anderen Seite steht der <Begriff term="Parameter" />: eine feste, meist unbekannte
-			Größe der <Begriff term="Grundgesamtheit" />: der wahre Mittelwert <strong>μ</strong>, die
-			wahre Standardabweichung <strong>σ</strong>. Parameter schreibt man mit
-			<em>griechischen</em> Buchstaben, und sie ändern sich nicht. Dein Ziel: vom beobachteten
-			Kennwert auf den unbekannten Parameter schließen.
+			<strong>Was du misst</strong>, heißt <Begriff term="Kennwert" />: eine Größe, die du aus
+			deiner <Begriff term="Stichprobe" /> berechnest, etwa der Mittelwert <strong>x̄</strong> oder
+			die Standardabweichung <strong>s</strong>. Kennwerte schreibt man mit <em>lateinischen</em>
+			Buchstaben, und sie schwanken von Stichprobe zu Stichprobe.
+		</p>
+		<p class="text-ink-soft leading-relaxed">
+			<strong>Was du wissen willst</strong>, heißt <Begriff term="Parameter" />: eine feste, meist
+			unbekannte Größe der <Begriff term="Grundgesamtheit" /> — also aller Vögel der Art zusammen.
+			Das ist der wahre Mittelwert <strong>μ</strong> oder die wahre Standardabweichung
+			<strong>σ</strong>. Parameter schreibt man mit <em>griechischen</em> Buchstaben, und sie ändern
+			sich nicht. Dein Ziel: vom beobachteten Kennwert auf den unbekannten Parameter schließen.
 		</p>
 
 		<Merke title="Lateinisch schätzt griechisch">
@@ -135,6 +143,11 @@
 			alle möglichen Stichproben genau den wahren Wert. Er ist also nicht systematisch zu hoch oder
 			zu niedrig, nur eben von Stichprobe zu Stichprobe verstreut.
 		</p>
+		<p class="text-ink-soft leading-relaxed">
+			In eine Formel gegossen heißt das, mit dem <Begriff term="Erwartungswert" />-Operator E(·) —
+			gemeint ist der Mittelwert über unendlich viele Wiederholungen der Stichprobenziehung —
+			schlicht: der Erwartungswert von x̄ ist genau μ.
+		</p>
 
 		<FormelZeigen
 			formula={String.raw`\mathbb{E}(\bar X) = \mu`}
@@ -148,17 +161,28 @@
 		<!-- Warum n-1 ------------------------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Warum durch n − 1? Die Sache mit den Freiheitsgraden</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Bei der Stichprobenvarianz teilt man die Summe der quadrierten Abweichungen nicht durch n,
-			sondern durch <strong>n − 1</strong>. Das wirkt willkürlich — ist es aber nicht. Der Grund
-			steckt darin, dass du die Abweichungen um <em>x̄</em> misst, und x̄ hast du selbst aus
-			denselben Daten geschätzt.
+			Bei der Stichprobenvarianz teilst du die Summe der quadrierten Abweichungen nicht durch n,
+			sondern durch <strong>n − 1</strong>. Das wirkt willkürlich — ist es aber nicht. Gehen wir es
+			in drei kleinen Schritten durch.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
-			Die Daten liegen per Konstruktion möglichst nah an ihrem eigenen x̄, näher, als sie im
-			Schnitt am wahren μ lägen. Würdest du durch n teilen, unterschätztest du σ² deshalb
-			systematisch. Ein <Begriff term="Freiheitsgrade">Freiheitsgrad</Begriff> ist bereits für die
-			Schätzung von x̄ „verbraucht“: Kennst du x̄ und n − 1 der Werte, liegt der letzte fest. Es
-			bleiben nur n − 1 frei variierbare Abweichungen, und genau durch diese Zahl wird geteilt.
+			<strong>Erstens: Du misst um die falsche Mitte.</strong> Die Abweichungen berechnest du
+			gegenüber <em>x̄</em> — und x̄ hast du selbst aus denselben Daten geschätzt. Die Daten liegen
+			per Konstruktion möglichst nah an ihrem eigenen x̄, näher, als sie im Schnitt am wahren μ
+			lägen.
+		</p>
+		<p class="text-ink-soft leading-relaxed">
+			<strong>Zweitens: „Durch n“ wäre deshalb zu klein.</strong> Weil die Abweichungen um das
+			eigene x̄ kleiner ausfallen als um das wahre μ, würdest du σ² systematisch unterschätzen, wenn
+			du durch n teilst. Die rohe Varianz kommt zu niedrig heraus.
+		</p>
+		<p class="text-ink-soft leading-relaxed">
+			<strong>Drittens: n − 1 sind die Freiheitsgrade.</strong> Ein
+			<Begriff term="Freiheitsgrade">Freiheitsgrad</Begriff> ist schon dafür „verbraucht“, dass du
+			x̄ aus den Daten geschätzt hast. Stell es dir konkret vor: Kennst du x̄ und alle Werte bis auf
+			einen einzigen, dann liegt dieser letzte Wert zwangsläufig fest — er muss die Summe genau so
+			ergänzen, dass wieder x̄ herauskommt. Frei wählbar sind also nur n − 1 der Abweichungen, und
+			genau durch diese Zahl teilst du.
 		</p>
 
 		<FormelZeigen
@@ -229,6 +253,13 @@
 			<li>95 % Konfidenz → z ≈ <strong>1,96</strong></li>
 			<li>99 % Konfidenz → z ≈ <strong>2,58</strong></li>
 		</ul>
+		<p class="text-ink-soft leading-relaxed">
+			Diese drei Zahlen sind keine Willkür, die man auswendig lernen muss: Es sind die
+			<Begriff term="Kritischer Wert">kritischen Werte</Begriff> der
+			<Begriff term="Standardnormalverteilung" /> — genau die Grenzen, die symmetrisch um die Mitte
+			90 %, 95 % bzw. 99 % der Fläche unter der Glockenkurve einschließen. Mehr Konfidenz bedeutet
+			mehr Fläche, und mehr Fläche bedeutet einen größeren z-Wert.
+		</p>
 
 		<!-- DIE zentrale Fehldeutung -------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Die eine Deutung, die fast alle falsch machen</h2>
@@ -275,23 +306,32 @@
 			<li>Erhöh <strong>n</strong>: Die Intervalle werden schmaler (der Standardfehler sinkt), der Trefferanteil bleibt aber beim Niveau.</li>
 		</ol>
 
-		<SamplingMaschine />
-
-		<Callout variant="merke" title="Hinweis zur Maschine">
-			In der Maschine ist σ <strong>bekannt</strong> (wir kennen die Population), daher rechnet sie
-			sauber mit dem z-basierten KI x̄ ± z·σ/√n und z = Φ⁻¹(0,975) für 95 %. Im echten Leben ist σ
-			meist unbekannt, dann kommt die t-Verteilung ins Spiel, gleich im nächsten Abschnitt.
+		<Callout variant="merke" title="Bevor du loslegst: σ ist hier bekannt">
+			Damit du die Maschine richtig einordnest: Sie <strong>tut so, als
+			kenntest du σ</strong> (wir kennen ja die ganze Population) und rechnet daher sauber mit dem
+			z-basierten KI x̄ ± z·σ/√n und z = Φ⁻¹(0,975) für 95 %. Im echten Leben kennst du σ fast nie —
+			dann schätzt du es aus den Daten durch s, und diese zusätzliche Unsicherheit verlangt die
+			t-Verteilung. Dazu gleich nach dem Widget mehr.
 		</Callout>
+
+		<SamplingMaschine />
 
 		<!-- z vs. t -------------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">z oder t? Kleine Stichproben brauchen breitere Netze</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Den z-Wert darfst du nur verwenden, wenn σ bekannt ist oder die Stichprobe groß ist. Bei
-			<strong>kleinem n</strong> und <strong>unbekanntem σ</strong> musst du σ durch s schätzen,
-			und diese zusätzliche Unsicherheit muss ins Intervall. Dafür gibt es die
-			<Begriff term="Student-t-Verteilung" />: glockenförmig wie die Normalverteilung, aber mit
-			<strong>schwereren Rändern</strong>. Ihre Form hängt von den Freiheitsgraden
-			<strong>df = n − 1</strong> ab.
+			<strong>kleinem n</strong> und <strong>unbekanntem σ</strong> musst du σ durch s schätzen. Das
+			ist ein Schätzer mehr, der selbst schwanken kann — und diese zusätzliche Unsicherheit muss
+			ehrlich mit ins Intervall.
+		</p>
+		<p class="text-ink-soft leading-relaxed">
+			Dafür gibt es die <Begriff term="Student-t-Verteilung" />: glockenförmig wie die
+			Normalverteilung, aber mit <strong>schwereren Rändern</strong>. „Schwerere Ränder“ heißt
+			anschaulich: Die Kurve ist flacher und breiter, extreme Werte sind etwas wahrscheinlicher.
+			Genau so bildet sie die Extra-Unsicherheit bei kleinem n ab — und das führt zu
+			<strong>größeren kritischen Werten</strong>, also zu einem breiteren Intervall. Wie stark, das
+			hängt von den Freiheitsgraden <strong>df = n − 1</strong> ab: je kleiner n, desto breiter die
+			Kurve.
 		</p>
 
 		<FormelZeigen
@@ -308,7 +348,8 @@
 			<strong>{fmt(zExample)}</strong>. Bei einer kleinen Stichprobe von n = 10 (df = 9) ist der
 			t-Wert dagegen <strong>{fmt(tExample9)}</strong>, deutlich größer, das Intervall also
 			breiter. Bei n = 31 (df = 30) sind es nur noch <strong>{fmt(tExample30)}</strong>, schon
-			nah an z. Je größer die Stichprobe, desto mehr verschmilzt t mit z.
+			nah an z. Je größer die Stichprobe, desto kleiner der Unterschied — bei großem n sind t-Wert
+			und z-Wert praktisch nicht mehr zu unterscheiden.
 		</p>
 
 		<Merke title="Im Zweifel t — es ist nie falsch">

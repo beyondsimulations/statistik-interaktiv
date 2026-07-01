@@ -32,25 +32,30 @@
 	const baseY = PAD_T + plotH; // y der Nulllinie (x-Achse)
 	const PEAK_FRAC = 0.92; // Gipfelhöhe als Anteil von plotH (wie zuvor ~92 %)
 
-	// Achse stets μ ± 4σ — die Kurve ist außerhalb praktisch null.
-	const lo = $derived(mu - 4 * sigma);
-	const hi = $derived(mu + 4 * sigma);
+	// Slider-Grenzen als EINE Wahrheitsquelle: dieselben Consts speisen die Achsen-
+	// Mathematik UND die min/max-Attribute der Regler. Weitet jemand einen Slider,
+	// wächst die feste Achse strukturell mit — kein stilles Klippen mehr.
+	const MU_MAX = 4; // Mittelwert μ ∈ [−MU_MAX, MU_MAX]
+	const SIGMA_MAX = 2.5; // Standardabweichung σ (Maximum)
 
-	// Slider-Bereich für a/b folgt der Achse. Wir runden großzügig, damit die
-	// Slider beim Verschieben von μ/σ nicht „springen“.
-	const boundMin = $derived(Math.round((lo - 0.5) * 10) / 10);
-	const boundMax = $derived(Math.round((hi + 0.5) * 10) / 10);
+	// KONSTANTE Achse, die den GESAMTEN Reglerbereich abdeckt, damit der Rahmen beim
+	// Ziehen steht: μ verschiebt die Kurve, σ staucht/streckt sie — die Achse bleibt.
+	// μ ∈ [−MU_MAX, MU_MAX], σ ≤ SIGMA_MAX; die äußerste Kurve reicht bis
+	// MU_MAX + 4·SIGMA_MAX = 4 + 10 = 14 (und spiegelbildlich −14). Bei 4σ ist die
+	// Dichte außerhalb praktisch null.
+	const HALF_SPAN = MU_MAX + 4 * SIGMA_MAX; // = 14
+	const lo = -HALF_SPAN; // = −14
+	const hi = HALF_SPAN; // = 14
+
+	// Slider-Bereich für a/b folgt der (nun festen) Achse. Wir runden großzügig.
+	const boundMin = Math.round((lo - 0.5) * 10) / 10;
+	const boundMax = Math.round((hi + 0.5) * 10) / 10;
 	const boundStep = $derived(Math.max(0.01, Math.round((sigma / 20) * 100) / 100));
 
-	// μ/σ verschieben den Slider-Bereich [boundMin, boundMax]. Ohne Nachführung
-	// klebt der Thumb am alten Wert, während min/max wandern — Anzeige und Thumb
-	// driften auseinander. Dieser Effekt klemmt a und b in den aktuellen Bereich.
-	$effect(() => {
-		const clampedA = Math.min(Math.max(a, boundMin), boundMax);
-		const clampedB = Math.min(Math.max(b, boundMin), boundMax);
-		if (clampedA !== a) a = clampedA;
-		if (clampedB !== b) b = clampedB;
-	});
+	// Der Slider-Bereich [boundMin, boundMax] ist jetzt konstant und zugleich das
+	// min/max der a-/b-Regler — die Range-Inputs klemmen a und b schon selbst in
+	// diesen Bereich. Die frühere $effect-Nachführung (nötig, solange sich der
+	// Bereich mit μ/σ verschob) entfällt damit ersatzlos.
 
 	// a darf b nicht überholen (und umgekehrt). Wir klemmen beim Lesen, statt die
 	// Slider gegenseitig zu zwingen — so bleibt das Ziehen flüssig.
@@ -144,13 +149,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Anzeige der gesuchten Wahrscheinlichkeit -->
-		<div class="bg-coral-50 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl px-4 py-3">
-			<span class="text-coral-700 font-semibold">P({fmtVal(aClamped)} &lt; X ≤ {fmtVal(bClamped)})</span>
-			<span class="text-ink-faint text-sm">= F(b) − F(a) =</span>
-			<span class="text-coral-700 text-2xl font-bold tabular-nums">{probPct} %</span>
-		</div>
-
 		<!-- Die Dichtekurve mit schattierter Fläche -->
 		<svg
 			viewBox="0 0 {W} {H}"
@@ -203,6 +201,13 @@
 			</text>
 		</svg>
 
+		<!-- Live-Anzeige der gesuchten Wahrscheinlichkeit -->
+		<div class="bg-coral-50 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl px-4 py-3">
+			<span class="text-coral-700 font-semibold">P({fmtVal(aClamped)} &lt; X ≤ {fmtVal(bClamped)})</span>
+			<span class="text-ink-faint text-sm">= F(b) − F(a) =</span>
+			<span class="text-coral-700 text-2xl font-bold tabular-nums">{probPct} %</span>
+		</div>
+
 		<p class="text-ink-faint text-xs">
 			Die Höhe der Kurve ist <strong>keine</strong> Wahrscheinlichkeit — erst die
 			<span class="text-coral-700 font-semibold">korallene Fläche</span> über dem Intervall ist eine.
@@ -250,14 +255,14 @@
 					<label for="fs-mu" class="text-ink-soft mb-1 block text-sm font-semibold">
 						Mittelwert μ = {mu.toFixed(1).replace('.', ',')}
 					</label>
-					<input id="fs-mu" type="range" min="-4" max="4" step="0.1" bind:value={mu} class="accent-sage-500 w-full" />
+					<input id="fs-mu" type="range" min={-MU_MAX} max={MU_MAX} step="0.1" bind:value={mu} class="accent-sage-500 w-full" />
 					<div class="text-ink-faint flex justify-between text-xs"><span>verschiebt die Kurve</span></div>
 				</div>
 				<div>
 					<label for="fs-sigma" class="text-ink-soft mb-1 block text-sm font-semibold">
 						Standardabweichung σ = {sigma.toFixed(1).replace('.', ',')}
 					</label>
-					<input id="fs-sigma" type="range" min="0.4" max="2.5" step="0.1" bind:value={sigma} class="accent-sage-500 w-full" />
+					<input id="fs-sigma" type="range" min="0.4" max={SIGMA_MAX} step="0.1" bind:value={sigma} class="accent-sage-500 w-full" />
 					<div class="text-ink-faint flex justify-between text-xs"><span>staucht / streckt die Kurve</span></div>
 				</div>
 			</div>

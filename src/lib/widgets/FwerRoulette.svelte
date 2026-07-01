@@ -100,26 +100,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Kennzahlen -->
-		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-			<div class="bg-paper-sunk flex items-baseline gap-2 rounded-2xl px-4 py-2">
-				<span class="text-ink-soft font-semibold">c = </span>
-				<span class="text-ink text-xl font-bold tabular-nums">{nComparisons}</span>
-				<span class="text-ink-faint text-sm">Vergleiche</span>
-			</div>
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {empirical > 0.1
-					? 'bg-coral-50 text-coral-700'
-					: 'bg-sage-100 text-sage-500'}"
-			>
-				<span class="font-semibold">Fehlalarm (empirisch) = </span>
-				<span class="text-2xl font-bold tabular-nums">{fmtPct(empirical)}</span>
-			</div>
-			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
-				<span>Theorie 1 − (1 − α)<sup>c</sup> = {fmtPct(theoryUncorrected)}</span>
-			</div>
-		</div>
-
 		<svg
 			viewBox="0 0 {W} {H}"
 			class="block h-auto w-full"
@@ -166,6 +146,26 @@
 				Anzahl paarweiser Vergleiche c →
 			</text>
 		</svg>
+
+		<!-- Live-Kennzahlen -->
+		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+			<div class="bg-paper-sunk flex items-baseline gap-2 rounded-2xl px-4 py-2">
+				<span class="text-ink-soft font-semibold">c = </span>
+				<span class="text-ink text-xl font-bold tabular-nums">{nComparisons}</span>
+				<span class="text-ink-faint text-sm">Vergleiche</span>
+			</div>
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {empirical > 0.1
+					? 'bg-coral-50 text-coral-700'
+					: 'bg-sage-100 text-sage-500'}"
+			>
+				<span class="font-semibold">Fehlalarm (empirisch) = </span>
+				<span class="text-2xl font-bold tabular-nums">{fmtPct(empirical)}</span>
+			</div>
+			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
+				<span>Theorie 1 − (1 − α)<sup>c</sup> = {fmtPct(theoryUncorrected)}</span>
+			</div>
+		</div>
 
 		<p class="text-ink-faint text-xs leading-relaxed">
 			Der gelbe Punkt ist die <strong>gemessene</strong> Fehlalarmrate aus {ROUNDS} Runden, die

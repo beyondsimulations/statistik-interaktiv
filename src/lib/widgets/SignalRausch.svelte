@@ -41,11 +41,20 @@
 	const plotH = H - PAD_T - PAD_B;
 	const baseY = PAD_T + plotH;
 
-	// Feste, weit genug gespannte km-Achse, damit beide Kurven samt Schwänzen
-	// hineinpassen — egal wie Δ und s stehen.
-	const halfSpan = $derived(Math.max(delta / 2 + 3 * s, 600));
-	const lo = $derived(BASE - halfSpan);
-	const hi = $derived(BASE + halfSpan);
+	// Slider-Grenzen als EINE Wahrheitsquelle: dieselben Consts speisen die Achsen-
+	// Mathematik UND die max-Attribute der Regler. Weitet jemand einen Slider, wächst
+	// die feste Achse strukturell mit — kein stilles Klippen mehr.
+	const DELTA_MAX = 800; // Mittelwertdifferenz Δ (km)
+	const S_MAX = 700; // Streuung je Gruppe (SD, km)
+
+	// KONSTANTE km-Achse, die den GESAMTEN Reglerbereich abdeckt, damit der Rahmen
+	// beim Ziehen steht und sich nur die Kurven bewegen. Die äußerste Kurve liegt bei
+	// BASE + DELTA_MAX/2 mit einem 3σ-Schwanz (σ = S_MAX):
+	//   HALF_SPAN = DELTA_MAX/2 + 3·S_MAX = 2500 km.
+	// Damit passt jede Kombination aus Δ und s vollständig in den festen Rahmen.
+	const HALF_SPAN = DELTA_MAX / 2 + 3 * S_MAX; // = 2500 km
+	const lo = BASE - HALF_SPAN;
+	const hi = BASE + HALF_SPAN;
 
 	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
 	const sx = $derived(scaleX.map);
@@ -114,34 +123,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Anzeige t und p -->
-		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100'
-					: 'bg-paper-sunk'}"
-			>
-				<span class="text-ink-soft font-semibold">t = </span>
-				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(res.t)}</span>
-			</div>
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100 text-sage-500'
-					: 'bg-coral-50 text-coral-700'}"
-			>
-				<span class="font-semibold">p = </span>
-				<span class="text-2xl font-bold tabular-nums">{fmtP(res.pTwoSided)}</span>
-				<span class="text-sm font-semibold"
-					>{significant ? '· signifikant' : '· nicht signifikant'}</span
-				>
-			</div>
-			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
-				<span>SE = {fmt0(res.se)} km</span>
-				<span>·</span>
-				<span>df = {res.df}</span>
-			</div>
-		</div>
-
 		<svg
 			viewBox="0 0 {W} {H}"
 			class="block h-auto w-full"
@@ -251,6 +232,34 @@
 			</text>
 		</svg>
 
+		<!-- Live-Anzeige t und p -->
+		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100'
+					: 'bg-paper-sunk'}"
+			>
+				<span class="text-ink-soft font-semibold">t = </span>
+				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(res.t)}</span>
+			</div>
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100 text-sage-500'
+					: 'bg-coral-50 text-coral-700'}"
+			>
+				<span class="font-semibold">p = </span>
+				<span class="text-2xl font-bold tabular-nums">{fmtP(res.pTwoSided)}</span>
+				<span class="text-sm font-semibold"
+					>{significant ? '· signifikant' : '· nicht signifikant'}</span
+				>
+			</div>
+			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
+				<span>SE = {fmt0(res.se)} km</span>
+				<span>·</span>
+				<span>df = {res.df}</span>
+			</div>
+		</div>
+
 		<p class="text-ink-faint text-xs leading-relaxed">
 			Der t-Wert ist <strong>Signal ÷ Rausch</strong>: t = Δ / SE mit SE = s·√(2/n). Dreh die
 			<span class="text-ink-soft font-semibold">Streuung s</span> hoch → der Standardfehler wächst,
@@ -271,7 +280,7 @@
 					id="sr-delta"
 					type="range"
 					min="0"
-					max="800"
+					max={DELTA_MAX}
 					step="10"
 					bind:value={delta}
 					class="accent-coral-500 w-full"
@@ -290,7 +299,7 @@
 					id="sr-s"
 					type="range"
 					min="50"
-					max="700"
+					max={S_MAX}
 					step="10"
 					bind:value={s}
 					class="accent-sage-500 w-full"

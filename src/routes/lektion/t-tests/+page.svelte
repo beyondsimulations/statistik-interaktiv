@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import SignalRausch from '$lib/widgets/SignalRausch.svelte';
 	import AnnahmenBaum from '$lib/widgets/AnnahmenBaum.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
@@ -67,6 +68,8 @@
 	{slug}
 	description="Der t-Wert als Signal-zu-Rausch-Verhältnis: Ein-Stichproben-, Student-, Welch- und gepaarter t-Test, ihre Voraussetzungen (Unabhängigkeit, Normalverteilung, Varianzhomogenität) und die nicht-parametrischen Alternativen Mann-Whitney-U und Wilcoxon. Mit Signal-vs-Rausch-Regler und interaktivem Entscheidungsbaum — biologisch motiviert an der Zugdistanz von Buchfink und Mönchsgrasmücke."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -114,6 +117,14 @@
 			Mehr gemessene Vögel machen den Standardfehler kleiner und denselben Unterschied leichter signifikant.
 		</Intuition>
 
+		<p class="text-ink-soft leading-relaxed">
+			Und woher kommt die <strong>2</strong> unter der Wurzel? Du vergleichst
+			<strong>zwei</strong> Gruppen, und jede bringt ihre eigene Streuung mit. Beide
+			Unsicherheiten addieren sich zum Rauschen der Differenz — daher die 2. Die folgende Formel
+			gilt für den <strong>vereinfachten Fall</strong> gleich großer Gruppen (gleiches n) mit
+			gleicher Streuung (gleiches s) — genau die Welt des Reglers gleich unten.
+		</p>
+
 		<FormelZeigen
 			formula={String.raw`t = \frac{\text{Signal}}{\text{Rausch}} = \frac{\bar x_1 - \bar x_2}{SE_{\text{Differenz}}} \qquad SE_{\text{Differenz}} = s \cdot \sqrt{\tfrac{2}{n}}`}
 			symbols={[
@@ -126,9 +137,9 @@
 		/>
 
 		<p class="text-ink-soft leading-relaxed">
-			Die Formel <em>SE = s·√(2/n)</em> gilt für den vereinfachten Fall gleich großer Gruppen mit
-			gleicher Streuung, genau die Welt des Reglers weiter unten. Im Allgemeinen rechnet man den
-			Standardfehler aus beiden Stichprobenvarianzen; die Intuition bleibt aber dieselbe.
+			Sind die Gruppen unterschiedlich groß oder streuen sie unterschiedlich stark, rechnet man den
+			Standardfehler aus beiden Stichprobenvarianzen einzeln — die Signal-durch-Rausch-Intuition
+			bleibt dabei genau dieselbe.
 		</p>
 
 		<!-- Der Signal-vs-Rausch-Regler ----------------------------------------- -->
@@ -166,9 +177,12 @@
 		</p>
 		<p class="text-ink-soft leading-relaxed">
 			Das gängigste Maß beim t-Test ist <strong>Cohen's d</strong>. Die Idee ist verblüffend einfach:
-			Miss die Mittelwertdifferenz nicht in Kilometern, sondern in <strong>Standardabweichungen</strong>.
-			Ein d = 1 heißt dann „die beiden Arten liegen im Schnitt eine ganze Streuungsbreite auseinander“,
-			eine Aussage, die unabhängig von Stichprobengröße und Messeinheit ist.
+			Miss die Mittelwertdifferenz nicht in Kilometern, sondern in <strong>Standardabweichungen</strong>
+			— dann wird sie über Arten und Messgrößen hinweg vergleichbar. Als Maßstab dient dabei die
+			<strong>gepoolte Standardabweichung</strong> s<sub>p</sub>: die gemeinsame Streuung, die man aus
+			beiden Gruppen zu einem Wert zusammenfasst. Ein d = 1 heißt dann „die beiden Arten liegen im
+			Schnitt eine ganze Streuungsbreite auseinander“, eine Aussage, die unabhängig von
+			Stichprobengröße und Messeinheit ist.
 		</p>
 
 		<FormelZeigen
@@ -217,21 +231,26 @@
 
 		<h3 class="mt-2 text-xl">1 · Ein-Stichproben-t-Test</h3>
 		<p class="text-ink-soft leading-relaxed">
-			Der <Begriff term="Ein-Stichproben-t-Test" /> vergleicht den Mittelwert
-			<em>einer</em> Stichprobe mit einem festen Erwartungswert μ₀. Beispiel: Aus der Literatur „weiß“
-			man, Buchfinken ziehen im Mittel 1500 km. Stimmt das für deine gemessene Population? Signal ist
-			x̄ − μ₀, Rauschen der Standardfehler des einen Mittelwerts.
+			Nimm ihn, wenn du nur <em>eine</em> Gruppe hast und sie gegen einen festen, vorher bekannten
+			Vergleichswert prüfst. Der <Begriff term="Ein-Stichproben-t-Test" /> vergleicht den Mittelwert
+			<em>einer</em> Stichprobe mit diesem festen Wert μ₀ (sprich „mü null“ — der erwartete Wert aus
+			Theorie oder Literatur). Beispiel: Aus der Literatur „weiß“ man, Buchfinken ziehen im Mittel
+			1500 km, also μ₀ = 1500. Stimmt das für deine gemessene Population? Signal ist x̄ − μ₀, Rauschen
+			der Standardfehler des einen Mittelwerts.
 		</p>
 
 		<h3 class="mt-2 text-xl">2 · Zwei unabhängige Stichproben: Student vs. Welch</h3>
 		<p class="text-ink-soft leading-relaxed">
-			Bei zwei <strong>unabhängigen</strong> Gruppen (Buchfink vs. Mönchsgrasmücke) gibt es zwei
-			Varianten. Der <Begriff term="Student-t-Test" /> nimmt an, dass beide Gruppen
+			Nimm sie, wenn du zwei <strong>unabhängige</strong> Gruppen vergleichst (Buchfink vs.
+			Mönchsgrasmücke). Hier gibt es zwei Varianten, und sie unterscheiden sich nur in einer Frage:
+			Darfst du annehmen, dass beide Gruppen gleich stark streuen? Der
+			<Begriff term="Student-t-Test" /> nimmt an, dass beide Gruppen
 			<strong>dieselbe Varianz</strong> haben, und „poolt“ die Streuung zu einem gemeinsamen
 			Schätzer. Der <Begriff term="Welch-Test" /> verzichtet auf diese Annahme: Er erlaubt
-			<strong>ungleiche Varianzen</strong> und korrigiert dafür die Freiheitsgrade
-			(Welch-Satterthwaite). In R ist Welch der <strong>Standard</strong> von <code class="font-mono text-sm">t.test()</code>, und das aus gutem Grund: Er ist robuster und kostet bei
-			gleichen Varianzen kaum Genauigkeit.
+			<strong>ungleiche Varianzen</strong> und korrigiert dafür die Freiheitsgrade (mit einer kleinen
+			Korrektur namens Welch-Satterthwaite — die Details brauchst du dir nicht zu merken). In R ist
+			Welch der <strong>Standard</strong> von <code class="font-mono text-sm">t.test()</code>, und das
+			aus gutem Grund: Er ist robuster und kostet bei gleichen Varianzen kaum Genauigkeit.
 		</p>
 
 		<Callout variant="merke" title="Faustregel Student vs. Welch">
@@ -269,7 +288,7 @@
 		<Merke title="Die drei Voraussetzungen des t-Tests">
 			<ol class="ml-5 list-decimal space-y-1">
 				<li><strong>Unabhängigkeit</strong> der Beobachtungen — keine Vögel doppelt zählen, keine versteckte Paarung (sonst gepaart rechnen).</li>
-				<li><strong>Normalverteilung</strong> — die Werte je Gruppe (beim gepaarten Test: die Differenzen) sollten annähernd normalverteilt sein. Bei großem n ist der Test dank des zentralen Grenzwertsatzes recht robust.</li>
+				<li><strong>Normalverteilung</strong> — die Werte je Gruppe (beim gepaarten Test: die Differenzen) sollten <strong>annähernd</strong> normalverteilt sein. „Annähernd“ heißt grob: keine krassen Ausreißer und keine stark schiefe Verteilung. Und schon „annähernd“ reicht meist: Bei <strong>großem n</strong> (Faustregel: ab etwa 30 pro Gruppe) wird der Test dank des zentralen Grenzwertsatzes robust gegen moderate Abweichungen.</li>
 				<li><strong>Varianzhomogenität</strong> — gleiche Streuung in beiden Gruppen. Nur für den Student-t-Test nötig; der Welch-Test verzichtet darauf.</li>
 			</ol>
 		</Merke>
@@ -281,13 +300,15 @@
 			Doch Vorsicht: Hier lauert ein klassischer Stolperstein.
 		</p>
 
-		<Callout variant="warnung" title="Bei Voraussetzungstests ist p > 0,05 das, was du willst">
-			Bei diesen Tests ist die <Begriff term="Nullhypothese" /> die Annahme selbst: „die Daten sind
-			normalverteilt“ bzw. „die Varianzen sind gleich“. Ein <strong>kleiner</strong> p-Wert (≤ 0,05)
-			ist hier ein <em>Warnsignal</em> — er verwirft die Annahme. Ein <strong>großer</strong> p-Wert
-			(> 0,05) heißt „kein Hinweis auf eine Verletzung“, die Annahme darfst du beibehalten. Das ist
-			die umgekehrte Logik zum eigentlichen Forschungstest, wo du dir ein <em>kleines</em> p wünschst.
-			Und: Ein großes p <strong>beweist</strong> die Annahme nicht — es findet nur keinen Widerspruch.
+		<Callout variant="warnung" title="Bei Voraussetzungstests drehst du die Logik um">
+			<strong>Bei einem Voraussetzungstest willst du ein großes p (> 0,05) — genau das
+			Gegenteil vom sonstigen Testdenken.</strong> Der Grund: Bei diesen Tests ist die
+			<Begriff term="Nullhypothese" /> die Annahme selbst — „die Daten sind normalverteilt“ bzw. „die
+			Varianzen sind gleich“. Ein <strong>kleiner</strong> p-Wert (≤ 0,05) ist hier ein
+			<em>Warnsignal</em>: Er verwirft die Annahme. Ein <strong>großer</strong> p-Wert (> 0,05) heißt
+			„kein Hinweis auf eine Verletzung“, die Annahme darfst du beibehalten. Im eigentlichen
+			Forschungstest wünschst du dir dagegen ein <em>kleines</em> p. Und: Ein großes p
+			<strong>beweist</strong> die Annahme nicht — es findet nur keinen Widerspruch.
 		</Callout>
 
 		<!-- R-Code t.test ------------------------------------------------------- -->
@@ -331,12 +352,13 @@ sample estimates:
 		<p class="text-ink-soft leading-relaxed">
 			Ist die Normalverteilungsannahme deutlich verletzt (oder ist deine Stichprobe so klein, dass du
 			es nicht beurteilen kannst), dann greifst du zu einem
-			<Begriff term="nicht-parametrischer Test">nicht-parametrischen Test</Begriff>. Statt mit den
-			Rohwerten arbeiten diese Tests mit deren <strong>Rängen</strong> und vergleichen eher die Lage
-			(Mediane) als die Mittelwerte. Sie sind <strong>verteilungsfrei</strong> und
-			<strong>robuster gegen Ausreißer</strong>: Ein einzelner extrem weit ziehender Vogel kippt das
-			Ergebnis nicht. Der Preis: etwas geringere Power, wenn die Daten in Wahrheit doch normalverteilt
-			wären.
+			<Begriff term="nicht-parametrischer Test">nicht-parametrischen Test</Begriff>. Diese Tests sind
+			<strong>rangbasiert</strong>: Statt mit den Rohwerten rechnen sie nur mit deren Reihenfolge, den
+			<strong>Rängen</strong>, und vergleichen eher die Lage (Mediane) als die Mittelwerte. Damit sind
+			sie <strong>verteilungsfrei</strong> — sie setzen keine bestimmte Verteilung (etwa die
+			Normalverteilung) voraus — und <strong>robuster gegen Ausreißer</strong>: Ein einzelner extrem
+			weit ziehender Vogel kippt das Ergebnis nicht. Der Preis: etwas geringere Power, wenn die Daten
+			in Wahrheit doch normalverteilt wären.
 		</p>
 
 		<Merke title="Das parametrische Paar und seine rangbasierte Alternative">
@@ -345,6 +367,13 @@ sample estimates:
 				<li>Gepaarte Daten: gepaarter t-Test → <Begriff term="Wilcoxon-Vorzeichen-Rang-Test" />.</li>
 			</ul>
 		</Merke>
+
+		<Callout variant="warnung" title="Namensfalle: dreimal ähnlich, zweimal dasselbe">
+			<strong>Mann-Whitney-U-Test</strong> und <strong>Wilcoxon-Rangsummen-Test</strong> sind nur zwei
+			Namen für <strong>dasselbe</strong> Verfahren — das für zwei <strong>unabhängige</strong>
+			Gruppen. Verwechsle das nicht mit dem <strong>Wilcoxon-Vorzeichen-Rang-Test</strong>: Das ist
+			ein <strong>anderes</strong> Verfahren, nämlich das für <strong>gepaarte</strong> Daten.
+		</Callout>
 
 		<RCode
 			code={`# Verteilungsfreie Alternative: dieselben Daten, ohne Normalitaetsannahme

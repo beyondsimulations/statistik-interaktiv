@@ -129,20 +129,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Treffer-Zähler -->
-		<div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 rounded-2xl bg-sage-100 px-4 py-3">
-			<span class="text-sage-500 font-semibold">Treffer</span>
-			<span class="text-ink text-2xl font-bold tabular-nums">
-				{hits} von {total}
-			</span>
-			<span class="text-ink-soft tabular-nums">
-				({total > 0 ? fmt(hitPct, 1) : '–'} %)
-			</span>
-			<span class="text-ink-faint text-sm">
-				Ziel: {niveau} % · {total - hits} verfehlt
-			</span>
-		</div>
-
 		<!-- Gestapelte Konfidenzintervalle gegen das feste μ -->
 		<svg
 			viewBox="0 0 {W} {svgH}"
@@ -220,6 +206,20 @@
 				</text>
 			{/if}
 		</svg>
+
+		<!-- Treffer-Zähler -->
+		<div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 rounded-2xl bg-sage-100 px-4 py-3">
+			<span class="text-sage-500 font-semibold">Treffer</span>
+			<span class="text-ink text-2xl font-bold tabular-nums">
+				{hits} von {total}
+			</span>
+			<span class="text-ink-soft tabular-nums">
+				({total > 0 ? fmt(hitPct, 1) : '–'} %)
+			</span>
+			<span class="text-ink-faint text-sm">
+				Ziel: {niveau} % · {total - hits} verfehlt
+			</span>
+		</div>
 
 		<p class="text-ink-faint text-xs">
 			Jede waagerechte Linie ist ein 95-%-KI (hier mit <strong>bekanntem σ</strong>, daher

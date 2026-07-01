@@ -98,19 +98,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-5">
-		<!-- Schlagzeile: P(krank | positiv) -->
-		<div class="bg-coral-50 border-coral-200 rounded-2xl border px-5 py-4">
-			<div class="text-coral-700 text-sm font-semibold">
-				P(krank | positiv) — wie viele der positiv Getesteten sind wirklich krank?
-			</div>
-			<div class="text-coral-700 mt-1 text-5xl font-bold tabular-nums">
-				{pct(ppv)}
-			</div>
-			<div class="text-ink-soft mt-1 text-sm">
-				{num(counts.truePos)} wirklich Kranke von {num(positiveTotal)} positiv Getesteten.
-			</div>
-		</div>
-
 		<!-- Das Raster: 10.000 Personen -->
 		<div>
 			<svg
@@ -141,6 +128,19 @@
 				Getesteten (Koralle), unten die negativ Getesteten (Salbeigrün). Dunkel =
 				wirklich krank, hell = wirklich gesund.
 			</p>
+		</div>
+
+		<!-- Schlagzeile: P(krank | positiv) -->
+		<div class="bg-coral-50 border-coral-200 rounded-2xl border px-5 py-4">
+			<div class="text-coral-700 text-sm font-semibold">
+				P(krank | positiv) — wie viele der positiv Getesteten sind wirklich krank?
+			</div>
+			<div class="text-coral-700 mt-1 text-5xl font-bold tabular-nums">
+				{pct(ppv)}
+			</div>
+			<div class="text-ink-soft mt-1 text-sm">
+				{num(counts.truePos)} wirklich Kranke von {num(positiveTotal)} positiv Getesteten.
+			</div>
 		</div>
 
 		<!-- Live-Zähler der vier Gruppen -->

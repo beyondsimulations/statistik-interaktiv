@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LessonLayout from '$lib/components/LessonLayout.svelte';
+	import Rueckblick from '$lib/components/Rueckblick.svelte';
 	import KontingenztafelEditor from '$lib/widgets/KontingenztafelEditor.svelte';
 	import FormelZeigen from '$lib/components/FormelZeigen.svelte';
 	import Intuition from '$lib/components/Intuition.svelte';
@@ -67,6 +68,8 @@
 	{slug}
 	description="Chi-Quadrat-Tests für kategoriale Häufigkeitsdaten: der Anpassungstest (goodness of fit) an Mendels 9:3:3:1-Erbsen und der Unabhängigkeitstest auf einer Kontingenztafel (Art × Habitat). Die zentrale Intuition χ² = Σ(B−E)²/E, die Erwartungswerte aus den Rändern, Voraussetzungen (E ≥ 5, Fisher-Test, Yates-Korrektur) und chisq.test() in R — mit einem interaktiven Kontingenztafel-Editor."
 >
+	<Rueckblick {slug} />
+
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">

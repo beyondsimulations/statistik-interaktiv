@@ -100,38 +100,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Große Live-Power-Zahl + Kennwerte -->
-		<div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-			<div
-				class={[
-					'flex items-baseline gap-2 rounded-2xl px-5 py-3',
-					powerTone === 'sage' && 'bg-sage-100',
-					powerTone === 'amber' && 'bg-amber-100',
-					powerTone === 'coral' && 'bg-coral-50'
-				]}
-			>
-				<span
-					class={[
-						'font-semibold',
-						powerTone === 'sage' && 'text-sage-500',
-						powerTone === 'amber' && 'text-amber-600',
-						powerTone === 'coral' && 'text-coral-700'
-					]}
-				>
-					Power = 1 − β
-				</span>
-				<span class="text-ink text-4xl font-bold tabular-nums">{pct(power)} %</span>
-			</div>
-			<div class="text-ink-soft flex flex-col gap-0.5 text-sm tabular-nums">
-				<span>
-					β (Effekt übersehen) = <strong>{pct(1 - power)} %</strong>
-				</span>
-				<span>
-					Für Power 0,8 nötig: <strong>n ≈ {fmtN(nFor80)}</strong> pro Gruppe
-				</span>
-			</div>
-		</div>
-
 		<!-- Power-Kurve: Power über n -->
 		<svg
 			viewBox="0 0 {W} {H}"
@@ -248,6 +216,38 @@
 				n = {n}
 			</text>
 		</svg>
+
+		<!-- Große Live-Power-Zahl + Kennwerte -->
+		<div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+			<div
+				class={[
+					'flex items-baseline gap-2 rounded-2xl px-5 py-3',
+					powerTone === 'sage' && 'bg-sage-100',
+					powerTone === 'amber' && 'bg-amber-100',
+					powerTone === 'coral' && 'bg-coral-50'
+				]}
+			>
+				<span
+					class={[
+						'font-semibold',
+						powerTone === 'sage' && 'text-sage-500',
+						powerTone === 'amber' && 'text-amber-600',
+						powerTone === 'coral' && 'text-coral-700'
+					]}
+				>
+					Power = 1 − β
+				</span>
+				<span class="text-ink text-4xl font-bold tabular-nums">{pct(power)} %</span>
+			</div>
+			<div class="text-ink-soft flex flex-col gap-0.5 text-sm tabular-nums">
+				<span>
+					β (Effekt übersehen) = <strong>{pct(1 - power)} %</strong>
+				</span>
+				<span>
+					Für Power 0,8 nötig: <strong>n ≈ {fmtN(nFor80)}</strong> pro Gruppe
+				</span>
+			</div>
+		</div>
 
 		<p class="text-ink-faint text-xs leading-relaxed">
 			Die <span class="text-sage-500 font-semibold">grüne Kurve</span> zeigt, wie die Power mit

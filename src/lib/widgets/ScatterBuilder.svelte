@@ -241,20 +241,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Kennzahlen: Pearson und Spearman nebeneinander -->
-		<div class="grid grid-cols-2 gap-3">
-			<div class="bg-coral-50 rounded-2xl px-4 py-3">
-				<div class="text-coral-700 text-sm font-semibold">Pearson r (linear)</div>
-				<div class="text-ink text-3xl font-bold tabular-nums">{fmt(r)}</div>
-				<div class="text-ink-faint text-xs">{strength(r)}</div>
-			</div>
-			<div class="bg-sage-100 rounded-2xl px-4 py-3">
-				<div class="text-sage-500 text-sm font-semibold">Spearman ρ (monoton)</div>
-				<div class="text-ink text-3xl font-bold tabular-nums">{fmt(rho)}</div>
-				<div class="text-ink-faint text-xs">{strength(rho)}</div>
-			</div>
-		</div>
-
 		<!-- Streudiagramm -->
 		<svg
 			bind:this={svgEl}
@@ -344,6 +330,20 @@
 				/>
 			{/each}
 		</svg>
+
+		<!-- Live-Kennzahlen: Pearson und Spearman nebeneinander -->
+		<div class="grid grid-cols-2 gap-3">
+			<div class="bg-coral-50 rounded-2xl px-4 py-3">
+				<div class="text-coral-700 text-sm font-semibold">Pearson r (linear)</div>
+				<div class="text-ink text-3xl font-bold tabular-nums">{fmt(r)}</div>
+				<div class="text-ink-faint text-xs">{strength(r)}</div>
+			</div>
+			<div class="bg-sage-100 rounded-2xl px-4 py-3">
+				<div class="text-sage-500 text-sm font-semibold">Spearman ρ (monoton)</div>
+				<div class="text-ink text-3xl font-bold tabular-nums">{fmt(rho)}</div>
+				<div class="text-ink-faint text-xs">{strength(rho)}</div>
+			</div>
+		</div>
 
 		<p class="text-ink-faint text-xs leading-relaxed">
 			<strong>Probier es:</strong> Bei der Vorlage <em>U-Form / Parabel</em> ist Pearson r ≈ 0,
