@@ -41,20 +41,18 @@
 	const plotH = H - PAD_T - PAD_B;
 	const baseY = PAD_T + plotH;
 
-	// Slider-Grenzen als EINE Wahrheitsquelle: dieselben Consts speisen die Achsen-
-	// Mathematik UND die max-Attribute der Regler. Weitet jemand einen Slider, wächst
-	// die feste Achse strukturell mit — kein stilles Klippen mehr.
+	// Slider-Maxima (auch die max-Attribute der Regler weiter unten).
 	const DELTA_MAX = 800; // Mittelwertdifferenz Δ (km)
 	const S_MAX = 700; // Streuung je Gruppe (SD, km)
 
-	// KONSTANTE km-Achse, die den GESAMTEN Reglerbereich abdeckt, damit der Rahmen
-	// beim Ziehen steht und sich nur die Kurven bewegen. Die äußerste Kurve liegt bei
-	// BASE + DELTA_MAX/2 mit einem 3σ-Schwanz (σ = S_MAX):
-	//   HALF_SPAN = DELTA_MAX/2 + 3·S_MAX = 2500 km.
-	// Damit passt jede Kombination aus Δ und s vollständig in den festen Rahmen.
-	const HALF_SPAN = DELTA_MAX / 2 + 3 * S_MAX; // = 2500 km
-	const lo = BASE - HALF_SPAN;
-	const hi = BASE + HALF_SPAN;
+	// KONSTANTE km-Achse — bewusst auf den STANDARD-Zustand gerahmt (nicht auf die
+	// Slider-Extreme), damit die Kurven per Default den Rahmen gut füllen. Der Rahmen
+	// bleibt beim Ziehen fest; bei sehr großer Streuung s laufen die äußeren Schwänze
+	// über den Rand hinaus — genau das macht sichtbar, wie breit die Kurve wird.
+	// Default Δ=300, s=250 → Spannweite Δ/2+3s = 900 km ⇒ füllt ~64 % bei HALF_SPAN 1400.
+	const AXIS_HALF_SPAN = 1400; // km
+	const lo = BASE - AXIS_HALF_SPAN;
+	const hi = BASE + AXIS_HALF_SPAN;
 
 	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
 	const sx = $derived(scaleX.map);
@@ -79,7 +77,10 @@
 	// neu auswürfelt.
 	function sampleZ(seed: number): { z: number; jitter: number }[] {
 		const rng = makeRng(seed);
-		const count = Math.min(n, 40); // höchstens 40 Punkte je Gruppe zeichnen
+		// Alle n Punkte je Gruppe zeichnen, damit die Wolke sichtbar mitwächst, wenn
+		// man n hochdreht. Der Seed ist stabil: vorhandene Punkte bleiben liegen, neue
+		// werden nur angehängt (kein Neu-Auswürfeln beim Ziehen).
+		const count = n;
 		const out: { z: number; jitter: number }[] = [];
 		for (let i = 0; i < count; i++) {
 			const z = standardNormal(rng);

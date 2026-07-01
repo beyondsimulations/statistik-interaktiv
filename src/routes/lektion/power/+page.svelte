@@ -59,6 +59,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Power hängt von (Effektgröße · √n)/σ ab — der nötige Stichprobenumfang wächst ungefähr mit 1/d² (n ≈ 16·s²/d²). Halbierst du die zu entdeckende Differenz d, vervierfacht sich grob das nötige n. Kleine Effekte sind also nicht „unwichtig“, sondern einfach teuer nachzuweisen: Sie verlangen drastisch größere Stichproben.'
+		},
+		{
+			id: 'power-4',
+			kind: 'mc',
+			prompt:
+				'Eine Studie mit sehr großem n findet, dass sich zwei Vogelpopulationen in der Zugdistanz um im Schnitt 4 km unterscheiden — hochsignifikant mit p < 0,001. Was zeigt dieses Ergebnis?',
+			options: [
+				'Ein so kleiner p-Wert beweist einen großen, biologisch bedeutsamen Unterschied.',
+				'Bei sehr großem n wird selbst ein winziger, praktisch belangloser Unterschied statistisch signifikant. Signifikanz ist nicht dasselbe wie Relevanz — dafür schaut man auf die Effektgröße.',
+				'Große Stichproben liefern grundsätzlich unzuverlässige, falsche Ergebnisse.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Der p-Wert sagt nur, OB ein Unterschied von null verschieden ist, nicht WIE GROSS oder wie wichtig er ist. Mit wachsendem n wird der Standardfehler beliebig klein, sodass auch ein biologisch bedeutungsloser 4-km-Unterschied hochsignifikant wird. Ob ein Effekt zählt, entscheidet die Effektgröße (z. B. Cohens d) zusammen mit fachlichem Urteil, nicht der p-Wert allein.'
 		}
 	];
 </script>
@@ -67,8 +81,6 @@
 	{slug}
 	description="Gutes experimentelles Design entscheidet, ob eine Studie überhaupt etwas zeigen kann: Repräsentativität, Randomisierung als Goldstandard, Blocking, Negativ- und Positivkontrollen, Verblindung und das Isolieren von Confounding. Die zentrale Intuition: Power (1 − β), Effektgröße, Streuung σ, α und Stichprobenumfang n bilden ein gekoppeltes System — Power ∝ (Effektgröße·√n)/σ. Kennt man vier Größen, ist die fünfte festgelegt. Ein nicht-signifikantes Ergebnis bedeutet NICHT „kein Effekt“ — vielleicht war einfach zu wenig Power. Mindeststichprobenumfang per Faustformel n ≈ 16·s²/d², R-Funktion power.t.test und ein interaktiver Power-Spielplatz am Beispiel Vogelzug."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -89,6 +101,8 @@
 			vorhandenen Effekt auch zu finden?</strong> Die zentrale Größe dafür heißt
 			<Begriff term="Teststärke">Power</Begriff>.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Planungskriterien ---------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Bevor du misst: gutes Design</h2>

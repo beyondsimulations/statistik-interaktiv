@@ -60,6 +60,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Der Mann-Whitney-U-Test ist rang-/medianbasiert und verteilungsfrei: Er setzt keine Normalverteilung voraus und ist robuster gegen Ausreißer. Er hat nur etwas geringere Power, wenn die Daten eigentlich doch normalverteilt wären. Das gepaarte Pendant ist der Wilcoxon-Vorzeichen-Rang-Test.'
+		},
+		{
+			id: 'tt-4',
+			kind: 'mc',
+			prompt:
+				'Du misst die Blattgröße derselben Pflanzen vor und nach einer Behandlung. Warum hat der gepaarte t-Test hier oft mehr Power als ein unabhängiger t-Test auf denselben Werten?',
+			options: [
+				'Weil er aus den Vorher/Nachher-Werten automatisch doppelt so viele unabhängige Datenpunkte macht.',
+				'Weil er die großen Unterschiede ZWISCHEN den Pflanzen herausrechnet und nur die Vorher/Nachher-Differenz je Pflanze betrachtet — das verkleinert das Rauschen im Nenner.',
+				'Weil er im Gegensatz zum unabhängigen t-Test keine Normalverteilung voraussetzt.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Beim gepaarten Test bildet man pro Pflanze die Differenz und prüft, ob deren Mittel von 0 abweicht. Dadurch fällt die (oft große) natürliche Variabilität zwischen den Individuen komplett weg — der Standardfehler im Nenner wird kleiner, t größer, die Power steigt. Er erzeugt keine zusätzlichen Datenpunkte, und eine Normalverteilung (der Differenzen) setzt auch er voraus.'
 		}
 	];
 </script>
@@ -68,8 +82,6 @@
 	{slug}
 	description="Der t-Wert als Signal-zu-Rausch-Verhältnis: Ein-Stichproben-, Student-, Welch- und gepaarter t-Test, ihre Voraussetzungen (Unabhängigkeit, Normalverteilung, Varianzhomogenität) und die nicht-parametrischen Alternativen Mann-Whitney-U und Wilcoxon. Mit Signal-vs-Rausch-Regler und interaktivem Entscheidungsbaum — biologisch motiviert an der Zugdistanz von Buchfink und Mönchsgrasmücke."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -89,6 +101,8 @@
 			<Begriff term="t-Test" /> beantwortet genau das. In dieser Lektion lernst du die eine Intuition,
 			die alles zusammenhält: Der t-Wert ist ein <strong>Signal-zu-Rausch-Verhältnis</strong>.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<Callout variant="merke" title="Unser rotes Beispiel durch die ganze Lektion">
 			Die Forschungsfrage lautet: <strong

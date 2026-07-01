@@ -59,6 +59,20 @@
 			correct: false,
 			explanation:
 				'Falsch. Korrelation ist NICHT Kausalität. Ein hoher Wert kann durch einen dritten Faktor (Confounder) entstehen — eine Scheinkorrelation. Beispiel: Über Inseln hinweg korrelieren Storchenzahl und Geburtenrate, weil beide mit der Fläche/Ländlichkeit zusammenhängen — nicht weil Störche Babys bringen. Kausalität begründet man nur über kontrollierte Experimente.'
+		},
+		{
+			id: 'kor-4',
+			kind: 'mc',
+			prompt:
+				'Zwischen Umgebungstemperatur und Eidechsen-Aktivität misst du eine Pearson-Korrelation von r = 0,6. Welcher Anteil der Streuung in der Aktivität wird durch die Temperatur (linear) erklärt?',
+			options: [
+				'60 %, denn r = 0,6 entspricht direkt dem erklärten Anteil.',
+				'36 %, denn der erklärte Varianzanteil ist das Bestimmtheitsmaß r² = 0,6² = 0,36.',
+				'Rund 77 %, denn √0,6 ≈ 0,77.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Der erklärte Varianzanteil ist r² (das Bestimmtheitsmaß), nicht r selbst. r = 0,6 klingt nach viel, aber r² = 0,36 heißt: Nur 36 % der Streuung der Aktivität gehen (linear) auf die Temperatur zurück, 64 % bleiben unerklärt. r und r² zu verwechseln lässt Zusammenhänge stärker erscheinen, als sie sind.'
 		}
 	];
 </script>
@@ -67,8 +81,6 @@
 	{slug}
 	description="Korrelation misst den Zusammenhang zweier zufälliger Variablen — ohne Richtung und ohne Kausalität. Vom Scatterplot über die skalenabhängige Kovarianz zur zentralen Intuition: Pearson r ist die standardisierte Kovarianz, r = Cov(x,y)/(s_x·s_y), einheitenlos in [−1, +1], misst aber nur die LINEARE Stärke (eine U-Form gibt r ≈ 0). Spearman ρ und Kendall τ erfassen rangbasiert monotone Zusammenhänge und sind robust gegen Ausreißer. Signifikanztest ρ = 0 über t mit df = n−2, Korrelation ≠ Kausalität, und Transformationen (log/sqrt/Box-Cox), die Nichtlinearität linearisieren — am Beispiel Körpermasse vs. Hirnmasse bei Säugetieren (log-log). Mit dem interaktiven Scatter-Builder."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -88,6 +100,8 @@
 			<Begriff term="Korrelation" /> in einer einzigen Zahl. In dieser Lektion lernst du, was diese
 			Zahl wirklich misst und wo sie täuscht.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Korrelation vs. Regression ------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Korrelation: Zusammenhang ohne Richtung</h2>

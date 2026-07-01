@@ -59,20 +59,18 @@
 	const plotH = H - PAD_T - PAD_B;
 	const baseY = PAD_T + plotH;
 
-	// Slider-Grenzen als EINE Wahrheitsquelle: dieselben Consts speisen die Achsen-
-	// Mathematik UND die max-Attribute der Regler. Weitet jemand einen Slider, wächst
-	// die feste Achse strukturell mit — kein stilles Klippen mehr.
+	// Slider-Maxima (auch die max-Attribute der Regler weiter unten).
 	const SPACING_MAX = 20; // Abstand der Gruppenmittel (cm)
 	const WITHIN_MAX = 20; // Streuung innerhalb der Gruppen (SD, cm)
 
-	// KONSTANTE cm-Achse, die den GESAMTEN Reglerbereich abdeckt, damit der Rahmen
-	// beim Ziehen steht und sich nur die Kurven bewegen. Die äußerste Gruppe liegt bei
-	// BASE + SPACING_MAX mit einem 3σ-Schwanz (σ = WITHIN_MAX):
-	//   HALF_SPAN = SPACING_MAX + 3·WITHIN_MAX = 80 cm.
-	// Damit passt jede Kombination aus Abstand und Streuung vollständig in den Rahmen.
-	const HALF_SPAN = SPACING_MAX + 3 * WITHIN_MAX; // = 80 cm
-	const lo = BASE - HALF_SPAN;
-	const hi = BASE + HALF_SPAN;
+	// KONSTANTE cm-Achse — bewusst auf den STANDARD-Zustand gerahmt (nicht auf die
+	// Slider-Extreme), damit die drei Kurven per Default den Rahmen gut füllen. Der
+	// Rahmen bleibt beim Ziehen fest; bei sehr großer Streuung laufen die äußeren
+	// Schwänze über den Rand hinaus — genau das zeigt, wie breit die Kurven werden.
+	// Default spacing=8, within=6 → Spannweite spacing+3·within = 26 cm ⇒ füllt ~62 %.
+	const AXIS_HALF_SPAN = 42; // cm
+	const lo = BASE - AXIS_HALF_SPAN;
+	const hi = BASE + AXIS_HALF_SPAN;
 	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
 	const sx = $derived(scaleX.map);
 	// sy bildet einen Höhen-Anteil (0..1, Gipfel = 1) auf die SVG-y-Achse ab;

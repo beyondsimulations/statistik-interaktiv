@@ -58,6 +58,20 @@
 			correct: false,
 			explanation:
 				'Falsch. Der positive prädiktive Wert P(infiziert|positiv) hängt zusätzlich von der Prävalenz und der Spezifität ab. Bei einem seltenen Erreger kann er trotz hoher Sensitivität sehr niedrig sein.'
+		},
+		{
+			id: 'wb-4',
+			kind: 'mc',
+			prompt:
+				'Otto setzt denselben Feldtest (Sensitivität 99 %, Spezifität 95 %) nun in einer Population ein, in der der Erreger häufig ist — Prävalenz 40 % statt 0,5 %. Was passiert mit dem positiven prädiktiven Wert P(infiziert | positiv)?',
+			options: [
+				'Er bleibt gleich, weil Sensitivität und Spezifität des Tests unverändert sind.',
+				'Er steigt deutlich, weil bei hoher Prävalenz unter den positiv Getesteten viel mehr echte Infizierte als Fehlalarme stecken.',
+				'Er sinkt, weil in einer größeren Risikogruppe mehr getestet wird.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Der positive prädiktive Wert hängt nicht nur vom Test, sondern entscheidend von der Prävalenz ab. Bei 40 % Infizierten liefern 10.000 Tiere ~4.000 Infizierte (davon ~3.960 positiv) gegen ~6.000 Gesunde (davon ~300 falsch-positiv): P(infiziert|positiv) ≈ 3960/4260 ≈ 93 %. Derselbe Test, der bei seltenem Erreger meist Fehlalarm gab, ist bei häufigem Erreger sehr aussagekräftig — die Basisrate macht den Unterschied.'
 		}
 	];
 </script>
@@ -66,8 +80,6 @@
 	{slug}
 	description="Von der Laplace-Wahrscheinlichkeit über die Rechenregeln bis zum Satz von Bayes — warum ein positiver Test bei seltenen Krankheiten oft ein Fehlalarm ist. Mit interaktiver Bayes-Box."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -88,6 +100,8 @@
 			bedeutet, als man denkt, etwa wenn Otto im Feld ein gefangenes Wildtier auf
 			einen seltenen Erreger testet.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Grundbegriffe -------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Die Grundbegriffe</h2>

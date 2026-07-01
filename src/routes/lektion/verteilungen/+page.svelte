@@ -55,6 +55,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Das ist die 68–95–99,7-Regel: etwa 68 % liegen in μ ± 1σ, etwa 95 % in μ ± 2σ und etwa 99,7 % in μ ± 3σ. Probier es im Flächen-Schieber mit a = μ − 2σ und b = μ + 2σ aus.'
+		},
+		{
+			id: 'vt-4',
+			kind: 'mc',
+			prompt:
+				'Ein Lachs ist 6 cm länger als der Mittelwert seiner Art (σ = 4 cm). Eine Amsel hat einen Flügel, der 6 cm länger ist als der Mittelwert ihrer Art (σ = 2 cm). Welches Tier ist — relativ zu seiner Art — außergewöhnlicher?',
+			options: [
+				'Beide gleich, denn beide liegen 6 cm über dem Mittelwert.',
+				'Die Amsel: 6 cm sind bei ihr 3 Standardabweichungen (z = 3), beim Lachs nur 1,5 (z = 1,5) — bezogen auf die Streuung liegt die Amsel viel weiter draußen.',
+				'Der Lachs, weil Lachse insgesamt größer sind.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. „Außergewöhnlich“ misst man nicht in Zentimetern, sondern in Standardabweichungen (z-Wert = Abstand vom Mittel geteilt durch σ). Beim Lachs ist z = 6/4 = 1,5, bei der Amsel z = 6/2 = 3. Nach der 68–95–99,7-Regel liegen jenseits von z = 3 nur rund 0,1 %, jenseits von z = 1,5 dagegen etwa 7 %. Erst die Standardisierung macht Werte aus verschiedenen Verteilungen vergleichbar.'
 		}
 	];
 </script>
@@ -63,8 +77,6 @@
 	{slug}
 	description="Häufigkeits- vs. Wahrscheinlichkeitsverteilung, diskret vs. stetig, die Normalverteilung und die zentrale Idee: Die Fläche unter der Dichtekurve ist die Wahrscheinlichkeit. Mit interaktivem Flächen-Schieber."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -85,6 +97,8 @@
 			Fläche unter einer Kurve ist eine Wahrscheinlichkeit.</strong> Bauen wir uns langsam
 			dorthin.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Beobachtet vs. theoretisch ------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Beobachtet oder erwartet?</h2>

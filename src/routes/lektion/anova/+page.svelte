@@ -61,6 +61,20 @@
 			correct: false,
 			explanation:
 				'Falsch. Die ANOVA sagt nur: „irgendein Gruppenmittel weicht ab“ — aber nicht welches. Um die konkreten Paare zu finden, brauchst du einen Post-hoc-Test wie Tukey HSD, der die familienweise Fehlerrate kontrolliert. Die ANOVA ist das Eingangstor; Tukey HSD sagt dir dann, welche Türen offen sind.'
+		},
+		{
+			id: 'an-4',
+			kind: 'mc',
+			prompt:
+				'Obwohl die ANOVA mit Varianzen rechnet, dreht sich ihre Nullhypothese um etwas anderes. Was genau besagt H₀ bei einer einfaktoriellen ANOVA über drei Käfigtypen?',
+			options: [
+				'H₀: Alle drei Käfigtypen haben dieselbe Varianz der Lachsgröße.',
+				'H₀: Alle drei Gruppenmittelwerte sind gleich (μ₁ = μ₂ = μ₃); die Varianzen sind nur das Werkzeug, um genau diese Mittelwert-Gleichheit zu prüfen.',
+				'H₀: Alle drei Gruppen haben denselben Stichprobenumfang.'
+			],
+			correct: 1,
+			explanation:
+				'Genau. Die ANOVA heißt zwar „Varianzanalyse“ und zerlegt Streuung, aber ihre Nullhypothese betrifft die MITTELWERTE: μ₁ = μ₂ = μ₃. Sie nutzt das Verhältnis der Varianz zwischen den Gruppen zur Varianz innerhalb der Gruppen nur als Hebel, um Mittelwertunterschiede aufzuspüren. Gleiche Varianzen (Varianzhomogenität) sind dagegen eine VORAUSSETZUNG des Tests, nicht seine Nullhypothese.'
 		}
 	];
 </script>
@@ -69,8 +83,6 @@
 	{slug}
 	description="Die einfaktorielle Varianzanalyse (ANOVA) vergleicht die Mittelwerte mehrerer Gruppen in EINEM Test — am Beispiel der Lachsgröße in verschiedenen Käfigtypen. Das Problem des multiplen Testens und die familienweise Fehlerrate 1 − (1 − α)^c, die Varianzzerlegung SS_total = SS_zwischen + SS_innerhalb, die zentrale Intuition F = Varianz zwischen / Varianz innerhalb, Voraussetzungen (Normalität, Varianzhomogenität/Levene, Unabhängigkeit), die nicht-parametrische Alternative Kruskal-Wallis, Post-hoc-Tests (Tukey HSD), die Effektstärke η² und aov()/TukeyHSD() in R — mit zwei interaktiven Widgets."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -90,6 +102,8 @@
 			dieser Lektion lernst du, warum man stattdessen <strong>einen</strong> Test über alle Gruppen
 			rechnet: die <Begriff term="ANOVA">Varianzanalyse (ANOVA)</Begriff>.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Das Problem des multiplen Testens ----------------------------------- -->
 		<h2 class="mt-4 text-2xl">Das Problem: viele Vergleiche blähen den Fehler auf</h2>

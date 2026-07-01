@@ -54,6 +54,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Das ist das Verblüffende daran: Selbst aus einer schiefen Grundgesamtheit werden die Stichprobenmittelwerte mit wachsendem n glockenförmig. Probier es im Widget mit der rechtsschiefen Verteilung aus.'
+		},
+		{
+			id: 'sv-4',
+			kind: 'mc',
+			prompt:
+				'Für deine Amsel-Fänge unterscheidest du den Standardfehler (SE = σ/√n) von der Standardabweichung σ. Welche Beschreibung trifft zu?',
+			options: [
+				'SE und σ sind dasselbe, nur unterschiedlich benannt.',
+				'σ beschreibt, wie stark die Flügellängen EINZELNER Vögel streuen; der SE beschreibt, wie stark die MITTELWERTE vieler Fänge um den wahren Mittelwert schwanken.',
+				'σ beschreibt die Streuung der Mittelwerte, der SE die Streuung der einzelnen Vögel.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Die Standardabweichung σ ist ein Streumaß der Rohdaten — wie unterschiedlich sind die einzelnen Vögel. Der Standardfehler SE = σ/√n ist die Standardabweichung der Stichprobenmittelwerte — wie präzise dein geschätzter Mittelwert ist. Deshalb schrumpft nur der SE mit größerem n; σ (die biologische Streuung der Population) bleibt gleich. SE und SD zu verwechseln ist einer der häufigsten Fehler in Ergebnisberichten.'
 		}
 	];
 </script>
@@ -62,8 +76,6 @@
 	{slug}
 	description="Warum sagt eine kleine Stichprobe etwas über eine riesige Grundgesamtheit aus? Die zentrale Idee der schließenden Statistik — interaktiv erklärt."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -104,6 +116,8 @@
 			<Begriff term="Standardfehler" />, und sie ist der Schlüssel zu allem, was
 			danach kommt.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<Merke title="Worauf es jetzt ankommt">
 			Halte zwei Dinge auseinander: die <em>Streuung der Flügellängen</em> in einem

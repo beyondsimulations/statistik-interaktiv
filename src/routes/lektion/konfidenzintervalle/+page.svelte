@@ -68,6 +68,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Mehr Sicherheit verlangt einen größeren kritischen Wert (z geht von 1,96 auf 2,58), also ein breiteres Intervall. Sicherheit und Präzision sind ein Tauschgeschäft: Willst du dir sicherer sein, das wahre μ einzufangen, musst du ein breiteres Netz auswerfen.'
+		},
+		{
+			id: 'ki-4',
+			kind: 'mc',
+			prompt:
+				'Zwei Studien schätzen dieselbe mittlere Zugdistanz bei gleicher Streuung. Studie A hat n = 25, Studie B n = 100. Wie verhalten sich die Breiten ihrer 95-%-Konfidenzintervalle?',
+			options: [
+				'Beide Intervalle sind gleich breit, weil beide 95 % Sicherheit haben.',
+				'Das Intervall von Studie B ist etwa halb so breit, denn die Breite schrumpft mit 1/√n — viermal so viele Daten halbieren die Breite.',
+				'Das Intervall von Studie B ist viermal so schmal, weil n viermal so groß ist.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Die Breite eines KI hängt über den Standardfehler σ/√n von der WURZEL aus n ab, nicht von n selbst. Vervierfacht man n (25 → 100), sinkt der Standardfehler um den Faktor √4 = 2, die Breite halbiert sich also nur. Der Distraktor „viermal so schmal“ ist der klassische Fehler, linear statt mit der Wurzel zu rechnen: Um ein KI zu halbieren, braucht man das Vierfache an Daten.'
 		}
 	];
 </script>
@@ -76,8 +90,6 @@
 	{slug}
 	description="Kennwert vs. Parameter, Punktschätzer & Erwartungstreue, warum n−1, Standardfehler und das Konfidenzintervall x̄ ± z·SE. Mit der Sampling-Maschine zur korrekten Deutung: der Parameter ist fest, das Intervall ist zufällig."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -97,6 +109,8 @@
 			er sie damit eingegrenzt hat. Am Ende steht ein Satz, den fast alle falsch deuten, und du
 			wirst ihn richtig verstehen.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Kennwert vs. Parameter ---------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Kennwert oder Parameter?</h2>

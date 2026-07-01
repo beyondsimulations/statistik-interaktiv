@@ -57,6 +57,20 @@
 			correct: false,
 			explanation:
 				'Falsch — und das ist der Kerngedanke dieser Lektion. Den Test wählst du VOR dem Blick auf den p-Wert, allein aus der Fragestellung, dem Datentyp, der Anzahl der Gruppen, gepaart vs. unabhängig und den erfüllten Annahmen. Den Test nach dem Ergebnis auszusuchen („welcher liefert mir Signifikanz?“) ist p-Hacking und macht den p-Wert bedeutungslos.'
+		},
+		{
+			id: 'welcher-test-4',
+			kind: 'mc',
+			prompt:
+				'Du willst wissen, ob sich der Parasitenbefall (je Tier nur befallen ja/nein) zwischen DREI Habitaten unterscheidet. Welcher Test passt?',
+			options: [
+				'Eine einfaktorielle ANOVA, weil es drei Gruppen sind.',
+				'Ein χ²-Test auf Unabhängigkeit, weil das Ergebnis kategorial ist (befallen ja/nein) und du Häufigkeiten über eine 3×2-Tafel vergleichst.',
+				'Dreimal ein unabhängiger t-Test zwischen den Habitatpaaren.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Den Test wählt der DATENTYP der Zielgröße, nicht nur die Zahl der Gruppen. „Befallen ja/nein“ ist kategorial (eine Häufigkeit), kein metrischer Messwert — also gehört der Vergleich über die drei Habitate in eine 3×2-Kontingenztafel mit χ²-Test. ANOVA und t-Test bräuchten eine metrische Zielgröße (z. B. Anzahl Parasiten pro Tier). Wer nur „drei Gruppen → ANOVA“ denkt, übersieht den Datentyp.'
 		}
 	];
 </script>
@@ -65,8 +79,6 @@
 	{slug}
 	description="Die Abschlusslektion bündelt alles: Welchen statistischen Test wählst du? Die zentrale Intuition — den Test wählst du VOR dem Blick auf den p-Wert, aus Datentyp (kategorial → Chi-Quadrat; kontinuierlich → t-Test/ANOVA/Regression), Anzahl der Gruppen (1 vs. Referenz / 2 / ≥3), gepaart vs. unabhängig und den erfüllten Annahmen (sonst nicht-parametrisch). Mit Cheatsheet-Tabelle (Fragestellung → Test → R-Funktion) für die sechs biologischen Beispiele plus die nicht-parametrischen Alternativen, einem interaktiven Entscheidungsbaum-Spiel über alle Test-Familien, einem Szenario-Quiz mit der ≥3-Gruppen-Falle und R-Code-Spickzettel."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -85,6 +97,8 @@
 			<strong>Welchen Test nimmst du eigentlich?</strong> Die gute Nachricht: Es ist kein Raten. Mit
 			vier kurzen Fragen landest du fast immer beim richtigen Werkzeug.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Die zentrale Intuition ----------------------------------------------- -->
 		<Intuition title="Den Test wählst du VOR dem Blick auf den p-Wert">

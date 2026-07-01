@@ -60,6 +60,20 @@
 			correct: 1,
 			explanation:
 				'Korrekt. Beim Anpassungstest gilt df = k − 1, mit k = Anzahl Kategorien. Bei vier Phänotyp-Klassen also df = 4 − 1 = 3. (Zum Vergleich: Beim Unabhängigkeitstest einer Tafel gilt df = (Zeilen − 1)·(Spalten − 1), für eine 2×2-Tafel daher df = 1.)'
+		},
+		{
+			id: 'cq-4',
+			kind: 'mc',
+			prompt:
+				'Dein χ²-Unabhängigkeitstest der Tafel Habitat × Befall wird signifikant (p < 0,01). Was darfst du daraus schließen?',
+			options: [
+				'Das Habitat verursacht den Parasitenbefall.',
+				'Habitat und Befall sind nicht unabhängig — es besteht ein Zusammenhang. WIE stark er ist und in welche Richtung, sagt der χ²-Test allein nicht.',
+				'Der Zusammenhang zwischen Habitat und Befall ist stark.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Ein signifikanter χ²-Test verwirft nur die Nullhypothese der Unabhängigkeit: Es gibt eine Assoziation. Über die STÄRKE sagt der p-Wert nichts (dafür braucht man ein Effektmaß wie Cramérs V), und über KAUSALITÄT schon gar nicht — es ist ein Häufigkeitsvergleich, kein kontrolliertes Experiment. Bei großem N kann selbst eine winzige Assoziation signifikant werden.'
 		}
 	];
 </script>
@@ -68,8 +82,6 @@
 	{slug}
 	description="Chi-Quadrat-Tests für kategoriale Häufigkeitsdaten: der Anpassungstest (goodness of fit) an Mendels 9:3:3:1-Erbsen und der Unabhängigkeitstest auf einer Kontingenztafel (Art × Habitat). Die zentrale Intuition χ² = Σ(B−E)²/E, die Erwartungswerte aus den Rändern, Voraussetzungen (E ≥ 5, Fisher-Test, Yates-Korrektur) und chisq.test() in R — mit einem interaktiven Kontingenztafel-Editor."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -91,6 +103,8 @@
 			<strong>gezählt</strong> hast, von dem abweicht, was du bei reinem Zufall
 			<strong>erwarten</strong> würdest.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<Callout variant="warnung" title="Chi-Quadrat will Anzahlen — keine Prozente, keine Mittelwerte">
 			Der erste und häufigste Fehler: χ² in eine Prozent- oder Mittelwerttabelle stecken. Das geht

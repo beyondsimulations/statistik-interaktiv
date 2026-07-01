@@ -60,6 +60,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Ein Punkt mit hoher Hebelwirkung liegt weit draußen in X-Richtung und zieht die Kleinste-Quadrate-Gerade förmlich zu sich — er kann Steigung, Achsenabschnitt und R² dramatisch kippen, obwohl alle anderen Punkte unverändert bleiben. Genau das zeigt der Regression-Builder mit dem Hebelpunkt. Solche Punkte spürt man über Hebelwirkung (leverage) und Cook-Distanz auf.'
+		},
+		{
+			id: 'reg-4',
+			kind: 'mc',
+			prompt:
+				'Dein Regressionsmodell „Nachkommen ~ Körperlänge“ wurde an Daphnien von 1 bis 3 mm Länge angepasst (R² = 0,7). Darfst du damit die Nachkommenzahl einer 8 mm langen Daphnie vorhersagen?',
+			options: [
+				'Ja, die Regressionsgerade gilt für beliebige Längen.',
+				'Nein — 8 mm liegt weit außerhalb des beobachteten Bereichs (1–3 mm). Solche Extrapolation ist unzuverlässig, weil dort nie geprüft wurde, ob der lineare Zusammenhang überhaupt noch gilt.',
+				'Ja, denn bei R² = 0,7 ist das Modell gut genug für jede Vorhersage.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Ein Modell ist nur im Bereich der Daten belegt, an denen es angepasst wurde. Bei 8 mm — mehr als dem Doppelten des größten beobachteten Werts — extrapolierst du blind: Der Zusammenhang könnte abflachen, umkippen oder in eine Sättigung laufen. Ein hohes R² beschreibt nur die Passung INNERHALB des beobachteten Bereichs und rechtfertigt keine Vorhersage weit außerhalb.'
 		}
 	];
 </script>
@@ -68,8 +82,6 @@
 	{slug}
 	description="Die lineare Regression legt mit der Methode der kleinsten Quadrate eine Gerade ŷ = a + b·x durch die Daten und sagt Y aus X vorher — anders als die Korrelation hat sie eine Richtung. Steigung b (Änderung von Y pro Einheit X), Achsenabschnitt a (Y bei X = 0), Residuen als Grundlage der Diagnostik, Bestimmtheitsmaß R² = SS_Regression / SS_Total und der t-Test auf die Steigung (t = b/SE_b, df = n − 2, H0: β = 0). Die zentrale Intuition: R² ≠ Signifikanz — eine Steigung kann hochsignifikant sein (Zusammenhang existiert) und R² trotzdem klein (schlechte Vorhersage). Annahmen und Diagnoseplots (Residuals-vs-Fitted, Q-Q), Hebelwirkung und Cook-Distanz. Am Beispiel Daphnia: Anzahl Nachkommen ~ Körperlänge, mit interaktivem Regression-Builder."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -90,6 +102,8 @@
 			<strong>Körperlänge → Anzahl Nachkommen</strong> und macht aus „hängt zusammen“ ein
 			handfestes „so viele Nachkommen erwarte ich bei dieser Länge“.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Korrelation vs. Regression ------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Von der Korrelation zur Regression: jetzt mit Richtung</h2>

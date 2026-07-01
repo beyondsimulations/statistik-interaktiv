@@ -71,6 +71,20 @@
 			correct: 1,
 			explanation:
 				'Richtig. „gering – mittel – stark“ ist eine Rangfolge, aber der Abstand zwischen den Stufen ist nicht definiert gleich groß — das ist ordinal. Deshalb passen hier Rangverfahren und der Median besser als ein Mittelwert.'
+		},
+		{
+			id: 'ws-5',
+			kind: 'mc',
+			prompt:
+				'Otto misst bei 40 gefangenen Amseln die mittlere Flügellänge x̄ = 12,1 cm und will damit die mittlere Flügellänge ALLER Amseln der Region einschätzen. Was ist die 12,1 cm?',
+			options: [
+				'Ein Parameter — der wahre Mittelwert der Grundgesamtheit.',
+				'Eine Stichprobenstatistik (ein Schätzwert); der gesuchte Parameter μ der Grundgesamtheit bleibt unbekannt und wird durch x̄ nur geschätzt.',
+				'Beides zugleich, weil bei 40 Vögeln die Stichprobe der Grundgesamtheit entspricht.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Ein aus einer Stichprobe berechneter Kennwert (hier x̄) ist eine Statistik — ein Schätzwert. Der wahre Mittelwert der ganzen Grundgesamtheit (μ) ist der Parameter; ihn kennt man fast nie und schätzt ihn aus der Stichprobe. Statistik und Parameter zu verwechseln verwischt genau den Sprung von den Daten zur Grundgesamtheit, um den es in der Inferenzstatistik geht.'
 		}
 	];
 </script>
