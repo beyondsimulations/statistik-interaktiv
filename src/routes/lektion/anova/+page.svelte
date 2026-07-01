@@ -61,6 +61,20 @@
 			correct: false,
 			explanation:
 				'Falsch. Die ANOVA sagt nur: „irgendein Gruppenmittel weicht ab“ — aber nicht welches. Um die konkreten Paare zu finden, brauchst du einen Post-hoc-Test wie Tukey HSD, der die familienweise Fehlerrate kontrolliert. Die ANOVA ist das Eingangstor; Tukey HSD sagt dir dann, welche Türen offen sind.'
+		},
+		{
+			id: 'an-4',
+			kind: 'mc',
+			prompt:
+				'Obwohl die ANOVA mit Varianzen rechnet, dreht sich ihre Nullhypothese um etwas anderes. Was genau besagt H₀ bei einer einfaktoriellen ANOVA über drei Käfigtypen?',
+			options: [
+				'H₀: Alle drei Käfigtypen haben dieselbe Varianz der Lachsgröße.',
+				'H₀: Alle drei Gruppenmittelwerte sind gleich (μ₁ = μ₂ = μ₃); die Varianzen sind nur das Werkzeug, um genau diese Mittelwert-Gleichheit zu prüfen.',
+				'H₀: Alle drei Gruppen haben denselben Stichprobenumfang.'
+			],
+			correct: 1,
+			explanation:
+				'Genau. Die ANOVA heißt zwar „Varianzanalyse“ und zerlegt Streuung, aber ihre Nullhypothese betrifft die MITTELWERTE: μ₁ = μ₂ = μ₃. Sie nutzt das Verhältnis der Varianz zwischen den Gruppen zur Varianz innerhalb der Gruppen nur als Hebel, um Mittelwertunterschiede aufzuspüren. Gleiche Varianzen (Varianzhomogenität) sind dagegen eine VORAUSSETZUNG des Tests, nicht seine Nullhypothese.'
 		}
 	];
 </script>

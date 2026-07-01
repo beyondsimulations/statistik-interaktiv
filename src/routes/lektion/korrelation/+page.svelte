@@ -59,6 +59,20 @@
 			correct: false,
 			explanation:
 				'Falsch. Korrelation ist NICHT Kausalität. Ein hoher Wert kann durch einen dritten Faktor (Confounder) entstehen — eine Scheinkorrelation. Beispiel: Über Inseln hinweg korrelieren Storchenzahl und Geburtenrate, weil beide mit der Fläche/Ländlichkeit zusammenhängen — nicht weil Störche Babys bringen. Kausalität begründet man nur über kontrollierte Experimente.'
+		},
+		{
+			id: 'kor-4',
+			kind: 'mc',
+			prompt:
+				'Zwischen Umgebungstemperatur und Eidechsen-Aktivität misst du eine Pearson-Korrelation von r = 0,6. Welcher Anteil der Streuung in der Aktivität wird durch die Temperatur (linear) erklärt?',
+			options: [
+				'60 %, denn r = 0,6 entspricht direkt dem erklärten Anteil.',
+				'36 %, denn der erklärte Varianzanteil ist das Bestimmtheitsmaß r² = 0,6² = 0,36.',
+				'Rund 77 %, denn √0,6 ≈ 0,77.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Der erklärte Varianzanteil ist r² (das Bestimmtheitsmaß), nicht r selbst. r = 0,6 klingt nach viel, aber r² = 0,36 heißt: Nur 36 % der Streuung der Aktivität gehen (linear) auf die Temperatur zurück, 64 % bleiben unerklärt. r und r² zu verwechseln lässt Zusammenhänge stärker erscheinen, als sie sind.'
 		}
 	];
 </script>

@@ -60,6 +60,20 @@
 			correct: 1,
 			explanation:
 				'Korrekt. Beim Anpassungstest gilt df = k − 1, mit k = Anzahl Kategorien. Bei vier Phänotyp-Klassen also df = 4 − 1 = 3. (Zum Vergleich: Beim Unabhängigkeitstest einer Tafel gilt df = (Zeilen − 1)·(Spalten − 1), für eine 2×2-Tafel daher df = 1.)'
+		},
+		{
+			id: 'cq-4',
+			kind: 'mc',
+			prompt:
+				'Dein χ²-Unabhängigkeitstest der Tafel Habitat × Befall wird signifikant (p < 0,01). Was darfst du daraus schließen?',
+			options: [
+				'Das Habitat verursacht den Parasitenbefall.',
+				'Habitat und Befall sind nicht unabhängig — es besteht ein Zusammenhang. WIE stark er ist und in welche Richtung, sagt der χ²-Test allein nicht.',
+				'Der Zusammenhang zwischen Habitat und Befall ist stark.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Ein signifikanter χ²-Test verwirft nur die Nullhypothese der Unabhängigkeit: Es gibt eine Assoziation. Über die STÄRKE sagt der p-Wert nichts (dafür braucht man ein Effektmaß wie Cramérs V), und über KAUSALITÄT schon gar nicht — es ist ein Häufigkeitsvergleich, kein kontrolliertes Experiment. Bei großem N kann selbst eine winzige Assoziation signifikant werden.'
 		}
 	];
 </script>

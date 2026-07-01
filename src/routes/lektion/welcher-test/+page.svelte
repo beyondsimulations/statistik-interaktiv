@@ -57,6 +57,20 @@
 			correct: false,
 			explanation:
 				'Falsch — und das ist der Kerngedanke dieser Lektion. Den Test wählst du VOR dem Blick auf den p-Wert, allein aus der Fragestellung, dem Datentyp, der Anzahl der Gruppen, gepaart vs. unabhängig und den erfüllten Annahmen. Den Test nach dem Ergebnis auszusuchen („welcher liefert mir Signifikanz?“) ist p-Hacking und macht den p-Wert bedeutungslos.'
+		},
+		{
+			id: 'welcher-test-4',
+			kind: 'mc',
+			prompt:
+				'Du willst wissen, ob sich der Parasitenbefall (je Tier nur befallen ja/nein) zwischen DREI Habitaten unterscheidet. Welcher Test passt?',
+			options: [
+				'Eine einfaktorielle ANOVA, weil es drei Gruppen sind.',
+				'Ein χ²-Test auf Unabhängigkeit, weil das Ergebnis kategorial ist (befallen ja/nein) und du Häufigkeiten über eine 3×2-Tafel vergleichst.',
+				'Dreimal ein unabhängiger t-Test zwischen den Habitatpaaren.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Den Test wählt der DATENTYP der Zielgröße, nicht nur die Zahl der Gruppen. „Befallen ja/nein“ ist kategorial (eine Häufigkeit), kein metrischer Messwert — also gehört der Vergleich über die drei Habitate in eine 3×2-Kontingenztafel mit χ²-Test. ANOVA und t-Test bräuchten eine metrische Zielgröße (z. B. Anzahl Parasiten pro Tier). Wer nur „drei Gruppen → ANOVA“ denkt, übersieht den Datentyp.'
 		}
 	];
 </script>

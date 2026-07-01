@@ -58,6 +58,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Ein strengeres α schiebt die Entscheidungslinie nach außen: Du verwirfst H0 seltener fälschlich (kleiner Fehler 1. Art), übersiehst dafür aber echte Effekte häufiger — β wächst, die Power = 1 − β sinkt. Dieses Tauschgeschäft lässt sich nur durch mehr Daten (größeres n) entschärfen.'
+		},
+		{
+			id: 'ht-4',
+			kind: 'mc',
+			prompt:
+				'In Wahrheit unterscheiden sich Sonnen- und Schattenblätter gar nicht in der Größe. Otto erhält aber p = 0,02, verwirft H0 und meldet einen Unterschied. Welchen Fehler hat er begangen?',
+			options: [
+				'Fehler 2. Art (β): Er hat einen echten Unterschied übersehen.',
+				'Fehler 1. Art (α): Er hat H0 verworfen, obwohl sie in Wahrheit stimmt — ein Fehlalarm.',
+				'Keinen Fehler, denn ein signifikantes Ergebnis ist per Definition korrekt.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. H0 („kein Unterschied“) ist hier wahr, trotzdem wird sie verworfen — das ist ein falsch-positiver Befund, der Fehler 1. Art. Seine Wahrscheinlichkeit ist genau α (hier 5 %). Der Fehler 2. Art wäre das Gegenteil: einen echten Effekt NICHT zu entdecken. Wichtig: Ein einzelnes signifikantes Ergebnis kann immer ein Zufallstreffer sein.'
 		}
 	];
 </script>

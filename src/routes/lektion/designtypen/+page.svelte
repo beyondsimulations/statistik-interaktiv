@@ -58,6 +58,20 @@
 			correct: false,
 			explanation:
 				'Falsch. Wiederholte Messungen an derselben Einheit sind abhängig, sie teilen alles, was diese Einheit ausmacht (Genetik, Vorgeschichte, Messsituation). Sie sind Subsamples, keine echten Replikate. Behandelt man sie als unabhängig, entsteht Pseudoreplikation mit aufgeblähten Freiheitsgraden und falsch kleinen p-Werten. Korrekt: einen Mittelwert pro Individuum bilden, einen Error()-Term verwenden oder ein Mixed Model rechnen.'
+		},
+		{
+			id: 'designtypen-4',
+			kind: 'mc',
+			prompt:
+				'Wie musst du den Futterversuch anlegen, damit du echte Replikate hast und keine Pseudoreplikation betreibst?',
+			options: [
+				'Ein einziges großes Becken pro Futter, dafür besonders viele Fische je Becken messen.',
+				'Mehrere unabhängig versorgte Becken pro Futter anlegen und pro Becken EINEN Mittelwert als Datenpunkt in den Test geben — die Becken sind die Replikationseinheit.',
+				'Alle Fische in ein gemeinsames Becken setzen und das Futter täglich abwechseln.'
+			],
+			correct: 1,
+			explanation:
+				'Genau. Weil das Futter auf Becken-Ebene zugeteilt wird, ist das Becken die Versuchseinheit. Echte Replikation heißt: mehrere unabhängige Becken pro Futter, und die vielen Fische innerhalb eines Beckens werden zu einem Becken-Mittelwert zusammengefasst. Ein Becken mit noch so vielen Fischen bleibt für die Behandlung n = 1 — mehr Fische darin liefern keine unabhängige Information über den Futtereffekt.'
 		}
 	];
 </script>

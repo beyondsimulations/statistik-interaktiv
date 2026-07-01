@@ -60,6 +60,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Ein Punkt mit hoher Hebelwirkung liegt weit draußen in X-Richtung und zieht die Kleinste-Quadrate-Gerade förmlich zu sich — er kann Steigung, Achsenabschnitt und R² dramatisch kippen, obwohl alle anderen Punkte unverändert bleiben. Genau das zeigt der Regression-Builder mit dem Hebelpunkt. Solche Punkte spürt man über Hebelwirkung (leverage) und Cook-Distanz auf.'
+		},
+		{
+			id: 'reg-4',
+			kind: 'mc',
+			prompt:
+				'Dein Regressionsmodell „Nachkommen ~ Körperlänge“ wurde an Daphnien von 1 bis 3 mm Länge angepasst (R² = 0,7). Darfst du damit die Nachkommenzahl einer 8 mm langen Daphnie vorhersagen?',
+			options: [
+				'Ja, die Regressionsgerade gilt für beliebige Längen.',
+				'Nein — 8 mm liegt weit außerhalb des beobachteten Bereichs (1–3 mm). Solche Extrapolation ist unzuverlässig, weil dort nie geprüft wurde, ob der lineare Zusammenhang überhaupt noch gilt.',
+				'Ja, denn bei R² = 0,7 ist das Modell gut genug für jede Vorhersage.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Ein Modell ist nur im Bereich der Daten belegt, an denen es angepasst wurde. Bei 8 mm — mehr als dem Doppelten des größten beobachteten Werts — extrapolierst du blind: Der Zusammenhang könnte abflachen, umkippen oder in eine Sättigung laufen. Ein hohes R² beschreibt nur die Passung INNERHALB des beobachteten Bereichs und rechtfertigt keine Vorhersage weit außerhalb.'
 		}
 	];
 </script>

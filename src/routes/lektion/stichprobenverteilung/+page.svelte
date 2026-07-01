@@ -54,6 +54,20 @@
 			correct: true,
 			explanation:
 				'Wahr. Das ist das Verblüffende daran: Selbst aus einer schiefen Grundgesamtheit werden die Stichprobenmittelwerte mit wachsendem n glockenförmig. Probier es im Widget mit der rechtsschiefen Verteilung aus.'
+		},
+		{
+			id: 'sv-4',
+			kind: 'mc',
+			prompt:
+				'Für deine Amsel-Fänge unterscheidest du den Standardfehler (SE = σ/√n) von der Standardabweichung σ. Welche Beschreibung trifft zu?',
+			options: [
+				'SE und σ sind dasselbe, nur unterschiedlich benannt.',
+				'σ beschreibt, wie stark die Flügellängen EINZELNER Vögel streuen; der SE beschreibt, wie stark die MITTELWERTE vieler Fänge um den wahren Mittelwert schwanken.',
+				'σ beschreibt die Streuung der Mittelwerte, der SE die Streuung der einzelnen Vögel.'
+			],
+			correct: 1,
+			explanation:
+				'Richtig. Die Standardabweichung σ ist ein Streumaß der Rohdaten — wie unterschiedlich sind die einzelnen Vögel. Der Standardfehler SE = σ/√n ist die Standardabweichung der Stichprobenmittelwerte — wie präzise dein geschätzter Mittelwert ist. Deshalb schrumpft nur der SE mit größerem n; σ (die biologische Streuung der Population) bleibt gleich. SE und SD zu verwechseln ist einer der häufigsten Fehler in Ergebnisberichten.'
 		}
 	];
 </script>
