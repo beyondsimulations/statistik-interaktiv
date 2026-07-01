@@ -331,7 +331,7 @@ alternative hypothesis: true difference in means
  -512.4  -108.7
 sample estimates:
   mean in group Buchfink  mean in group Moenchsgrasmuecke
-                  1487.3                          1797.8`}
+                  1487.3                           1797.8`}
 			annotations={{
 				't = -3.142': 'Die Teststatistik: Signal ÷ Rausch. Negativ, weil die erste Gruppe (Buchfink) den kleineren Mittelwert hat. Entscheidend ist der Betrag, |t| = 3,14.',
 				'df = 36.8': 'Die Welch-Freiheitsgrade — nicht ganzzahlig, weil Welch sie aus beiden Varianzen korrigiert. Das verrät dir, dass hier kein gepoolter Student-Test lief.',
