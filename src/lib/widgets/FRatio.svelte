@@ -128,34 +128,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Anzeige F und p -->
-		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100'
-					: 'bg-paper-sunk'}"
-			>
-				<span class="text-ink-soft font-semibold">F = </span>
-				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(res.F)}</span>
-			</div>
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100 text-sage-500'
-					: 'bg-coral-50 text-coral-700'}"
-			>
-				<span class="font-semibold">p = </span>
-				<span class="text-2xl font-bold tabular-nums">{fmtP(res.p)}</span>
-				<span class="text-sm font-semibold"
-					>{significant ? '· signifikant' : '· nicht signifikant'}</span
-				>
-			</div>
-			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
-				<span>MS<sub>zw.</sub> = {fmt1(res.msBetween)}</span>
-				<span>·</span>
-				<span>MS<sub>inn.</sub> = {fmt1(res.msWithin)}</span>
-			</div>
-		</div>
-
 		<svg
 			viewBox="0 0 {W} {H}"
 			class="block h-auto w-full"
@@ -199,6 +171,34 @@
 				Größe (cm) →
 			</text>
 		</svg>
+
+		<!-- Live-Anzeige F und p -->
+		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100'
+					: 'bg-paper-sunk'}"
+			>
+				<span class="text-ink-soft font-semibold">F = </span>
+				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(res.F)}</span>
+			</div>
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100 text-sage-500'
+					: 'bg-coral-50 text-coral-700'}"
+			>
+				<span class="font-semibold">p = </span>
+				<span class="text-2xl font-bold tabular-nums">{fmtP(res.p)}</span>
+				<span class="text-sm font-semibold"
+					>{significant ? '· signifikant' : '· nicht signifikant'}</span
+				>
+			</div>
+			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
+				<span>MS<sub>zw.</sub> = {fmt1(res.msBetween)}</span>
+				<span>·</span>
+				<span>MS<sub>inn.</sub> = {fmt1(res.msWithin)}</span>
+			</div>
+		</div>
 
 		<!-- SS-Zerlegung (zwischen vs. innerhalb) via die geteilte Komponente -->
 		<SSZerlegung

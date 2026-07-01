@@ -123,34 +123,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Anzeige t und p -->
-		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100'
-					: 'bg-paper-sunk'}"
-			>
-				<span class="text-ink-soft font-semibold">t = </span>
-				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(res.t)}</span>
-			</div>
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100 text-sage-500'
-					: 'bg-coral-50 text-coral-700'}"
-			>
-				<span class="font-semibold">p = </span>
-				<span class="text-2xl font-bold tabular-nums">{fmtP(res.pTwoSided)}</span>
-				<span class="text-sm font-semibold"
-					>{significant ? '· signifikant' : '· nicht signifikant'}</span
-				>
-			</div>
-			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
-				<span>SE = {fmt0(res.se)} km</span>
-				<span>·</span>
-				<span>df = {res.df}</span>
-			</div>
-		</div>
-
 		<svg
 			viewBox="0 0 {W} {H}"
 			class="block h-auto w-full"
@@ -259,6 +231,34 @@
 				Zugdistanz (km) →
 			</text>
 		</svg>
+
+		<!-- Live-Anzeige t und p -->
+		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100'
+					: 'bg-paper-sunk'}"
+			>
+				<span class="text-ink-soft font-semibold">t = </span>
+				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(res.t)}</span>
+			</div>
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100 text-sage-500'
+					: 'bg-coral-50 text-coral-700'}"
+			>
+				<span class="font-semibold">p = </span>
+				<span class="text-2xl font-bold tabular-nums">{fmtP(res.pTwoSided)}</span>
+				<span class="text-sm font-semibold"
+					>{significant ? '· signifikant' : '· nicht signifikant'}</span
+				>
+			</div>
+			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
+				<span>SE = {fmt0(res.se)} km</span>
+				<span>·</span>
+				<span>df = {res.df}</span>
+			</div>
+		</div>
 
 		<p class="text-ink-faint text-xs leading-relaxed">
 			Der t-Wert ist <strong>Signal ÷ Rausch</strong>: t = Δ / SE mit SE = s·√(2/n). Dreh die

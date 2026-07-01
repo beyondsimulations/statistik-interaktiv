@@ -95,29 +95,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-5">
-		<!-- Live-Anzeige χ², df, p -->
-		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-			<div class="bg-paper-sunk flex items-baseline gap-2 rounded-2xl px-4 py-2">
-				<span class="text-ink-soft font-semibold">χ² = </span>
-				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(result.chi2)}</span>
-			</div>
-			<div class="text-ink-soft flex items-baseline gap-2 rounded-2xl px-4 py-2">
-				<span class="font-semibold">df = </span>
-				<span class="text-ink text-xl font-bold tabular-nums">{fmt0(result.df)}</span>
-			</div>
-			<div
-				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
-					? 'bg-sage-100 text-sage-500'
-					: 'bg-coral-50 text-coral-700'}"
-			>
-				<span class="font-semibold">p = </span>
-				<span class="text-2xl font-bold tabular-nums">{fmtP(result.p)}</span>
-				<span class="text-sm font-semibold">
-					{significant ? '· signifikant' : '· nicht signifikant'}
-				</span>
-			</div>
-		</div>
-
 		{#if anyExpectedTooSmall}
 			<div
 				class="border-coral-300 bg-coral-100/70 text-coral-700 flex items-start gap-2 rounded-xl border px-4 py-2.5 text-sm"
@@ -219,6 +196,29 @@
 						<span>(Beiträge mit Yates-Korrektur gerechnet.)</span>
 					{/if}
 				</p>
+			</div>
+		</div>
+
+		<!-- Live-Anzeige χ², df, p -->
+		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+			<div class="bg-paper-sunk flex items-baseline gap-2 rounded-2xl px-4 py-2">
+				<span class="text-ink-soft font-semibold">χ² = </span>
+				<span class="text-ink text-2xl font-bold tabular-nums">{fmt2(result.chi2)}</span>
+			</div>
+			<div class="text-ink-soft flex items-baseline gap-2 rounded-2xl px-4 py-2">
+				<span class="font-semibold">df = </span>
+				<span class="text-ink text-xl font-bold tabular-nums">{fmt0(result.df)}</span>
+			</div>
+			<div
+				class="flex items-baseline gap-2 rounded-2xl px-4 py-2 {significant
+					? 'bg-sage-100 text-sage-500'
+					: 'bg-coral-50 text-coral-700'}"
+			>
+				<span class="font-semibold">p = </span>
+				<span class="text-2xl font-bold tabular-nums">{fmtP(result.p)}</span>
+				<span class="text-sm font-semibold">
+					{significant ? '· signifikant' : '· nicht signifikant'}
+				</span>
 			</div>
 		</div>
 

@@ -110,23 +110,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Anzeige Power = 1 − β -->
-		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-			<div class="bg-sage-100 flex items-baseline gap-2 rounded-2xl px-4 py-2">
-				<span class="text-sage-500 font-semibold">Power = 1 − β</span>
-				<span class="text-ink text-2xl font-bold tabular-nums">{pct(power)} %</span>
-			</div>
-			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
-				<span class="text-coral-700 font-semibold">α = {pct(alphaArea)} %</span>
-				<span>·</span>
-				<span>β = {pct(beta)} %</span>
-				<span>·</span>
-				<span>Effekt δ = {fmt2(delta)} SE</span>
-				<span>·</span>
-				<span>krit. Wert c = {fmt2(crit)}</span>
-			</div>
-		</div>
-
 		<svg
 			viewBox="0 0 {W} {H}"
 			class="block h-auto w-full"
@@ -221,6 +204,23 @@
 				{/if}
 			{/each}
 		</svg>
+
+		<!-- Live-Anzeige Power = 1 − β -->
+		<div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+			<div class="bg-sage-100 flex items-baseline gap-2 rounded-2xl px-4 py-2">
+				<span class="text-sage-500 font-semibold">Power = 1 − β</span>
+				<span class="text-ink text-2xl font-bold tabular-nums">{pct(power)} %</span>
+			</div>
+			<div class="text-ink-soft flex items-baseline gap-2 text-sm tabular-nums">
+				<span class="text-coral-700 font-semibold">α = {pct(alphaArea)} %</span>
+				<span>·</span>
+				<span>β = {pct(beta)} %</span>
+				<span>·</span>
+				<span>Effekt δ = {fmt2(delta)} SE</span>
+				<span>·</span>
+				<span>krit. Wert c = {fmt2(crit)}</span>
+			</div>
+		</div>
 
 		<p class="text-ink-faint text-xs">
 			<span class="text-coral-700 font-semibold">Koralle</span> = α (Fehler 1. Art: ein Unterschied

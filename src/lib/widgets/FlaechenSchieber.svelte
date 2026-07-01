@@ -149,13 +149,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Live-Anzeige der gesuchten Wahrscheinlichkeit -->
-		<div class="bg-coral-50 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl px-4 py-3">
-			<span class="text-coral-700 font-semibold">P({fmtVal(aClamped)} &lt; X ≤ {fmtVal(bClamped)})</span>
-			<span class="text-ink-faint text-sm">= F(b) − F(a) =</span>
-			<span class="text-coral-700 text-2xl font-bold tabular-nums">{probPct} %</span>
-		</div>
-
 		<!-- Die Dichtekurve mit schattierter Fläche -->
 		<svg
 			viewBox="0 0 {W} {H}"
@@ -207,6 +200,13 @@
 				{zView ? 'μ (z = 0)' : 'μ'}
 			</text>
 		</svg>
+
+		<!-- Live-Anzeige der gesuchten Wahrscheinlichkeit -->
+		<div class="bg-coral-50 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl px-4 py-3">
+			<span class="text-coral-700 font-semibold">P({fmtVal(aClamped)} &lt; X ≤ {fmtVal(bClamped)})</span>
+			<span class="text-ink-faint text-sm">= F(b) − F(a) =</span>
+			<span class="text-coral-700 text-2xl font-bold tabular-nums">{probPct} %</span>
+		</div>
 
 		<p class="text-ink-faint text-xs">
 			Die Höhe der Kurve ist <strong>keine</strong> Wahrscheinlichkeit — erst die

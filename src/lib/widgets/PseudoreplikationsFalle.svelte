@@ -164,67 +164,6 @@
 			</button>
 		</div>
 
-		<!-- Live-Kennzahlen -->
-		<div class="flex flex-wrap items-stretch gap-3">
-			<div class="border-ink/10 bg-paper-sunk/50 flex flex-col rounded-2xl border px-4 py-2">
-				<span class="text-ink-faint text-xs font-semibold tracking-wide uppercase">
-					Replikationseinheit
-				</span>
-				<span class="text-ink font-semibold">
-					{method === 'naiv' ? 'jedes Blatt' : 'jede Pflanze'}
-				</span>
-			</div>
-			<div class="border-ink/10 bg-paper-sunk/50 flex flex-col rounded-2xl border px-4 py-2 tabular-nums">
-				<span class="text-ink-faint text-xs font-semibold tracking-wide uppercase">n je Gruppe</span>
-				<span class="text-ink text-xl font-bold">{active.n1}</span>
-			</div>
-			<div class="border-ink/10 bg-paper-sunk/50 flex flex-col rounded-2xl border px-4 py-2 tabular-nums">
-				<span class="text-ink-faint text-xs font-semibold tracking-wide uppercase">Freiheitsgrade</span>
-				<span class="text-ink text-xl font-bold">{fmt1(active.df)}</span>
-			</div>
-			<div class="border-ink/10 bg-paper-sunk/50 flex flex-col rounded-2xl border px-4 py-2 tabular-nums">
-				<span class="text-ink-faint text-xs font-semibold tracking-wide uppercase">t-Wert</span>
-				<span class="text-ink text-xl font-bold">{fmt2(active.t)}</span>
-			</div>
-			<div
-				class={[
-					'flex flex-col rounded-2xl px-4 py-2 tabular-nums',
-					significant ? 'bg-coral-100 text-coral-700' : 'bg-sage-100 text-sage-500'
-				]}
-			>
-				<span class="text-xs font-semibold tracking-wide uppercase">p-Wert</span>
-				<span class="text-xl font-bold">{fmtP(active.pTwoSided)}</span>
-			</div>
-		</div>
-
-		<!-- Verdikt -->
-		<div
-			class={[
-				'rounded-xl border px-4 py-3 text-sm leading-relaxed',
-				scheinSignifikanz
-					? 'border-coral-300 bg-coral-100/70 text-coral-700'
-					: significant
-						? 'border-sage-300 bg-sage-100 text-sage-500'
-						: 'border-ink/10 bg-paper-sunk/60 text-ink-soft'
-			]}
-			role="status"
-		>
-			{#if scheinSignifikanz}
-				<strong>Schein-Signifikanz!</strong> Naiv ist p = {fmtP(active.pTwoSided)} (signifikant) — aber
-				nur, weil die {naivResult.n1} Blätter je Gruppe die Freiheitsgrade künstlich aufblähen. Schalte
-				auf <em>Mittelwert pro Pflanze</em>: mit ehrlichen {korrektResult.n1} Pflanzen je Gruppe ist
-				p = {fmtP(korrektResult.pTwoSided)} — <strong>nicht</strong> signifikant.
-			{:else if significant}
-				<strong>Signifikant</strong> (p = {fmtP(active.pTwoSided)}). {method === 'korrekt'
-					? 'Auch mit ehrlichen Freiheitsgraden hält der Effekt — hier ist das Signal stark genug.'
-					: 'Aber prüfe gegen: Hält der Effekt auch bei „Mittelwert pro Pflanze“?'}
-			{:else}
-				<strong>Nicht signifikant</strong> (p = {fmtP(active.pTwoSided)}). {method === 'korrekt'
-					? 'Mit der ehrlichen Replikationseinheit (Pflanze) reichen die Daten nicht aus.'
-					: 'Selbst naiv kein Effekt — dann ist auch korrekt keiner zu erwarten.'}
-			{/if}
-		</div>
-
 		<!-- Visualisierung: zwei Gruppen, je Pflanzen als Cluster von Blatt-Punkten -->
 		<div class="grid gap-4 sm:grid-cols-2">
 			{#each data as group, gi (group.name)}
@@ -291,6 +230,67 @@
 					</svg>
 				</div>
 			{/each}
+		</div>
+
+		<!-- Live-Kennzahlen -->
+		<div class="flex flex-wrap items-stretch gap-3">
+			<div class="border-ink/10 bg-paper-sunk/50 flex flex-col rounded-2xl border px-4 py-2">
+				<span class="text-ink-faint text-xs font-semibold tracking-wide uppercase">
+					Replikationseinheit
+				</span>
+				<span class="text-ink font-semibold">
+					{method === 'naiv' ? 'jedes Blatt' : 'jede Pflanze'}
+				</span>
+			</div>
+			<div class="border-ink/10 bg-paper-sunk/50 flex flex-col rounded-2xl border px-4 py-2 tabular-nums">
+				<span class="text-ink-faint text-xs font-semibold tracking-wide uppercase">n je Gruppe</span>
+				<span class="text-ink text-xl font-bold">{active.n1}</span>
+			</div>
+			<div class="border-ink/10 bg-paper-sunk/50 flex flex-col rounded-2xl border px-4 py-2 tabular-nums">
+				<span class="text-ink-faint text-xs font-semibold tracking-wide uppercase">Freiheitsgrade</span>
+				<span class="text-ink text-xl font-bold">{fmt1(active.df)}</span>
+			</div>
+			<div class="border-ink/10 bg-paper-sunk/50 flex flex-col rounded-2xl border px-4 py-2 tabular-nums">
+				<span class="text-ink-faint text-xs font-semibold tracking-wide uppercase">t-Wert</span>
+				<span class="text-ink text-xl font-bold">{fmt2(active.t)}</span>
+			</div>
+			<div
+				class={[
+					'flex flex-col rounded-2xl px-4 py-2 tabular-nums',
+					significant ? 'bg-coral-100 text-coral-700' : 'bg-sage-100 text-sage-500'
+				]}
+			>
+				<span class="text-xs font-semibold tracking-wide uppercase">p-Wert</span>
+				<span class="text-xl font-bold">{fmtP(active.pTwoSided)}</span>
+			</div>
+		</div>
+
+		<!-- Verdikt -->
+		<div
+			class={[
+				'rounded-xl border px-4 py-3 text-sm leading-relaxed',
+				scheinSignifikanz
+					? 'border-coral-300 bg-coral-100/70 text-coral-700'
+					: significant
+						? 'border-sage-300 bg-sage-100 text-sage-500'
+						: 'border-ink/10 bg-paper-sunk/60 text-ink-soft'
+			]}
+			role="status"
+		>
+			{#if scheinSignifikanz}
+				<strong>Schein-Signifikanz!</strong> Naiv ist p = {fmtP(active.pTwoSided)} (signifikant) — aber
+				nur, weil die {naivResult.n1} Blätter je Gruppe die Freiheitsgrade künstlich aufblähen. Schalte
+				auf <em>Mittelwert pro Pflanze</em>: mit ehrlichen {korrektResult.n1} Pflanzen je Gruppe ist
+				p = {fmtP(korrektResult.pTwoSided)} — <strong>nicht</strong> signifikant.
+			{:else if significant}
+				<strong>Signifikant</strong> (p = {fmtP(active.pTwoSided)}). {method === 'korrekt'
+					? 'Auch mit ehrlichen Freiheitsgraden hält der Effekt — hier ist das Signal stark genug.'
+					: 'Aber prüfe gegen: Hält der Effekt auch bei „Mittelwert pro Pflanze“?'}
+			{:else}
+				<strong>Nicht signifikant</strong> (p = {fmtP(active.pTwoSided)}). {method === 'korrekt'
+					? 'Mit der ehrlichen Replikationseinheit (Pflanze) reichen die Daten nicht aus.'
+					: 'Selbst naiv kein Effekt — dann ist auch korrekt keiner zu erwarten.'}
+			{/if}
 		</div>
 
 		<p class="text-ink-faint text-xs leading-relaxed">
