@@ -4,66 +4,66 @@
     {
       "id": 1,
       "subject": "Task 1: Konstante x-Achse bei Verteilungs-Widgets",
-      "status": "pending",
+      "status": "completed",
       "description": "Domain in SignalRausch/FlaechenSchieber/PowerVisualizer/FRatio von $derived Slider-State auf Konstante umstellen; 4 weitere investigate; Regression/Scatter ausgenommen.\n\n```json:metadata\n{\"files\": [\"src/lib/widgets/SignalRausch.svelte\",\"src/lib/widgets/FlaechenSchieber.svelte\",\"src/lib/widgets/PowerVisualizer.svelte\",\"src/lib/widgets/FRatio.svelte\"], \"verifyCommand\": \"npm run check && npm run test\", \"acceptanceCriteria\": [\"Domain konstant\",\"x-Rahmen steht\",\"Investigate geprüft\",\"check+test grün\"]}\n```"
     },
     {
       "id": 2,
       "subject": "Task 2: Würfelspiel-Redesign (PWertSpiel)",
-      "status": "pending",
+      "status": "completed",
       "description": "Fehlalarm-Zähler ans Ende, klar gerahmt; Coral-Kopfbox neutralisieren; Logik unverändert.\n\n```json:metadata\n{\"files\": [\"src/lib/widgets/PWertSpiel.svelte\"], \"verifyCommand\": \"npm run check\", \"acceptanceCriteria\": [\"Reihenfolge umgestellt\",\"Zähler als Fehlalarm-Quote\",\"Kopfbox neutralisiert\",\"Logik unverändert\"]}\n```"
     },
     {
       "id": 3,
       "subject": "Task 3: Recap-Mechanik (Rueckblick-Komponente + Resolver)",
-      "status": "pending",
+      "status": "completed",
       "description": "recap-fragen.ts + Test + Rueckblick.svelte; recapForLesson löst Vorlektion auf.\n\n```json:metadata\n{\"files\": [\"src/lib/components/recap-fragen.ts\",\"src/lib/components/recap-fragen.test.ts\",\"src/lib/components/Rueckblick.svelte\"], \"verifyCommand\": \"npm run check && npm run test\", \"acceptanceCriteria\": [\"Resolver korrekt\",\"Rueckblick rendert bedingt\",\"Tests grün\"]}\n```"
     },
     {
       "id": 4,
       "subject": "Task 4: Recap-Inhalte verfassen + Rollout Lektionen 2–14",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [3],
       "description": "recapQuestions für Lektionen 1–13 füllen; <Rueckblick> in Seiten 2–14 einbauen.\n\n```json:metadata\n{\"files\": [\"src/lib/components/recap-fragen.ts\",\"src/routes/lektion/\"], \"verifyCommand\": \"npm run check && npm run test && npm run build\", \"acceptanceCriteria\": [\"Fragen 1–13\",\"Rueckblick in 2–14\",\"was-ist-statistik ohne\",\"build grün\"]}\n```"
     },
     {
       "id": 5,
       "subject": "Task 5: Vereinfachung Lektion 5 (Konfidenzintervalle)",
-      "status": "pending",
+      "status": "completed",
       "description": "Intuition-first Umbau; Formeln einklappen; n−1 splitten; z-Werte-Herkunft; σ-Caveat vor Widget.\n\n```json:metadata\n{\"files\": [\"src/routes/lektion/konfidenzintervalle/+page.svelte\"], \"verifyCommand\": \"npm run check && npm run build\", \"acceptanceCriteria\": [\"Intuition vor Formel\",\"n−1 gesplittet\",\"z-Werte Herkunft\",\"σ vor Widget\",\"Gutes erhalten\"]}\n```"
     },
     {
       "id": 6,
       "subject": "Task 6: Vereinfachung Lektion 6 (Hypothesentest)",
-      "status": "pending",
+      "status": "completed",
       "description": "Popper praktisch; H0/HA-Stütze; einseitig/zweiseitig entzerren; p-Wert-Bedingung Klartext; Fehler/Power trennen.\n\n```json:metadata\n{\"files\": [\"src/routes/lektion/hypothesentest/+page.svelte\"], \"verifyCommand\": \"npm run check && npm run build\", \"acceptanceCriteria\": [\"Popper gebunden\",\"H0/HA-Stütze\",\"Abschnitt entzerrt\",\"P(Daten|H0) Klartext\",\"Fehler/Power getrennt\"]}\n```"
     },
     {
       "id": 7,
       "subject": "Task 7: Vereinfachung Lektion 7 (t-Tests)",
-      "status": "pending",
+      "status": "completed",
       "description": "√(2/n) motivieren; Cohen's d schrittweise; drei Varianten entzerren; Voraussetzungs-Umkehrung als Kernaussage; Mann-Whitney/Wilcoxon klären.\n\n```json:metadata\n{\"files\": [\"src/routes/lektion/t-tests/+page.svelte\"], \"verifyCommand\": \"npm run check && npm run build\", \"acceptanceCriteria\": [\"√(2/n) erklärt\",\"Cohen's d schrittweise\",\"Varianten entzerrt\",\"Voraussetzungs-Umkehrung\",\"Namen geklärt\"]}\n```"
     },
     {
       "id": 8,
       "subject": "Task 8: Interaktiv-Audit-Report (Deliverable + Review-Gate)",
-      "status": "pending",
+      "status": "completed",
       "description": "Report über alle Widgets: Zweck/Leserichtung/Probleme+Schweregrad/Fix/Prioritäten. Danach Review-Gate.\n\n```json:metadata\n{\"files\": [\"docs/superpowers/audits/2026-07-01-interaktiv-audit.md\"], \"verifyCommand\": \"\", \"acceptanceCriteria\": [\"alle Widgets abgedeckt\",\"Schweregrade+Fixes\",\"Prioritäten\",\"Review-Gate\"]}\n```"
     },
     {
       "id": 9,
       "subject": "Task 9: Interaktiv-Fixes (nur freigegebene)",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [8],
       "description": "Freigegebene Fixes aus Task 8 umsetzen; Chrome-verifiziert.\n\n```json:metadata\n{\"files\": [\"src/lib/widgets/\"], \"verifyCommand\": \"npm run check && npm run test\", \"acceptanceCriteria\": [\"abgehakte Fixes umgesetzt\",\"nichts Unfreigegebenes\",\"Tests grün\",\"Chrome-verifiziert\"]}\n```"
     },
     {
       "id": 10,
       "subject": "Task 10: Textfeinschliff (/humanizer) + finale Verifikation",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [2, 4, 5, 6, 7, 9],
       "description": "/humanizer über neue/überarbeitete Texte; volle Verifikation check+test+build; finale Chrome-Sichtung.\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"npm run check && npm run test && npm run build\", \"acceptanceCriteria\": [\"humanizer gelaufen\",\"Ton/Umlaute konsistent\",\"check+test+build grün\",\"Chrome-Sichtung\"]}\n```"
     }
   ],
-  "lastUpdated": "2026-07-01T00:00:00Z"
+  "lastUpdated": "2026-07-01T22:35:00Z"
 }
