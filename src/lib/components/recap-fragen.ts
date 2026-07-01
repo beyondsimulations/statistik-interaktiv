@@ -1,8 +1,8 @@
-import { orderedLessons } from '$lib/lessons';
+import { prevLesson } from '$lib/lessons';
 import type { Question } from './selbsttest-logic';
 
-/** Recap-Fragen, keyed nach dem slug der Lektion, DIE zusammengefasst wird.
- *  Wird in Task 4 mit echten Fragen für alle Lektionen gefüllt. */
+/** Recap-Fragen, keyed nach dem slug der Lektion, DIE zusammengefasst wird
+ *  (1–2 Fragen je Lektion 1–13; die letzte Lektion braucht keinen Eintrag). */
 export const recapQuestions: Record<string, Question[]> = {
 	// Lektion 1 — Was ist Statistik?
 	'was-ist-statistik': [
@@ -303,8 +303,7 @@ export const recapQuestions: Record<string, Question[]> = {
 
 /** Recap-Fragen der Lektion, die VOR `slug` kommt (oder [] für die erste). */
 export function recapForLesson(slug: string): Question[] {
-	const idx = orderedLessons.findIndex((l) => l.slug === slug);
-	if (idx <= 0) return []; // -1 = unbekannt, 0 = erste Lektion → beide leer
-	const prev = orderedLessons[idx - 1];
-	return recapQuestions[prev.slug] ?? [];
+	// prevLesson kapselt die Reihenfolge-Logik (undefined für erste/unbekannte Lektion).
+	const prev = prevLesson(slug);
+	return prev ? (recapQuestions[prev.slug] ?? []) : [];
 }
