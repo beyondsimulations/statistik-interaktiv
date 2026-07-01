@@ -111,32 +111,47 @@
 		</Intuition>
 
 		<!-- Gute Hypothese & Popper --------------------------------------------- -->
-		<h2 class="mt-4 text-2xl">Eine gute Hypothese — und warum man sie nie beweist</h2>
+		<h2 class="mt-4 text-2xl">Warum wir das Gegenteil widerlegen, statt unsere Idee zu beweisen</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Eine gute wissenschaftliche Hypothese ist <strong>überprüfbar</strong> und vor allem
-			<strong>widerlegbar</strong>. Diese Idee geht auf Karl Popper zurück:
-			<Begriff term="Falsifikation" /> statt Beweis. Man kann eine Forschungshypothese niemals
-			endgültig <em>beweisen</em>. Egal wie viele Sonnenblätter du misst, der nächste Datensatz
-			könnte sie noch kippen. Widerlegen dagegen kann man eine Hypothese mit einem einzigen
-			Gegenbeispiel.
+			Was du eigentlich zeigen willst: dass sich Sonnen- und Schattenblätter in der Größe
+			<strong>unterscheiden</strong>. Der überraschende Kniff der Statistik ist, dass sie genau das
+			<em>nicht</em> direkt angeht. Statt „es gibt einen Unterschied“ zu beweisen, versucht sie, das
+			Gegenteil zu <strong>widerlegen</strong> — die langweilige Annahme „es gibt keinen
+			Unterschied“. Gelingt dieses Widerlegen, bleibt dein vermuteter Unterschied als plausibel
+			übrig. Ein indirektes Vorgehen, aber ein logisch sauberes.
 		</p>
 		<p class="text-ink-soft leading-relaxed">
-			Deshalb dreht die Statistik den Spieß um. Sie prüft nicht direkt deine
-			<Begriff term="Forschungshypothese" />, sondern versucht, die <em>gegenteilige</em> Annahme zu
-			widerlegen, die Annahme „kein Effekt“. Gelingt das, bleibt die Forschungshypothese als
-			plausibel übrig. Ein indirektes Vorgehen, aber ein logisch sauberes.
+			Warum dieser Umweg? Eine <Begriff term="Forschungshypothese" /> lässt sich nie endgültig
+			<em>beweisen</em>. Egal wie viele Sonnenblätter du misst, der nächste Datensatz könnte deinen
+			Befund noch kippen. <em>Widerlegen</em> dagegen kann man eine Behauptung schon mit einem
+			einzigen klaren Gegenbeispiel. Deshalb ist eine gute wissenschaftliche Hypothese vor allem
+			<strong>überprüfbar</strong> (man kann sie an Daten messen) und <strong>widerlegbar</strong>
+			(Daten könnten ihr klar widersprechen). Diese Idee — <Begriff term="Falsifikation" /> statt
+			Beweis — geht auf Karl Popper zurück.
 		</p>
 
 		<!-- H0 vs HA ------------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">H0 und HA: die zwei Hypothesen jedes Tests</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Jeder Test stellt zwei Hypothesen gegenüber. Die <Begriff term="Nullhypothese" /> H₀ ist die
-			langweilige: <strong>kein Effekt</strong>. Sonnen- und Schattenpflanzen
-			sind im Mittel gleich groß (μ<sub>Sonne</sub> = μ<sub>Schatten</sub>). Die
-			<Begriff term="Alternativhypothese">Alternativhypothese</Begriff> HA (oder H₁) ist deine
-			eigentliche Vermutung und enthält <strong>immer eine Effektgröße</strong>: Es gibt einen
-			Unterschied (μ<sub>Sonne</sub> ≠ μ<sub>Schatten</sub>).
+			langweilige Annahme: <strong>kein Effekt</strong>, Sonnen- und Schattenpflanzen sind im Mittel
+			gleich groß. Die <Begriff term="Alternativhypothese">Alternativhypothese</Begriff> HA (oder
+			H₁) ist deine eigentliche Vermutung: Es <strong>gibt</strong> einen Unterschied.
 		</p>
+		<p class="text-ink-soft leading-relaxed">
+			In Formelsprache stehen dafür gleich die Symbole μ<sub>Sonne</sub> und μ<sub>Schatten</sub>
+			(μ ist die wahre, unbekannte mittlere Blattgröße einer Gruppe). Lies sie einfach als Klartext:
+		</p>
+		<ul class="text-ink-soft ml-5 list-disc space-y-1 leading-relaxed">
+			<li>
+				<strong>H₀:</strong> μ<sub>Sonne</sub> = μ<sub>Schatten</sub> heißt schlicht „die
+				mittleren Blattgrößen sind <strong>gleich</strong>“.
+			</li>
+			<li>
+				<strong>HA:</strong> μ<sub>Sonne</sub> ≠ μ<sub>Schatten</sub> heißt „die mittleren
+				Blattgrößen sind <strong>verschieden</strong>“.
+			</li>
+		</ul>
 
 		<FormelZeigen
 			formula={String.raw`H_0:\ \mu_{\text{Sonne}} = \mu_{\text{Schatten}} \qquad H_A:\ \mu_{\text{Sonne}} \neq \mu_{\text{Schatten}}`}
@@ -146,6 +161,13 @@
 				{ sym: String.raw`\mu_{\text{Sonne}}, \mu_{\text{Schatten}}`, bedeutung: 'Die wahren mittleren Blattgrößen der beiden Grundgesamtheiten — fest und unbekannt.' }
 			]}
 		/>
+
+		<Merke title="HA enthält immer eine Effektgröße">
+			H₀ sagt „nichts ist los“ (Effekt = 0). HA sagt „da ist etwas“ und steckt damit eine
+			<Begriff term="Effektgröße" /> ungleich null — grob gesagt eine Aussage darüber, <em>wie
+			groß</em> der Unterschied ist (das vertiefen wir in Lektion 7). Bewiesen wird HA nie direkt.
+			Der Test kann nur H₀ verwerfen oder sie stehen lassen.
+		</Merke>
 
 		<!-- Einseitig vs. zweiseitig -------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Einseitig oder zweiseitig? Die Richtung von HA</h2>
@@ -168,13 +190,13 @@
 			(nicht senkt), dürfen wir gerichtet einseitig testen — H₀: μ<sub>gedüngt</sub> ≤
 			μ<sub>Kontrolle</sub> gegen HA: μ<sub>gedüngt</sub> &gt; μ<sub>Kontrolle</sub>.
 		</p>
-		<p class="text-ink-soft leading-relaxed">
-			Der Haken: Einseitig testen darfst du nur, wenn die Richtung <strong>vor</strong> dem Blick in
-			die Daten biologisch begründet feststeht. Wer erst die Daten ansieht, die Richtung abliest und
+		<Callout variant="warnung" title="Erst die Richtung begründen, dann testen — nie umgekehrt">
+			Einseitig testen darfst du nur, wenn die Richtung <strong>vor</strong> dem Blick in die Daten
+			biologisch begründet feststeht. Wer erst die Daten ansieht, die Richtung abliest und
 			<em>dann</em> einseitig testet, halbiert sich den p-Wert unredlich und bläht so heimlich den
-			Fehler 1. Art auf. Im Zweifel, und immer, wenn die Richtung offen ist, bleibst du ehrlich
-			<strong>zweiseitig</strong>.
-		</p>
+			Fehler 1. Art (die Fehlalarm-Rate) auf. Im Zweifel, und immer wenn die Richtung offen ist,
+			bleibst du ehrlich <strong>zweiseitig</strong>.
+		</Callout>
 
 		<Merke title="Einseitig nur mit vorab begründeter Richtung">
 			<ul class="ml-5 list-disc space-y-1">
@@ -194,25 +216,29 @@
 			</ul>
 		</Merke>
 
-		<Merke title="HA enthält immer eine Effektgröße">
-			H₀ sagt „nichts ist los“ (Effekt = 0). HA sagt „da ist etwas“ und steckt damit eine
-			<Begriff term="Effektgröße" /> ungleich null. Bewiesen wird HA nie direkt. Der Test kann nur
-			H₀ verwerfen oder sie stehen lassen.
-		</Merke>
-
 		<!-- Das 8-Schritte-Vorgehen --------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Das Vorgehen in acht Schritten</h2>
 		<p class="text-ink-soft leading-relaxed">
 			Fast jeder klassische Test folgt demselben Ablauf, am Blattgrößen-Beispiel:
 		</p>
 		<Merke title="Hypothesentest in 8 Schritten">
+			<p class="mb-1 font-semibold">Vorbereitung — bevor du auf die Daten schaust:</p>
 			<ol class="ml-5 list-decimal space-y-1">
 				<li>Forschungsfrage formulieren („Sind Sonnenblätter anders groß als Schattenblätter?“).</li>
 				<li>H₀ und HA aufstellen (kein Unterschied vs. Unterschied).</li>
 				<li>Passenden Test wählen (hier: t-Test für zwei Mittelwerte).</li>
-				<li><Begriff term="Signifikanzniveau" /> α festlegen (meist 0,05) — <em>vor</em> dem Test.</li>
+				<li>
+					<Begriff term="Signifikanzniveau" /> α festlegen (meist 0,05) — die Schwelle, ab der du
+					ein Ergebnis „signifikant“ nennst. Unbedingt <em>vor</em> dem Test.
+				</li>
+			</ol>
+			<p class="mt-3 mb-1 font-semibold">Durchführung — mit den Daten:</p>
+			<ol start="5" class="ml-5 list-decimal space-y-1">
 				<li>Daten erheben (Blätter beider Gruppen messen).</li>
-				<li><Begriff term="Teststatistik" /> berechnen (wie weit ist der Befund von H₀ entfernt?).</li>
+				<li>
+					<Begriff term="Teststatistik" /> berechnen — eine einzige Zahl, die zusammenfasst, wie
+					weit dein Befund von H₀ entfernt liegt.
+				</li>
 				<li>p-Wert bestimmen.</li>
 				<li>Entscheiden: p ≤ α → H₀ verwerfen; p &gt; α → H₀ beibehalten. Biologisch deuten.</li>
 			</ol>
@@ -249,6 +275,15 @@
 				{ sym: String.raw`H_0\ \text{wahr}`, bedeutung: 'Die Bedingung: Wir rechnen so, als gäbe es in Wahrheit keinen Unterschied. Der p-Wert sagt nichts darüber, wie wahrscheinlich diese Bedingung selbst ist.' }
 			]}
 		/>
+
+		<p class="text-ink-soft leading-relaxed">
+			Der senkrechte Strich „|“ in der Formel heißt <strong>„unter der Bedingung, dass“</strong>.
+			Lies P(Daten so extrem | H₀ wahr) also als: die Wahrscheinlichkeit, solche (oder extremere)
+			Daten zu sehen, <strong>wenn H₀ in Wahrheit gilt</strong>. Entscheidend ist die Leserichtung:
+			Wir setzen H₀ als gegeben <em>voraus</em> und fragen nach den Daten — nicht umgekehrt. Der
+			p-Wert ist damit gerade <strong>nicht</strong> P(H₀ wahr | Daten), also <em>nicht</em> die
+			Wahrscheinlichkeit, dass H₀ stimmt.
+		</p>
 
 		<!-- DIE zentrale Fehldeutung -------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Die eine Sache, die fast alle am p-Wert falsch verstehen</h2>
@@ -301,13 +336,24 @@
 		</Merke>
 
 		<!-- Fehler 1. & 2. Art --------------------------------------------------- -->
-		<h2 class="mt-4 text-2xl">Zwei Arten, sich zu irren</h2>
+		<h2 class="mt-4 text-2xl">Zwei Arten, sich zu irren — und die Teststärke</h2>
 		<p class="text-ink-soft leading-relaxed">
-			Beim Entscheiden kann man auf zwei Weisen danebenliegen. Der
-			<Begriff term="Fehler 1. Art" /> (Wahrscheinlichkeit α): Du verwirfst eine wahre H₀ und
-			„findest“ einen Größenunterschied, den es gar nicht gibt, einen <strong>Fehlalarm</strong>. Der
-			<Begriff term="Fehler 2. Art" /> (Wahrscheinlichkeit β): Es gibt einen echten Unterschied, aber
-			dein Test übersieht ihn. Du <strong>verpasst</strong> ihn.
+			Bei jeder Testentscheidung kannst du auf zwei Weisen danebenliegen. Sieh dir beide einzeln an.
+		</p>
+
+		<h3 class="mt-2 text-xl">Fehler 1. Art: ein Fehlalarm (α)</h3>
+		<p class="text-ink-soft leading-relaxed">
+			Beim <Begriff term="Fehler 1. Art" /> verwirfst du eine wahre H₀: Du „findest“ einen
+			Größenunterschied, den es in Wahrheit gar nicht gibt — ein <strong>Fehlalarm</strong>. Seine
+			Wahrscheinlichkeit ist genau das Signifikanzniveau <strong>α</strong>, das du vorab festlegst
+			(meist 5 %).
+		</p>
+
+		<h3 class="mt-2 text-xl">Fehler 2. Art: ein übersehener Effekt (β)</h3>
+		<p class="text-ink-soft leading-relaxed">
+			Beim <Begriff term="Fehler 2. Art" /> ist es umgekehrt: Es gibt einen echten Unterschied, aber
+			dein Test übersieht ihn. Du <strong>verpasst</strong> ihn. Seine Wahrscheinlichkeit heißt
+			<strong>β</strong>.
 		</p>
 
 		<div class="overflow-x-auto">
@@ -334,6 +380,7 @@
 			</table>
 		</div>
 
+		<h3 class="mt-2 text-xl">Teststärke (Power): echte Effekte finden</h3>
 		<p class="text-ink-soft leading-relaxed">
 			Die <Begriff term="Teststärke" /> (Power) ist die Gegenwahrscheinlichkeit zum Fehler 2. Art:
 			<strong>Power = 1 − β</strong>. Sie sagt, wie zuverlässig dein Test einen wirklich vorhandenen
@@ -348,14 +395,20 @@
 			]}
 		/>
 
-		<Callout variant="warnung" title="Das Tauschgeschäft zwischen α und β">
-			Bei <strong>festem n</strong> kannst du α und β nicht gleichzeitig kleinmachen. Ein strengeres
-			α (weniger Fehlalarme) schiebt die Entscheidungsschwelle nach außen und vergrößert β: Du
-			übersiehst mehr echte Effekte. Den Ausweg liefert nur mehr Information:
-			<strong>größeres n</strong> oder ein <strong>größerer Effekt</strong> heben die Power, ohne α
-			zu opfern. Biologisch ist das eine bewusste Abwägung: Meist ist es schlimmer, ein
-			Pflanzenwachstums-Phänomen zu behaupten, das es gar nicht gibt (Fehler 1. Art), als vorsichtig
-			zu bleiben.
+		<p class="text-ink-soft leading-relaxed">
+			Der zentrale Haken beim Zusammenspiel: <strong>Bei festem Stichprobenumfang n kannst du α und
+			β nicht gleichzeitig kleinmachen.</strong> Ein strengeres α (weniger Fehlalarme) schiebt die
+			Entscheidungsschwelle nach außen und vergrößert dadurch β — du übersiehst dann mehr echte
+			Effekte. Aus diesem Tauschgeschäft kommst du nur mit mehr Information heraus: Ein
+			<strong>größeres n</strong> oder ein <strong>größerer Effekt</strong> hebt die Power, ohne dass
+			du α opfern musst.
+		</p>
+
+		<Callout variant="merke" title="Welcher Fehler ist schlimmer?">
+			Welchen der beiden Fehler du eher vermeiden willst, ist eine bewusste Abwägung. In der
+			Biologie ist es meist schlimmer, ein Pflanzenwachstums-Phänomen zu behaupten, das es gar nicht
+			gibt (Fehler 1. Art), als vorsichtig zu bleiben. Deshalb hält man α klein — und erkauft sich
+			die nötige Power lieber über ein größeres n.
 		</Callout>
 
 		<!-- Power-Visualisierer -------------------------------------------------- -->
