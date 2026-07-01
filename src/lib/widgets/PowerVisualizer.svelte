@@ -181,8 +181,9 @@
 				HA
 			</text>
 
-			<!-- Achsen-Ticks -->
-			{#each [-3, -2, -1, 0, 1, 2, 3] as k (k)}
+			<!-- Achsen-Ticks: −3…3 plus Marken im HA-Bereich (5, 10, 15), damit auch
+			     ein weit rechts liegender HA-Gipfel auf der Achse verortet ist. -->
+			{#each [-3, -2, -1, 0, 1, 2, 3, 5, 10, 15] as k (k)}
 				{#if k >= lo && k <= hi}
 					<line
 						x1={sx(k)}
@@ -203,6 +204,17 @@
 					</text>
 				{/if}
 			{/each}
+
+			<!-- Achsentitel -->
+			<text
+				x={W - PAD_R}
+				y={baseY + 32}
+				text-anchor="end"
+				font-size="10"
+				fill="var(--color-ink-faint)"
+			>
+				Teststatistik (in Standardfehlern) →
+			</text>
 		</svg>
 
 		<!-- Live-Anzeige Power = 1 − β -->
