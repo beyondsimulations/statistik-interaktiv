@@ -351,10 +351,10 @@ TukeyHSD(modell)`}
     95% family-wise confidence level
 
 $kaefig
-                      diff        lwr        upr     p adj
-Festkaefig-Netzkaefig  7.0   4.227  9.773  0.0002
-Tiefkaefig-Netzkaefig  3.0   0.227  5.773  0.0345
-Tiefkaefig-Festkaefig -4.0  -6.773 -1.227  0.0079`}
+                       diff     lwr     upr   p adj
+Festkaefig-Netzkaefig   7.0   4.227   9.773  0.0002
+Tiefkaefig-Netzkaefig   3.0   0.227   5.773  0.0345
+Tiefkaefig-Festkaefig  -4.0  -6.773  -1.227  0.0079`}
 			annotations={{
 				"family-wise confidence level": "Tukey hält die FAMILIENWEISE Fehlerrate auf 5 % — es korrigiert das multiple Testen für dich.",
 				"diff": "Die geschätzte Mittelwertdifferenz des Paares (in cm).",
