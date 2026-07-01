@@ -59,9 +59,20 @@
 	const plotH = H - PAD_T - PAD_B;
 	const baseY = PAD_T + plotH;
 
-	const halfSpan = $derived(Math.max(spacing + 3 * within, 24));
-	const lo = $derived(BASE - halfSpan);
-	const hi = $derived(BASE + halfSpan);
+	// Slider-Grenzen als EINE Wahrheitsquelle: dieselben Consts speisen die Achsen-
+	// Mathematik UND die max-Attribute der Regler. Weitet jemand einen Slider, wächst
+	// die feste Achse strukturell mit — kein stilles Klippen mehr.
+	const SPACING_MAX = 20; // Abstand der Gruppenmittel (cm)
+	const WITHIN_MAX = 20; // Streuung innerhalb der Gruppen (SD, cm)
+
+	// KONSTANTE cm-Achse, die den GESAMTEN Reglerbereich abdeckt, damit der Rahmen
+	// beim Ziehen steht und sich nur die Kurven bewegen. Die äußerste Gruppe liegt bei
+	// BASE + SPACING_MAX mit einem 3σ-Schwanz (σ = WITHIN_MAX):
+	//   HALF_SPAN = SPACING_MAX + 3·WITHIN_MAX = 80 cm.
+	// Damit passt jede Kombination aus Abstand und Streuung vollständig in den Rahmen.
+	const HALF_SPAN = SPACING_MAX + 3 * WITHIN_MAX; // = 80 cm
+	const lo = BASE - HALF_SPAN;
+	const hi = BASE + HALF_SPAN;
 	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
 	const sx = $derived(scaleX.map);
 	// sy bildet einen Höhen-Anteil (0..1, Gipfel = 1) auf die SVG-y-Achse ab;
@@ -219,7 +230,7 @@
 					id="fr-spacing"
 					type="range"
 					min="0"
-					max="20"
+					max={SPACING_MAX}
 					step="0.5"
 					bind:value={spacing}
 					class="accent-coral-500 w-full"
@@ -238,7 +249,7 @@
 					id="fr-within"
 					type="range"
 					min="1"
-					max="20"
+					max={WITHIN_MAX}
 					step="0.5"
 					bind:value={within}
 					class="accent-sage-500 w-full"

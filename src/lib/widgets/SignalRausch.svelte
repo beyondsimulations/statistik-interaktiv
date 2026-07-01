@@ -41,11 +41,20 @@
 	const plotH = H - PAD_T - PAD_B;
 	const baseY = PAD_T + plotH;
 
-	// Feste, weit genug gespannte km-Achse, damit beide Kurven samt Schwänzen
-	// hineinpassen — egal wie Δ und s stehen.
-	const halfSpan = $derived(Math.max(delta / 2 + 3 * s, 600));
-	const lo = $derived(BASE - halfSpan);
-	const hi = $derived(BASE + halfSpan);
+	// Slider-Grenzen als EINE Wahrheitsquelle: dieselben Consts speisen die Achsen-
+	// Mathematik UND die max-Attribute der Regler. Weitet jemand einen Slider, wächst
+	// die feste Achse strukturell mit — kein stilles Klippen mehr.
+	const DELTA_MAX = 800; // Mittelwertdifferenz Δ (km)
+	const S_MAX = 700; // Streuung je Gruppe (SD, km)
+
+	// KONSTANTE km-Achse, die den GESAMTEN Reglerbereich abdeckt, damit der Rahmen
+	// beim Ziehen steht und sich nur die Kurven bewegen. Die äußerste Kurve liegt bei
+	// BASE + DELTA_MAX/2 mit einem 3σ-Schwanz (σ = S_MAX):
+	//   HALF_SPAN = DELTA_MAX/2 + 3·S_MAX = 2500 km.
+	// Damit passt jede Kombination aus Δ und s vollständig in den festen Rahmen.
+	const HALF_SPAN = DELTA_MAX / 2 + 3 * S_MAX; // = 2500 km
+	const lo = BASE - HALF_SPAN;
+	const hi = BASE + HALF_SPAN;
 
 	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
 	const sx = $derived(scaleX.map);
@@ -271,7 +280,7 @@
 					id="sr-delta"
 					type="range"
 					min="0"
-					max="800"
+					max={DELTA_MAX}
 					step="10"
 					bind:value={delta}
 					class="accent-coral-500 w-full"
@@ -290,7 +299,7 @@
 					id="sr-s"
 					type="range"
 					min="50"
-					max="700"
+					max={S_MAX}
 					step="10"
 					bind:value={s}
 					class="accent-sage-500 w-full"

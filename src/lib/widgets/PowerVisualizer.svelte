@@ -48,9 +48,20 @@
 	const plotH = H - PAD_T - PAD_B;
 	const baseY = PAD_T + plotH;
 
-	// Feste z-Achse, breit genug für Effekt + Schwänze.
-	const lo = $derived(Math.min(-3.5, delta - 3.5));
-	const hi = $derived(Math.max(3.5, delta + 3.5));
+	// Slider-Grenzen als EINE Wahrheitsquelle: dieselben Consts speisen die Achsen-
+	// Mathematik UND die max-Attribute der Regler. Weitet jemand einen Slider, wächst
+	// die feste Achse strukturell mit — kein stilles Klippen mehr.
+	const D_MAX = 1.5; // Effektgröße d (Cohen's d)
+	const N_MAX = 120; // Stichprobenumfang je Gruppe
+
+	// KONSTANTE z-Achse, die den GESAMTEN Reglerbereich abdeckt, damit der Rahmen
+	// beim Ziehen steht und nur die HA-Kurve wandert. δ = d·√(n/2) wird maximal bei
+	// D_MAX und N_MAX: δ_max = 1,5·√60 ≈ 11,62. Links reicht −3,5 (der H0-Schwanz,
+	// links von 0 passiert nichts weiter), rechts δ_max + 3,5 für den HA-Schwanz bei
+	// maximalem Effekt. Asymmetrisch, weil H0 fest bei 0 sitzt.
+	const DELTA_MAX = D_MAX * Math.sqrt(N_MAX / 2); // ≈ 11,62 (D_MAX · √(N_MAX/2))
+	const lo = -3.5;
+	const hi = DELTA_MAX + 3.5; // ≈ 15,12
 
 	const scaleX = $derived(makeLinearScale(lo, hi, PAD_L, PAD_L + plotW));
 	const sx = $derived(scaleX.map);
@@ -227,7 +238,7 @@
 				<label for="pv-d" class="text-ink-soft mb-1 block text-sm font-semibold">
 					Effektgröße d = {fmt2(d)} <span class="text-ink-faint font-normal">(Größenunterschied der Blätter, in SD pro Messung)</span>
 				</label>
-				<input id="pv-d" type="range" min="0" max="1.5" step="0.05" bind:value={d} class="accent-sage-500 w-full" />
+				<input id="pv-d" type="range" min="0" max={D_MAX} step="0.05" bind:value={d} class="accent-sage-500 w-full" />
 				<div class="text-ink-faint flex justify-between text-xs"><span>0 (kein Effekt)</span><span>großer Effekt</span></div>
 			</div>
 
@@ -243,7 +254,7 @@
 				<label for="pv-n" class="text-ink-soft mb-1 block text-sm font-semibold">
 					Stichprobenumfang je Gruppe n = {n}
 				</label>
-				<input id="pv-n" type="range" min="3" max="120" step="1" bind:value={n} class="accent-sage-500 w-full" />
+				<input id="pv-n" type="range" min="3" max={N_MAX} step="1" bind:value={n} class="accent-sage-500 w-full" />
 				<div class="text-ink-faint flex justify-between text-xs"><span>3</span><span>120</span></div>
 			</div>
 		</div>
