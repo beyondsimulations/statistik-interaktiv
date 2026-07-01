@@ -68,8 +68,6 @@
 	{slug}
 	description="Die lineare Regression legt mit der Methode der kleinsten Quadrate eine Gerade ŷ = a + b·x durch die Daten und sagt Y aus X vorher — anders als die Korrelation hat sie eine Richtung. Steigung b (Änderung von Y pro Einheit X), Achsenabschnitt a (Y bei X = 0), Residuen als Grundlage der Diagnostik, Bestimmtheitsmaß R² = SS_Regression / SS_Total und der t-Test auf die Steigung (t = b/SE_b, df = n − 2, H0: β = 0). Die zentrale Intuition: R² ≠ Signifikanz — eine Steigung kann hochsignifikant sein (Zusammenhang existiert) und R² trotzdem klein (schlechte Vorhersage). Annahmen und Diagnoseplots (Residuals-vs-Fitted, Q-Q), Hebelwirkung und Cook-Distanz. Am Beispiel Daphnia: Anzahl Nachkommen ~ Körperlänge, mit interaktivem Regression-Builder."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -90,6 +88,8 @@
 			<strong>Körperlänge → Anzahl Nachkommen</strong> und macht aus „hängt zusammen“ ein
 			handfestes „so viele Nachkommen erwarte ich bei dieser Länge“.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Korrelation vs. Regression ------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Von der Korrelation zur Regression: jetzt mit Richtung</h2>

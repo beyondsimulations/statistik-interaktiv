@@ -76,8 +76,6 @@
 	{slug}
 	description="Kennwert vs. Parameter, Punktschätzer & Erwartungstreue, warum n−1, Standardfehler und das Konfidenzintervall x̄ ± z·SE. Mit der Sampling-Maschine zur korrekten Deutung: der Parameter ist fest, das Intervall ist zufällig."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -97,6 +95,8 @@
 			er sie damit eingegrenzt hat. Am Ende steht ein Satz, den fast alle falsch deuten, und du
 			wirst ihn richtig verstehen.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Kennwert vs. Parameter ---------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Kennwert oder Parameter?</h2>

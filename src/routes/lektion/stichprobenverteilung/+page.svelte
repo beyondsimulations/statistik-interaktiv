@@ -62,8 +62,6 @@
 	{slug}
 	description="Warum sagt eine kleine Stichprobe etwas über eine riesige Grundgesamtheit aus? Die zentrale Idee der schließenden Statistik — interaktiv erklärt."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -82,6 +80,8 @@
 			klick macht, verstehst du den Rest viel leichter: Konfidenzintervalle,
 			p-Werte, t-Tests. Schauen wir sie uns also in Ruhe an.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<p class="text-ink-soft leading-relaxed">
 			Die Frage dahinter klingt fast wie ein Zaubertrick: Warum sagt uns eine

@@ -66,8 +66,6 @@
 	{slug}
 	description="Von der Laplace-Wahrscheinlichkeit über die Rechenregeln bis zum Satz von Bayes — warum ein positiver Test bei seltenen Krankheiten oft ein Fehlalarm ist. Mit interaktiver Bayes-Box."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -88,6 +86,8 @@
 			bedeutet, als man denkt, etwa wenn Otto im Feld ein gefangenes Wildtier auf
 			einen seltenen Erreger testet.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Grundbegriffe -------------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Die Grundbegriffe</h2>

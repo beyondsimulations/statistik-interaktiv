@@ -67,8 +67,6 @@
 	{slug}
 	description="Gutes experimentelles Design entscheidet, ob eine Studie überhaupt etwas zeigen kann: Repräsentativität, Randomisierung als Goldstandard, Blocking, Negativ- und Positivkontrollen, Verblindung und das Isolieren von Confounding. Die zentrale Intuition: Power (1 − β), Effektgröße, Streuung σ, α und Stichprobenumfang n bilden ein gekoppeltes System — Power ∝ (Effektgröße·√n)/σ. Kennt man vier Größen, ist die fünfte festgelegt. Ein nicht-signifikantes Ergebnis bedeutet NICHT „kein Effekt“ — vielleicht war einfach zu wenig Power. Mindeststichprobenumfang per Faustformel n ≈ 16·s²/d², R-Funktion power.t.test und ein interaktiver Power-Spielplatz am Beispiel Vogelzug."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -89,6 +87,8 @@
 			vorhandenen Effekt auch zu finden?</strong> Die zentrale Größe dafür heißt
 			<Begriff term="Teststärke">Power</Begriff>.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Planungskriterien ---------------------------------------------------- -->
 		<h2 class="mt-4 text-2xl">Bevor du misst: gutes Design</h2>

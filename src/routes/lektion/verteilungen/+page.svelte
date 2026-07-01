@@ -63,8 +63,6 @@
 	{slug}
 	description="Häufigkeits- vs. Wahrscheinlichkeitsverteilung, diskret vs. stetig, die Normalverteilung und die zentrale Idee: Die Fläche unter der Dichtekurve ist die Wahrscheinlichkeit. Mit interaktivem Flächen-Schieber."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -85,6 +83,8 @@
 			Fläche unter einer Kurve ist eine Wahrscheinlichkeit.</strong> Bauen wir uns langsam
 			dorthin.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Beobachtet vs. theoretisch ------------------------------------------ -->
 		<h2 class="mt-4 text-2xl">Beobachtet oder erwartet?</h2>

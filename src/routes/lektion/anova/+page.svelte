@@ -69,8 +69,6 @@
 	{slug}
 	description="Die einfaktorielle Varianzanalyse (ANOVA) vergleicht die Mittelwerte mehrerer Gruppen in EINEM Test — am Beispiel der Lachsgröße in verschiedenen Käfigtypen. Das Problem des multiplen Testens und die familienweise Fehlerrate 1 − (1 − α)^c, die Varianzzerlegung SS_total = SS_zwischen + SS_innerhalb, die zentrale Intuition F = Varianz zwischen / Varianz innerhalb, Voraussetzungen (Normalität, Varianzhomogenität/Levene, Unabhängigkeit), die nicht-parametrische Alternative Kruskal-Wallis, Post-hoc-Tests (Tukey HSD), die Effektstärke η² und aov()/TukeyHSD() in R — mit zwei interaktiven Widgets."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -90,6 +88,8 @@
 			dieser Lektion lernst du, warum man stattdessen <strong>einen</strong> Test über alle Gruppen
 			rechnet: die <Begriff term="ANOVA">Varianzanalyse (ANOVA)</Begriff>.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<!-- Das Problem des multiplen Testens ----------------------------------- -->
 		<h2 class="mt-4 text-2xl">Das Problem: viele Vergleiche blähen den Fehler auf</h2>

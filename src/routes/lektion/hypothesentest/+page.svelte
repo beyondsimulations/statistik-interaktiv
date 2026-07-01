@@ -66,8 +66,6 @@
 	{slug}
 	description="Muster vs. Modell, H0 vs. HA, das 8-Schritte-Vorgehen, Signifikanzniveau α, Teststatistik und p-Wert, Fehler 1. & 2. Art und Teststärke. Mit Power-Visualisierer und p-Wert-Würfelspiel — und der zentralen Fehldeutung des p-Werts, biologisch motiviert an Sonnen- vs. Schattenblättern."
 >
-	<Rueckblick {slug} />
-
 	<article class="flex flex-col gap-5">
 		<!-- Hinführung ----------------------------------------------------------- -->
 		<header class="flex flex-col gap-3">
@@ -87,6 +85,8 @@
 			du, wie er funktioniert, was der berühmte <Begriff term="p-Wert" /> wirklich sagt und vor
 			allem, was er <em>nicht</em> sagt.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<Callout variant="merke" title="Unser rotes Beispiel durch die ganze Lektion">
 			Die Forschungsfrage lautet: <strong
