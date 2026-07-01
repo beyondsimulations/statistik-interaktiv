@@ -326,7 +326,7 @@ modell <- aov(groesse ~ kaefig, data = lachse)
 summary(modell)`}
 			output={`            Df Sum Sq Mean Sq F value   Pr(>F)
 kaefig       2 106.17   53.08   25.48 0.000197 ***
-Residuals    9  18.75    2.083
+Residuals    9  18.75   2.083
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1`}
 			annotations={{

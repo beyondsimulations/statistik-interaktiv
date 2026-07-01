@@ -422,10 +422,10 @@ predict(model, newdata = neu, interval = "confidence")
 
 # (b) Vorhersageintervall fuer eine EINZELNE neue Daphnie (breiter):
 predict(model, newdata = neu, interval = "prediction")`}
-			output={`       fit      lwr      upr
+			output={`      fit     lwr     upr
 1 13.5714 12.8329 14.3099
 
-       fit      lwr      upr
+      fit     lwr     upr
 1 13.5714 10.8762 16.2666`}
 			annotations={{
 				'interval = "confidence"': 'Liefert das KI der MITTLEREN Antwort: wo die wahre Gerade bei x = 3,5 liegt. Hier 12,83 bis 14,31 — schmal.',
