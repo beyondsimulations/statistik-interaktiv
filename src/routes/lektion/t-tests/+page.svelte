@@ -300,8 +300,8 @@
 			Doch Vorsicht: Hier lauert ein klassischer Stolperstein.
 		</p>
 
-		<Callout variant="warnung" title="Kernaussage: Bei Voraussetzungstests drehst du die Logik um">
-			<strong>Merkregel: Bei einem Voraussetzungstest willst du ein großes p (> 0,05) — genau das
+		<Callout variant="warnung" title="Bei Voraussetzungstests drehst du die Logik um">
+			<strong>Bei einem Voraussetzungstest willst du ein großes p (> 0,05) — genau das
 			Gegenteil vom sonstigen Testdenken.</strong> Der Grund: Bei diesen Tests ist die
 			<Begriff term="Nullhypothese" /> die Annahme selbst — „die Daten sind normalverteilt“ bzw. „die
 			Varianzen sind gleich“. Ein <strong>kleiner</strong> p-Wert (≤ 0,05) ist hier ein

@@ -307,7 +307,7 @@
 		</ol>
 
 		<Callout variant="merke" title="Bevor du loslegst: σ ist hier bekannt">
-			Ein Vorab-Hinweis, damit du die Maschine richtig einordnest: Sie <strong>tut so, als
+			Damit du die Maschine richtig einordnest: Sie <strong>tut so, als
 			kenntest du σ</strong> (wir kennen ja die ganze Population) und rechnet daher sauber mit dem
 			z-basierten KI x̄ ± z·σ/√n und z = Φ⁻¹(0,975) für 95 %. Im echten Leben kennst du σ fast nie —
 			dann schätzt du es aus den Daten durch s, und diese zusätzliche Unsicherheit verlangt die
