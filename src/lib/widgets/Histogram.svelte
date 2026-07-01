@@ -60,7 +60,10 @@
 	const W = 520;
 	const margin = { top: 12, right: 12, bottom: 34, left: 12 };
 
-	const innerW = $derived(W - margin.left - margin.right);
+	// Ist ein y-Label gesetzt, verbreitern wir den linken Rand zu einem echten
+	// Gutter, damit die gedrehte Beschriftung neben (nicht über) den Balken sitzt.
+	const marginLeft = $derived(yLabel ? 30 : margin.left);
+	const innerW = $derived(W - marginLeft - margin.right);
 	const innerH = $derived(height - margin.top - margin.bottom);
 
 	const x = $derived(scaleLinear().domain([min, max]).range([0, innerW]));
@@ -111,7 +114,7 @@
 	preserveAspectRatio="xMidYMid meet"
 >
 	<title>{title}</title>
-	<g transform="translate({margin.left},{margin.top})">
+	<g transform="translate({marginLeft},{margin.top})">
 		<!-- baseline -->
 		<line x1="0" y1={innerH} x2={innerW} y2={innerH} stroke="var(--color-ink)" stroke-opacity="0.25" />
 
@@ -190,13 +193,14 @@
 		{/if}
 
 		{#if yLabel}
+			<!-- Im linken Gutter (abs x ≈ 14), gedreht, links vom Plot (Plot beginnt bei abs marginLeft = 30). -->
 			<text
-				x={-2}
+				x={14 - marginLeft}
 				y={innerH / 2}
 				text-anchor="middle"
 				font-size="11"
 				fill="var(--color-ink-faint)"
-				transform="rotate(-90 {-2} {innerH / 2})"
+				transform="rotate(-90 {14 - marginLeft} {innerH / 2})"
 			>
 				{yLabel}
 			</text>

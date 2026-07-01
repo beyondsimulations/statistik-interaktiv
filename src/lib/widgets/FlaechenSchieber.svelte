@@ -47,9 +47,11 @@
 	const lo = -HALF_SPAN; // = −14
 	const hi = HALF_SPAN; // = 14
 
-	// Slider-Bereich für a/b folgt der (nun festen) Achse. Wir runden großzügig.
-	const boundMin = Math.round((lo - 0.5) * 10) / 10;
-	const boundMax = Math.round((hi + 0.5) * 10) / 10;
+	// Slider-Bereich für a/b = die feste Achse selbst, damit a/b nie über den
+	// Rahmen hinaus gezogen werden können (sonst überliefe die Flächenfüllung die
+	// Achse ins rechte/linke Padding).
+	const boundMin = lo; // = −14
+	const boundMax = hi; // = 14
 	const boundStep = $derived(Math.max(0.01, Math.round((sigma / 20) * 100) / 100));
 
 	// Der Slider-Bereich [boundMin, boundMax] ist jetzt konstant und zugleich das
