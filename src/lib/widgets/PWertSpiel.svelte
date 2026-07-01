@@ -99,20 +99,6 @@
 	onReset={reset}
 >
 	<div class="flex flex-col gap-4">
-		<!-- Zähler -->
-		<div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 rounded-2xl bg-coral-50 px-4 py-3">
-			<span class="text-coral-700 font-semibold">signifikant</span>
-			<span class="text-ink text-2xl font-bold tabular-nums">{sig} von {total}</span>
-			<span class="text-ink-soft tabular-nums">({total > 0 ? fmt1(sigPct) : '–'} %)</span>
-			<span class="text-ink-faint text-sm">
-				{#if h0Wahr}
-					H0 ist wahr → Treffer sind reine Fehlalarme (≈ α = 5 %)
-				{:else}
-					wahrer Unterschied = {fmt1(effekt)} Einheiten
-				{/if}
-			</span>
-		</div>
-
 		<!-- Letztes Experiment -->
 		{#if last}
 			<div
@@ -153,10 +139,28 @@
 
 		<p class="text-ink-faint text-xs">
 			<span class="text-sage-500 font-semibold">Grün</span> = nicht signifikant (p &gt; 0,05),
-			<span class="text-coral-600 font-semibold">rot</span> = signifikant (p ≤ 0,05). Mit
-			„H0 wahr“ gibt es in Wahrheit <strong>keinen</strong> Unterschied — und trotzdem fällt rund
-			jedes zwanzigste Experiment „signifikant“ aus. Genau das ist der Fehler 1. Art mit α = 5 %.
+			<span class="text-coral-600 font-semibold">rot</span> = signifikant (p ≤ 0,05).
 		</p>
+
+		<!-- Fazit: Fehlalarm-Quote ganz unten, ruhig gerahmt -->
+		{#if total > 0}
+			<div class="border-ink/10 bg-paper-sunk mt-1 rounded-2xl border px-4 py-3">
+				<div class="flex flex-wrap items-baseline gap-x-3">
+					<span class="text-ink-soft font-semibold">Ergebnis nach {total} Experimenten:</span>
+					<span class="text-ink text-2xl font-bold tabular-nums">{sig} von {total}</span>
+					<span class="text-ink-soft tabular-nums">signifikant ({fmt1(sigPct)} %)</span>
+				</div>
+				<p class="text-ink-faint mt-1 text-sm">
+					{#if h0Wahr}
+						Das sind <strong>reine Fehlalarme</strong>: In Wahrheit gibt es keinen Unterschied —
+						und trotzdem ruft rund jedes zwanzigste Experiment „signifikant“ (≈ α = 5 %).
+					{:else}
+						Wahrer Unterschied = {fmt1(effekt)} Einheiten — hier sind signifikante Treffer echte
+						Funde.
+					{/if}
+				</p>
+			</div>
+		{/if}
 	</div>
 
 	{#snippet controls()}
