@@ -81,8 +81,6 @@
 			p-Werte, t-Tests. Schauen wir sie uns also in Ruhe an.
 		</p>
 
-		<Rueckblick {slug} />
-
 		<p class="text-ink-soft leading-relaxed">
 			Die Frage dahinter klingt fast wie ein Zaubertrick: Warum sagt uns eine
 			kleine <Begriff term="Stichprobe" /> überhaupt etwas über eine riesige
@@ -104,6 +102,8 @@
 			<Begriff term="Standardfehler" />, und sie ist der Schlüssel zu allem, was
 			danach kommt.
 		</p>
+
+		<Rueckblick {slug} />
 
 		<Merke title="Worauf es jetzt ankommt">
 			Halte zwei Dinge auseinander: die <em>Streuung der Flügellängen</em> in einem
