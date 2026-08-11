@@ -84,9 +84,9 @@ export const AUSSAGEN: Aussage[] = [
 	},
 	{
 		id: 's5',
-		text: 'Der t-Test ergibt p = 0,02; der Unterschied zwischen den Gruppen ist signifikant.',
+		text: 'Aus 50 gefangenen Amseln schließen wir auf die mittlere Flügellänge aller Amseln der Region.',
 		correct: 'inferentiell',
-		why: 'Eine gezielte Hypothese wird mit einem Test geprüft und auf die Grundgesamtheit verallgemeinert — schließende Statistik.'
+		why: 'Von einer Stichprobe wird auf die ganze Grundgesamtheit geschlossen — das ist schließende (inferentielle) Statistik.'
 	},
 	{
 		id: 's6',
